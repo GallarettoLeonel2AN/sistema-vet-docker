@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SistemaVetIng.Migrations
 {
     /// <inheritdoc />
-    public partial class Primera : Migration
+    public partial class PrimeraDomingo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,7 +33,6 @@ namespace SistemaVetIng.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Clave = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -217,15 +216,15 @@ namespace SistemaVetIng.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<long>(type: "bigint", nullable: false),
                     Dni = table.Column<long>(type: "bigint", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: true),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Veterinario_UsuarioId = table.Column<int>(type: "int", nullable: true),
                     Matricula = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Veterinario_Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VeterinariaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -234,12 +233,6 @@ namespace SistemaVetIng.Migrations
                     table.ForeignKey(
                         name: "FK_Personas_AspNetUsers_UsuarioId",
                         column: x => x.UsuarioId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Personas_AspNetUsers_Veterinario_UsuarioId",
-                        column: x => x.Veterinario_UsuarioId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -283,14 +276,14 @@ namespace SistemaVetIng.Migrations
                     FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Sexo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RazaPeligrosa = table.Column<bool>(type: "bit", nullable: false),
-                    PropietarioId = table.Column<int>(type: "int", nullable: false)
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Mascotas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Mascotas_Personas_PropietarioId",
-                        column: x => x.PropietarioId,
+                        name: "FK_Mascotas_Personas_ClienteId",
+                        column: x => x.ClienteId,
                         principalTable: "Personas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -567,9 +560,9 @@ namespace SistemaVetIng.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mascotas_PropietarioId",
+                name: "IX_Mascotas_ClienteId",
                 table: "Mascotas",
-                column: "PropietarioId");
+                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pagos_AtencionVeterinariaId",
@@ -590,20 +583,12 @@ namespace SistemaVetIng.Migrations
                 name: "IX_Personas_UsuarioId",
                 table: "Personas",
                 column: "UsuarioId",
-                unique: true,
-                filter: "[UsuarioId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Personas_VeterinariaId",
                 table: "Personas",
                 column: "VeterinariaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Personas_Veterinario_UsuarioId",
-                table: "Personas",
-                column: "Veterinario_UsuarioId",
-                unique: true,
-                filter: "[UsuarioId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Turnos_ClienteId",

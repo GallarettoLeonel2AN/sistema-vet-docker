@@ -39,7 +39,7 @@ namespace SistemaVetIng.Models.Indentity
                     Email = adminEmail,           // Email
                     EmailConfirmed = true,        // Confirmamos el email de una
                     NombreUsuario = "admin",      // Atributo personalizado
-                    Clave = "admin123"            // Atributo personalizado (NO se usa para autenticar)
+                              // Atributo personalizado (NO se usa para autenticar)
                 };
 
                 // Creamos el usuario con una contraseña segura (mínimo una mayúscula, número, símbolo, etc.)

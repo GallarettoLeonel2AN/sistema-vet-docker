@@ -38,8 +38,8 @@ namespace SistemaVetIng.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    NombreUsuario = model.Email,
-                    Clave = model.Password // esto debería estar encriptado por Identity, no lo guardes así
+                    NombreUsuario = model.Nombre +"" + model.Apellido ,
+                  
                 };
 
                 var result = await _userManager.CreateAsync(usuario, model.Password);
@@ -64,31 +64,41 @@ namespace SistemaVetIng.Controllers
                     Direccion = model.Direccion,
                     UsuarioId = usuario.Id,
                 };
+              ;
+            // Dentro de tu método Registro [HttpPost]
+            // ... después de crear el objeto 'cliente' o 'veterinario'
+            try
+            {
+                // Asumimos que es ClienteController
+                _context.Clientes.Add(cliente);
 
-                try
-                {
-                    _context.Clientes.Add(cliente);
-                    await _context.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
+                // Este es el paso que podría estar fallando
+                await _context.SaveChangesAsync();
 
-                    // ¡Esto es clave para ver el error real!
-                    Console.WriteLine("--- ERROR AL GUARDAR CLIENTE ---");
-                    Console.WriteLine($"Mensaje: {ex.Message}");
-                    Console.WriteLine($"StackTrace: {ex.StackTrace}");
-                    if (ex.InnerException != null)
-                    {
-                        Console.WriteLine($"Inner Exception Mensaje: {ex.InnerException.Message}");
-                        Console.WriteLine($"Inner Exception StackTrace: {ex.InnerException.StackTrace}");
-                    }
-                    Console.WriteLine("-------------------------------");
+                // Si llegamos aquí, todo salió bien
+                TempData["Mensaje"] = "¡Cliente registrado con éxito!";
 
-                    TempData["Error"] = "Error al guardar el cliente en la base de datos. Por favor, inténtelo de nuevo. Detalles: " + ex.Message;
-                    return View(model);
-                }
+                // Redirige a donde quieras después del registro exitoso
+                // Por ejemplo, a la lista de clientes para asociar mascotas
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
+            {
+                // Este bloque de código capturará y mostrará el error de la base de datos
+                // Imprime el error en la ventana de Salida de Visual Studio
+                Console.WriteLine("--- ERROR AL GUARDAR EN LA BASE DE DATOS ---");
+                Console.WriteLine($"Error principal: {ex.Message}");
+                Console.WriteLine($"Error interno: {ex.InnerException?.Message}"); // <-- ¡Este es el mensaje clave!
+                Console.WriteLine("------------------------------------------");
 
-                await _signInManager.SignInAsync(usuario, isPersistent: false);
+                // Pasa un mensaje de error a la vista para el usuario
+                ModelState.AddModelError(string.Empty, "Hubo un error al guardar el cliente. Es posible que el DNI ya esté registrado.");
+
+                // Vuelve a la vista para que el usuario pueda corregir los datos
+                return View(model);
+            }
+
+            await _signInManager.SignInAsync(usuario, isPersistent: false);
 
                 TempData["Mensaje"] = "Cliente registrado correctamente.";
                 return RedirectToAction("Index", "Home");

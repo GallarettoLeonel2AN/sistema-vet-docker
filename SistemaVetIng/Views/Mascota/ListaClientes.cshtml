@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SistemaVetIng.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Seleccionar Cliente";
+}
+
+<h1>Seleccionar Cliente para Asociar Mascota</h1>
+
+<hr />
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["Mensaje"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger mt-3">@TempData["Error"]</div>
+}
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Teléfono</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in Model)
+            {
+                <tr>
+                    <td>@cliente.Nombre</td>
+                    <td>@cliente.Apellido</td>
+                    <td>@cliente.Dni</td>
+                    <td>@cliente.Telefono</td>
+                    <td>
+                        <a asp-action="Registro" asp-route-clienteId="@cliente.Id" class="btn btn-primary btn-sm">Asociar Mascota</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">No se encontraron clientes en el sistema.</div>
+}

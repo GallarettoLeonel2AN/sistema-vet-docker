@@ -9,6 +9,7 @@
         public string Sexo { get; set; }
         public bool RazaPeligrosa { get; set; }
         public Cliente Propietario { get; set; }
+        public int ClienteId { get; set; }
         public Chip? Chip { get; set; }
         public HistoriaClinica HistoriaClinica { get; set; }
     }
