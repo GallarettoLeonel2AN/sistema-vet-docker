@@ -1,0 +1,56 @@
+﻿@model SistemaVetIng.Models.Cliente
+
+@{
+    ViewData["Title"] = $"Mascotas de {Model.Nombre} {Model.Apellido}";
+}
+
+<h1>Mascotas de @Model.Nombre @Model.Apellido</h1>
+
+<p>
+    Selecciona una mascota para ver su historial clínico completo.
+</p>
+
+<hr />
+
+@if (Model.Mascotas == null || !Model.Mascotas.Any())
+{
+    <div class="alert alert-info" role="alert">
+        El cliente @Model.Nombre @Model.Apellido no tiene mascotas registradas.
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Sexo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mascota in Model.Mascotas)
+            {
+                <tr>
+                    <td>@mascota.Nombre</td>
+                    <td>@mascota.Raza</td>
+                    <td>@mascota.FechaNacimiento.ToShortDateString()</td>
+                    <td>@mascota.Sexo</td>
+                    <td>
+                        <a asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@mascota.Id" class="btn btn-sm btn-success">
+                            <i class="fas fa-file-medical"></i> Ver Historia Clínica
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div>
+    <a asp-action="ListaClientesParaSeguimiento" class="btn btn-secondary mt-3">
+        <i class="fas fa-arrow-left"></i> Volver a la lista de clientes
+    </a>
+</div>

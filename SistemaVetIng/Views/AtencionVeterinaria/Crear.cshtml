@@ -1,0 +1,102 @@
+﻿@model SistemaVetIng.ViewsModels.AtencionVeterinariaViewModel
+
+@{
+    ViewData["Title"] = $"Nueva Atención para {ViewBag.MascotaNombre}";
+}
+
+<h1>Nueva Atención para @ViewBag.MascotaNombre</h1>
+<h3>Propietario: @ViewBag.PropietarioNombre</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Crear">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            
+            <input type="hidden" asp-for="HistoriaClinicaId" />
+
+            <div class="form-group mb-3">
+                <label asp-for="Diagnostico" class="control-label"></label>
+                <textarea asp-for="Diagnostico" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Diagnostico" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="PesoKg" class="control-label"></label>
+                <input asp-for="PesoKg" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="PesoKg" class="text-danger"></span>
+            </div>
+
+            <hr />
+            <h4>Tratamiento (Opcional)</h4>
+            <div class="form-group form-check mb-3">
+                <input class="form-check-input" asp-for="RequiereTratamiento" id="requiereTratamientoCheckbox" />
+                <label class="form-check-label" for="requiereTratamientoCheckbox" asp-for="RequiereTratamiento"></label>
+            </div>
+
+            <div id="tratamientoFields" style="display: none;">
+                <div class="form-group mb-3">
+                    <label asp-for="Medicamento" class="control-label"></label>
+                    <input asp-for="Medicamento" class="form-control" />
+                    <span asp-validation-for="Medicamento" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Dosis" class="control-label"></label>
+                    <input asp-for="Dosis" class="form-control" />
+                    <span asp-validation-for="Dosis" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Frecuencia" class="control-label"></label>
+                    <input asp-for="Frecuencia" class="form-control" />
+                    <span asp-validation-for="Frecuencia" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="DuracionDias" class="control-label"></label>
+                    <input asp-for="DuracionDias" class="form-control" type="number" />
+                    <span asp-validation-for="DuracionDias" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ObservacionesTratamiento" class="control-label"></label>
+                    <textarea asp-for="ObservacionesTratamiento" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="ObservacionesTratamiento" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Atención
+                </button>
+                <a asp-controller="HistoriaClinica" asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@ViewBag.MascotaId" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Cancelar y Volver
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+ @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.getElementById('requiereTratamientoCheckbox');
+            var tratamientoFields = document.getElementById('tratamientoFields');
+
+            // Función para mostrar u ocultar los campos de tratamiento
+            function toggleTratamientoFields() {
+                if (checkbox.checked) {
+                    tratamientoFields.style.display = 'block';
+                } else {
+                    tratamientoFields.style.display = 'none';
+                }
+            }
+
+            // Llamar la función al cargar la página para el estado inicial
+            toggleTratamientoFields();
+
+            // Añadir un listener para cuando el checkbox cambie
+            checkbox.addEventListener('change', toggleTratamientoFields);
+        });
+    </script>
+}

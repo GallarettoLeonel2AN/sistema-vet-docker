@@ -1,0 +1,120 @@
+﻿@model SistemaVetIng.Models.Mascota
+
+@{
+    ViewData["Title"] = $"Historia Clínica de {Model.Nombre}";
+}
+
+<h1>Historia Clínica de @Model.Nombre</h1>
+<h3>Propietario: @Model.Propietario?.Nombre @Model.Propietario?.Apellido</h3>
+
+<div class="card mb-4">
+    <div class="card-header bg-info text-white">
+        <h5>Datos de la Mascota</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Nombre:</dt>
+            <dd class="col-sm-9">@Model.Nombre</dd>
+
+            <dt class="col-sm-3">Raza:</dt>
+            <dd class="col-sm-9">@Model.Raza</dd>
+
+            <dt class="col-sm-3">Fecha de Nacimiento:</dt>
+            <dd class="col-sm-9">@Model.FechaNacimiento.ToShortDateString()</dd>
+
+            <dt class="col-sm-3">Sexo:</dt>
+            <dd class="col-sm-9">@Model.Sexo</dd>
+
+            <dt class="col-sm-3">Raza Peligrosa:</dt>
+            <dd class="col-sm-9">@(Model.RazaPeligrosa ? "Sí" : "No")</dd>
+
+            @if (Model.Chip != null)
+            {
+                <dt class="col-sm-3">Chip N°:</dt>
+                <dd class="col-sm-9">@Model.Chip.Codigo</dd>
+                <dt class="col-sm-3">Fecha Implantación Chip:</dt>
+              
+            }
+        </dl>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Atenciones Registradas</h4>
+    <a asp-controller="AtencionVeterinaria" asp-action="Crear" asp-route-historiaClinicaId="@Model.HistoriaClinica.Id" class="btn btn-primary">
+        <i class="fas fa-plus-circle"></i> Nueva Atención
+    </a>
+</div>
+
+@if (Model.HistoriaClinica.Atenciones == null || !Model.HistoriaClinica.Atenciones.Any())
+{
+    <div class="alert alert-warning" role="alert">
+        No hay atenciones registradas para esta mascota.
+    </div>
+}
+else
+{
+    @foreach (var atencion in Model.HistoriaClinica.Atenciones.OrderByDescending(a => a.Fecha))
+    {
+        <div class="card mb-3">
+            <div class="card-header bg-light">
+                <strong>Fecha:</strong> @atencion.Fecha.ToShortDateString() -
+                <strong>Veterinario:</strong> @atencion.Veterinario?.Nombre @atencion.Veterinario?.Apellido
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Diagnóstico:</dt>
+                    <dd class="col-sm-9">@atencion.Diagnostico</dd>
+
+                    <dt class="col-sm-3">Peso (kg):</dt>
+                    <dd class="col-sm-9">@atencion.PesoMascota</dd>
+                </dl>
+
+                @if (atencion.Tratamiento != null)
+                {
+                    <h5>Tratamiento:</h5>
+                    <dl class="row">
+                        <dt class="col-sm-3">Medicamento:</dt>
+                        <dd class="col-sm-9">@atencion.Tratamiento.Medicamento</dd>
+                        <dt class="col-sm-3">Dosis:</dt>
+                        <dd class="col-sm-9">@atencion.Tratamiento.Dosis</dd>
+                        <dt class="col-sm-3">Frecuencia:</dt>
+                        <dd class="col-sm-9">@atencion.Tratamiento.Frecuencia</dd>
+                        <dt class="col-sm-3">Duración (días):</dt>
+                        <dd class="col-sm-9">@atencion.Tratamiento.Duracion</dd>
+                        <dt class="col-sm-3">Observaciones:</dt>
+                        <dd class="col-sm-9">@atencion.Tratamiento.Observaciones</dd>
+                    </dl>
+                }
+
+                @if (atencion.Vacunas != null && atencion.Vacunas.Any())
+                {
+                    <h5>Vacunas Aplicadas:</h5>
+                    <ul>
+                        @foreach (var vacuna in atencion.Vacunas)
+                        {
+                            <li>@vacuna.Nombre (@vacuna.FechaAplicacion.ToShortDateString()) - Lote: @vacuna.Lote</li>
+                        }
+                    </ul>
+                }
+
+                @if (atencion.EstudiosComplementarios != null && atencion.EstudiosComplementarios.Any())
+                {
+                    <h5>Estudios Complementarios:</h5>
+                    <ul>
+                        @foreach (var estudio in atencion.EstudiosComplementarios)
+                        {
+                            <li>@estudio.Nombre - Resultados: @estudio.Informe</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    }
+}
+
+<div>
+    <a asp-action="MascotasCliente" asp-route-clienteId="@Model.ClienteId" class="btn btn-secondary mt-3">
+        <i class="fas fa-arrow-left"></i> Volver a las mascotas del cliente
+    </a>
+</div>

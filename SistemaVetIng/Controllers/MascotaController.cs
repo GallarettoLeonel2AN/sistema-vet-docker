@@ -99,6 +99,16 @@ namespace SistemaVetIng.Controllers
                 TempData["Error"] = "El cliente propietario no fue encontrado.";
                 return RedirectToAction(nameof(ListaClientes));
             }
+            var historiaClinica = new HistoriaClinica();
+
+            // 2. Asociar la Mascota a la HistoriaClinica
+            //    EF Core manejará la clave foránea MascotaId automáticamente
+            //    cuando guardes la Mascota y la HistoriaClinica juntas.
+            historiaClinica.Mascota = mascota;
+
+            // 3. Asignar la HistoriaClinica a la Mascota
+            //    Esto establece la relación inversa.
+            mascota.HistoriaClinica = historiaClinica;
 
             try
             {

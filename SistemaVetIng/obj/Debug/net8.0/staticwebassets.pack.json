@@ -9,8 +9,56 @@
       "PackagePath": "staticwebassets\\css\\animaciones.css"
     },
     {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\atendiendoPerro.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\atendiendoPerro.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\camaleon.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\camaleon.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\gaviota.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\gaviota.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\gorila.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\gorila.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\monos.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\monos.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\ovejas.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\ovejas.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\pago.png",
+      "PackagePath": "staticwebassets\\css\\img\\pago.png"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\perrito.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\perrito.jpg"
+    },
+    {
       "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\perro.jpg",
       "PackagePath": "staticwebassets\\css\\img\\perro.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\stickerPanda.png",
+      "PackagePath": "staticwebassets\\css\\img\\stickerPanda.png"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\tucan.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\tucan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\img\\vacuna.jpg",
+      "PackagePath": "staticwebassets\\css\\img\\vacuna.jpg"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\login-styles.css",
+      "PackagePath": "staticwebassets\\css\\login-styles.css"
     },
     {
       "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\registrar_cliente_style2.css",
@@ -19,6 +67,14 @@
     {
       "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\veterinario-styles.css",
+      "PackagePath": "staticwebassets\\css\\veterinario-styles.css"
     },
     {
       "Id": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\favicon.ico",

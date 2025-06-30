@@ -3,6 +3,7 @@
     public class AtencionVeterinaria
     {
         public int Id { get; set; }
+        public DateTime Fecha { get; set; } = DateTime.Now;
         public Tratamiento Tratamiento { get; set; }
         public int TratamientoId { get; set; }
         public List<Vacuna>? Vacunas { get; set; }

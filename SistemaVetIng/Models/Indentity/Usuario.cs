@@ -7,7 +7,6 @@ namespace SistemaVetIng.Models.Indentity
     {
         [Required]
         public string NombreUsuario { get; set; }
-       
         
     }
 }

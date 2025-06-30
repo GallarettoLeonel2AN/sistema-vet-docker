@@ -6,7 +6,11 @@
         public string Nombre { get; set; }
         public string Droga { get; set; }
         public string Lote { get; set; }
+
+        public DateTime FechaAplicacion { get; set; }
         public DateTime FechaVencimiento { get; set; }
+
+        
         public decimal Precio { get; set; }
 
         public int AtencionVeterinariaId { get; set; }

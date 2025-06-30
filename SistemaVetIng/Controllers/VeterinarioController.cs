@@ -26,6 +26,11 @@ namespace SistemaVetIng.Controllers
 
         // Acción GET para mostrar el formulario de registro
         [HttpGet]
+        public IActionResult PaginaPrincipal()
+        {
+            
+            return View(); // Por defecto, busca la vista "Dashboard.cshtml" en la carpeta "Views/Veterinario".
+        }
         public IActionResult Registro()
         {
             // Devuelve la vista que crearemos en la siguiente sección
@@ -96,6 +101,7 @@ namespace SistemaVetIng.Controllers
                 TempData["Error"] = "Error al guardar los datos del veterinario. Por favor, inténtelo de nuevo.";
                 return View(model);
             }
+
 
             // 7. Iniciar sesión del nuevo usuario (opcional)
             await _signInManager.SignInAsync(usuario, isPersistent: false);

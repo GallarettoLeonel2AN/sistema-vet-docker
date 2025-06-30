@@ -32,8 +32,36 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/Account/CambiarContraseña.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDYW1iaWFyQ29udHJhc2XDsWEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/Account/RecuperarContraseña.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWN1cGVyYXJDb250cmFzZcOxYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/AtencionVeterinaria/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXRlbmNpb25WZXRlcmluYXJpYVxDcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/Cliente/Registro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxSZWdpc3Ryby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/DetalleHistoriaClinica.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yaWFDbGluaWNhXERldGFsbGVIaXN0b3JpYUNsaW5pY2EuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/ListaClientesParaSeguimiento.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yaWFDbGluaWNhXExpc3RhQ2xpZW50ZXNQYXJhU2VndWltaWVudG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/MascotasCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yaWFDbGluaWNhXE1hc2NvdGFzQ2xpZW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/Home/Index.cshtml]
@@ -62,6 +90,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/Veterinario/PaginaPrincipal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaW9cUGFnaW5hUHJpbmNpcGFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/leo/source/repos/SistemaVetIng/SistemaVetIng/Views/Veterinario/Registro.cshtml]

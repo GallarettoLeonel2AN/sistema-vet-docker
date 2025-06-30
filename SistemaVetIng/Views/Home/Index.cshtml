@@ -1,14 +1,214 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="mt-4">
-    <a asp-controller="Mascota" asp-action="ListaClientes" class="btn btn-success btn-lg">
-        <i class="fas fa-plus-circle"></i> Asociar Mascota a un Cliente
-    </a>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetIng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    @* Rutas a los archivos CSS. Usamos el operador ~ para referenciar la carpeta wwwroot *@
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/css/animaciones.css">
+
+</head>
+
+<body>
+    <header id="home">
+        <a href="#hero" class="logo"><i class="fa-solid fa-paw" style="color: #ffffff;"></i></a>
+        <nav class="navbar">
+            <ul class="navbar-list">
+                <li><a class="navbar-link" href="#nosotros">Nosotros</a></li>
+                <li><a class="navbar-link" href="#funcionalidades">Funcionalidades</a></li>
+                <li><a class="navbar-link" href="#footer">Contacto</a></li>
+
+                @* **LÓGICA RAZOR PARA MOSTRAR LOGIN/REGISTER O CERRAR SESIÓN** *@
+                @* Usamos la propiedad User.Identity.IsAuthenticated para verificar si el usuario ha iniciado sesión *@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    // Si el usuario está autenticado, mostramos un enlace para Cerrar Sesión
+                    // Este formulario POST es la forma segura de hacer logout en ASP.NET Core
+                    <li>
+                        <form asp-controller="Account" asp-action="Logout" method="post">
+                            <button type="submit" class="navbar-link sesion">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    // Si el usuario NO está autenticado, mostramos los enlaces de Login y Register
+                    <li><a class="navbar-link sesion" asp-controller="Account" asp-action="Login">Login</a></li>
+                    <li><a class="navbar-link sesion" asp-controller="Cliente" asp-action="Registro">Registrarse</a></li> @* Asume que tienes una acción Register *@
+                }
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-part1">
+                <div class="title-container">
+                    <h2 class="hero-title">VetIng Software</h2>
+                </div>
+                <div class="subtitle-container">
+                    <p class="subtitle-info">
+                        Soluciones tecnológicas para un cuidado animal excepcional.
+                    </p>
+
+                    @* Enlace al formulario de Login usando Tag Helpers *@
+                    <a asp-controller="Account" asp-action="Login" class="btn">Iniciar Sesión</a>
+                </div>
+            </div>
+
+            <div class="hero-part2">
+            </div>
+        </section>
+
+        <section class="section-nosotros" id="nosotros">
+            <div class="contenedor-1">
+                <div class="contenido">
+                    <h2>Quiénes Somos</h2>
+                    <p>
+                        En VetIng Software, entendemos la importancia del cuidado y bienestar de las mascotas en la sociedad actual.
+                        Por eso, hemos diseñado una solución tecnológica integral para clínicas veterinarias,
+                        enfocada en optimizar los procesos de gestión, mejorar la experiencia de los clientes y
+                        garantizar un cuidado de calidad para las mascotas.
+                    </p>
+                </div>
+            </div>
+            <div class="contenedor-2-img"></div>
+            <div class="contenedor-3">
+                <div class="contenido">
+                    <h2>Nuestra Misión</h2>
+                    <p>
+                        Nuestra misión es facilitar el trabajo de los profesionales veterinarios y empoderar a los dueños de mascotas mediante herramientas digitales modernas. Creemos que la tecnología
+                        puede transformar la manera en que las clínicas gestionan sus operaciones y el cuidado animal.
+                    </p>
+                    <a href="#funcionalidades" class="btn">Descubre Más</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-funcions" id="funcionalidades">
+            <h2 class="title-fun">Funcionalidades Destacadas</h2>
+            <div class="contenedor-funci">
+
+                <div class="card">
+                    <div class="top">
+                        <div class="img-card turno">
+                        </div>
+                    </div>
+                    <div class="card-title">
+                        <h3>Gestión de Turnos</h3>
+                    </div>
+                    <div class="card-info">
+                        <p>
+                            Organiza citas de manera rápida y eficiente con opciones para registrar,
+                            modificar o cancelar turnos tanto para clientes como veterinarios.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="top">
+                        <div class="img-card historial">
+                        </div>
+                    </div>
+                    <div class="card-title">
+                        <h3>Historial Clínico Digital</h3>
+                    </div>
+                    <div class="card-info">
+                        <p>
+                            Lleva un registro completo del historial médico de cada mascota, incluyendo diagnósticos, tratamientos y planes de vacunación.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="top">
+                        <div class="img-card reporte">
+                        </div>
+                    </div>
+                    <div class="card-title">
+                        <h3>Reportes Analíticos</h3>
+                    </div>
+                    <div class="card-info">
+                        <p>
+                            Genera informes sobre ingresos, servicios más solicitados, clientes recurrentes y tendencias clínicas para tomar decisiones informadas.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="top">
+                        <div class="img-card pago">
+                        </div>
+                    </div>
+                    <div class="card-title">
+                        <h3>Pagos Online</h3>
+                    </div>
+                    <div class="card-info">
+                        <p>
+                            Simplifica los pagos con métodos seguros como tarjetas, transferencias y más, además de emitir comprobantes detallados.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer id="footer">
+            <div class="footer-1">
+                <i class="fa-solid fa-paw footer-logo" style="color: #ffffff;"></i>
+                <h2 class="footer-title">VetIng Software</h2>
+
+                <div class="footer-1i">
+                    <a href="#footer"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#footer"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#footer"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#footer"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-2">
+                <a href="#footer">
+                    <h4>Acerca de VetIng</h4>
+                </a>
+                <a href="#footer">Información</a>
+                <a href="#footer">Noticias</a>
+                <a href="#footer">Eventos</a>
+                <a href="#footer">Fundación</a>
+            </div>
+            <div class="footer-3">
+                <a href="#footer">
+                    <h4>Ayudanos a mejorar</h4>
+                </a>
+                <a href="#footer">
+                    <h4>Nuevos lanzamientos</h4>
+                </a>
+                <a href="#footer">
+                    <h4>Asistencia</h4>
+                </a>
+                <a href="#footer">
+                    <h4>Descargar aplicación VetIng Mobile</h4>
+                </a>
+            </div>
+        </footer>
+        <div class="add-modal"></div>
+        <div class="firma">
+            <h6>Proyecto de Ulises Sosa y Leonel Gallareto</h6>
+        </div>
+        
+    </main>
+
+</body>
+
+</html>

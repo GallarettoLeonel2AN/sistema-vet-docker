@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "VetIng";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetIng - Veterinario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    @* Rutas a los archivos CSS. Reemplaza las rutas estáticas por rutas relativas al proyecto. *@
+    <link rel="stylesheet" href="~/css/veterinario-styles.css">
+    <link rel="stylesheet" href="~/css/animaciones.css">
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo"><i class="fa-solid fa-paw" style="color: white;"></i> VetIng</a>
+        <nav class="navbar">
+            <ul class="navbar-list">
+                <li><a href="#citas">Turnos</a></li>
+                <li><a href="#clientes">Clientes</a></li>
+                <li><a href="#mascotas">Mascotas</a></li>
+                <li><a href="#seguimiento">Seguimiento</a></li>
+                @* Reemplazamos el enlace "Cerrar Sesión" por un formulario POST para logout *@
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                        <button type="submit" class="sesion">Cerrar Sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="citas">
+            <h2>Gestionar Turnos</h2>
+            <div class="gestion-turnos">
+                @* Usamos asp-controller y asp-action para generar el enlace a la vista de turnos *@
+                <button class="btnGestion" onclick="location.href='@Url.Action("VerTurnos", "Turnos")'">Ver Turnos</button>
+            </div>
+        </section>
+
+        <section id="clientes">
+            <h2 class="margin-top">Gestión de Clientes</h2>
+            <div class="cliente-busq">
+                @* Enlace para registrar un nuevo cliente *@
+                <a asp-controller="Cliente" asp-action="Registro" class="btnAdd">Registrar Nuevo Cliente</a>
+                <div class="buscador">
+                    <label for="busqueda"> Buscar por Dni:</label>
+                    <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese el numero de documento">
+                    <button class="btn">Buscar</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre del Cliente</th>
+                        <th>Contacto</th>
+                        <th>Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ulises Sosa</td>
+                        <td>sosa.ulises@gmail.com</td>
+                        <td>sulises</td>
+                        <td>
+                            <button class="btnModificar">Editar</button>
+                            <button class="btn btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="mascotas">
+            <h2>Gestión de Mascotas</h2>
+            <div class="cliente-busq">
+                @* Enlace para registrar una nueva mascota *@
+                <a asp-controller="Mascota" asp-action="Registro" class="btnAdd">Registrar Nueva Mascota</a>
+                <div class="buscador">
+                    <label for="busqueda"> Buscar por Dueño:</label>
+                    <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese el nombre del dueño">
+                    <button class="btn">Buscar</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre de la Mascota</th>
+                        <th>Especie</th>
+                        <th>Raza</th>
+                        <th>Edad</th>
+                        <th>Dueño</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mia</td>
+                        <td>Perro</td>
+                        <td>Labrador</td>
+                        <td>5 años</td>
+                        <td>Ulises Sosa</td>
+                        <td>
+                            <button class="btnModificar">Editar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+        <section id="seguimiento">
+            <h2>Seguimiento Clínico</h2>
+            <div class="cliente-busq">
+                @* Enlace para registrar una nueva atención veterinaria *@
+                <a asp-controller="HistoriaClinica" asp-action="ListaClientesParaSeguimiento" class="btnAdd">Ver Clientes</a> 
+              
+            </div>
+           
+        </section>
+
+        <footer>
+            <div class="footer-1">
+                <i class="fa-solid fa-paw footer-logo" style="color: #ffffff;"></i>
+                <h2 class="footer-title">VetIng Software</h2>
+                <div class="footer-1i">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-2">
+                <a href="#">
+                    <h4>Acerca de VetIng</h4>
+                </a>
+                <a href="#">Información</a>
+                <a href="#">Noticias</a>
+                <a href="#">Eventos</a>
+                <a href="#">Fundación</a>
+            </div>
+            <div class="footer-3">
+                <a href="#">
+                    <h4>Ayúdanos a mejorar</h4>
+                </a>
+                <a href="#">
+                    <h4>Nuevos lanzamientos</h4>
+                </a>
+                <a href="#">
+                    <h4>Asistencia</h4>
+                </a>
+                <a href="#">
+                    <h4>Descargar aplicación VetIng Mobile</h4>
+                </a>
+            </div>
+        </footer>
+</body>
+
+</html>

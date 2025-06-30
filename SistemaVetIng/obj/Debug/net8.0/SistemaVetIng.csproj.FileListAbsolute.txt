@@ -180,3 +180,8 @@ C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\obj\Debug\net8.0\refint\Si
 C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\obj\Debug\net8.0\SistemaVetIng.pdb
 C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\obj\Debug\net8.0\SistemaVetIng.genruntimeconfig.cache
 C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\obj\Debug\net8.0\ref\SistemaVetIng.dll
+C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\bin\Debug\net8.0\MailKit.dll
+C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\bin\Debug\net8.0\MimeKit.dll
+C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
