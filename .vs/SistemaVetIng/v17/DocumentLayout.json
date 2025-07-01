@@ -3,20 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/PerrosPeligrososApiDb/True/SqlTable/dbo.ChipsPerroPeligroso.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/PerrosPeligrososApiDb/True/SqlTable/dbo.PerrosPeligrosos.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Migrations\\20250701232528_primera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PerrosPeligrososApi\\Migrations\\20250701232528_primera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\perrospeligrososapi\\models\\perropeligrosoregistrodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|solutionrelative:perrospeligrososapi\\models\\perropeligrosoregistrodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\controllers\\mascotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\controllers\\mascotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\perrospeligrososapi\\models\\perropeligroso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|solutionrelative:perrospeligrososapi\\models\\perropeligroso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\mascota\\registro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\mascota\\registro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\viewsmodels\\mascotaregistroviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\viewsmodels\\mascotaregistroviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\perrospeligrososapi\\controllers\\perrospeligrososcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|solutionrelative:perrospeligrososapi\\controllers\\perrospeligrososcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +36,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,54 +48,87 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "dbo.ChipsPerroPeligroso [Datos]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/PerrosPeligrososApiDb/True/SqlTable/dbo.ChipsPerroPeligroso.sql",
+              "ToolTip": "dbo.ChipsPerroPeligroso [Datos]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-07-01T23:27:20.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "SistemaVetIng\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAG4AAAAAAAAAAAAgwH8AAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T20:32:58.021Z",
+              "Title": "dbo.PerrosPeligrosos [Datos]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/PerrosPeligrososApiDb/True/SqlTable/dbo.PerrosPeligrosos.sql",
+              "ToolTip": "dbo.PerrosPeligrosos [Datos]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-07-01T23:27:14.369Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Registro.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\Registro.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Mascota\\Registro.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\Registro.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Mascota\\Registro.cshtml",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-01T20:10:07.918Z",
+              "Title": "20250701232528_primera.cs",
+              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Migrations\\20250701232528_primera.cs",
+              "RelativeDocumentMoniker": "PerrosPeligrososApi\\Migrations\\20250701232528_primera.cs",
+              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Migrations\\20250701232528_primera.cs",
+              "RelativeToolTip": "PerrosPeligrososApi\\Migrations\\20250701232528_primera.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T23:25:28.367Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MascotaController.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\MascotaController.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\MascotaController.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\MascotaController.cs",
-              "RelativeToolTip": "SistemaVetIng\\Controllers\\MascotaController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAJUAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "PerroPeligroso.cs",
+              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Models\\PerroPeligroso.cs",
+              "RelativeDocumentMoniker": "PerrosPeligrososApi\\Models\\PerroPeligroso.cs",
+              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Models\\PerroPeligroso.cs",
+              "RelativeToolTip": "PerrosPeligrososApi\\Models\\PerroPeligroso.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA5wBMAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T20:04:59.331Z",
+              "WhenOpened": "2025-07-01T23:24:33.349Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "MascotaRegistroViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\ViewsModels\\MascotaRegistroViewModel.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\ViewsModels\\MascotaRegistroViewModel.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\ViewsModels\\MascotaRegistroViewModel.cs",
-              "RelativeToolTip": "SistemaVetIng\\ViewsModels\\MascotaRegistroViewModel.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Title": "PerroPeligrosoRegistroDto.cs",
+              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Models\\PerroPeligrosoRegistroDto.cs",
+              "RelativeDocumentMoniker": "PerrosPeligrososApi\\Models\\PerroPeligrosoRegistroDto.cs",
+              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Models\\PerroPeligrosoRegistroDto.cs",
+              "RelativeToolTip": "PerrosPeligrososApi\\Models\\PerroPeligrosoRegistroDto.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAcAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T20:03:49.635Z",
+              "WhenOpened": "2025-07-01T21:30:33.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MascotaController.cs",
+              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\MascotaController.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\MascotaController.cs",
+              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\MascotaController.cs",
+              "RelativeToolTip": "SistemaVetIng\\Controllers\\MascotaController.cs",
+              "ViewState": "AgIAAO0AAAAAAAAAAAAewAABAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T22:35:13.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PerrosPeligrososController.cs",
+              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "RelativeDocumentMoniker": "PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "RelativeToolTip": "PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowCUAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T22:30:31.249Z",
               "EditorCaption": ""
             }
           ]

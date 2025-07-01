@@ -188,6 +188,8 @@ namespace SistemaVetIng.Controllers
             }
         }
 
+
+
         // Método auxiliar para verificar raza peligrosa (backend)
         private bool IsRazaPeligrosa(string especie, string raza)
         {
@@ -215,7 +217,7 @@ namespace SistemaVetIng.Controllers
             string clienteApellido)
         {
             // URL de tu API de perros peligrosos (¡ajusta esto a la URL real de tu API!)
-            var apiEndpoint = "http://localhost:5000/api/perros-peligrosos/registrar"; // Ejemplo
+            var apiEndpoint = "http://localhost:5075/api/perros-peligrosos/registrar"; // Ejemplo
 
             // Objeto de datos que vas a enviar a tu API
             var dataToSend = new

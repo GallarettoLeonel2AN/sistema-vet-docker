@@ -1,0 +1,150 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "PerrosPeligrososApi",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/perros-peligrosos/registrar": {
+      "post": {
+        "tags": [
+          "PerrosPeligrosos"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerroPeligrosoRegistroDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerroPeligrosoRegistroDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerroPeligrosoRegistroDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PerroPeligrosoRegistroDto": {
+        "type": "object",
+        "properties": {
+          "mascotaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreMascota": {
+            "type": "string",
+            "nullable": true
+          },
+          "razaMascota": {
+            "type": "string",
+            "nullable": true
+          },
+          "esRazaPeligrosa": {
+            "type": "boolean"
+          },
+          "tieneChip": {
+            "type": "boolean"
+          },
+          "chipCodigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "clienteDni": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "clienteNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "clienteApellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaRegistro": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "SistemaVetIng\\SistemaVetIng.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
