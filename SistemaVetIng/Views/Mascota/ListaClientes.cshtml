@@ -2,50 +2,121 @@
 
 @{
     ViewData["Title"] = "Seleccionar Cliente";
+    Layout = null; 
 }
 
-<h1>Seleccionar Cliente para Asociar Mascota</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sistema Veterinario</title>
 
-<hr />
+    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="main-header">
+        <a href="#" class="logo">
+            <i class="fas fa-paw"></i>
+            <span>VetIng</span>
+        </a>
+        <a asp-controller="Veterinario" asp-action="PaginaPrincipal" class="btn sesion">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+    </header>
 
-@if (TempData["Mensaje"] != null)
-{
-    <div class="alert alert-success mt-3">@TempData["Mensaje"]</div>
-}
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger mt-3">@TempData["Error"]</div>
-}
+    <main>
+        <section>
+            <h1 class="section-title">Seleccionar Cliente para Asociar Mascota</h1>
 
-@if (Model != null && Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>DNI</th>
-                <th>Teléfono</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var cliente in Model)
+            @if (Model != null && Model.Any())
             {
-                <tr>
-                    <td>@cliente.Nombre</td>
-                    <td>@cliente.Apellido</td>
-                    <td>@cliente.Dni</td>
-                    <td>@cliente.Telefono</td>
-                    <td>
-                        <a asp-action="Registro" asp-route-clienteId="@cliente.Id" class="btn btn-primary btn-sm">Asociar Mascota</a>
-                    </td>
-                </tr>
+                <div class="table-container">
+                    <table class="table responsive-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>DNI</th>
+                                <th>Teléfono</th>
+                                <th class="text-center">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var cliente in Model)
+                            {
+                                <tr>
+                                    <td data-label="Nombre:">@cliente.Nombre</td>
+                                    <td data-label="Apellido:">@cliente.Apellido</td>
+                                    <td data-label="DNI:">@cliente.Dni</td>
+                                    <td data-label="Teléfono:">@cliente.Telefono</td>
+                                    <td data-label="Acción:" class="text-center">
+                                        <a asp-controller="Mascota" asp-action="Registro" asp-route-clienteId="@cliente.Id" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-plus"></i> Asociar Mascota
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <div class="alert alert-info">No se encontraron clientes en el sistema.</div>
-}
+            else
+            {
+                <div class="alert alert-info empty-state-message custom-alert">No se encontraron clientes en el sistema.</div>
+                <p class="text-center" style="margin-top: 20px;">
+                    <a asp-controller="Cliente" asp-action="Registro" class="btn btn-secondary">
+                        <i class="fas fa-user-plus"></i> Registrar Nuevo Cliente
+                    </a>
+                </p>
+            }
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-col footer-info">
+            <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p> <div class="footer-social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Acerca de VetIng</h4> <ul class="footer-links">
+                <li><a href="#">Nuestra Historia</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Noticias y Blog</a></li>
+                <li><a href="#">Fundación VetIng</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Soporte</h4> <ul class="footer-links">
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Guías de Usuario</a></li>
+                <li><a href="#">Descargar App Móvil</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

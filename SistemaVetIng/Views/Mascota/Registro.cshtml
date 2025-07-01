@@ -2,60 +2,181 @@
 
 @{
     ViewData["Title"] = "Registrar Mascota";
+    Layout = null;
 }
 
-<h1>Registrar Mascota para el Cliente: <span class="badge bg-primary">@ViewBag.ClienteNombre</span></h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sistema Veterinario</title>
 
-<hr />
+    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="main-header">
+        <a href="#" class="logo">
+            <i class="fas fa-paw"></i>
+            <span>VetIng</span>
+        </a>
+        <a asp-controller="Veterinario" asp-action="PaginaPrincipal" class="btn sesion">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+    </header>
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Registro" asp-controller="Mascota" method="post">
-            @Html.AntiForgeryToken()
+    <main class="registrar-form-main">
+        <section class="form-section">
+            <h2 class="section-title">Registrar Nueva Mascota</h2>
+            <p class="form-subtitle">Asociando mascota al Cliente: <strong>@ViewBag.ClienteNombre</strong></p>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-controller="Mascota" asp-action="Registro" method="post" class="main-form">
+                @Html.AntiForgeryToken()
 
-            <input type="hidden" asp-for="ClienteId" />
+                <input type="hidden" asp-for="ClienteId" />
 
-            <div class="form-group">
-                <label asp-for="Nombre"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Nombre"></label>
+                    <input asp-for="Nombre" class="form-control" placeholder="Nombre de la mascota" />
+                    <span asp-validation-for="Nombre" class="text-danger validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Especie"></label>
+                    <select asp-for="Especie" class="form-control" id="especieMascota">
+                        <option value="">Seleccione la especie</option>
+                        <option value="Perro">Perro</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Pájaro">Pájaro</option>
+                        <option value="Roedor">Roedor</option>
+                        <option value="Reptil">Reptil</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span asp-validation-for="Especie" class="text-danger validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Raza"></label>
+                    <input asp-for="Raza" class="form-control" id="razaMascota" placeholder="Ej: Labrador, Siames, Pitbull" />
+                    <span asp-validation-for="Raza" class="text-danger validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FechaNacimiento"></label>
+                    <input asp-for="FechaNacimiento" class="form-control" type="date" />
+                    <span asp-validation-for="FechaNacimiento" class="text-danger validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Sexo"></label>
+                    <select asp-for="Sexo" class="form-control">
+                        <option value="">Seleccione el sexo</option>
+                        <option value="Macho">Macho</option>
+                        <option value="Hembra">Hembra</option>
+                        <option value="Desconocido">Desconocido</option>
+                    </select>
+                    <span asp-validation-for="Sexo" class="text-danger validation-error"></span>
+                </div>
+
+                <input type="hidden" asp-for="RazaPeligrosa" id="esRazaPeligrosa" />
+
+                <div class="form-group" id="chipGroup" style="display: none;">
+                    <label asp-for="Chip"></label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="tieneChip" asp-for="Chip">
+                        <label class="form-check-label" for="tieneChip">Sí, posee chip</label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a asp-controller="Cliente" asp-action="ListaClientesParaMascota" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Registrar Mascota</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-col footer-info">
+            <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p> <div class="footer-social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
             </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Acerca de VetIng</h4> <ul class="footer-links">
+                <li><a href="#">Nuestra Historia</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Noticias y Blog</a></li>
+                <li><a href="#">Fundación VetIng</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Soporte</h4> <ul class="footer-links">
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Guías de Usuario</a></li>
+                <li><a href="#">Descargar App Móvil</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+        </div>
+    </footer>
 
-            <div class="form-group">
-                <label asp-for="Raza"></label>
-                <input asp-for="Raza" class="form-control" />
-                <span asp-validation-for="Raza" class="text-danger"></span>
-            </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-            <div class="form-group">
-                <label asp-for="FechaNacimiento"></label>
-                <input asp-for="FechaNacimiento" class="form-control" type="date" />
-                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-            </div>
+    <script>
+        $(document).ready(function () {
+            // Función para verificar si la raza es peligrosa
+            function checkRazaPeligrosa() {
+                var especie = $('#especieMascota').val().toLowerCase();
+                var raza = $('#razaMascota').val().toLowerCase().trim(); // Trim para limpiar espacios
 
-            <div class="form-group">
-                <label asp-for="Sexo"></label>
-                <input asp-for="Sexo" class="form-control" />
-                <span asp-validation-for="Sexo" class="text-danger"></span>
-            </div>
+                // Lista de razas de perros consideradas peligrosas
+                var razasPeligrosas = [
+                    "pitbull", "rottweiler", "dogo argentino", "fila brasileiro",
+                    "akita inu", "tosa inu", "doberman", "staffordshire bull terrier",
+                    "american staffordshire terrier", "pastor alemán" // Agrega las que consideres
+                ];
 
-            <div class="form-group form-check mt-3">
-                <input asp-for="RazaPeligrosa" class="form-check-input" />
-                <label asp-for="RazaPeligrosa" class="form-check-label"></label>
-            </div>
+                var esPerro = (especie === "perro");
+                var esPeligrosa = esPerro && razasPeligrosas.includes(raza);
 
-            <div class="form-group mt-3">
-                <button type="submit" class="btn btn-primary">Registrar Mascota</button>
-                <a asp-action="ListaClientes" class="btn btn-secondary">Cancelar</a>
-            </div>
-        </form>
-    </div>
-</div>
+                if (esPeligrosa) {
+                    $('#chipGroup').slideDown(); // Muestra el campo del chip
+                    $('#esRazaPeligrosa').val('true'); // Marca el campo oculto como true
+                } else {
+                    $('#chipGroup').slideUp(); // Oculta el campo del chip
+                    $('#tieneChip').prop('checked', false); // Desmarca el chip si no es peligrosa
+                    $('#esRazaPeligrosa').val('false'); // Marca el campo oculto como false
+                }
+            }
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+            // Llamar la función al cargar la página (por si se recarga con valores)
+            checkRazaPeligrosa();
+
+            // Escuchar cambios en los campos de especie y raza
+            $('#especieMascota, #razaMascota').on('change keyup', function () {
+                checkRazaPeligrosa();
+            });
+        });
+    </script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -6,7 +6,10 @@ namespace SistemaVetIng.ViewsModels
 {
     public class MascotaRegistroViewModel
     {
-        // Propiedades de la Mascota
+        // Atributos de la Mascota
+        [Required(ErrorMessage = "La especie de la mascota es obligatorio.")]
+        public string Especie { get; set; }
+
         [Required(ErrorMessage = "El nombre de la mascota es obligatorio.")]
         public string Nombre { get; set; }
 
@@ -23,6 +26,9 @@ namespace SistemaVetIng.ViewsModels
 
         [Display(Name = "Raza Peligrosa")]
         public bool RazaPeligrosa { get; set; }
+
+        [Display(Name = "Chip")]
+        public bool Chip { get; set; }
 
         // Propiedad para el Id del cliente seleccionado
         [Required(ErrorMessage = "Debes seleccionar un cliente propietario.")]

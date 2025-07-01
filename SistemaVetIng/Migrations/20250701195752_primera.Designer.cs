@@ -12,7 +12,7 @@ using SistemaVetIng.Data;
 namespace SistemaVetIng.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250701150021_primera")]
+    [Migration("20250701195752_primera")]
     partial class primera
     {
         /// <inheritdoc />
@@ -412,6 +412,10 @@ namespace SistemaVetIng.Migrations
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Especie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("datetime2");
