@@ -226,11 +226,10 @@ namespace SistemaVetIng.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AtencionVeterinariaId")
+                    b.Property<int?>("AtencionVeterinariaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Informe")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
@@ -245,6 +244,38 @@ namespace SistemaVetIng.Migrations
                     b.HasIndex("AtencionVeterinariaId");
 
                     b.ToTable("Estudios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "Análisis de sangre completo",
+                            Precio = 4500.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "Radiografía de tórax",
+                            Precio = 6000.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "Análisis de orina",
+                            Precio = 2000.00m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nombre = "Ecografía abdominal",
+                            Precio = 7500.00m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Nombre = "Estudio parasitológico",
+                            Precio = 1800.00m
+                        });
                 });
 
             modelBuilder.Entity("SistemaVetIng.Models.HistoriaClinica", b =>
@@ -514,10 +545,6 @@ namespace SistemaVetIng.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Indicaciones")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Medicamento")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -586,17 +613,10 @@ namespace SistemaVetIng.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AtencionVeterinariaId")
+                    b.Property<int?>("AtencionVeterinariaId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Droga")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("FechaAplicacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FechaVencimiento")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Lote")
@@ -615,6 +635,40 @@ namespace SistemaVetIng.Migrations
                     b.HasIndex("AtencionVeterinariaId");
 
                     b.ToTable("Vacunas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FechaAplicacion = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Lote = "Lote-A123",
+                            Nombre = "Vacuna Antirrábica",
+                            Precio = 2500.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FechaAplicacion = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Lote = "Lote-B456",
+                            Nombre = "Vacuna Quíntuple Canina",
+                            Precio = 3200.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FechaAplicacion = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Lote = "Lote-C789",
+                            Nombre = "Vacuna Triple Felina",
+                            Precio = 2800.00m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FechaAplicacion = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Lote = "Lote-D012",
+                            Nombre = "Vacuna de la Tos de las Perreras",
+                            Precio = 2000.00m
+                        });
                 });
 
             modelBuilder.Entity("SistemaVetIng.Models.Veterinaria", b =>
@@ -792,9 +846,7 @@ namespace SistemaVetIng.Migrations
                 {
                     b.HasOne("SistemaVetIng.Models.AtencionVeterinaria", "AtencionVeterinaria")
                         .WithMany("EstudiosComplementarios")
-                        .HasForeignKey("AtencionVeterinariaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("AtencionVeterinariaId");
 
                     b.Navigation("AtencionVeterinaria");
                 });
@@ -889,9 +941,7 @@ namespace SistemaVetIng.Migrations
                 {
                     b.HasOne("SistemaVetIng.Models.AtencionVeterinaria", "AtencionVeterinaria")
                         .WithMany("Vacunas")
-                        .HasForeignKey("AtencionVeterinariaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("AtencionVeterinariaId");
 
                     b.Navigation("AtencionVeterinaria");
                 });

@@ -30,6 +30,25 @@ namespace SistemaVetIng.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Seed para Vacunas
+            modelBuilder.Entity<Vacuna>().HasData(
+                new Vacuna { Id = 1, Nombre = "Vacuna Antirrábica", Lote = "Lote-A123", Precio = 2500.00m, FechaAplicacion = DateTime.MinValue },
+                new Vacuna { Id = 2, Nombre = "Vacuna Quíntuple Canina", Lote = "Lote-B456", Precio = 3200.00m, FechaAplicacion = DateTime.MinValue },
+                new Vacuna { Id = 3, Nombre = "Vacuna Triple Felina", Lote = "Lote-C789", Precio = 2800.00m, FechaAplicacion = DateTime.MinValue },
+                new Vacuna { Id = 4, Nombre = "Vacuna de la Tos de las Perreras", Lote = "Lote-D012", Precio = 2000.00m, FechaAplicacion = DateTime.MinValue }
+                // Agrega más vacunas si lo necesitas
+            );
+
+            // Seed para Estudios
+            modelBuilder.Entity<Estudio>().HasData(
+                new Estudio { Id = 1, Nombre = "Análisis de sangre completo", Precio = 4500.00m, Informe = null, },
+                new Estudio { Id = 2, Nombre = "Radiografía de tórax", Precio = 6000.00m, Informe = null },
+                new Estudio { Id = 3, Nombre = "Análisis de orina", Precio = 2000.00m, Informe = null },
+                new Estudio { Id = 4, Nombre = "Ecografía abdominal", Precio = 7500.00m, Informe = null },
+                new Estudio { Id = 5, Nombre = "Estudio parasitológico", Precio = 1800.00m, Informe = null }
+                // Agrega más estudios si lo necesitas
+            );
+
             // Relaciones con Usuario
             modelBuilder.Entity<Cliente>()
                 .HasOne(c => c.Usuario)
@@ -96,17 +115,7 @@ namespace SistemaVetIng.Data
                 .HasForeignKey<AtencionVeterinaria>(a => a.TratamientoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Vacuna>()
-                .HasOne(v => v.AtencionVeterinaria)
-                .WithMany(a => a.Vacunas)
-                .HasForeignKey(v => v.AtencionVeterinariaId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Estudio>()
-                .HasOne(e => e.AtencionVeterinaria)
-                .WithMany(a => a.EstudiosComplementarios)
-                .HasForeignKey(e => e.AtencionVeterinariaId)
-                .OnDelete(DeleteBehavior.Restrict);
+            
 
             modelBuilder.Entity<AtencionVeterinaria>()
                 .HasOne(a => a.Veterinario)

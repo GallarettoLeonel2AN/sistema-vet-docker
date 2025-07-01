@@ -10,10 +10,9 @@
 <hr />
 <div class="row">
     <div class="col-md-8">
-        <form asp-action="Crear">
+        <form asp-action="Crear" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            
             <input type="hidden" asp-for="HistoriaClinicaId" />
 
             <div class="form-group mb-3">
@@ -29,37 +28,55 @@
             </div>
 
             <hr />
-            <h4>Tratamiento (Opcional)</h4>
-            <div class="form-group form-check mb-3">
-                <input class="form-check-input" asp-for="RequiereTratamiento" id="requiereTratamientoCheckbox" />
-                <label class="form-check-label" for="requiereTratamientoCheckbox" asp-for="RequiereTratamiento"></label>
+          
+            <h4>Tratamiento </h4>
+            <div class="form-group mb-3">
+                <label asp-for="Medicamento" class="control-label"></label>
+                <input asp-for="Medicamento" class="form-control" />
+                <span asp-validation-for="Medicamento" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Dosis" class="control-label"></label>
+                <input asp-for="Dosis" class="form-control" />
+                <span asp-validation-for="Dosis" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Frecuencia" class="control-label"></label>
+                <input asp-for="Frecuencia" class="form-control" />
+                <span asp-validation-for="Frecuencia" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="DuracionDias" class="control-label"></label>
+                <input asp-for="DuracionDias" class="form-control" type="number" />
+                <span asp-validation-for="DuracionDias" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ObservacionesTratamiento" class="control-label"></label>
+                <textarea asp-for="ObservacionesTratamiento" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="ObservacionesTratamiento" class="text-danger"></span>
             </div>
 
-            <div id="tratamientoFields" style="display: none;">
-                <div class="form-group mb-3">
-                    <label asp-for="Medicamento" class="control-label"></label>
-                    <input asp-for="Medicamento" class="form-control" />
-                    <span asp-validation-for="Medicamento" class="text-danger"></span>
+            <hr />
+
+            <div class="mb-4">
+                <h4>
+                    Vacunas 
+                    <button type="button" id="add-vacuna-btn" class="btn btn-sm btn-success ms-2">
+                        <i class="fas fa-plus-circle"></i> Agregar Vacuna
+                    </button>
+                </h4>
+                <div id="vacunas-container">
                 </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Dosis" class="control-label"></label>
-                    <input asp-for="Dosis" class="form-control" />
-                    <span asp-validation-for="Dosis" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Frecuencia" class="control-label"></label>
-                    <input asp-for="Frecuencia" class="form-control" />
-                    <span asp-validation-for="Frecuencia" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="DuracionDias" class="control-label"></label>
-                    <input asp-for="DuracionDias" class="form-control" type="number" />
-                    <span asp-validation-for="DuracionDias" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="ObservacionesTratamiento" class="control-label"></label>
-                    <textarea asp-for="ObservacionesTratamiento" class="form-control" rows="3"></textarea>
-                    <span asp-validation-for="ObservacionesTratamiento" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <h4>
+                    Estudios Complementarios 
+                    <button type="button" id="add-estudio-btn" class="btn btn-sm btn-success ms-2">
+                        <i class="fas fa-plus-circle"></i> Agregar Estudio
+                    </button>
+                </h4>
+                <div id="estudios-container">
                 </div>
             </div>
 
@@ -75,28 +92,90 @@
     </div>
 </div>
 
- @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<template id="vacuna-template">
+    <div class="input-group mb-2">
+        <select name="" class="form-select" required>
+            <option value="">Seleccione una vacuna...</option>
+            @* Genera las opciones con Razor *@
+            @if (ViewBag.VacunasDisponibles != null)
+            {
+                foreach (var item in ViewBag.VacunasDisponibles)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+        <button type="button" class="btn btn-outline-danger remove-item-btn">
+            <i class="fas fa-trash-alt"></i>
+        </button>
+    </div>
+</template>
+
+<template id="estudio-template">
+    <div class="input-group mb-2">
+        <select name="" class="form-select" required>
+            <option value="">Seleccione un estudio...</option>
+            @* Genera las opciones con Razor *@
+            @if (ViewBag.EstudiosDisponibles != null)
+            {
+                foreach (var item in ViewBag.EstudiosDisponibles)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+        <button type="button" class="btn btn-outline-danger remove-item-btn">
+            <i class="fas fa-trash-alt"></i>
+        </button>
+    </div>
+</template>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var checkbox = document.getElementById('requiereTratamientoCheckbox');
-            var tratamientoFields = document.getElementById('tratamientoFields');
+           
+            // =================================================================
+            // NUEVA LÓGICA DE JAVASCRIPT AÑADIDA
+            // =================================================================
 
-            // Función para mostrar u ocultar los campos de tratamiento
-            function toggleTratamientoFields() {
-                if (checkbox.checked) {
-                    tratamientoFields.style.display = 'block';
-                } else {
-                    tratamientoFields.style.display = 'none';
-                }
-            }
+            let vacunaIndex = 0;
+            let estudioIndex = 0;
 
-            // Llamar la función al cargar la página para el estado inicial
-            toggleTratamientoFields();
+            // Función para agregar una fila de selección de vacuna usando la plantilla
+            $('#add-vacuna-btn').click(function () {
+                const template = document.getElementById('vacuna-template');
+                const clone = template.content.cloneNode(true);
 
-            // Añadir un listener para cuando el checkbox cambie
-            checkbox.addEventListener('change', toggleTratamientoFields);
+                // Asigna el nombre del campo para que el model binding funcione
+                const selectElement = clone.querySelector('select');
+                selectElement.name = `VacunasSeleccionadasIds[${vacunaIndex}]`;
+
+                $('#vacunas-container').append(clone);
+                vacunaIndex++;
+            });
+
+            // Función para agregar una fila de selección de estudio usando la plantilla
+            $('#add-estudio-btn').click(function () {
+                const template = document.getElementById('estudio-template');
+                const clone = template.content.cloneNode(true);
+
+                // Asigna el nombre del campo para que el model binding funcione
+                const selectElement = clone.querySelector('select');
+                selectElement.name = `EstudiosSeleccionadosIds[${estudioIndex}]`;
+
+                $('#estudios-container').append(clone);
+                estudioIndex++;
+            });
+
+            // Delegación de eventos para eliminar filas
+            $(document).on('click', '.remove-item-btn', function () {
+                $(this).closest('.input-group').remove();
+            });
         });
     </script>
 }

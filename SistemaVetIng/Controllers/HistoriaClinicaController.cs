@@ -66,8 +66,13 @@ namespace SistemaVetIng.Controllers
             var mascota = await _context.Mascotas
                                         .Include(m => m.Propietario) // Para mostrar los datos del propietario
                                         .Include(m => m.HistoriaClinica)
-                                            .ThenInclude(hc => hc.Atenciones) // Cargar las atenciones de la historia clínica
+                                            .ThenInclude(hc => hc.Atenciones)// Cargar las atenciones de la historia clínica
                                                 .ThenInclude(a => a.Tratamiento) // Y los tratamientos dentro de las atenciones
+                                        
+                                         .Include(m => m.HistoriaClinica)
+                                            .ThenInclude(hc => hc.Atenciones)
+                                             .ThenInclude(a => a.Veterinario)
+
                                         .Include(m => m.HistoriaClinica) // Necesario para cargar también las vacunas y estudios si son parte de la atención
                                             .ThenInclude(hc => hc.Atenciones)
                                                 .ThenInclude(a => a.Vacunas)

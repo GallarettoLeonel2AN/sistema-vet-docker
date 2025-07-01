@@ -89,6 +89,8 @@ namespace SistemaVetIng.Controllers
 
             return View("ForgotPasswordConfirmation");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken] // Siempre usa esto para formularios POST
         public async Task<IActionResult> ResetPassword(CambiarContraseñaViewModel model)
         {
             if (!ModelState.IsValid)
@@ -123,7 +125,8 @@ namespace SistemaVetIng.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken] // Siempre usa esto para formularios POST
         public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -189,6 +192,7 @@ namespace SistemaVetIng.Controllers
 
         // POST: /Account/Logout
         [HttpPost]
+        [ValidateAntiForgeryToken] // Siempre usa esto para formularios POST
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

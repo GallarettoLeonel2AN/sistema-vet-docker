@@ -1,11 +1,13 @@
 ﻿// Archivo: Controllers/AtencionVeterinariaController.cs
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.ViewsModels;
 using System.Security.Claims; // Necesario para obtener el ID del usuario logueado
+
 
 namespace SistemaVetIng.Controllers
 {
@@ -35,7 +37,14 @@ namespace SistemaVetIng.Controllers
                 TempData["Error"] = "Historia Clínica no encontrada.";
                 return RedirectToAction("ListaClientesParaSeguimiento", "HistoriaClinica");
             }
+            // Obtener todas las vacunas y estudios disponibles
+            ViewBag.VacunasDisponibles = new SelectList(await _context.Vacunas.ToListAsync(), "Id", "Nombre");
+            ViewBag.EstudiosDisponibles = new SelectList(await _context.Estudios.ToListAsync(), "Id", "Nombre");
 
+            // Si necesitas el precio, puedes cargarlo también
+            var vacunasConPrecio = await _context.Vacunas.Select(v => new { v.Id, v.Nombre, v.Precio }).ToListAsync();
+            var estudiosConPrecio = await _context.Estudios.Select(e => new { e.Id, e.Nombre, e.Precio }).ToListAsync();
+            
             // Creamos una instancia del ViewModel y le pasamos el ID de la Historia Clínica
             var viewModel = new AtencionVeterinariaViewModel
             {
@@ -108,10 +117,9 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
 
-            // Crear la instancia de Tratamiento si se requiere
+            
             Tratamiento? tratamiento = null;
-            if (model.RequiereTratamiento)
-            {
+           
                 tratamiento = new Tratamiento
                 {
                     Medicamento = model.Medicamento,
@@ -120,19 +128,49 @@ namespace SistemaVetIng.Controllers
                     Duracion = model.DuracionDias,
                     Observaciones = model.ObservacionesTratamiento
                 };
+                _context.Tratamientos.Add(tratamiento);
                 // No es necesario agregar tratamiento al contexto aquí si es parte de la atención
                 // EF Core lo manejará cuando se agregue la atención
+            
+            var vacunasSeleccionadas = new List<Vacuna>();
+            decimal costoVacunas = 0;
+            if (model.VacunasSeleccionadasIds != null && model.VacunasSeleccionadasIds.Any())
+            {
+                vacunasSeleccionadas = await _context.Vacunas
+                    .Where(v => model.VacunasSeleccionadasIds.Contains(v.Id))
+                    .ToListAsync();
+                costoVacunas = vacunasSeleccionadas.Sum(v => v.Precio);
             }
+
+            // Obtener los estudios completos desde la base de datos
+            var estudiosSeleccionados = new List<Estudio>();
+            decimal costoEstudios = 0;
+            if (model.EstudiosSeleccionadosIds != null && model.EstudiosSeleccionadosIds.Any())
+            {
+                estudiosSeleccionados = await _context.Estudios
+                    .Where(e => model.EstudiosSeleccionadosIds.Contains(e.Id))
+                    .ToListAsync();
+                costoEstudios = estudiosSeleccionados.Sum(e => e.Precio);
+            }
+
+            decimal costoConsultaBase = 1000;
+            // Calcular el costo total
+            decimal costoTotal = costoVacunas + costoConsultaBase + costoEstudios;
 
             // Crear la instancia de AtencionVeterinaria
             var atencion = new AtencionVeterinaria
             {
-                Fecha = DateTime.Now, // La fecha se establece automáticamente al momento de la creación
+                Fecha = DateTime.Now,
                 Diagnostico = model.Diagnostico,
                 PesoMascota = model.PesoKg,
                 HistoriaClinicaId = model.HistoriaClinicaId,
-                VeterinarioId = model.VeterinarioId, // El ID del veterinario logueado
-                Tratamiento = tratamiento // Asignar el tratamiento (puede ser null)
+                VeterinarioId = model.VeterinarioId,
+                Tratamiento = tratamiento, // Asignar el tratamiento (puede ser null)
+                CostoTotal = costoTotal,
+
+                // *** Asignas las colecciones aquí para que EF Core las persista ***
+                Vacunas = vacunasSeleccionadas,
+                EstudiosComplementarios = estudiosSeleccionados
             };
 
             try

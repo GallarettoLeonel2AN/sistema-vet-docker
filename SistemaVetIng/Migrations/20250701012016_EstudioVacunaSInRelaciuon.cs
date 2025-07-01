@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace SistemaVetIng.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimeraDomingo : Migration
+    public partial class EstudioVacunaSInRelaciuon : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,9 +74,12 @@ namespace SistemaVetIng.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Indicaciones = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Observaciones = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Observaciones = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Medicamento = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Dosis = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Frecuencia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Duracion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -372,6 +377,7 @@ namespace SistemaVetIng.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TratamientoId = table.Column<int>(type: "int", nullable: false),
                     Diagnostico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CostoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -409,9 +415,9 @@ namespace SistemaVetIng.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Informe = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Informe = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    AtencionVeterinariaId = table.Column<int>(type: "int", nullable: false)
+                    AtencionVeterinariaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -420,8 +426,7 @@ namespace SistemaVetIng.Migrations
                         name: "FK_Estudios_AtencionesVeterinarias_AtencionVeterinariaId",
                         column: x => x.AtencionVeterinariaId,
                         principalTable: "AtencionesVeterinarias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -465,11 +470,10 @@ namespace SistemaVetIng.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Droga = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Lote = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaVencimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaAplicacion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    AtencionVeterinariaId = table.Column<int>(type: "int", nullable: false)
+                    AtencionVeterinariaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -478,8 +482,30 @@ namespace SistemaVetIng.Migrations
                         name: "FK_Vacunas_AtencionesVeterinarias_AtencionVeterinariaId",
                         column: x => x.AtencionVeterinariaId,
                         principalTable: "AtencionesVeterinarias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Estudios",
+                columns: new[] { "Id", "AtencionVeterinariaId", "Informe", "Nombre", "Precio" },
+                values: new object[,]
+                {
+                    { 1, null, null, "Análisis de sangre completo", 4500.00m },
+                    { 2, null, null, "Radiografía de tórax", 6000.00m },
+                    { 3, null, null, "Análisis de orina", 2000.00m },
+                    { 4, null, null, "Ecografía abdominal", 7500.00m },
+                    { 5, null, null, "Estudio parasitológico", 1800.00m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Vacunas",
+                columns: new[] { "Id", "AtencionVeterinariaId", "FechaAplicacion", "Lote", "Nombre", "Precio" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lote-A123", "Vacuna Antirrábica", 2500.00m },
+                    { 2, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lote-B456", "Vacuna Quíntuple Canina", 3200.00m },
+                    { 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lote-C789", "Vacuna Triple Felina", 2800.00m },
+                    { 4, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lote-D012", "Vacuna de la Tos de las Perreras", 2000.00m }
                 });
 
             migrationBuilder.CreateIndex(
