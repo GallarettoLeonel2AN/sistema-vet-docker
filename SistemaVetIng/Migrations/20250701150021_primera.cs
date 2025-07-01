@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SistemaVetIng.Migrations
 {
     /// <inheritdoc />
-    public partial class EstudioVacunaSInRelaciuon : Migration
+    public partial class primera : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

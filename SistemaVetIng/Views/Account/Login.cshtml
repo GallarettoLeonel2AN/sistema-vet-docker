@@ -1,11 +1,11 @@
-﻿  @model SistemaVetIng.ViewModels.LoginViewModel;
+﻿@model SistemaVetIng.ViewModels.LoginViewModel;
 
 @{
     ViewData["Title"] = "Iniciar Sesion";
-    Layout = null; // Puedes mantenerlo en null si esta vista no usa un _Layout.cshtml global
+    Layout = null;
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -14,59 +14,57 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
           integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="~/css/login-styles.css"> @* Asegúrate de que la ruta a tu CSS sea correcta *@
-    <title>Login</title>
+    <link rel="stylesheet" href="~/css/login-styles.css">
+    <title>VetIng - Iniciar Sesión</title>
 </head>
 
 <body>
-    <main>
+    <main class="login-main">
         <div class="login-container">
             <div class="container-img-login"></div>
             <div class="container-formulario">
                 <div class="ingreso-correo">
-                    <div class="responsive"></div>
-                    <h1>Iniciar sesión en VetIng</h1>
-                    <div class="icons">
-                        <a href="#"><i class="fa-brands fa-google"></i></a>
-                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <h1>¡Bienvenido a VetIng!</h1> 
+                    <p class="login-subtext">Ingresa tus credenciales o usa tus redes sociales.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon google"><i class="fa-brands fa-google"></i></a>
+                        <a href="#" class="social-icon twitter"><i class="fa-brands fa-twitter"></i></a>
                     </div>
                 </div>
+
                 <div class="formulario">
-                    @* Aquí indicamos que esta vista usa LoginViewModel *@
-                  
-
                     @* Formulario que enviará los datos al método Login del AccountController *@
-                    <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                        @* Token de seguridad para prevenir ataques CSRF *@
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div> @* Mostrar errores de validación generales *@
+                    <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="login-form">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger error-summary"></div> @* Mostrar errores de validación generales *@
 
-                        <label asp-for="UserName"></label> @* Usamos asp-for para enlazar con la propiedad UserName del ViewModel *@
-                        <input asp-for="UserName" id="name" />
-                        <span asp-validation-for="UserName" class="text-danger"></span> @* Mostrar errores de validación para UserName *@
+                        <div class="form-group">
+                            <label asp-for="UserName"></label>
+                            <input asp-for="UserName" id="name" placeholder="Tu correo electrónico" class="form-control" /> 
+                            <span asp-validation-for="UserName" class="text-danger validation-error"></span> 
+                        </div>
 
-                        <label asp-for="Password"></label> @* Usamos asp-for para enlazar con la propiedad Password del ViewModel *@
-                        <input asp-for="Password" id="pass" />
-                        <span asp-validation-for="Password" class="text-danger"></span> @* Mostrar errores de validación para Password *@
-                        
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" id="pass" placeholder="Tu contraseña" class="form-control" /> 
+                            <span asp-validation-for="Password" class="text-danger validation-error"></span>
+                        </div>
 
-                        <button type="submit" class="button">Ingresar</button> @* Cambiado a button type="submit" *@
-                      
-                        <p>No eres miembro? <a asp-controller="Cliente" asp-action="Registro" class="signUp"> Registrarme </a></p> @* Ajusta la ruta a tu página de registro *@
-                        
-                        <a asp-controller="Account" asp-action="RecuperarContraseña">¿Olvidaste tu contraseña?</a>
+                        <button type="submit" class="button login-button">Ingresar</button> 
+
+                        <p class="signup-link">¿No eres miembro? <a asp-controller="Cliente" asp-action="Registro" class="link-secondary"> Registrarme </a></p>
+                        <a asp-controller="Account" asp-action="RecuperarContraseña" class="link-secondary forgot-password">¿Olvidaste tu contraseña?</a>
                     </form>
-
                 </div>
             </div>
-
         </div>
     </main>
 
-    @* Scripts para validación del lado del cliente (opcional pero recomendado) *@
-    @section Scripts {
-        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-    }
-
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+   
 </body>
 
 </html>

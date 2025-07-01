@@ -12,8 +12,8 @@ using SistemaVetIng.Data;
 namespace SistemaVetIng.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250701012016_EstudioVacunaSInRelaciuon")]
-    partial class EstudioVacunaSInRelaciuon
+    [Migration("20250701150021_primera")]
+    partial class primera
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -847,9 +847,11 @@ namespace SistemaVetIng.Migrations
 
             modelBuilder.Entity("SistemaVetIng.Models.Estudio", b =>
                 {
-                    b.HasOne("SistemaVetIng.Models.AtencionVeterinaria", null)
+                    b.HasOne("SistemaVetIng.Models.AtencionVeterinaria", "AtencionVeterinaria")
                         .WithMany("EstudiosComplementarios")
                         .HasForeignKey("AtencionVeterinariaId");
+
+                    b.Navigation("AtencionVeterinaria");
                 });
 
             modelBuilder.Entity("SistemaVetIng.Models.HistoriaClinica", b =>
@@ -940,9 +942,11 @@ namespace SistemaVetIng.Migrations
 
             modelBuilder.Entity("SistemaVetIng.Models.Vacuna", b =>
                 {
-                    b.HasOne("SistemaVetIng.Models.AtencionVeterinaria", null)
+                    b.HasOne("SistemaVetIng.Models.AtencionVeterinaria", "AtencionVeterinaria")
                         .WithMany("Vacunas")
                         .HasForeignKey("AtencionVeterinariaId");
+
+                    b.Navigation("AtencionVeterinaria");
                 });
 
             modelBuilder.Entity("SistemaVetIng.Models.Veterinaria", b =>

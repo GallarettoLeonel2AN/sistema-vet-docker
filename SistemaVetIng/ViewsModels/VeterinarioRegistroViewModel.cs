@@ -1,5 +1,4 @@
-﻿// Archivo: ViewsModels/VeterinarioRegistroViewModel.cs
-
+﻿
 using System.ComponentModel.DataAnnotations;
 
 namespace SistemaVetIng.ViewsModels
