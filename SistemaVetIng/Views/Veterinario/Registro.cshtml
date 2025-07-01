@@ -1,88 +1,106 @@
-﻿@model SistemaVetIng.ViewsModels.VeterinarioRegistroViewModel
-
+﻿@model SistemaVetIng.ViewsModels.VeterinarioRegistroViewModel 
 @{
     ViewData["Title"] = "Registrar Veterinario";
-    Layout = null; // Te recomiendo usar un layout para mantener la consistencia
+    Layout = null; 
 }
 
-<h1>Registrar Nuevo Veterinario</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetIng - Registrar Veterinario</title>
+    <link rel="stylesheet" href="~/css/registrar-cliente-style.css" asp-append-version="true" /> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <main class="register-main">
+        <div class="register-container">
+            <div class="container-img-register" style="background-image: url(/css/Img/reg-veterinario.jpg);"></div> <div class="container-formulario">
+                <div class="ingreso-correo">
+                    <h1>Registro de Veterinario</h1>
+                    <p class="register-subtext">Ingresa los datos necesarios para crearle una cuenta al profesional</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon google"><i class="fa-brands fa-google"></i></a>
+                        <a href="#" class="social-icon twitter"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
 
-<hr />
+                <div class="formulario">
+                    <form asp-action="Registro" asp-controller="Veterinario" method="post" class="register-form"> @Html.AntiForgeryToken()
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Registro" asp-controller="Veterinario" method="post">
-            @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label asp-for="Nombre"></label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Nombre" />
+                            <span asp-validation-for="Nombre" class="text-danger validation-error"></span>
+                        </div>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Apellido"></label>
+                            <input asp-for="Apellido" class="form-control" placeholder="Apellido" />
+                            <span asp-validation-for="Apellido" class="text-danger validation-error"></span>
+                        </div>
 
-            <div class="form-group">
-                <label asp-for="Nombre"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                        <div class="form-group">
+                            <label asp-for="Dni"></label>
+                            <input asp-for="Dni" class="form-control" placeholder="Número de DNI" />
+                            <span asp-validation-for="Dni" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" placeholder="email@vet.com" type="email" />
+                            <span asp-validation-for="Email" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Password">Contraseña:</label>
+                            <input asp-for="Password" class="form-control" type="password" placeholder="8+ caracteres, Mayús, Minús, Números, Carácter" />
+                            <span asp-validation-for="Password" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Direccion"></label>
+                            <input asp-for="Direccion" class="form-control" placeholder="Calle, número, piso, depto." />
+                            <span asp-validation-for="Direccion" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Telefono"></label>
+                            <input asp-for="Telefono" class="form-control" placeholder="Número de teléfono" />
+                            <span asp-validation-for="Telefono" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Matricula"></label>
+                            <input asp-for="Matricula" class="form-control" placeholder="Número de Matrícula" />
+                            <span asp-validation-for="Matricula" class="text-danger validation-error"></span>
+                        </div>
+
+                        <button type="submit" class="button register-button">Registrar Veterinario</button> 
+                        @if (TempData["Mensaje"] != null)
+                        {
+                                <div class="alert alert-success">@TempData["Mensaje"]</div>
+                        }
+                        @if (TempData["Error"] != null)
+                        {
+                                <div class="alert alert-danger">@TempData["Error"]</div>
+                        }
+
+                        <p class="signin-link">¿Ya tienes cuenta? <a asp-controller="Account" asp-action="Login" class="link-secondary"> Iniciar sesión</a></p>
+                    </form>
+                </div>
             </div>
+        </div>
+    </main>
 
-            <div class="form-group">
-                <label asp-for="Apellido"></label>
-                <input asp-for="Apellido" class="form-control" />
-                <span asp-validation-for="Apellido" class="text-danger"></span>
-            </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-            <div class="form-group">
-                <label asp-for="Dni"></label>
-                <input asp-for="Dni" class="form-control" type="number" />
-                <span asp-validation-for="Dni" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" type="password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Direccion"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Telefono"></label>
-                <input asp-for="Telefono" class="form-control" type="number" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Matricula"></label>
-                <input asp-for="Matricula" class="form-control" />
-                <span asp-validation-for="Matricula" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mt-3">
-                <button type="submit" class="btn btn-primary">Registrar</button>
-            </div>
-        </form>
-
-        @if (TempData["Mensaje"] != null)
-        {
-            <div class="alert alert-success mt-3">@TempData["Mensaje"]</div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
-        @if (TempData["Error"] != null)
-        {
-            <div class="alert alert-danger mt-3">@TempData["Error"]</div>
-        }
-
-    </div>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+</body>
+</html>
