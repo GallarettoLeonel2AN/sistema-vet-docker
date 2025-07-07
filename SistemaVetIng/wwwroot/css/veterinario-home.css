@@ -267,6 +267,8 @@ section {
 .btnModificar, .btn-danger {
     padding: 8px 15px;
     border-radius: 5px;
+    background-color: yellowgreen;
+    color:white;
     cursor: pointer;
     font-size: 0.9em;
     font-weight: 600;
@@ -292,7 +294,24 @@ section {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
-
+.clienteTable {
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+    background-color: dimgrey;
+    font-size: 0.9em;
+    padding:5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    margin-right: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+    .clienteTable:hover {
+        background-color: #4a55ff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
 /* Estilos para gestión de elementos */
 .gestion-turnos {
     display: flex;

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model SistemaVetIng.ViewsModels.VeterinarioPaginaPrincipalViewModel
+@{
     ViewData["Title"] = "VetIng";
     Layout = null;
 }
@@ -45,11 +46,11 @@
         </section>
 
         <section id="clientes">
-            <h2 class="section-title">Gestión de Clientes</h2> <div class="cliente-busq">
+            <h2 class="section-title">Gestión de Clientes</h2>
+            <div class="cliente-busq">
                 <a asp-controller="Cliente" asp-action="Registro" class="btnAdd">Registrar Nuevo Cliente</a>
                 <div class="buscador">
-                    <label for="busqueda"> Buscar por Dni:</label>
-                    <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese el numero de documento">
+                    <label for="busquedaCliente"> Buscar por Dni:</label> <input type="text" id="busquedaCliente" name="busqueda" placeholder="Ingrese el numero de documento">
                     <button class="btnBuscar">Buscar</button>
                 </div>
             </div>
@@ -63,25 +64,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Ulises Sosa</td>
-                        <td>sosa.ulises@gmail.com</td>
-                        <td>sulises</td>
-                        <td>
-                            <button class="btnModificar">Editar</button>
-                            <button class="btn btn-danger">Eliminar</button>
-                        </td>
-                    </tr>
+                    @if (Model.Clientes != null && Model.Clientes.Any()) 
+                    {
+                        @foreach (var cliente in Model.Clientes)
+                        {
+                            <tr>
+                                <td>@cliente.NombreCompleto</td>
+                                <td>@cliente.Telefono</td>
+                                <td>@cliente.NombreUsuario</td>
+                                <td>
+                                    <a asp-controller="Cliente" asp-action="Editar" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
+                                    <a asp-controller="Cliente" asp-action="Eliminar" asp-route-id="@cliente.Id" class="btn btn-danger"
+                                       onclick="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');">Eliminar</a>
+                                    <a asp-controller="Mascota" asp-action="Registro" asp-route-clienteId="@cliente.Id" class="btn btn-primary">Registrar Mascota</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">No hay clientes registrados.</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </section>
 
+
         <section id="mascotas">
-            <h2 class="section-title">Gestión de Mascotas</h2> <div class="cliente-busq">
+            <h2 class="section-title">Gestión de Mascotas</h2>
+            <div class="cliente-busq">
                 <a asp-controller="Mascota" asp-action="Registro" class="btnAdd">Registrar Nueva Mascota</a>
                 <div class="buscador">
-                    <label for="busqueda"> Buscar por Dueño:</label>
-                    <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese el nombre del dueño">
+                    <label for="busquedaMascota"> Buscar por Dueño:</label> <input type="text" id="busquedaMascota" name="busqueda" placeholder="Ingrese el nombre del dueño">
                     <button class="btnBuscar">Buscar</button>
                 </div>
             </div>
@@ -91,22 +107,40 @@
                         <th>Nombre de la Mascota</th>
                         <th>Especie</th>
                         <th>Raza</th>
+                        <th>Sexo</th>
                         <th>Edad</th>
                         <th>Dueño</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mia</td>
-                        <td>Perro</td>
-                        <td>Labrador</td>
-                        <td>5 años</td>
-                        <td>Ulises Sosa</td>
-                        <td>
-                            <button class="btnModificar">Editar</button>
-                        </td>
-                    </tr>
+                    @if (Model.Mascotas != null && Model.Mascotas.Any()) 
+                    {
+                        @foreach (var mascota in Model.Mascotas)
+                        {
+                            <tr>
+                                <td>@mascota.NombreMascota</td>
+                                <td>@mascota.Especie</td>
+                                <td>@mascota.Raza</td>
+                                <td>@mascota.Sexo</td>
+                                <td>@mascota.EdadAnios años</td>
+                                <td>
+                                    <a asp-controller="Cliente" asp-action="Detalles" asp-route-id="@mascota.ClienteId" class="clienteTable">@mascota.NombreDueno</a>
+                                </td>
+                                <td>
+                                    <a asp-controller="Mascota" asp-action="Editar" asp-route-id="@mascota.Id" class="btnModificar">Editar</a>
+                                    <a asp-controller="Mascota" asp-action="Eliminar" asp-route-id="@mascota.Id" class="btn btn-danger"
+                                       onclick="return confirm('¿Estás seguro de que quieres eliminar a esta mascota?');">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">No hay mascotas registradas.</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </section>
