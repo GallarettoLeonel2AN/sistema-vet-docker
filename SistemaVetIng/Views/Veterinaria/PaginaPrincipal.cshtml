@@ -1,0 +1,390 @@
+﻿@model SistemaVetIng.ViewsModels.VeterinariaPaginaPrincipalViewModel
+@{
+    ViewData["Title"] = "VetIng - Administración";
+    Layout = null; 
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetIng - Administración</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header class="main-header">
+        <a href="#" class="logo"><i class="fa-solid fa-paw"></i> VetIng</a>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="#veterinarios">Veterinarios</a></li>
+                <li><a class="nav-link" href="#configuracion-turnos">Config. Turnos</a></li>
+                <li><a class="nav-link" href="#clientes">Clientes</a></li>
+                <li><a class="nav-link" href="#mascotas">Mascotas</a></li>
+                <li><a class="nav-link" href="#reportes">Reportes</a></li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                        <button type="submit" class="btn sesion nav-button">Cerrar Sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        <div class="hamburger-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+
+    <main>
+       
+        <section id="veterinarios">
+            <h2 class="section-title">Gestión de Veterinarios</h2>
+            <div class="cliente-busq">
+                <a asp-controller="Veterinaria" asp-action="Registro" class="btnAdd">Registrar Nuevo Veterinario</a>
+                <div class="buscador">
+                    <label for="busquedaVeterinario">Buscar por Nombre:</label>
+                    <input type="text" id="busquedaVeterinario" name="busqueda" placeholder="Ingrese el nombre del veterinario">
+                    <button class="btnBuscar">Buscar</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Matrícula</th>
+                        <th>Teléfono</th>
+                        <th>Nombre Usuario</th>
+                        <th>Direccion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Veterinarios != null && Model.Veterinarios.Any())
+                    {
+                        @foreach (var veterinario in Model.Veterinarios)
+                        {
+                            <tr>
+                                <td>@veterinario.NombreCompleto</td>
+                                <td>@veterinario.Matricula</td>
+                                <td>@veterinario.Telefono</td>
+                                <td>@veterinario.NombreUsuario</td>
+                                <td>@veterinario.Direccion</td>
+                                <td>
+                                    <a asp-controller="Veterinario" asp-action="Editar" asp-route-id="@veterinario.Id" class="btnModificar">Editar</a>
+                                    <form asp-controller="Administracion" asp-action="EliminarVeterinario" asp-route-id="@veterinario.Id" method="post" style="display:inline;"
+                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este veterinario?');">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">No hay veterinarios registrados.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+
+        <section id="configuracion-turnos">
+            <h2 class="section-title">Configuración de Turnos</h2>
+            <div class="form-section config-turnos-form-section">
+                <form asp-controller="Administracion" asp-action="GuardarConfiguracionTurnos" method="post" class="main-form">
+                    <input type="hidden" asp-for="ConfiguracionTurnos.Id" />
+                    <div class="form-group">
+                        <label asp-for="ConfiguracionTurnos.HoraInicio"></label>
+                        <input asp-for="ConfiguracionTurnos.HoraInicio" type="time" class="form-control" />
+                        <span asp-validation-for="ConfiguracionTurnos.HoraInicio" class="validation-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfiguracionTurnos.HoraFin"></label>
+                        <input asp-for="ConfiguracionTurnos.HoraFin" type="time" class="form-control" />
+                        <span asp-validation-for="ConfiguracionTurnos.HoraFin" class="validation-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfiguracionTurnos.DuracionMinutosPorConsulta"></label>
+                        <input asp-for="ConfiguracionTurnos.DuracionMinutosPorConsulta" type="number" class="form-control" />
+                        <span asp-validation-for="ConfiguracionTurnos.DuracionMinutosPorConsulta" class="validation-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Días Laborables:</label>
+                        <div class="dias-laborables-checkboxes">
+                            <div class="form-check">
+                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaLunes" class="form-check-input" />
+                                <label asp-for="ConfiguracionTurnos.TrabajaLunes" class="form-check-label"></label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaMartes" class="form-check-input" />
+                                <label asp-for="ConfiguracionTurnos.TrabajaMartes" class="form-check-label"></label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaMiercoles" class="form-check-input" />
+                                <label asp-for="ConfiguracionTurnos.TrabajaMiercoles" class="form-check-label"></label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaJueves" class="form-check-input" />
+                                <label asp-for="ConfiguracionTurnos.TrabajaJueves" class="form-check-label"></label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaViernes" class="form-check-input" />
+                                <label asp-for="ConfiguracionTurnos.TrabajaViernes" class="form-check-label"></label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaSabado" class="form-check-input" />
+                                <label asp-for="ConfiguracionTurnos.TrabajaSabado" class="form-check-label"></label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaDomingo" class="form-check-input" />
+                                <label asp-for="ConfiguracionTurnos.TrabajaDomingo" class="form-check-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Guardar Configuración</button>
+                    </div>
+                </form>
+            </div>
+
+            <h3 class="section-subtitle">Configuración Actual</h3>
+            <table class="table config-table">
+                <thead>
+                    <tr>
+                        <th>Horario de Trabajo</th>
+                        <th>Duración por Consulta</th>
+                        <th>Días Laborables</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.ConfiguracionTurnos.HoraInicio.ToString(@"hh\:mm") - @Model.ConfiguracionTurnos.HoraFin.ToString(@"hh\:mm")</td>
+                        <td>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta minutos</td>
+                        <td>@Model.ConfiguracionTurnos.DiasLaborablesString</td>
+                        <td>
+                            <button type="button" class="btnModificar" onclick="scrollToConfigForm()">Modificar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="clientes">
+            <h2 class="section-title">Gestión de Clientes</h2>
+            <div class="cliente-busq">
+                <a asp-controller="Cliente" asp-action="Registro" class="btnAdd">Registrar Nuevo Cliente</a>
+                <div class="buscador">
+                    <label for="busquedaCliente"> Buscar por Dni:</label>
+                    <input type="text" id="busquedaCliente" name="busqueda" placeholder="Ingrese el numero de documento">
+                    <button class="btnBuscar">Buscar</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre del Cliente</th>
+                        <th>Contacto</th>
+                        <th>Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Clientes != null && Model.Clientes.Any())
+                    {
+                        @foreach (var cliente in Model.Clientes)
+                        {
+                            <tr>
+                                <td>@cliente.NombreCompleto</td>
+                                <td>@cliente.Telefono</td>
+                                <td>@cliente.NombreUsuario</td>
+                                <td>
+                                    <a asp-controller="Cliente" asp-action="Editar" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
+                                    <form asp-controller="Cliente" asp-action="Eliminar" asp-route-id="@cliente.Id" method="post" style="display:inline;"
+                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                    <a asp-controller="Mascota" asp-action="Registro" asp-route-clienteId="@cliente.Id" class="btn btn-primary">Registrar Mascota</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">No hay clientes registrados.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+
+        <section id="mascotas">
+            <h2 class="section-title">Gestión de Mascotas</h2>
+            <div class="cliente-busq">
+                <a asp-controller="Mascota" asp-action="Registro" class="btnAdd">Registrar Nueva Mascota</a>
+                <div class="buscador">
+                    <label for="busquedaMascota"> Buscar por Dueño:</label>
+                    <input type="text" id="busquedaMascota" name="busqueda" placeholder="Ingrese el nombre del dueño">
+                    <button class="btnBuscar">Buscar</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre de la Mascota</th>
+                        <th>Especie</th>
+                        <th>Raza</th>
+                        <th>Sexo</th>
+                        <th>Edad</th>
+                        <th>Dueño</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Mascotas != null && Model.Mascotas.Any())
+                    {
+                        @foreach (var mascota in Model.Mascotas)
+                        {
+                            <tr>
+                                <td>@mascota.NombreMascota</td>
+                                <td>@mascota.Especie</td>
+                                <td>@mascota.Raza</td>
+                                <td>@mascota.Sexo</td>
+                                <td>@mascota.EdadAnios años</td>
+                                <td>
+                                    <a asp-controller="Cliente" asp-action="Detalles" asp-route-id="@mascota.ClienteId" class="clienteTable">@mascota.NombreDueno</a>
+                                </td>
+                                <td>
+                                    <a asp-controller="Mascota" asp-action="Editar" asp-route-id="@mascota.Id" class="btnModificar">Editar</a>
+                                    <form asp-controller="Mascota" asp-action="Eliminar" asp-route-id="@mascota.Id" method="post" style="display:inline;"
+                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar a esta mascota?');">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">No hay mascotas registradas.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+
+        <section id="reportes">
+            <h2 class="section-title">Reportes Analíticos</h2>
+            <div class="report-cards-container">
+                <div class="report-card">
+                    <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Perros Peligrosos Registrados</h3>
+                        <p class="card-value">@Model.CantidadPerrosPeligrosos</p>
+                    </div>
+                </div>
+                <div class="report-card">
+                    <div class="card-icon"><i class="fa-solid fa-dog"></i></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Raza con Mayor Demanda</h3>
+                        <p class="card-value">@Model.RazaMayorDemanda</p>
+                    </div>
+                </div>
+                <div class="report-card">
+                    <div class="card-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Ingresos Mensuales Estimados</h3>
+                        <p class="card-value">$@Model.IngresosMensualesEstimados.ToString("N2")</p>
+                    </div>
+                </div>
+                <div class="report-card">
+                    <div class="card-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Ingresos Diarios Estimados</h3>
+                        <p class="card-value">$@Model.IngresosDiariosEstimados.ToString("N2")</p>
+                    </div>
+                </div>
+            </div>
+            <div class="clientes-btn-container" style="margin-top: 30px;">
+                <a href="#" class="btnAdd">Ver Reportes Detallados</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-col footer-info">
+            <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+            <div class="footer-social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Acerca de VetIng</h4>
+            <ul class="footer-links">
+                <li><a href="#">Nuestra Historia</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Noticias y Blog</a></li>
+                <li><a href="#">Fundación VetIng</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Soporte</h4>
+            <ul class="footer-links">
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Guías de Usuario</a></li>
+                <li><a href="#">Descargar App Móvil</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        // Lógica de JS para menú hamburguesa 
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mainNav = document.querySelector('.main-nav');
+
+        hamburger.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link, .nav-button, .sesion').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+
+        // Función para scroll a la sección de configuración de turnos
+        function scrollToConfigForm() {
+            document.getElementById('configuracion-turnos').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

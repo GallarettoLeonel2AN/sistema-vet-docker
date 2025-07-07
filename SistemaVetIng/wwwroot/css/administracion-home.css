@@ -1,0 +1,121 @@
+﻿
+
+/* --- Estilos para la Configuración de Turnos --- */
+.config-turnos-form-section {
+    max-width: 800px; 
+    margin: 0 auto 40px auto; 
+}
+
+.config-table {
+    margin-top: 20px;
+}
+
+.dias-laborables-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+    justify-content: flex-start; 
+}
+
+    .dias-laborables-checkboxes .form-check {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px; 
+        margin-bottom: 0; 
+    }
+
+/* Ajustes para el tamaño de los inputs de tiempo/número si son muy grandes */
+input[type="time"].form-control,
+input[type="number"].form-control {
+    max-width: 250px; 
+}
+
+
+/* --- Estilos para Reportes Analíticos (Cards) --- */
+.report-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+    justify-content: center; 
+}
+
+.report-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .report-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+.card-icon {
+    font-size: 3em;
+    color: var(--primary-color);
+    flex-shrink: 0; 
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.2em;
+    color: var(--text-color-light);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.card-value {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Subtítulo para secciones dentro de una sección  */
+.section-subtitle {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 50px; 
+    margin-bottom: 20px;
+}
+
+/* Media Queries específicas para esta página si son necesarias */
+@media (max-width: 768px) {
+    .dias-laborables-checkboxes {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .report-cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .report-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .card-icon {
+        font-size: 2.5em;
+    }
+
+    .card-title {
+        font-size: 1.1em;
+    }
+
+    .card-value {
+        font-size: 1.8em;
+    }
+}

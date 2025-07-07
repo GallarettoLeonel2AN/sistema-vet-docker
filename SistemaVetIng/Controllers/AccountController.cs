@@ -159,8 +159,8 @@ namespace SistemaVetIng.Controllers
                         }
                         else
                         {
-                            // Si tiene otros roles o ninguno de los esperados, redirigir a un Home por defecto
-                            return RedirectToAction("Index", "Home");
+                            // Administrador
+                            return RedirectToAction("PaginaPrincipal", "Veterinaria");
                         }
                     }
                     // Si returnUrl no es nulo y es local, redirigir allí.

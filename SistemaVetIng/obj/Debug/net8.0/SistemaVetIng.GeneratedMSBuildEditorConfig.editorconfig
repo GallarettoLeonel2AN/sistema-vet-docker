@@ -92,12 +92,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinario/PaginaPrincipal.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaW9cUGFnaW5hUHJpbmNpcGFsLmNzaHRtbA==
+[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinaria/PaginaPrincipal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaWFcUGFnaW5hUHJpbmNpcGFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinario/Registro.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaW9cUmVnaXN0cm8uY3NodG1s
+[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinaria/Registro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaWFcUmVnaXN0cm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinario/PaginaPrincipal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaW9cUGFnaW5hUHJpbmNpcGFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/_ViewImports.cshtml]

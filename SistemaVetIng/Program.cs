@@ -49,13 +49,7 @@ using (var scope = app.Services.CreateScope()) // Creamos un scope manual para a
     // Llamamos al seeder para que cree roles y el usuario admin si no existen
     await IdentitySeeder.SeedRolesAndAdminAsync(services);
 }
-// Archivo: Program.cs (en .NET 6 o superior)
 
-// ... (código existente)
-
-// Configura el servicio de correo electrónico
-
-// ... (resto de la configuración, como AddIdentity, AddDbContext, etc.)
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
