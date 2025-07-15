@@ -1,15 +1,12 @@
-﻿// Archivo: Controllers/HistoriaClinicaController.cs
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaVetIng.Data;
-using SistemaVetIng.Models;
-using System.Linq; // Necesario para OrderBy
-using System.Threading.Tasks; // Necesario para async/await
+
 
 namespace SistemaVetIng.Controllers
 {
-    [Authorize(Roles = "Veterinario")] // Asumiendo que solo los veterinarios pueden acceder a esto
+    [Authorize(Roles = "Veterinario")] // Solo los veterinarios pueden acceder
     public class HistoriaClinicaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,7 +16,6 @@ namespace SistemaVetIng.Controllers
             _context = context;
         }
 
-        // GET: /HistoriaClinica/ListaClientesParaSeguimiento
         // Muestra una lista de todos los clientes para buscar.
         public async Task<IActionResult> ListaClientesParaSeguimiento(string searchString)
         {
@@ -54,11 +50,11 @@ namespace SistemaVetIng.Controllers
                 return RedirectToAction(nameof(ListaClientesParaSeguimiento));
             }
 
-            // Pasa el cliente (que ahora incluye sus mascotas) a la vista.
-            // La vista se encargará de iterar sobre cliente.Mascotas
+            // Pasa el cliente a la vista.
+            // La vista se encarga de iterar sobre cliente.Mascotas
             return View(cliente);
         }
-        // GET: /HistoriaClinica/DetalleHistoriaClinica/5
+
         // Muestra la historia clínica completa de una mascota.
         public async Task<IActionResult> DetalleHistoriaClinica(int mascotaId)
         {
@@ -88,7 +84,7 @@ namespace SistemaVetIng.Controllers
             }
             if (mascota.HistoriaClinica == null)
             {
-                // Esto no debería pasar con la lógica actual, pero es una buena práctica
+                // En caso de Error
                 TempData["Error"] = "La mascota no tiene una historia clínica asociada.";
                 return RedirectToAction("MascotasCliente", new { clienteId = mascota.ClienteId });
             }
@@ -96,8 +92,6 @@ namespace SistemaVetIng.Controllers
             // Pasamos la Mascota (que incluye la HistoriaClinica y sus Atenciones) a la vista.
             return View(mascota);
         }
-        // Próximos métodos:
-        // - MascotasCliente(int clienteId)
-        // - DetalleHistoriaClinica(int mascotaId)
+
     }
 }

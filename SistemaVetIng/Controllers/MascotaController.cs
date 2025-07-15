@@ -4,12 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.ViewsModels;
-using System;
-using System.Collections.Generic; // Necesario para List<string>
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SistemaVetIng.Controllers
 {
@@ -37,7 +33,7 @@ namespace SistemaVetIng.Controllers
             var clientes = await _context.Clientes
                                          .OrderBy(c => c.Apellido)
                                          .ToListAsync();
-            return View(clientes); // Esta vista debería ser SeleccionarClienteParaMascota.cshtml
+            return View(clientes); 
         }
 
  
@@ -125,9 +121,6 @@ namespace SistemaVetIng.Controllers
                         // Si la mascota peligrosa tiene chip, creamos el objeto Chip
                         chipAsociado = new Chip
                         {
-                            // En un escenario real, el Código podría ser generado por tu API
-                            // o podrías generarlo aquí como un GUID y luego enviarlo.
-                            // Por simplicidad, aquí generamos un GUID temporal.
                             Codigo = Guid.NewGuid().ToString("N").Substring(0, 16), // Genera un código de 16 caracteres hex
                             MascotaId = mascota.Id // Asocia el chip con la Mascota recién creada
                         };
@@ -136,10 +129,10 @@ namespace SistemaVetIng.Controllers
                         await _context.SaveChangesAsync(); // Guarda el chip
                     }
 
-                    // Prepara los datos para enviar a tu API de Perros Peligrosos
+                    // Prepara los datos para enviar a la API de Perros Peligrosos
                     var clienteAsociado = await _context.Clientes.FindAsync(model.ClienteId);
 
-                    // Llama a tu método SendDataToDangerousDogApi con los datos relevantes
+                    // Llamamos a metodo SendDataToDangerousDogApi
                     apiCommunicationSuccess = await SendDataToDangerousDogApi(
                         mascota.Id,
                         mascota.Nombre,
@@ -160,11 +153,8 @@ namespace SistemaVetIng.Controllers
                     }
                     else
                     {
+                        //Si la comunicación con la API falla mostrar un error
                         apiMessage = "Hubo un problema al comunicar con la API de perros peligrosos.";
-                        // Considera qué hacer si la comunicación con la API falla:
-                        // - ¿Deberías deshacer el registro de la mascota? (requiere transacción compleja)
-                        // - ¿Deberías marcar la mascota para una re-intentar el envío a la API más tarde?
-                        // - ¿Solo mostrar un error y continuar? (lo que estamos haciendo ahora)
                     }
                 }
 
@@ -174,11 +164,11 @@ namespace SistemaVetIng.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al registrar la mascota: {ex.Message}");
-                // Puedes loggear el stack trace completo si necesitas más detalles en desarrollo
+                // Loggear el stack trace completo para mas detalles de error
                 Console.WriteLine(ex.StackTrace);
 
                 TempData["Error"] = "Error al registrar la mascota. Por favor, inténtelo de nuevo.";
-                // Vuelve a la vista con los datos para que el usuario no pierda lo que ingresó.
+                // Vuelve a la vista con los datos para que el usuario no pierda lo que ya ingreso
                 var cliente = await _context.Clientes.FindAsync(model.ClienteId);
                 if (cliente != null)
                 {
@@ -188,9 +178,7 @@ namespace SistemaVetIng.Controllers
             }
         }
 
-
-
-        // Método auxiliar para verificar raza peligrosa (backend)
+        // Método para verificar raza peligrosa 
         private bool IsRazaPeligrosa(string especie, string raza)
         {
             if (string.IsNullOrEmpty(especie) || string.IsNullOrEmpty(raza))
@@ -204,22 +192,22 @@ namespace SistemaVetIng.Controllers
             return especieLower == "perro" && _razasPeligrosas.Contains(razaLower);
         }
 
-        // Método para enviar datos a tu API de Perros Peligrosos
+        // Metodo para enviar datos a la API de Perros Peligrosos
         private async Task<bool> SendDataToDangerousDogApi(
             int mascotaId,
             string nombreMascota,
             string razaMascota,
             bool esRazaPeligrosa,
             bool tieneChip, // Si el checkbox fue marcado
-            string chipCodigo, // El código del chip (puede ser null)
+            string chipCodigo, 
             long clienteDni,
             string clienteNombre,
             string clienteApellido)
         {
-            // URL de tu API de perros peligrosos (¡ajusta esto a la URL real de tu API!)
-            var apiEndpoint = "http://localhost:5075/api/perros-peligrosos/registrar"; // Ejemplo
+            // URL API 
+            var apiEndpoint = "http://localhost:5075/api/perros-peligrosos/registrar"; 
 
-            // Objeto de datos que vas a enviar a tu API
+            // Objeto de datos a enviar a API
             var dataToSend = new
             {
                 MascotaId = mascotaId,
@@ -231,7 +219,7 @@ namespace SistemaVetIng.Controllers
                 ClienteDni = clienteDni,
                 ClienteNombre = clienteNombre,
                 ClienteApellido = clienteApellido,
-                FechaRegistro = DateTime.Now // Opcional: fecha de registro en tu sistema
+                FechaRegistro = DateTime.Now 
             };
 
             using (var client = new HttpClient())
@@ -247,7 +235,7 @@ namespace SistemaVetIng.Controllers
                     Console.WriteLine($"Enviando a API de Perros Peligrosos: {jsonContent.ReadAsStringAsync().Result}");
                     var response = await client.PostAsync(apiEndpoint, jsonContent);
 
-                    // Si la API retorna un código de estado de éxito (2xx)
+                    // Si la API retorna un código de estado de exito
                     if (response.IsSuccessStatusCode)
                     {
                         Console.WriteLine($"Respuesta exitosa de la API: {await response.Content.ReadAsStringAsync()}");
@@ -261,13 +249,13 @@ namespace SistemaVetIng.Controllers
                 }
                 catch (HttpRequestException httpEx)
                 {
-                    // Errores de red, DNS, conexión rechazada, etc.
+                    // Errores de red,DNS,conexión rechazada,etc
                     Console.WriteLine($"Error de conexión HTTP con la API: {httpEx.Message}");
                     return false;
                 }
                 catch (Exception ex)
                 {
-                    // Otros errores (serialización, etc.)
+                    // Otros errores (serialización,etc)
                     Console.WriteLine($"Error general al enviar datos a la API: {ex.Message}");
                     return false;
                 }

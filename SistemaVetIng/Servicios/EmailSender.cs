@@ -42,7 +42,6 @@ public class EmailSender : IEmailSender
     }
 }
 
-// Puedes crear una clase de configuración para tus ajustes de SMTP
 public class SmtpSettings
 {
     public string Server { get; set; }

@@ -9,7 +9,6 @@
         public string? Motivo { get; set; }
         public bool PrimeraCita { get; set; }
 
-        // Relaciones
         public Cliente Cliente { get; set; }
         public int ClienteId { get; set; }
         public Veterinario Veterinario { get; set; }

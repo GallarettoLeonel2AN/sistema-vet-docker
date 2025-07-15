@@ -26,7 +26,6 @@ namespace PerrosPeligrososApi.Models
 
         public DateTime FechaRegistroApi { get; set; } = DateTime.Now; // Fecha en que se registró en esta API
 
-        // Relación opcional con el Chip
         public ChipPerroPeligroso? Chip { get; set; } // Puede ser nulo si no tiene chip
     }
 }

@@ -9,7 +9,7 @@ using SistemaVetIng.ViewsModels;
 
 namespace SistemaVetIng.Controllers
 {
-    [Authorize(Roles = "Veterinaria")]
+    [Authorize(Roles = "Veterinaria")] // Solamente pueden acceder los roles Veterinaria 
     public class VeterinariaController : Controller
     {
         private readonly UserManager<Usuario> _userManager;
@@ -30,7 +30,7 @@ namespace SistemaVetIng.Controllers
         {
             var viewModel = new VeterinariaPaginaPrincipalViewModel();
 
-            // --- 1. Cargar Peluqueros ---
+            //  Cargar Peluqueros
             viewModel.Veterinarios = await _context.Veterinarios
                 .Select(p => new VeterinarioViewModel
                 {
@@ -42,10 +42,6 @@ namespace SistemaVetIng.Controllers
                     Matricula = p.Matricula,
                 })
                 .ToListAsync();
-
-            // --- 2. Cargar Configuración de Turnos ---
-             //viewModel.ConfiguracionTurnos = await _context.Disponibilidades.FirstOrDefaultAsync() ?? new DisponibilidadViewModel();
-            // Si no hay ninguna configuración, crea una por defecto para mostrar el formulario vacío
 
             // Cargar Clientes en las tablas
             viewModel.Clientes = await _context.Clientes
@@ -74,28 +70,25 @@ namespace SistemaVetIng.Controllers
                 })
                 .ToListAsync();
 
-            // --- Cargar Datos para Reportes Analíticos ---
-
-            // Perros Peligrosos
+            // Hardcoded de datos para Reportes Analíticos 
+            // Card Perros Peligrosos
             viewModel.CantidadPerrosPeligrosos = 5;
-            
-
-            // Raza mas Demandada
+        
+            // Card Raza mas Demandada
             viewModel.RazaMayorDemanda = _context.Mascotas
                 .GroupBy(m => m.Raza)
                 .OrderByDescending(g => g.Count())
                 .Select(g => g.Key)
                 .FirstOrDefault() ?? "N/A";
 
-            // Ingresos Hardcoded para el ejemplo
+            // Card Ingresos 
             viewModel.IngresosMensualesEstimados = 150000.00m; 
             viewModel.IngresosDiariosEstimados = 5000.00m;    
-
 
             return View(viewModel);
         }
 
-        // --- Acciones para Peluqueros ---
+        // Acciones para Peluqueros
         public IActionResult Registro()
         {
             return View();
@@ -106,14 +99,14 @@ namespace SistemaVetIng.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registro(VeterinarioRegistroViewModel model)
         {
-            // 1. Validar el modelo
+            // Validar el modelo
             if (!ModelState.IsValid)
             {
                 // Si hay errores de validación, vuelve a mostrar el formulario
                 return View(model);
             }
 
-            // 2. Crear el objeto Usuario para Identity
+            // Crear el objeto Usuario para Identity
             var usuario = new Usuario
             {
                 UserName = model.Email, // Usamos el email como nombre de usuario
@@ -122,7 +115,7 @@ namespace SistemaVetIng.Controllers
 
             };
 
-            // 3. Crear el usuario en la base de datos de Identity
+            // Crear el usuario en la base de datos de Identity
             var result = await _userManager.CreateAsync(usuario, model.Password);
 
             if (!result.Succeeded)
@@ -136,10 +129,10 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
 
-            // 4. Asignar el rol al nuevo usuario (asegúrate de que el rol "Veterinario" exista)
+            // Asignar el rol al nuevo usuario
             await _userManager.AddToRoleAsync(usuario, "Veterinario");
 
-            // 5. Crear el objeto Veterinario con los datos adicionales
+            // Crear el objeto Veterinario con los datos adicionales
             var veterinario = new Veterinario
             {
                 Nombre = model.Nombre,
@@ -151,7 +144,7 @@ namespace SistemaVetIng.Controllers
                 UsuarioId = usuario.Id // Enlaza el Veterinario con el Usuario de Identity
             };
 
-            // 6. Guardar el objeto Veterinario en la base de datos
+            // Guardar Veterionario
             try
             {
                 _context.Veterinarios.Add(veterinario);
@@ -164,14 +157,12 @@ namespace SistemaVetIng.Controllers
                 TempData["Error"] = "Error al guardar los datos del veterinario. Por favor, inténtelo de nuevo.";
                 return View(model);
             }
-
-            // 7. Redirigir a una página de éxito
-            //TempData["Mensaje"] = "Veterinario registrado correctamente.";
+      
             return RedirectToAction("Index", "Home");
         }
 
 
-        // --- Acciones para Configuración de Turnos ---
+        // Acciones para Configuración de Turnos **EN DESARROLLO**
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GuardarConfiguracionTurnos(DisponibilidadViewModel model)

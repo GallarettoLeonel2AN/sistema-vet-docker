@@ -4,7 +4,7 @@ namespace SistemaVetIng.Models.Indentity
 {
     public class IdentitySeeder
     {
-        // Este método recibe el service provider del sistema y lo usamos para acceder a los managers de usuario y roles
+        // Este metodo recibe el service provider del sistema y lo usamos para acceder a los managers de usuario y roles
         public static async Task SeedRolesAndAdminAsync(IServiceProvider serviceProvider)
         {
             // Obtenemos el RoleManager para manejar los roles de Identity
@@ -19,12 +19,12 @@ namespace SistemaVetIng.Models.Indentity
             // Recorremos cada rol y lo creamos si no existe
             foreach (var roleName in roles)
             {
-                var roleExist = await roleManager.RoleExistsAsync(roleName); // ¿Ya existe este rol?
+                var roleExist = await roleManager.RoleExistsAsync(roleName); // Existe?
                 if (!roleExist)
                     await roleManager.CreateAsync(new Rol { Name = roleName }); // Si no existe, lo creamos
             }
 
-            // Ahora creamos un usuario inicial para la veterinaria o admin
+            // Creamos un usuario inicial para la veterinaria (admin)
             var adminEmail = "admin@veting.com";
 
             // Buscamos si ese usuario ya existe
@@ -32,20 +32,20 @@ namespace SistemaVetIng.Models.Indentity
 
             if (adminUser == null)
             {
-                // Si no existe, lo creamos manualmente con los datos que queramos
+                // Si no existe, lo creamos manualmente
                 var user = new Usuario
                 {
-                    UserName = "admin",           // Nombre de usuario en el sistema
-                    Email = adminEmail,           // Email
-                    EmailConfirmed = true,        // Confirmamos el email de una
-                    NombreUsuario = "admin",      // Atributo personalizado
-                              // Atributo personalizado (NO se usa para autenticar)
+                    UserName = "admin",     
+                    Email = adminEmail,          
+                    EmailConfirmed = true,        
+                    NombreUsuario = "admin",      
+                            
                 };
 
-                // Creamos el usuario con una contraseña segura (mínimo una mayúscula, número, símbolo, etc.)
+                // Creamos Contraseña
                 var result = await userManager.CreateAsync(user, "Admin123!");
 
-                // Si lo pudimos crear, le asignamos el rol
+                // Le asignamos el rol
                 if (result.Succeeded)
                     await userManager.AddToRoleAsync(user, "Veterinaria");
             }

@@ -1,5 +1,4 @@
-﻿// Archivo: Controllers/AtencionVeterinariaController.cs
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,7 @@ using System.Security.Claims; // Necesario para obtener el ID del usuario loguea
 
 namespace SistemaVetIng.Controllers
 {
-    [Authorize(Roles = "Veterinario")] // Solo los veterinarios pueden crear atenciones
+    [Authorize(Roles = "Veterinario")] // Solo visible para usuarios de tipo Veterinario
     public class AtencionVeterinariaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +20,6 @@ namespace SistemaVetIng.Controllers
             _context = context;
         }
 
-        // GET: /AtencionVeterinaria/Crear?historiaClinicaId=5
         // Muestra el formulario para registrar una nueva atención veterinaria.
         [HttpGet]
         public async Task<IActionResult> Crear(int historiaClinicaId)
@@ -41,25 +39,24 @@ namespace SistemaVetIng.Controllers
             ViewBag.VacunasDisponibles = new SelectList(await _context.Vacunas.ToListAsync(), "Id", "Nombre");
             ViewBag.EstudiosDisponibles = new SelectList(await _context.Estudios.ToListAsync(), "Id", "Nombre");
 
-            // Si necesitas el precio, puedes cargarlo también
+            // Si necesitas el precio, podemos cargarlo también
             var vacunasConPrecio = await _context.Vacunas.Select(v => new { v.Id, v.Nombre, v.Precio }).ToListAsync();
             var estudiosConPrecio = await _context.Estudios.Select(e => new { e.Id, e.Nombre, e.Precio }).ToListAsync();
             
             // Creamos una instancia del ViewModel y le pasamos el ID de la Historia Clínica
             var viewModel = new AtencionVeterinariaViewModel
             {
-                HistoriaClinicaId = historiaClinicaId,
-                // Puedes precargar otros valores si es necesario, por ejemplo, el peso actual si lo tuvieras
+                HistoriaClinicaId = historiaClinicaId
             };
 
             ViewBag.MascotaNombre = historiaClinica.Mascota.Nombre;
             ViewBag.PropietarioNombre = $"{historiaClinica.Mascota.Propietario?.Nombre} {historiaClinica.Mascota.Propietario?.Apellido}";
-            ViewBag.MascotaId = historiaClinica.Mascota.Id; // Para el botón de volver
+            ViewBag.MascotaId = historiaClinica.Mascota.Id;
 
             return View(viewModel);
         }
 
-        // POST: /AtencionVeterinaria/Crear
+ 
         // Procesa el formulario de registro de la atención veterinaria.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -84,8 +81,7 @@ namespace SistemaVetIng.Controllers
             }
 
             // Buscar el Veterinario en la base de datos usando el UsuarioId que se mapea al ID del ApplicationUser
-            // Asumiendo que tu modelo Veterinario tiene una propiedad int llamada 'UsuarioId'
-            var veterinario = await _context.Veterinarios // _context.Veterinarios ya filtra por Discriminator si está configurado para TPH
+            var veterinario = await _context.Veterinarios 
                                             .FirstOrDefaultAsync(v => v.UsuarioId == userIdInt); // Buscar por UsuarioId (que ahora es int)
 
             // Si el Veterinario no se encuentra, significa que el usuario logueado no tiene un perfil de Veterinario asociado
@@ -96,7 +92,7 @@ namespace SistemaVetIng.Controllers
             }
 
             // Asignar el ID del Veterinario encontrado (el Id de la tabla Personas) al modelo de atención
-            model.VeterinarioId = veterinario.Id; // Asigna el Id del registro de la tabla Personas/Veterinarios
+            model.VeterinarioId = veterinario.Id;
 
 
             if (!ModelState.IsValid)
@@ -119,7 +115,7 @@ namespace SistemaVetIng.Controllers
 
             
             Tratamiento? tratamiento = null;
-           
+           // A Desarrollar!!!
                 tratamiento = new Tratamiento
                 {
                     Medicamento = model.Medicamento,
@@ -129,9 +125,8 @@ namespace SistemaVetIng.Controllers
                     Observaciones = model.ObservacionesTratamiento
                 };
                 _context.Tratamientos.Add(tratamiento);
-                // No es necesario agregar tratamiento al contexto aquí si es parte de la atención
-                // EF Core lo manejará cuando se agregue la atención
-            
+    
+            // Obtener vacunas
             var vacunasSeleccionadas = new List<Vacuna>();
             decimal costoVacunas = 0;
             if (model.VacunasSeleccionadasIds != null && model.VacunasSeleccionadasIds.Any())
@@ -142,7 +137,7 @@ namespace SistemaVetIng.Controllers
                 costoVacunas = vacunasSeleccionadas.Sum(v => v.Precio);
             }
 
-            // Obtener los estudios completos desde la base de datos
+            // Obtener los estudios completos
             var estudiosSeleccionados = new List<Estudio>();
             decimal costoEstudios = 0;
             if (model.EstudiosSeleccionadosIds != null && model.EstudiosSeleccionadosIds.Any())
@@ -168,7 +163,7 @@ namespace SistemaVetIng.Controllers
                 Tratamiento = tratamiento, // Asignar el tratamiento (puede ser null)
                 CostoTotal = costoTotal,
 
-                // *** Asignas las colecciones aquí para que EF Core las persista ***
+                // Asignas las colecciones para que se persista
                 Vacunas = vacunasSeleccionadas,
                 EstudiosComplementarios = estudiosSeleccionados
             };

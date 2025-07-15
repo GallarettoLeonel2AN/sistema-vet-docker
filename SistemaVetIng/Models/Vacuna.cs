@@ -12,8 +12,8 @@
         
         public decimal Precio { get; set; }
 
-        public int? AtencionVeterinariaId { get; set; } // La clave foránea, puede ser nula
-        public AtencionVeterinaria? AtencionVeterinaria { get; set; } // Propiedad de navegación
+        public int? AtencionVeterinariaId { get; set; } 
+        public AtencionVeterinaria? AtencionVeterinaria { get; set; } 
 
     }
 }

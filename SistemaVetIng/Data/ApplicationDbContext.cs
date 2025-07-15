@@ -36,7 +36,6 @@ namespace SistemaVetIng.Data
                 new Vacuna { Id = 2, Nombre = "Vacuna Quíntuple Canina", Lote = "Lote-B456", Precio = 3200.00m, FechaAplicacion = DateTime.MinValue },
                 new Vacuna { Id = 3, Nombre = "Vacuna Triple Felina", Lote = "Lote-C789", Precio = 2800.00m, FechaAplicacion = DateTime.MinValue },
                 new Vacuna { Id = 4, Nombre = "Vacuna de la Tos de las Perreras", Lote = "Lote-D012", Precio = 2000.00m, FechaAplicacion = DateTime.MinValue }
-                // Agrega más vacunas si lo necesitas
             );
 
             // Seed para Estudios
@@ -46,7 +45,6 @@ namespace SistemaVetIng.Data
                 new Estudio { Id = 3, Nombre = "Análisis de orina", Precio = 2000.00m, Informe = null },
                 new Estudio { Id = 4, Nombre = "Ecografía abdominal", Precio = 7500.00m, Informe = null },
                 new Estudio { Id = 5, Nombre = "Estudio parasitológico", Precio = 1800.00m, Informe = null }
-                // Agrega más estudios si lo necesitas
             );
 
             // Relaciones con Usuario

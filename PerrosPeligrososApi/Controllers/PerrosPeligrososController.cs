@@ -6,8 +6,6 @@ using System.Net;
 namespace PerrosPeligrososApi.Controllers
 {
     [ApiController]
-    // Cambia esta línea para que la ruta sea explícita y coincida con lo que envías.
-    // Usaremos "perros-peligrosos" directamente para que no haya ambigüedad con [controller]
     [Route("api/perros-peligrosos")]
     public class PerrosPeligrososController : ControllerBase
     {
@@ -16,12 +14,12 @@ namespace PerrosPeligrososApi.Controllers
 
         public PerrosPeligrososController(ILogger<PerrosPeligrososController> logger, PerrosPeligrososApiDbContext context)
         {
-            _logger = logger;
+            _logger = logger; // _logger es para registrar eventos, advertencias y errores, esencial para depurar y monitorear la API.
             _context = context;
         }
 
         // Endpoint para registrar un perro peligroso
-        [HttpPost("registrar")] // Esto significa POST a /api/perros-peligrosos/registrar
+        [HttpPost("registrar")] // POST a /api/perros-peligrosos/registrar
         public async Task<IActionResult> Registrar([FromBody] PerroPeligrosoRegistroDto registroDto) 
         {
 
