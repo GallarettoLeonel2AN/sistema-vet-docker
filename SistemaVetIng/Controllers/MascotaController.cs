@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace SistemaVetIng.Controllers
 {
-    [Authorize(Roles = "Veterinario")]
+    [Authorize(Roles = "Veterinario,Veterinaria")]
     public class MascotaController : Controller
     {
         private readonly ApplicationDbContext _context;

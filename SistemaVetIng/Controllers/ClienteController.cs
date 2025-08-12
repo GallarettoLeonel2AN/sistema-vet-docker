@@ -81,7 +81,20 @@ namespace SistemaVetIng.Controllers
                 TempData["Mensaje"] = "¡Cliente registrado con éxito!";
 
                 // Redirigimos al usuario al inicio
-                return RedirectToAction("Index", "Home");
+                if (User.IsInRole("Veterinario"))
+                {
+                    return RedirectToAction("PaginaPrincipal", "Veterinario");
+                }
+                else if (User.IsInRole("Veterinaria"))
+                {
+                    return RedirectToAction("PaginaPrincipal", "Veterinaria");
+                }
+                // Si no es ninguno de los roles anteriores, asumimos que es un cliente
+                // y lo redirigimos a la página de inicio
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             // Si hay Error
             catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)

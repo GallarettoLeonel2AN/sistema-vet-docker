@@ -17,101 +17,101 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SistemaVetIng
 build_property.RootNamespace = SistemaVetIng
-build_property.ProjectDir = C:\Users\ulipv\Source\Repos\SistemaVetIng\SistemaVetIng\
+build_property.ProjectDir = C:\Users\Ulises\Source\Repos\SistemaVetIng\SistemaVetIng\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ulipv\Source\Repos\SistemaVetIng\SistemaVetIng
+build_property.MSBuildProjectDirectory = C:\Users\Ulises\Source\Repos\SistemaVetIng\SistemaVetIng
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Account/CambiarContraseña.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Account/CambiarContraseña.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDYW1iaWFyQ29udHJhc2XDsWEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Account/Login.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Account/RecuperarContraseña.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Account/RecuperarContraseña.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWN1cGVyYXJDb250cmFzZcOxYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/AtencionVeterinaria/Crear.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/AtencionVeterinaria/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXRlbmNpb25WZXRlcmluYXJpYVxDcmVhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Cliente/Registro.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Cliente/Registro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxSZWdpc3Ryby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/DetalleHistoriaClinica.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/DetalleHistoriaClinica.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yaWFDbGluaWNhXERldGFsbGVIaXN0b3JpYUNsaW5pY2EuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/ListaClientesParaSeguimiento.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/ListaClientesParaSeguimiento.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yaWFDbGluaWNhXExpc3RhQ2xpZW50ZXNQYXJhU2VndWltaWVudG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/MascotasCliente.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/HistoriaClinica/MascotasCliente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yaWFDbGluaWNhXE1hc2NvdGFzQ2xpZW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Home/Index.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Home/Privacy.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/ListaClientes.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/ListaClientes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzY290YVxMaXN0YUNsaWVudGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/Registro.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/Registro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzY290YVxSZWdpc3Ryby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/Error.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinaria/PaginaPrincipal.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinaria/PaginaPrincipal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaWFcUGFnaW5hUHJpbmNpcGFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinaria/Registro.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinaria/Registro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaWFcUmVnaXN0cm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinario/PaginaPrincipal.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Veterinario/PaginaPrincipal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmV0ZXJpbmFyaW9cUGFnaW5hUHJpbmNpcGFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/_ViewImports.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/_ViewStart.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/_Layout.cshtml]
+[C:/Users/Ulises/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-5y4l16qknp
