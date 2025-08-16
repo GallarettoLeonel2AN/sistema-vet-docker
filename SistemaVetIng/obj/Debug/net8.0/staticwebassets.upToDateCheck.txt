@@ -7,7 +7,6 @@ wwwroot\css\img\hero.jpg
 wwwroot\css\img\mascotas-hero.jpg
 wwwroot\css\img\perrito.jpg
 wwwroot\css\img\perro.jpg
-wwwroot\css\img\recuperarpass.jpg
 wwwroot\css\img\reg-veterinario.jpg
 wwwroot\css\img\vet-cuidado.jpg
 wwwroot\css\listado-clientes.css
@@ -74,3 +73,7 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\css\img\recuperarpass.jpg
+wwwroot\css\img\restablecerpass.jpg
+wwwroot\css\img\editarvet.jpg
+wwwroot\css\img\editarvett.jpg

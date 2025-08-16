@@ -30,7 +30,7 @@ namespace SistemaVetIng.Controllers
         {
             var viewModel = new VeterinariaPaginaPrincipalViewModel();
 
-            //  Cargar Peluqueros
+            //  Cargar Veterinario
             viewModel.Veterinarios = await _context.Veterinarios
                 .Select(p => new VeterinarioViewModel
                 {
@@ -88,7 +88,7 @@ namespace SistemaVetIng.Controllers
             return View(viewModel);
         }
 
-        // Acciones para Peluqueros
+        // Acciones para Veterinarios
         public IActionResult Registro()
         {
             return View();
@@ -159,6 +159,77 @@ namespace SistemaVetIng.Controllers
             }
       
             return RedirectToAction("PaginaPrincipal", "Veterinaria");
+        }
+
+        // Muestra el formulario de edición de veterinario con los datos existentes.
+
+        [HttpGet]
+        public async Task<IActionResult> Modificar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Usamos .Include() para cargar explícitamente el objeto 'Usuario'
+            var veterinario = await _context.Veterinarios
+                .Include(v => v.Usuario) 
+                .FirstOrDefaultAsync(v => v.Id == id);
+
+            if (veterinario == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new VeterinarioEditarViewModel
+            {
+                Id = veterinario.Id,
+                Nombre = veterinario.Nombre,
+                Apellido = veterinario.Apellido,
+                Dni = veterinario.Dni,
+                Email = veterinario.Usuario?.UserName, 
+                Direccion = veterinario.Direccion,
+                Telefono = veterinario.Telefono,
+                Matricula = veterinario.Matricula
+            };
+
+            return View(viewModel);
+        }
+
+
+        // Procesa el formulario de edición y actualiza el veterinario en la base de datos.
+
+        [HttpPost]
+        [ValidateAntiForgeryToken] 
+        public async Task<IActionResult> Modificar(VeterinarioEditarViewModel model)
+        {
+            // Validar si el modelo recibido es válido
+            if (ModelState.IsValid)
+            {
+                // Buscar al veterinario existente en la base de datos por su ID
+                var veterinario = await _context.Veterinarios.FindAsync(model.Id);
+                if (veterinario == null)
+                {
+                    return NotFound();
+                }
+
+                // Actualizar las propiedades del modelo de la BD con los datos del ViewModel
+                veterinario.Nombre = model.Nombre;
+                veterinario.Apellido = model.Apellido;
+                veterinario.Dni = model.Dni;
+                veterinario.Direccion = model.Direccion;
+                veterinario.Telefono = model.Telefono;
+                veterinario.Matricula = model.Matricula;
+
+                await _context.SaveChangesAsync();
+
+                TempData["Mensaje"] = "Veterinario actualizado correctamente.";
+
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            }
+
+            // Si el modelo no es válido, devolver la vista con los errores
+            return View(model);
         }
 
 

@@ -76,7 +76,7 @@
                                 <td>@veterinario.NombreUsuario</td>
                                 <td>@veterinario.Direccion</td>
                                 <td>
-                                    <a asp-controller="Veterinario" asp-action="Editar" asp-route-id="@veterinario.Id" class="btnModificar">Editar</a>
+                                    <a asp-controller="Veterinaria" asp-action="Modificar" asp-route-id="@veterinario.Id" class="btnModificar">Editar</a>
                                     <form asp-controller="Administracion" asp-action="EliminarVeterinario" asp-route-id="@veterinario.Id" method="post" style="display:inline;"
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este veterinario?');">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>

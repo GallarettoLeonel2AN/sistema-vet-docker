@@ -1,0 +1,103 @@
+﻿@model SistemaVetIng.ViewsModels.VeterinarioEditarViewModel
+
+@{
+    ViewData["Title"] = "Modificar Veterinario";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetIng - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/registrar-cliente-style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <main class="register-main">
+        <div class="register-container">
+            <div class="container-img-register" style="background-image: url(/css/Img/editarvett.jpg);"></div>
+            <div class="container-formulario">
+                <div class="ingreso-correo">
+                    <h1>Modificar Veterinario</h1>
+                    <p class="register-subtext">Edita los datos del profesional para actualizar su información.</p>
+                </div>
+
+                <div class="formulario">
+                    <form asp-action="Modificar" asp-controller="Veterinaria" method="post" class="register-form">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="form-group">
+                            <label asp-for="Nombre"></label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Nombre" />
+                            <span asp-validation-for="Nombre" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Apellido"></label>
+                            <input asp-for="Apellido" class="form-control" placeholder="Apellido" />
+                            <span asp-validation-for="Apellido" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Dni"></label>
+                            <input asp-for="Dni" class="form-control" placeholder="Número de DNI" />
+                            <span asp-validation-for="Dni" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" placeholder="email@vet.com" type="email" readonly />
+                            <span asp-validation-for="Email" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Direccion"></label>
+                            <input asp-for="Direccion" class="form-control" placeholder="Calle, número, piso, depto." />
+                            <span asp-validation-for="Direccion" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Telefono"></label>
+                            <input asp-for="Telefono" class="form-control" placeholder="Número de teléfono" />
+                            <span asp-validation-for="Telefono" class="text-danger validation-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Matricula"></label>
+                            <input asp-for="Matricula" class="form-control" placeholder="Número de Matrícula" />
+                            <span asp-validation-for="Matricula" class="text-danger validation-error"></span>
+                        </div>
+
+                        <button type="submit" class="button register-button">Guardar Cambios</button>
+
+                        @if (TempData["Mensaje"] != null)
+                        {
+                            <div class="alert alert-success">@TempData["Mensaje"]</div>
+                        }
+                        @if (TempData["Error"] != null)
+                        {
+                            <div class="alert alert-danger">@TempData["Error"]</div>
+                        }
+                    </form>
+                </div>
+                <div class="signin-link">
+                    <a asp-controller="Veterinaria" asp-action="PaginaPrincipal" class="link-secondary">Volver a la gestión de veterinarios</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
