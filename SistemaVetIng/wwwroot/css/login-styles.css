@@ -58,6 +58,25 @@ body {
     transition: all 0.5s ease-in-out; 
 }
 
+.container-img-recuperar {
+    background-image: url(/css/Img/recuperarpass.jpg);
+    width: 45%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: brightness(0.7);
+    transition: all 0.5s ease-in-out;
+}
+.container-img-restablecer {
+    background-image: url(/css/Img/restablecerpass.jpg);
+    width: 45%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: brightness(0.7);
+    transition: all 0.5s ease-in-out;
+}
+
 .container-formulario {
     width: 55%;
     display: flex;
@@ -240,6 +259,12 @@ body {
 
     .container-img-login {
         display: none; 
+    }
+    .container-img-recuperar {
+        display: none;
+    }
+    .container-img-restablecer {
+        display: none;
     }
 
     .container-formulario {

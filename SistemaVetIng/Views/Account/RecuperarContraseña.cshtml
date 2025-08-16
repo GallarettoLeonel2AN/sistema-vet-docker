@@ -1,24 +1,54 @@
 ﻿@model SistemaVetIng.ViewsModels.RecuperarContraseñaViewModel
 
 @{
-    ViewData["Title"] = "Olvidé mi contraseña";
+    ViewData["Title"] = "Recuperar Contraseña";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="es">
 
-<h2>@ViewData["Title"]</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ForgotPassword" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/login-styles.css">
+    <title>VetIng - Recuperar Contraseña</title>
+</head>
+
+<div class="login-main">
+    <div class="login-container">
+        <div class="container-img-recuperar"></div>
+        <div class="container-formulario">
+            <div class="ingreso-correo">
+                <h1>Recuperar Contraseña</h1>
+                <p class="login-subtext">
+                    Ingresa tu correo electrónico para recibir un enlace de restablecimiento.
+                </p>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Enviar Enlace de Restablecimiento" class="btn btn-primary" />
+
+            <div class="formulario">
+                <form asp-action="ForgotPassword" method="post" class="login-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="button login-button">
+                            Enviar Enlace
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
+
+            <div class="signup-link">
+                <a asp-action="Login" class="link-secondary">Volver al inicio de sesión</a>
+            </div>
+        </div>
     </div>
 </div>
 

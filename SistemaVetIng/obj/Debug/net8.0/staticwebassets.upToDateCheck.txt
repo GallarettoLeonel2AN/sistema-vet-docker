@@ -7,6 +7,7 @@ wwwroot\css\img\hero.jpg
 wwwroot\css\img\mascotas-hero.jpg
 wwwroot\css\img\perrito.jpg
 wwwroot\css\img\perro.jpg
+wwwroot\css\img\recuperarpass.jpg
 wwwroot\css\img\reg-veterinario.jpg
 wwwroot\css\img\vet-cuidado.jpg
 wwwroot\css\listado-clientes.css

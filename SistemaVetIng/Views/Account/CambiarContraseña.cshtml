@@ -1,35 +1,65 @@
 ﻿@model SistemaVetIng.ViewsModels.CambiarContraseñaViewModel
 
 @{
-    ViewData["Title"] = "Restablecer contraseña";
+    ViewData["Title"] = "Restablecer Contraseña";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="es">
 
-<h2>@ViewData["Title"]</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ResetPassword" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Code" />
-            <input type="hidden" asp-for="Email" />
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" readonly />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/login-styles.css">
+    <title>VetIng - Restablecer Contraseña</title>
+</head>
+
+<div class="login-main">
+    <div class="login-container">
+        <div class="container-img-restablecer"></div>
+        <div class="container-formulario">
+            <div class="ingreso-correo">
+                <h1>@ViewData["Title"]</h1>
+                <p class="login-subtext">
+                    Ingresa tu nueva contraseña para completar el proceso.
+                </p>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+
+            <div class="formulario">
+                <form asp-action="ResetPassword" method="post" class="login-form">
+                    <div asp-validation-summary="ModelOnly" class="error-summary"></div>
+                    <input type="hidden" asp-for="Code" />
+                    <input type="hidden" asp-for="Email" />
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="button login-button">
+                            Restablecer Contraseña
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+            <div class="signup-link">
+                <a asp-action="Login" class="link-secondary">Volver al inicio de sesión</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Restablecer Contraseña" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
