@@ -232,6 +232,55 @@ namespace SistemaVetIng.Controllers
             return View(model);
         }
 
+     
+        // Elimina un veterinario de la base de datos por su ID.
+
+        [HttpPost]
+        [ValidateAntiForgeryToken] 
+        public async Task<IActionResult> EliminarVeterinario(int? id)
+        {
+            // Validar que se recibió un ID
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Veterinaria");
+            }
+
+            var veterinario = await _context.Veterinarios.FindAsync(id);
+
+            if (veterinario == null)
+            {
+                TempData["Error"] = "El veterinario que intenta eliminar no existe.";
+                return RedirectToAction("Index", "Veterinaria");
+            }
+
+            try
+            {
+                // Si el veterinario tiene un usuario relacionado, también se elimina
+                var usuario = await _context.Users.FindAsync(veterinario.Id); 
+                if (usuario != null)
+                {
+                    _context.Users.Remove(usuario);
+                }
+
+                _context.Veterinarios.Remove(veterinario);
+                await _context.SaveChangesAsync();
+
+                TempData["Mensaje"] = "El veterinario ha sido eliminado exitosamente.";
+            }
+            catch (DbUpdateException)
+            {
+                // Manejar errores de la base de datos
+                TempData["Error"] = "No se pudo eliminar el veterinario. Puede estar asociado a otros registros.";
+            }
+
+            return RedirectToAction("PaginaPrincipal", "Veterinaria");
+        }
+
+
+
+
+
+
 
         // Acciones para Configuración de Turnos **EN DESARROLLO**
         [HttpPost]
