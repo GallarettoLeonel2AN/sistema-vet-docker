@@ -46,7 +46,7 @@
         <section id="veterinarios">
             <h2 class="section-title">Gestión de Veterinarios</h2>
             <div class="cliente-busq">
-                <a asp-controller="Veterinaria" asp-action="Registro" class="btnAdd">Registrar Nuevo Veterinario</a>
+                <a asp-controller="Veterinaria" asp-action="RegistrarVeterinario" class="btnAdd">Registrar Nuevo Veterinario</a>
                 <div class="buscador">
                     <label for="busquedaVeterinario">Buscar por Nombre:</label>
                     <input type="text" id="busquedaVeterinario" name="busqueda" placeholder="Ingrese el nombre del veterinario">
@@ -76,7 +76,7 @@
                                 <td>@veterinario.NombreUsuario</td>
                                 <td>@veterinario.Direccion</td>
                                 <td>
-                                    <a asp-controller="Veterinaria" asp-action="Modificar" asp-route-id="@veterinario.Id" class="btnModificar">Editar</a>
+                                    <a asp-controller="Veterinaria" asp-action="ModificarVeterinario" asp-route-id="@veterinario.Id" class="btnModificar">Editar</a>
                                     <form asp-controller="Veterinaria" asp-action="EliminarVeterinario" asp-route-id="@veterinario.Id" method="post" style="display:inline;"
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este veterinario?');">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -180,7 +180,7 @@
         <section id="clientes">
             <h2 class="section-title">Gestión de Clientes</h2>
             <div class="cliente-busq">
-                <a asp-controller="Cliente" asp-action="Registro" class="btnAdd">Registrar Nuevo Cliente</a>
+                <a asp-controller="Cliente" asp-action="RegistrarCliente" class="btnAdd">Registrar Nuevo Cliente</a>
                 <div class="buscador">
                     <label for="busquedaCliente"> Buscar por Dni:</label>
                     <input type="text" id="busquedaCliente" name="busqueda" placeholder="Ingrese el numero de documento">
@@ -206,7 +206,7 @@
                                 <td>@cliente.Telefono</td>
                                 <td>@cliente.NombreUsuario</td>
                                 <td>
-                                    <a asp-controller="Cliente" asp-action="Editar" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
+                                    <a asp-controller="Veterinaria" asp-action="ModificarCliente" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
                                     <form asp-controller="Cliente" asp-action="Eliminar" asp-route-id="@cliente.Id" method="post" style="display:inline;"
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>

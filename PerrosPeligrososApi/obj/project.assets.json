@@ -4990,11 +4990,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
+      "projectUniqueName": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
       "projectName": "PerrosPeligrososApi",
-      "projectPath": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
+      "projectPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
       "packagesPath": "C:\\Users\\ulipv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\PerrosPeligrososApi\\obj\\",
+      "outputPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5081,7 +5081,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

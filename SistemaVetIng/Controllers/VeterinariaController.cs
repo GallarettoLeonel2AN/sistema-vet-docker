@@ -89,7 +89,7 @@ namespace SistemaVetIng.Controllers
         }
 
         // Acciones para Veterinarios
-        public IActionResult Registro()
+        public IActionResult RegistrarVeterinario()
         {
             return View();
         }
@@ -97,7 +97,7 @@ namespace SistemaVetIng.Controllers
         // Acción POST para procesar el formulario de registro
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registro(VeterinarioRegistroViewModel model)
+        public async Task<IActionResult> RegistrarVeterinario(VeterinarioRegistroViewModel model)
         {
             // Validar el modelo
             if (!ModelState.IsValid)
@@ -164,7 +164,7 @@ namespace SistemaVetIng.Controllers
         // Muestra el formulario de edición de veterinario con los datos existentes.
 
         [HttpGet]
-        public async Task<IActionResult> Modificar(int? id)
+        public async Task<IActionResult> ModificarVeterinario(int? id)
         {
             if (id == null)
             {
@@ -201,7 +201,7 @@ namespace SistemaVetIng.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken] 
-        public async Task<IActionResult> Modificar(VeterinarioEditarViewModel model)
+        public async Task<IActionResult> ModificarVeterinario(VeterinarioEditarViewModel model)
         {
             // Validar si el modelo recibido es válido
             if (ModelState.IsValid)
@@ -278,7 +278,11 @@ namespace SistemaVetIng.Controllers
 
 
 
-
+        // Acciones para los clientes
+        public IActionResult ModificarCliente(int? id)
+        {
+            return View();
+        }
 
 
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj": {}
+    "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj": {
+    "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj",
+        "projectUniqueName": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj",
         "projectName": "SistemaVetIng",
-        "projectPath": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj",
+        "projectPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj",
         "packagesPath": "C:\\Users\\ulipv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\SistemaVetIng\\obj\\",
+        "outputPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -106,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

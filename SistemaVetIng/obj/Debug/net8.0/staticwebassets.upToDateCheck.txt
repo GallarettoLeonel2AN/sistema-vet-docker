@@ -3,6 +3,7 @@ wwwroot\css\animaciones.css
 wwwroot\css\home-styles.css
 wwwroot\css\img\atendiendoPerro.jpg
 wwwroot\css\img\camaleon.jpg
+wwwroot\css\img\editarcliente.jpg
 wwwroot\css\img\editarvet.jpg
 wwwroot\css\img\editarvett.jpg
 wwwroot\css\img\hero.jpg

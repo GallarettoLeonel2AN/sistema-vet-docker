@@ -23,7 +23,7 @@ namespace SistemaVetIng.Controllers
 
         // Mostrar el formulario
         [HttpGet]
-        public IActionResult Registro()
+        public IActionResult RegistrarCliente()
         {
             return View();
         }
@@ -31,7 +31,7 @@ namespace SistemaVetIng.Controllers
        // Procesar el registro
         [HttpPost]
         [ValidateAntiForgeryToken] // Prevenir ataques de falsificación de solicitudes
-        public async Task<IActionResult> Registro(ClienteRegistroViewModel model)
+        public async Task<IActionResult> RegistrarCliente(ClienteRegistroViewModel model)
         {
             // Validamos reglas del viewmodel
             if (!ModelState.IsValid)

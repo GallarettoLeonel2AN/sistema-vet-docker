@@ -1,7 +1,8 @@
-﻿@model SistemaVetIng.ViewsModels.VeterinarioRegistroViewModel 
+﻿@model SistemaVetIng.ViewsModels.VeterinarioEditarViewModel
+
 @{
-    ViewData["Title"] = "Registrar Veterinario";
-    Layout = null; 
+    ViewData["Title"] = "Modificar Veterinario";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -9,24 +10,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetIng - Registrar Veterinario</title>
-    <link rel="stylesheet" href="~/css/registrar-cliente-style.css" asp-append-version="true" /> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>VetIng - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/registrar-cliente-style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <main class="register-main">
         <div class="register-container">
-            <div class="container-img-register" style="background-image: url(/css/Img/reg-veterinario.jpg);"></div> <div class="container-formulario">
+            <div class="container-img-register" style="background-image: url(/css/Img/editarvett.jpg);"></div>
+            <div class="container-formulario">
                 <div class="ingreso-correo">
-                    <h1>Registro de Veterinario</h1>
-                    <p class="register-subtext">Ingresa los datos necesarios para crearle una cuenta al profesional</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon google"><i class="fa-brands fa-google"></i></a>
-                        <a href="#" class="social-icon twitter"><i class="fa-brands fa-twitter"></i></a>
-                    </div>
+                    <h1>Modificar Veterinario</h1>
+                    <p class="register-subtext">Edita los datos del profesional para actualizar su información.</p>
                 </div>
 
                 <div class="formulario">
-                    <form asp-action="Registro" asp-controller="Veterinaria" method="post" class="register-form"> @Html.AntiForgeryToken()
+                    <form asp-action="ModificarVeterinario" asp-controller="Veterinaria" method="post" class="register-form">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
 
                         <div class="form-group">
                             <label asp-for="Nombre"></label>
@@ -48,14 +49,8 @@
 
                         <div class="form-group">
                             <label asp-for="Email"></label>
-                            <input asp-for="Email" class="form-control" placeholder="email@vet.com" type="email" />
+                            <input asp-for="Email" class="form-control" placeholder="email@vet.com" type="email" readonly />
                             <span asp-validation-for="Email" class="text-danger validation-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Password">Contraseña:</label>
-                            <input asp-for="Password" class="form-control" type="password" placeholder="8+ caracteres, Mayús, Minús, Números, Carácter" />
-                            <span asp-validation-for="Password" class="text-danger validation-error"></span>
                         </div>
 
                         <div class="form-group">
@@ -76,18 +71,20 @@
                             <span asp-validation-for="Matricula" class="text-danger validation-error"></span>
                         </div>
 
-                        <button type="submit" class="button register-button">Registrar Veterinario</button> 
+                        <button type="submit" class="button register-button">Guardar Cambios</button>
+
                         @if (TempData["Mensaje"] != null)
                         {
-                                <div class="alert alert-success">@TempData["Mensaje"]</div>
+                            <div class="alert alert-success">@TempData["Mensaje"]</div>
                         }
                         @if (TempData["Error"] != null)
                         {
-                                <div class="alert alert-danger">@TempData["Error"]</div>
+                            <div class="alert alert-danger">@TempData["Error"]</div>
                         }
-
-                        <p class="signin-link">¿Ya tienes cuenta? <a asp-controller="Account" asp-action="Login" class="link-secondary"> Iniciar sesión</a></p>
                     </form>
+                </div>
+                <div class="signin-link">
+                    <a asp-controller="Veterinaria" asp-action="PaginaPrincipal" class="link-secondary">Volver a la gestión de veterinarios</a>
                 </div>
             </div>
         </div>
