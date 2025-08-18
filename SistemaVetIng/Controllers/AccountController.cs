@@ -36,14 +36,23 @@ namespace SistemaVetIng.Controllers
         }
 
         [HttpGet]
-        public IActionResult ResetPassword(string code = null, string email = null)
+       
+        public async Task<IActionResult> ResetPassword(string code = null, string userId = null)
         {
-            if (code == null || email == null)
+            if (code == null || userId == null)
             {
-                // Si faltan parámetros de seguridad, redirigimos al login para evitar usos indebidos.
                 return RedirectToAction(nameof(Login));
             }
-            var model = new CambiarContraseñaViewModel { Code = code, Email = email };
+
+            // Busca al usuario con el userId y obtén su email
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                // Maneja el caso en que el usuario no se encuentre
+                return RedirectToAction(nameof(Login));
+            }
+
+            var model = new CambiarContraseñaViewModel { Code = code, Email = user.Email };
             return View(model);
         }
 
@@ -69,9 +78,9 @@ namespace SistemaVetIng.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
 
             // Importante para la seguridad: evita enumeración de usuarios.
-            if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+            if (user == null)
             {
-                return View("ForgotPasswordConfirmation");
+                return View("Login");
             }
             // Generar el token de restablecimiento de contraseña
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -85,7 +94,7 @@ namespace SistemaVetIng.Controllers
                 $"Por favor, restablezca su contraseña haciendo clic en este enlace: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>enlace</a>"
             );
 
-            return View("ForgotPasswordConfirmation");
+            return View("Login");
         }
 
         // ResetPassword Procesa el formulario donde el usuario ingresa su *nueva* contraseña.
