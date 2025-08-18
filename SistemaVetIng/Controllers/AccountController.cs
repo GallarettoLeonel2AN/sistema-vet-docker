@@ -30,7 +30,7 @@ namespace SistemaVetIng.Controllers
         }
 
         [HttpGet]
-        public IActionResult ForgotPasswordConfirmation()
+        public IActionResult ConfirmacionEnlaceReset()
         {
             return View();
         }
@@ -94,7 +94,7 @@ namespace SistemaVetIng.Controllers
                 $"Por favor, restablezca su contraseña haciendo clic en este enlace: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>enlace</a>"
             );
 
-            return View("Login");
+            return View("ConfirmacionEnlaceReset");
         }
 
         // ResetPassword Procesa el formulario donde el usuario ingresa su *nueva* contraseña.
