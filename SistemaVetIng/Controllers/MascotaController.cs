@@ -14,7 +14,6 @@ namespace SistemaVetIng.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        // Lista de ejemplo de razas consideradas peligrosas
         private readonly List<string> _razasPeligrosas = new List<string>
         {
             "pitbull", "rottweiler", "dogo argentino", "fila brasileiro",
@@ -27,8 +26,8 @@ namespace SistemaVetIng.Controllers
             _context = context;
         }
 
-        // Muestra una lista de todos los clientes para que el veterinario elija uno para asociar una mascota.
-        public async Task<IActionResult> ListaClientes()
+        // Listado de clientes para asociarle MASCOTAS
+        public async Task<IActionResult> ListarClientes()
         {
             var clientes = await _context.Clientes
                                          .OrderBy(c => c.Apellido)
@@ -36,16 +35,19 @@ namespace SistemaVetIng.Controllers
             return View(clientes); 
         }
 
- 
-        // Muestra el formulario para registrar una mascota para un cliente específico.
+        // **ACCIONES PARA LAS MASCOTAS**
+
+        // ------------------ REGISTRAR MASCOTA ------------------ 
+        #region REGISTRAR MASCOTA
+
         [HttpGet]
-        public async Task<IActionResult> Registro(int clienteId)
+        public async Task<IActionResult> RegistrarMascota(int clienteId)
         {
             var cliente = await _context.Clientes.FindAsync(clienteId);
             if (cliente == null)
             {
                 TempData["Error"] = "El cliente seleccionado no existe.";
-                return RedirectToAction(nameof(ListaClientes)); 
+                return RedirectToAction(nameof(ListarClientes)); 
             }
 
             var viewModel = new MascotaRegistroViewModel
@@ -62,10 +64,9 @@ namespace SistemaVetIng.Controllers
         }
 
 
-        // Procesa el formulario de registro de la mascota.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registro(MascotaRegistroViewModel model)
+        public async Task<IActionResult> RegistrarMascota(MascotaRegistroViewModel model)
         {
             model.RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza);
 
@@ -83,7 +84,7 @@ namespace SistemaVetIng.Controllers
             if (!clienteExiste)
             {
                 TempData["Error"] = "El cliente asociado no es válido. Intente de nuevo.";
-                return RedirectToAction(nameof(ListaClientes));
+                return RedirectToAction(nameof(ListarClientes));
             }
 
             var mascota = new Mascota
@@ -159,7 +160,7 @@ namespace SistemaVetIng.Controllers
                 }
 
                 TempData["Mensaje"] = $"Mascota '{mascota.Nombre}' registrada correctamente. " + apiMessage;
-                return RedirectToAction(nameof(ListaClientes));
+                return RedirectToAction(nameof(ListarClientes));
             }
             catch (Exception ex)
             {
@@ -177,6 +178,159 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
         }
+        #endregion
+
+
+        // ------------------ MODIFICAR MASCOTA ------------------
+        #region MODIFICAR MASCOTA
+
+        [HttpGet]
+        public async Task<IActionResult> ModificarMascota(int? id)
+        {
+            // 1. Validar que se recibió un ID
+            if (id == null)
+            {
+                TempData["Error"] = "No se pudo encontrar la mascota. ID no proporcionado.";
+                return RedirectToAction(nameof(ListarClientes));
+            }
+
+            // 2. Buscar la mascota en la base de datos
+            var mascota = await _context.Mascotas.Include(m => m.Propietario).FirstOrDefaultAsync(m => m.Id == id);
+
+            // 3. Validar si la mascota existe
+            if (mascota == null)
+            {
+                TempData["Error"] = "La mascota que intenta editar no existe.";
+                return RedirectToAction(nameof(ListarClientes));
+            }
+
+            // 4. Mapear la entidad a un ViewModel para la vista
+            var viewModel = new MascotaEditarViewModel
+            {
+                Id = mascota.Id,
+                ClienteId = mascota.ClienteId,
+                Nombre = mascota.Nombre,
+                Especie = mascota.Especie,
+                Raza = mascota.Raza,
+                FechaNacimiento = mascota.FechaNacimiento,
+                Sexo = mascota.Sexo,
+                RazaPeligrosa = mascota.RazaPeligrosa,
+                Chip = (mascota.Chip != null) // Verifica si la mascota tiene un chip asociado
+            };
+
+            // 5. Pasar el nombre del cliente a la vista
+            if (mascota.Propietario != null)
+            {
+                ViewBag.ClienteNombre = $"{mascota.Propietario.Nombre} {mascota.Propietario.Apellido}";
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ModificarMascota(MascotaEditarViewModel model)
+        {
+            // Volver a verificar si es una raza peligrosa, ya que el usuario pudo haberla cambiado
+            model.RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza);
+
+            if (!ModelState.IsValid)
+            {
+                // Si el modelo no es válido, vuelve a cargar el nombre del cliente y la vista
+                var cliente = await _context.Clientes.FindAsync(model.ClienteId);
+                if (cliente != null)
+                {
+                    ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
+                }
+                TempData["Error"] = "Hubo un error con los datos proporcionados.";
+                return View(model);
+            }
+
+            // 1. Buscar la mascota a editar en la base de datos
+            var mascota = await _context.Mascotas.Include(m => m.Chip).FirstOrDefaultAsync(m => m.Id == model.Id);
+
+            if (mascota == null)
+            {
+                TempData["Error"] = "La mascota que intenta editar no existe.";
+                return RedirectToAction(nameof(ListarClientes));
+            }
+
+            // 2. Actualizar las propiedades de la entidad con los datos del ViewModel
+            mascota.Nombre = model.Nombre;
+            mascota.Especie = model.Especie;
+            mascota.Raza = model.Raza;
+            mascota.FechaNacimiento = model.FechaNacimiento;
+            mascota.Sexo = model.Sexo;
+            mascota.RazaPeligrosa = model.RazaPeligrosa;
+
+            try
+            {
+                // 3. Manejar la lógica del chip
+                if (mascota.RazaPeligrosa && model.Chip && mascota.Chip == null)
+                {
+                    // Caso 1: Se convirtió en peligrosa y se le agregó un chip
+                    var nuevoChip = new Chip
+                    {
+                        Codigo = Guid.NewGuid().ToString("N").Substring(0, 16),
+                        MascotaId = mascota.Id
+                    };
+                    mascota.Chip = nuevoChip;
+                    _context.Chips.Add(nuevoChip);
+                }
+                else if (mascota.RazaPeligrosa && !model.Chip && mascota.Chip != null)
+                {
+                    // Caso 2: Era peligrosa con chip y ahora ya no tiene chip
+                    _context.Chips.Remove(mascota.Chip);
+                    mascota.Chip = null;
+                }
+                // Si no es peligrosa, aseguramos que el chip se elimine si existía
+                else if (!mascota.RazaPeligrosa && mascota.Chip != null)
+                {
+                    _context.Chips.Remove(mascota.Chip);
+                    mascota.Chip = null;
+                }
+
+                // 4. Llamar a la API si es una raza peligrosa
+                if (mascota.RazaPeligrosa)
+                {
+                    var clienteAsociado = await _context.Clientes.FindAsync(model.ClienteId);
+                    await SendDataToDangerousDogApi(
+                       mascota.Id,
+                       mascota.Nombre,
+                       mascota.Raza,
+                       mascota.RazaPeligrosa,
+                       model.Chip,
+                       mascota.Chip?.Codigo,
+                       clienteAsociado.Dni,
+                       clienteAsociado.Nombre,
+                       clienteAsociado.Apellido
+                    );
+                }
+
+                // 5. Guardar los cambios
+                await _context.SaveChangesAsync();
+
+                TempData["Mensaje"] = $"Mascota '{mascota.Nombre}' actualizada correctamente.";
+                return View("MascotaActualizada", mascota);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar la mascota: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
+                TempData["Error"] = "Error al actualizar la mascota. Por favor, inténtelo de nuevo.";
+
+                // Vuelve a la vista con los datos para que el usuario no pierda lo que ya ingreso
+                var cliente = await _context.Clientes.FindAsync(model.ClienteId);
+                if (cliente != null)
+                {
+                    ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
+                }
+                return View(model);
+            }
+        }
+        #endregion
+
+
 
         // Método para verificar raza peligrosa 
         private bool IsRazaPeligrosa(string especie, string raza)
@@ -192,6 +346,8 @@ namespace SistemaVetIng.Controllers
             return especieLower == "perro" && _razasPeligrosas.Contains(razaLower);
         }
 
+
+        #region API PERROSPELIGROSOS
         // Metodo para enviar datos a la API de Perros Peligrosos
         private async Task<bool> SendDataToDangerousDogApi(
             int mascotaId,
@@ -261,6 +417,7 @@ namespace SistemaVetIng.Controllers
                 }
             }
         }
+        #endregion
 
     }
 }

@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Sistema Veterinario</title>
+    <title>@ViewData["Title"]</title>
 
     <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -31,7 +31,7 @@
             <h2 class="section-title">Registrar Nueva Mascota</h2>
             <p class="form-subtitle">Asociando mascota al Cliente: <strong>@ViewBag.ClienteNombre</strong></p>
 
-            <form asp-controller="Mascota" asp-action="Registro" method="post" class="main-form">
+            <form asp-controller="Mascota" asp-action="RegistrarMascota" method="post" class="main-form">
                 @Html.AntiForgeryToken()
 
                 <input type="hidden" asp-for="ClienteId" />

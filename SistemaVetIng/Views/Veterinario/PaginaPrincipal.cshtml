@@ -1,6 +1,6 @@
 ﻿@model SistemaVetIng.ViewsModels.VeterinarioPaginaPrincipalViewModel
 @{
-    ViewData["Title"] = "VetIng";
+    ViewData["Title"] = "VetIng Veterinario";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetIng - Veterinario</title>
+    <title>@ViewData["Title"]</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
           integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
@@ -48,7 +48,7 @@
         <section id="clientes">
             <h2 class="section-title">Gestión de Clientes</h2>
             <div class="cliente-busq">
-                <a asp-controller="Cliente" asp-action="Registro" class="btnAdd">Registrar Nuevo Cliente</a>
+                <a asp-controller="Cliente" asp-action="RegistrarCliente" class="btnAdd">Registrar Nuevo Cliente</a>
                 <div class="buscador">
                     <label for="busquedaCliente"> Buscar por Dni:</label> <input type="text" id="busquedaCliente" name="busqueda" placeholder="Ingrese el numero de documento">
                     <button class="btnBuscar">Buscar</button>
@@ -73,10 +73,10 @@
                                 <td>@cliente.Telefono</td>
                                 <td>@cliente.NombreUsuario</td>
                                 <td>
-                                    <a asp-controller="Cliente" asp-action="Editar" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
-                                    <a asp-controller="Cliente" asp-action="Eliminar" asp-route-id="@cliente.Id" class="btn btn-danger"
+                                    <a asp-controller="Cliente" asp-action="ModificarCliente" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
+                                    <a asp-controller="Cliente" asp-action="EliminarCliente" asp-route-id="@cliente.Id" class="btn btn-danger"
                                        onclick="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');">Eliminar</a>
-                                    <a asp-controller="Mascota" asp-action="Registro" asp-route-clienteId="@cliente.Id" class="btn btn-primary">Registrar Mascota</a>
+                                    <a asp-controller="Mascota" asp-action="RegistrarMascota" asp-route-clienteId="@cliente.Id" class="btn btn-primary">Registrar Mascota</a>
                                 </td>
                             </tr>
                         }
@@ -95,7 +95,7 @@
         <section id="mascotas">
             <h2 class="section-title">Gestión de Mascotas</h2>
             <div class="cliente-busq">
-                <a asp-controller="Mascota" asp-action="Registro" class="btnAdd">Registrar Nueva Mascota</a>
+                <a asp-controller="Mascota" asp-action="RegistrarMascota" class="btnAdd">Registrar Nueva Mascota</a>
                 <div class="buscador">
                     <label for="busquedaMascota"> Buscar por Dueño:</label> <input type="text" id="busquedaMascota" name="busqueda" placeholder="Ingrese el nombre del dueño">
                     <button class="btnBuscar">Buscar</button>
@@ -128,7 +128,7 @@
                                     <a asp-controller="Cliente" asp-action="Detalles" asp-route-id="@mascota.ClienteId" class="clienteTable">@mascota.NombreDueno</a>
                                 </td>
                                 <td>
-                                    <a asp-controller="Mascota" asp-action="Editar" asp-route-id="@mascota.Id" class="btnModificar">Editar</a>
+                                    <a asp-controller="Mascota" asp-action="ModificarMascota" asp-route-id="@mascota.Id" class="btnModificar">Editar</a>
                                     <a asp-controller="Mascota" asp-action="Eliminar" asp-route-id="@mascota.Id" class="btn btn-danger"
                                        onclick="return confirm('¿Estás seguro de que quieres eliminar a esta mascota?');">Eliminar</a>
                                 </td>

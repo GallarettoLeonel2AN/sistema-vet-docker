@@ -84,12 +84,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/ListaClientes.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzY290YVxMaXN0YUNsaWVudGVzLmNzaHRtbA==
+[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/ListarClientes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzY290YVxMaXN0YXJDbGllbnRlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/Registro.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzY290YVxSZWdpc3Ryby5jc2h0bWw=
+[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/MascotaActualizada.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzY290YVxNYXNjb3RhQWN0dWFsaXphZGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/ModificarMascota.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzY290YVxNb2RpZmljYXJNYXNjb3RhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Mascota/RegistrarMascota.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzY290YVxSZWdpc3RyYXJNYXNjb3RhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ulipv/Source/Repos/SistemaVetIng/SistemaVetIng/Views/Shared/Error.cshtml]

@@ -86,9 +86,9 @@ namespace SistemaVetIng.Controllers
                 TempData["Mensaje"] = "¡Cliente registrado con éxito!";
 
                 // Redirigimos al usuario al inicio
-                if (User.IsInRole("cliente"))
+                if (User.IsInRole("Veterinario"))
                 {
-                    return RedirectToAction("PaginaPrincipal", "cliente");
+                    return RedirectToAction("PaginaPrincipal", "Veterinario");
                 }
                 else if (User.IsInRole("Veterinaria"))
                 {
@@ -179,9 +179,9 @@ namespace SistemaVetIng.Controllers
                 TempData["Mensaje"] = "Cliente actualizado correctamente.";
 
                 // Redirigimos al usuario al inicio
-                if (User.IsInRole("cliente"))
+                if (User.IsInRole("Veterinario"))
                 {
-                    return RedirectToAction("PaginaPrincipal", "cliente");
+                    return RedirectToAction("PaginaPrincipal", "Veterinario");
                 }
                 else if (User.IsInRole("Veterinaria"))
                 {
