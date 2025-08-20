@@ -24,7 +24,7 @@
                     <p class="register-subtext">Edita los datos de la cuenta del cliente.</p>
                 </div>
                 <div class="formulario">
-                    <form asp-action="ModificarCliente" asp-controller="Veterinaria" method="post" class="register-form">
+                    <form asp-action="ModificarCliente" asp-controller="Cliente" method="post" class="register-form">
                         @Html.AntiForgeryToken()
 
                         <input type="hidden" asp-for="Id" />
@@ -49,7 +49,7 @@
 
                         <div class="form-group">
                             <label asp-for="Email"></label>
-                            <input asp-for="Email" class="form-control" placeholder="email@gmail.com" type="email" />
+                            <input asp-for="Email" class="form-control" placeholder="email@gmail.com" type="email" readonly/>
                             <span asp-validation-for="Email" class="text-danger validation-error"></span>
                         </div>
 

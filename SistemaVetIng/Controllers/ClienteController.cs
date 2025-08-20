@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity; 
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SistemaVetIng.Data; 
-using SistemaVetIng.Models.Indentity; 
 using SistemaVetIng.Models; 
+using SistemaVetIng.Models.Indentity;
+using SistemaVetIng.Views.Veterinaria;
 using SistemaVetIng.ViewsModels; 
 
 namespace SistemaVetIng.Controllers
@@ -21,14 +23,17 @@ namespace SistemaVetIng.Controllers
             _context = context;
         }
 
-        // Mostrar el formulario
+        // **ACCIONES PARA LOS CLIENTES**
+
+
+        // ------------------ REGISTRAR CLIENTE ------------------ 
+        #region REGISTRAR CLIENTE
         [HttpGet]
         public IActionResult RegistrarCliente()
         {
             return View();
         }
 
-       // Procesar el registro
         [HttpPost]
         [ValidateAntiForgeryToken] // Prevenir ataques de falsificación de solicitudes
         public async Task<IActionResult> RegistrarCliente(ClienteRegistroViewModel model)
@@ -81,9 +86,9 @@ namespace SistemaVetIng.Controllers
                 TempData["Mensaje"] = "¡Cliente registrado con éxito!";
 
                 // Redirigimos al usuario al inicio
-                if (User.IsInRole("Veterinario"))
+                if (User.IsInRole("cliente"))
                 {
-                    return RedirectToAction("PaginaPrincipal", "Veterinario");
+                    return RedirectToAction("PaginaPrincipal", "cliente");
                 }
                 else if (User.IsInRole("Veterinaria"))
                 {
@@ -111,5 +116,134 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
         }
+        #endregion
+
+        // ------------------ MODIFICAR CLIENTE ------------------ 
+        #region MODIFICAR CLIENTE
+        [HttpGet]
+        public async Task<IActionResult> ModificarCliente(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Usamos .Include() para cargar explícitamente el objeto 'Usuario'
+            var cliente = await _context.Clientes
+                .Include(v => v.Usuario)
+                .FirstOrDefaultAsync(v => v.Id == id);
+
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ClienteEditarViewModel
+            {
+                Id = cliente.Id,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                Dni = cliente.Dni,
+                Email = cliente.Usuario?.UserName,
+                Direccion = cliente.Direccion,
+                Telefono = cliente.Telefono
+            };
+
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ModificarCliente(ClienteEditarViewModel model)
+        {
+            // Validar si el modelo recibido es válido
+            if (ModelState.IsValid)
+            {
+                // Buscar al cliente existente en la base de datos por su ID
+                var cliente = await _context.Clientes.FindAsync(model.Id);
+                if (cliente == null)
+                {
+                    return NotFound();
+                }
+
+                // Actualizar las propiedades del modelo de la BD con los datos del ViewModel
+                cliente.Nombre = model.Nombre;
+                cliente.Apellido = model.Apellido;
+                cliente.Dni = model.Dni;
+                cliente.Direccion = model.Direccion;
+                cliente.Telefono = model.Telefono;
+
+                await _context.SaveChangesAsync();
+
+                TempData["Mensaje"] = "Cliente actualizado correctamente.";
+
+                // Redirigimos al usuario al inicio
+                if (User.IsInRole("cliente"))
+                {
+                    return RedirectToAction("PaginaPrincipal", "cliente");
+                }
+                else if (User.IsInRole("Veterinaria"))
+                {
+                    return RedirectToAction("PaginaPrincipal", "Veterinaria");
+                }
+            }
+
+            // Si el modelo no es válido, devolver la vista con los errores
+            return View(model);
+        }
+        #endregion
+
+        // ------------------ ELIMINAR CLIENTE ------------------ 
+        #region ELIMINAR CLIENTE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarCliente(int? id)
+        {
+            // Validar que se recibió un ID
+            if (id == null)
+            {
+                TempData["Error"] = "No se pudo eliminar el cliente. ID no proporcionado.";
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            }
+
+            var cliente = await _context.Clientes.Include(v => v.Usuario).FirstOrDefaultAsync(v => v.Id == id);
+
+            if (cliente == null)
+            {
+                TempData["Error"] = "El cliente que intenta eliminar no existe.";
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            }
+
+            try
+            {
+
+                // Eliminar primero el cliente
+                _context.Clientes.Remove(cliente);
+                await _context.SaveChangesAsync();
+
+                // Eliminar luego el usuario asociado
+                if (cliente.Usuario != null)
+                {
+                    var result = await _userManager.DeleteAsync(cliente.Usuario);
+                    if (!result.Succeeded)
+                    {
+                        // Manejar el caso en que la eliminación del usuario falle
+                        TempData["Error"] = "No se pudo eliminar el usuario asociado al cliente.";
+                        return RedirectToAction("PaginaPrincipal", "Veterinaria");
+                    }
+                }
+
+                TempData["Mensaje"] = "El cliente ha sido eliminado exitosamente.";
+            }
+            catch (DbUpdateException)
+            {
+                // Manejar errores de la base de datos
+                TempData["Error"] = "No se pudo eliminar el cliente. Hay registros asociados.";
+            }
+
+            return RedirectToAction("PaginaPrincipal", "Veterinaria");
+        }
+        #endregion
     }
 }

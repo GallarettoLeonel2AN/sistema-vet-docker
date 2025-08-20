@@ -27,7 +27,7 @@ namespace SistemaVetIng.Controllers
             _context = context;
         }
 
-        // Acción GET para mostrar el formulario de registro
+        // ACCION GET PARA MOSTRAR LA PAGINA PRINCIPAL
         [HttpGet]
         public async Task<IActionResult> PaginaPrincipal()
         {

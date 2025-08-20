@@ -206,8 +206,8 @@
                                 <td>@cliente.Telefono</td>
                                 <td>@cliente.NombreUsuario</td>
                                 <td>
-                                    <a asp-controller="Veterinaria" asp-action="ModificarCliente" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
-                                    <form asp-controller="Cliente" asp-action="Eliminar" asp-route-id="@cliente.Id" method="post" style="display:inline;"
+                                    <a asp-controller="Cliente" asp-action="ModificarCliente" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
+                                    <form asp-controller="Cliente" asp-action="EliminarCliente" asp-route-id="@cliente.Id" method="post" style="display:inline;"
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
