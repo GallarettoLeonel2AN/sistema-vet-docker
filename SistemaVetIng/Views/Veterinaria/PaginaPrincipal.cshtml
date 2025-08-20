@@ -46,7 +46,7 @@
         <section id="veterinarios">
             <h2 class="section-title">Gestión de Veterinarios</h2>
             <div class="cliente-busq">
-                <a asp-controller="Veterinaria" asp-action="RegistrarVeterinario" class="btnAdd">Registrar Nuevo Veterinario</a>
+                <a asp-controller="Veterinario" asp-action="RegistrarVeterinario" class="btnAdd">Registrar Nuevo Veterinario</a>
                 <div class="buscador">
                     <label for="busquedaVeterinario">Buscar por Nombre:</label>
                     <input type="text" id="busquedaVeterinario" name="busqueda" placeholder="Ingrese el nombre del veterinario">
@@ -76,8 +76,8 @@
                                 <td>@veterinario.NombreUsuario</td>
                                 <td>@veterinario.Direccion</td>
                                 <td>
-                                    <a asp-controller="Veterinaria" asp-action="ModificarVeterinario" asp-route-id="@veterinario.Id" class="btnModificar">Editar</a>
-                                    <form asp-controller="Veterinaria" asp-action="EliminarVeterinario" asp-route-id="@veterinario.Id" method="post" style="display:inline;"
+                                    <a asp-controller="Veterinario" asp-action="ModificarVeterinario" asp-route-id="@veterinario.Id" class="btnModificar">Editar</a>
+                                    <form asp-controller="Veterinario" asp-action="EliminarVeterinario" asp-route-id="@veterinario.Id" method="post" style="display:inline;"
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este veterinario?');">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
