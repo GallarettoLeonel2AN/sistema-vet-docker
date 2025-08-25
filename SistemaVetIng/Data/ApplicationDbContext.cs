@@ -111,10 +111,10 @@ namespace SistemaVetIng.Data
                 .HasOne(a => a.Tratamiento)
                 .WithOne()
                 .HasForeignKey<AtencionVeterinaria>(a => a.TratamientoId)
+                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
 
             
-
             modelBuilder.Entity<AtencionVeterinaria>()
                 .HasOne(a => a.Veterinario)
                 .WithMany()

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaVetIng.Data;
 
@@ -11,9 +12,11 @@ using SistemaVetIng.Data;
 namespace SistemaVetIng.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250825213835_asdasd")]
+    partial class asdasd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,7 +152,7 @@ namespace SistemaVetIng.Migrations
                     b.Property<float>("PesoMascota")
                         .HasColumnType("real");
 
-                    b.Property<int?>("TratamientoId")
+                    b.Property<int>("TratamientoId")
                         .HasColumnType("int");
 
                     b.Property<int>("VeterinarioId")
@@ -160,8 +163,7 @@ namespace SistemaVetIng.Migrations
                     b.HasIndex("HistoriaClinicaId");
 
                     b.HasIndex("TratamientoId")
-                        .IsUnique()
-                        .HasFilter("[TratamientoId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("VeterinarioId");
 
@@ -829,7 +831,8 @@ namespace SistemaVetIng.Migrations
                     b.HasOne("SistemaVetIng.Models.Tratamiento", "Tratamiento")
                         .WithOne()
                         .HasForeignKey("SistemaVetIng.Models.AtencionVeterinaria", "TratamientoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("SistemaVetIng.Models.Veterinario", "Veterinario")
                         .WithMany()

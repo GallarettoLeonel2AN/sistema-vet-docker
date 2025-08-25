@@ -330,7 +330,92 @@ namespace SistemaVetIng.Controllers
         }
         #endregion
 
+        // ------------------ ELIMINAR MASCOTA ------------------
+        #region ELIMINAR MASCOTA
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarMascota(int? id)
+        {
+            // Validar que se recibió un ID
+            if (id == null)
+            {
+                TempData["Error"] = "No se pudo eliminar la mascota. ID no proporcionado.";
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            }
 
+            // Carga completa en cascada de todas las entidades relacionadas
+            var mascota = await _context.Mascotas
+                .Include(m => m.HistoriaClinica)
+                    .ThenInclude(h => h.Atenciones)
+                        .ThenInclude(a => a.Tratamiento)
+                .Include(m => m.HistoriaClinica)
+                    .ThenInclude(h => h.Atenciones)
+                        .ThenInclude(a => a.Vacunas)
+                .Include(m => m.HistoriaClinica)
+                    .ThenInclude(h => h.Atenciones)
+                        .ThenInclude(a => a.EstudiosComplementarios)
+                .Include(m => m.Chip)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (mascota == null)
+            {
+                TempData["Error"] = "La mascota que intenta eliminar no existe.";
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            }
+
+            try
+            {
+                // Eliminar primero las entidades relacionadas (Tratamiento, Vacuna, Estudio) de las atenciones.
+                if (mascota.HistoriaClinica?.Atenciones != null)
+                {
+                    foreach (var atencion in mascota.HistoriaClinica.Atenciones.ToList())
+                    {
+                        if (atencion.Tratamiento != null)
+                        {
+                            _context.Tratamientos.Remove(atencion.Tratamiento);
+                        }
+                        if (atencion.Vacunas != null)
+                        {
+                            _context.Vacunas.RemoveRange(atencion.Vacunas);
+                        }
+                        if (atencion.EstudiosComplementarios != null)
+                        {
+                            _context.Estudios.RemoveRange(atencion.EstudiosComplementarios);
+                        }
+                    }
+                    // Eliminar las Atenciones Veterinarias
+                    _context.AtencionesVeterinarias.RemoveRange(mascota.HistoriaClinica.Atenciones);
+                }
+
+                // Eliminar la Historia Clínica 
+                if (mascota.HistoriaClinica != null)
+                {
+                    _context.HistoriasClinicas.Remove(mascota.HistoriaClinica);
+                }
+
+                // Eliminar el Chip 
+                if (mascota.Chip != null)
+                {
+                    _context.Chips.Remove(mascota.Chip);
+                }
+
+                // 6. Finalmente, eliminar la mascota.
+                _context.Mascotas.Remove(mascota);
+
+                await _context.SaveChangesAsync();
+
+                TempData["Mensaje"] = "La mascota ha sido eliminada exitosamente.";
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine($"Error al eliminar la mascota: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
+                TempData["Error"] = "No se pudo eliminar la mascota. Hay registros asociados.";
+            }
+
+            return RedirectToAction("PaginaPrincipal", "Veterinaria");
+        }
+        #endregion
 
         // Método para verificar raza peligrosa 
         private bool IsRazaPeligrosa(string especie, string raza)

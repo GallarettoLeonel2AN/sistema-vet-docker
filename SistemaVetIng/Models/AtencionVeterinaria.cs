@@ -4,8 +4,8 @@
     {
         public int Id { get; set; }
         public DateTime Fecha { get; set; } = DateTime.Now;
-        public Tratamiento Tratamiento { get; set; }
-        public int TratamientoId { get; set; }
+        public Tratamiento? Tratamiento { get; set; }
+        public int? TratamientoId { get; set; }
         public List<Vacuna>? Vacunas { get; set; }
         public List<Estudio>? EstudiosComplementarios { get; set; }
         public string Diagnostico { get; set; }

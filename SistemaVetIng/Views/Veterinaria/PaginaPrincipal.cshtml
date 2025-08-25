@@ -264,7 +264,7 @@
                                 </td>
                                 <td>
                                     <a asp-controller="Mascota" asp-action="ModificarMascota" asp-route-id="@mascota.Id" class="btnModificar">Editar</a>
-                                    <form asp-controller="Mascota" asp-action="Eliminar" asp-route-id="@mascota.Id" method="post" style="display:inline;"
+                                    <form asp-controller="Mascota" asp-action="EliminarMascota" asp-route-id="@mascota.Id" method="post" style="display:inline;"
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar a esta mascota?');">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>

@@ -1,5 +1,6 @@
 wwwroot\css\administracion-home.css
 wwwroot\css\animaciones.css
+wwwroot\css\confirmation-styles.css
 wwwroot\css\home-styles.css
 wwwroot\css\img\atendiendoPerro.jpg
 wwwroot\css\img\camaleon.jpg
@@ -78,4 +79,3 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\css\confirmation-styles.css
