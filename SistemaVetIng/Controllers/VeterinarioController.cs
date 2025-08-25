@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
@@ -15,16 +16,19 @@ namespace SistemaVetIng.Controllers
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly IToastNotification _toastNotification;
 
         // Inyectamos los servicios necesarios
         public VeterinarioController(
             UserManager<Usuario> userManager,
             SignInManager<Usuario> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IToastNotification toastNotification)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _toastNotification = toastNotification;
         }
 
         // ACCION GET PARA MOSTRAR LA PAGINA PRINCIPAL
@@ -104,7 +108,7 @@ namespace SistemaVetIng.Controllers
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-                TempData["Error"] = "Hubo errores al crear el usuario. Por favor, revise los datos.";
+                _toastNotification.AddErrorToastMessage("Hubo errores al crear el usuario. Por favor, revise los datos");
                 return View(model);
             }
 
@@ -133,7 +137,7 @@ namespace SistemaVetIng.Controllers
             {
                 // Manejar errores si no se puede guardar el Veterinario
                 Console.WriteLine($"Error al guardar el veterinario: {ex.Message}");
-                TempData["Error"] = "Error al guardar los datos del veterinario. Por favor, inténtelo de nuevo.";
+                _toastNotification.AddErrorToastMessage("Error al guardar los datos del veterinario. Por favor, inténtelo de nuevo.");
                 return View(model);
             }
 
@@ -200,8 +204,7 @@ namespace SistemaVetIng.Controllers
                 veterinario.Matricula = model.Matricula;
 
                 await _context.SaveChangesAsync();
-
-                TempData["Mensaje"] = "Veterinario actualizado correctamente.";
+                _toastNotification.AddSuccessToastMessage("¡Veterinario actualizado correctamente!");
 
                 return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
@@ -220,7 +223,8 @@ namespace SistemaVetIng.Controllers
             // Validar que se recibió un ID
             if (id == null)
             {
-                TempData["Error"] = "No se pudo eliminar el veterinario. ID no proporcionado.";
+                _toastNotification.AddErrorToastMessage("No se pudo eliminar el veterinario. ID no proporcionado.");
+    
                 return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
 
@@ -228,7 +232,7 @@ namespace SistemaVetIng.Controllers
 
             if (veterinario == null)
             {
-                TempData["Error"] = "El veterinario que intenta eliminar no existe.";
+                _toastNotification.AddErrorToastMessage("El veterinario que intenta eliminar no existe.");
                 return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
 
@@ -246,17 +250,17 @@ namespace SistemaVetIng.Controllers
                     if (!result.Succeeded)
                     {
                         // Manejar el caso en que la eliminación del usuario falle
-                        TempData["Error"] = "No se pudo eliminar el usuario asociado al veterinario.";
+                        _toastNotification.AddErrorToastMessage("No se pudo eliminar el usuario asociado al veterinario.");
                         return RedirectToAction("PaginaPrincipal", "Veterinaria");
                     }
                 }
-
-                TempData["Mensaje"] = "El veterinario ha sido eliminado exitosamente.";
+                _toastNotification.AddSuccessToastMessage("El veterinario ha sido eliminado exitosamente.");
+               
             }
             catch (DbUpdateException)
             {
-                // Manejar errores de la base de datos
-                TempData["Error"] = "No se pudo eliminar el veterinario. Hay registros asociados.";
+
+                _toastNotification.AddErrorToastMessage("No se pudo eliminar el veterinario. Hay registros asociados.");
             }
 
             return RedirectToAction("PaginaPrincipal", "Veterinaria");

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
@@ -15,16 +16,19 @@ namespace SistemaVetIng.Controllers
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly IToastNotification _toastNotification;
 
         // Inyectamos los servicios necesarios
         public VeterinariaController(
             UserManager<Usuario> userManager,
             SignInManager<Usuario> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context, 
+            IToastNotification toastNotification)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _context = context;
+            _context = context; 
+            _toastNotification = toastNotification;
         }
         public async Task<IActionResult> PaginaPrincipal()
         {
@@ -116,10 +120,10 @@ namespace SistemaVetIng.Controllers
                 config.TrabajaDomingo = model.TrabajaDomingo;
 
                 await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Configuración de turnos guardada exitosamente.";
+                _toastNotification.AddSuccessToastMessage("¡Configuración de turnos guardada exitosamente.!");
                 return RedirectToAction(nameof(Index));
             }
-            TempData["ErrorMessage"] = "Error al guardar la configuración de turnos.";
+            _toastNotification.AddErrorToastMessage("Error al guardar la configuración de turnos.");
             return RedirectToAction(nameof(Index)); 
         }
     }

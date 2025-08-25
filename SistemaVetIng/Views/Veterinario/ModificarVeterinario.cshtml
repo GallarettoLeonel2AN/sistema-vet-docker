@@ -73,14 +73,6 @@
 
                         <button type="submit" class="button register-button">Guardar Cambios</button>
 
-                        @if (TempData["Mensaje"] != null)
-                        {
-                            <div class="alert alert-success">@TempData["Mensaje"]</div>
-                        }
-                        @if (TempData["Error"] != null)
-                        {
-                            <div class="alert alert-danger">@TempData["Error"]</div>
-                        }
                     </form>
                 </div>
                 <div class="signin-link">
@@ -99,5 +91,6 @@
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
+    @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>

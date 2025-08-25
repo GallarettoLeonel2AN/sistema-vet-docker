@@ -2,21 +2,20 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models.Indentity;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Cadena de conexión
+// Configuración de servicios
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-// Registrar el contexto con Identity
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Identity con Usuario y Rol personalizados
 builder.Services.AddIdentity<Usuario, Rol>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -28,6 +27,24 @@ builder.Services.AddRazorPages();
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<SmtpSettings>>().Value);
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+// AddNToastNotifyToastr
+builder.Services.AddControllersWithViews()
+    .AddNToastNotifyToastr(new ToastrOptions()
+    {
+        // Posición
+        PositionClass = ToastPositions.TopRight,
+
+        // Botón de cierre y barra de progreso
+        CloseButton = true,
+        ProgressBar = true,
+
+        // Duración y comportamiento
+        TimeOut = 5000, 
+        ExtendedTimeOut = 1000, 
+        NewestOnTop = true,
+        TapToDismiss = false // La notificación no se cierra al hacer clic
+    });
 
 var app = builder.Build();
 
@@ -41,23 +58,25 @@ else
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-// seeder de identity
-using (var scope = app.Services.CreateScope()) // Creamos un scope manual para acceder a los servicios
+
+// Seeder de Identity
+using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-
-    // Llamamos al seeder para que cree roles y el usuario admin si no existen
     await IdentitySeeder.SeedRolesAndAdminAsync(services);
 }
 
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseRouting();
 
-// Autenticación y autorización
+// Middleware de Autenticación, Autorización y Routing (orden correcto)
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Middleware de NToastNotify 
+app.UseNToastNotify();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

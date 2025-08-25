@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.ViewsModels;
@@ -13,6 +14,7 @@ namespace SistemaVetIng.Controllers
     public class MascotaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IToastNotification _toastNotification;
 
         private readonly List<string> _razasPeligrosas = new List<string>
         {
@@ -21,9 +23,10 @@ namespace SistemaVetIng.Controllers
             "american staffordshire terrier", "pastor alemán"
         };
 
-        public MascotaController(ApplicationDbContext context)
+        public MascotaController(ApplicationDbContext context, IToastNotification toastNotification)
         {
             _context = context;
+            _toastNotification = toastNotification;
         }
 
         // Listado de clientes para asociarle MASCOTAS
@@ -46,7 +49,7 @@ namespace SistemaVetIng.Controllers
             var cliente = await _context.Clientes.FindAsync(clienteId);
             if (cliente == null)
             {
-                TempData["Error"] = "El cliente seleccionado no existe.";
+                _toastNotification.AddErrorToastMessage("El cliente seleccionado no existe.");
                 return RedirectToAction(nameof(ListarClientes)); 
             }
 
@@ -83,7 +86,7 @@ namespace SistemaVetIng.Controllers
             var clienteExiste = await _context.Clientes.AnyAsync(c => c.Id == model.ClienteId);
             if (!clienteExiste)
             {
-                TempData["Error"] = "El cliente asociado no es válido. Intente de nuevo.";
+                _toastNotification.AddErrorToastMessage("El cliente asociado no es válido. Intente de nuevo.");
                 return RedirectToAction(nameof(ListarClientes));
             }
 
@@ -159,7 +162,8 @@ namespace SistemaVetIng.Controllers
                     }
                 }
 
-                TempData["Mensaje"] = $"Mascota '{mascota.Nombre}' registrada correctamente. " + apiMessage;
+                _toastNotification.AddSuccessToastMessage($"Mascota '{mascota.Nombre}' registrada correctamente. " + apiMessage);
+
                 return RedirectToAction(nameof(ListarClientes));
             }
             catch (Exception ex)
@@ -168,7 +172,7 @@ namespace SistemaVetIng.Controllers
                 // Loggear el stack trace completo para mas detalles de error
                 Console.WriteLine(ex.StackTrace);
 
-                TempData["Error"] = "Error al registrar la mascota. Por favor, inténtelo de nuevo.";
+                _toastNotification.AddErrorToastMessage("Error al registrar la mascota. Por favor, inténtelo de nuevo.");
                 // Vuelve a la vista con los datos para que el usuario no pierda lo que ya ingreso
                 var cliente = await _context.Clientes.FindAsync(model.ClienteId);
                 if (cliente != null)
@@ -187,24 +191,24 @@ namespace SistemaVetIng.Controllers
         [HttpGet]
         public async Task<IActionResult> ModificarMascota(int? id)
         {
-            // 1. Validar que se recibió un ID
+            // Validar que se recibió un ID
             if (id == null)
             {
-                TempData["Error"] = "No se pudo encontrar la mascota. ID no proporcionado.";
+                _toastNotification.AddErrorToastMessage("No se pudo encontrar la mascota. ID no proporcionado.");
                 return RedirectToAction(nameof(ListarClientes));
             }
 
-            // 2. Buscar la mascota en la base de datos
+            // Buscar la mascota en la base de datos
             var mascota = await _context.Mascotas.Include(m => m.Propietario).FirstOrDefaultAsync(m => m.Id == id);
 
-            // 3. Validar si la mascota existe
+            // Validar si la mascota existe
             if (mascota == null)
             {
-                TempData["Error"] = "La mascota que intenta editar no existe.";
+                _toastNotification.AddErrorToastMessage("La mascota que intenta editar no existe.");
                 return RedirectToAction(nameof(ListarClientes));
             }
 
-            // 4. Mapear la entidad a un ViewModel para la vista
+            // Mapear la entidad a un ViewModel para la vista
             var viewModel = new MascotaEditarViewModel
             {
                 Id = mascota.Id,
@@ -242,7 +246,7 @@ namespace SistemaVetIng.Controllers
                 {
                     ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
                 }
-                TempData["Error"] = "Hubo un error con los datos proporcionados.";
+                _toastNotification.AddErrorToastMessage("Hubo un error con los datos proporcionados.");
                 return View(model);
             }
 
@@ -251,7 +255,7 @@ namespace SistemaVetIng.Controllers
 
             if (mascota == null)
             {
-                TempData["Error"] = "La mascota que intenta editar no existe.";
+                _toastNotification.AddErrorToastMessage("La mascota que intenta editar no existe.");
                 return RedirectToAction(nameof(ListarClientes));
             }
 
@@ -310,14 +314,16 @@ namespace SistemaVetIng.Controllers
                 // 5. Guardar los cambios
                 await _context.SaveChangesAsync();
 
-                TempData["Mensaje"] = $"Mascota '{mascota.Nombre}' actualizada correctamente.";
+                _toastNotification.AddSuccessToastMessage($"Mascota '{mascota.Nombre}' actualizada correctamente.");
+        
                 return View("MascotaActualizada", mascota);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al actualizar la mascota: {ex.Message}");
                 Console.WriteLine(ex.StackTrace);
-                TempData["Error"] = "Error al actualizar la mascota. Por favor, inténtelo de nuevo.";
+                _toastNotification.AddErrorToastMessage("Error al actualizar la mascota. Por favor, inténtelo de nuevo.");
+              
 
                 // Vuelve a la vista con los datos para que el usuario no pierda lo que ya ingreso
                 var cliente = await _context.Clientes.FindAsync(model.ClienteId);
@@ -339,7 +345,7 @@ namespace SistemaVetIng.Controllers
             // Validar que se recibió un ID
             if (id == null)
             {
-                TempData["Error"] = "No se pudo eliminar la mascota. ID no proporcionado.";
+                _toastNotification.AddErrorToastMessage("No se pudo eliminar la mascota. ID no proporcionado.");
                 return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
 
@@ -359,7 +365,7 @@ namespace SistemaVetIng.Controllers
 
             if (mascota == null)
             {
-                TempData["Error"] = "La mascota que intenta eliminar no existe.";
+                _toastNotification.AddErrorToastMessage("La mascota que intenta eliminar no existe.");
                 return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
 
@@ -404,13 +410,15 @@ namespace SistemaVetIng.Controllers
 
                 await _context.SaveChangesAsync();
 
-                TempData["Mensaje"] = "La mascota ha sido eliminada exitosamente.";
+                _toastNotification.AddSuccessToastMessage("La mascota ha sido eliminada exitosamente.");
+        
             }
             catch (DbUpdateException ex)
             {
                 Console.WriteLine($"Error al eliminar la mascota: {ex.Message}");
                 Console.WriteLine(ex.StackTrace);
-                TempData["Error"] = "No se pudo eliminar la mascota. Hay registros asociados.";
+                _toastNotification.AddErrorToastMessage("No se pudo eliminar la mascota. Hay registros asociados.");
+         
             }
 
             return RedirectToAction("PaginaPrincipal", "Veterinaria");
