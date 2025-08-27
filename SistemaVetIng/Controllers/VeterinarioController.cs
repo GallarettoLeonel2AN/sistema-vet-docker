@@ -31,7 +31,6 @@ namespace SistemaVetIng.Controllers
             _toastNotification = toastNotification;
         }
 
-        // ACCION GET PARA MOSTRAR LA PAGINA PRINCIPAL
         [HttpGet]
         public async Task<IActionResult> PaginaPrincipal()
         {

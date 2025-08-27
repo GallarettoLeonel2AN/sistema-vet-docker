@@ -47,11 +47,13 @@
             <h2 class="section-title">Gestión de Veterinarios</h2>
             <div class="cliente-busq">
                 <a asp-controller="Veterinario" asp-action="RegistrarVeterinario" class="btnAdd">Registrar Nuevo Veterinario</a>
-                <div class="buscador">
-                    <label for="busquedaVeterinario">Buscar por Nombre:</label>
-                    <input type="text" id="busquedaVeterinario" name="busqueda" placeholder="Ingrese el nombre del veterinario">
-                    <button class="btnBuscar">Buscar</button>
-                </div>
+                <form asp-controller="Veterinaria" asp-action="FiltrarVeterinario" method="get">
+                    <div class="buscador">
+                        <label for="busquedaVeterinario">Buscar por Nombre:</label>
+                        <input type="text" id="busquedaVeterinario" name="busqueda" placeholder="Ingrese el nombre del veterinario">
+                        <button type="submit" class="btnBuscar">Buscar</button>
+                    </div>
+                </form>
             </div>
             <table class="table">
                 <thead>
@@ -181,11 +183,13 @@
             <h2 class="section-title">Gestión de Clientes</h2>
             <div class="cliente-busq">
                 <a asp-controller="Cliente" asp-action="RegistrarCliente" class="btnAdd">Registrar Nuevo Cliente</a>
-                <div class="buscador">
-                    <label for="busquedaCliente"> Buscar por Dni:</label>
-                    <input type="text" id="busquedaCliente" name="busqueda" placeholder="Ingrese el numero de documento">
-                    <button class="btnBuscar">Buscar</button>
-                </div>
+                <form asp-controller="Veterinaria" asp-action="FiltrarCliente" method="get">
+                    <div class="buscador">
+                        <label for="busquedaCliente">Buscar por Dni:</label>
+                        <input type="text" id="busquedaCliente" name="busqueda" placeholder="Ingrese el numero de documento">
+                        <button type="submit" class="btnBuscar">Buscar</button>
+                    </div>
+                </form>
             </div>
             <table class="table">
                 <thead>
@@ -230,11 +234,13 @@
             <h2 class="section-title">Gestión de Mascotas</h2>
             <div class="cliente-busq">
                 <a asp-controller="Mascota" asp-action="RegistrarMascota" class="btnAdd">Registrar Nueva Mascota</a>
-                <div class="buscador">
-                    <label for="busquedaMascota"> Buscar por Dueño:</label>
-                    <input type="text" id="busquedaMascota" name="busqueda" placeholder="Ingrese el nombre del dueño">
-                    <button class="btnBuscar">Buscar</button>
-                </div>
+                <form asp-controller="Veterinaria" asp-action="FiltrarMascota" method="get">
+                    <div class="buscador">
+                        <label for="busquedaMascota">Buscar por Dueño:</label>
+                        <input type="text" id="busquedaMascota" name="busqueda" placeholder="Ingrese el numero de documento">
+                        <button type="submit" class="btnBuscar">Buscar</button>
+                    </div>
+                </form>
             </div>
             <table class="table">
                 <thead>

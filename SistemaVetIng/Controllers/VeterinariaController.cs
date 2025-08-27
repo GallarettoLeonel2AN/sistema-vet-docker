@@ -30,6 +30,7 @@ namespace SistemaVetIng.Controllers
             _context = context; 
             _toastNotification = toastNotification;
         }
+        [HttpGet]
         public async Task<IActionResult> PaginaPrincipal()
         {
             var viewModel = new VeterinariaPaginaPrincipalViewModel();
@@ -92,7 +93,38 @@ namespace SistemaVetIng.Controllers
             return View(viewModel);
         }
 
-      
+        [HttpGet]
+        public async Task<IActionResult> FiltrarVeterinario(string busqueda)
+        {
+            var consulta = _context.Veterinarios.AsQueryable();
+
+            if (!string.IsNullOrEmpty(busqueda))
+            {
+                consulta = consulta.Where(v =>
+                    v.Nombre.Contains(busqueda) ||
+                    v.Apellido.Contains(busqueda)
+                );
+            }
+
+            var veterinariosViewModel = await consulta
+                .Select(p => new VeterinarioViewModel
+                {
+                    Id = p.Id,
+                    NombreCompleto = $"{p.Nombre} {p.Apellido}",
+                    Telefono = p.Telefono,
+                    NombreUsuario = p.Usuario.Email,
+                    Direccion = p.Direccion,
+                    Matricula = p.Matricula,
+                })
+                .ToListAsync();
+
+            var viewModelPagina = new VeterinariaPaginaPrincipalViewModel
+            {
+                Veterinarios = veterinariosViewModel
+            };
+
+            return View("PaginaPrincipal", viewModelPagina);
+        }
 
         // Acciones para Configuración de Turnos **EN DESARROLLO**
         [HttpPost]
