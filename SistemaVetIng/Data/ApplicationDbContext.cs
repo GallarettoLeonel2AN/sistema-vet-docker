@@ -22,7 +22,7 @@ namespace SistemaVetIng.Data
         public DbSet<Tratamiento> Tratamientos { get; set; }
         public DbSet<Vacuna> Vacunas { get; set; }
         public DbSet<Estudio> Estudios { get; set; }
-        public DbSet<Disponibilidad> Disponibilidades { get; set; }
+        public DbSet<ConfiguracionVeterinaria> ConfiguracionVeterinarias { get; set; }
         public DbSet<Pago> Pagos { get; set; }
         public DbSet<MetodoPago> MetodosPago { get; set; }
         public DbSet<Veterinaria> Veterinarias { get; set; }
@@ -86,12 +86,6 @@ namespace SistemaVetIng.Data
                 .HasForeignKey(t => t.ClienteId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
-            // Relacion Disponibilidad y Veterinario
-            modelBuilder.Entity<Disponibilidad>()
-                .HasOne(d => d.Veterinario)
-                .WithMany(v => v.Disponibilidades)
-                .HasForeignKey(d => d.VeterinarioId);
 
             // Relaciones Historia Clinica
             modelBuilder.Entity<HistoriaClinica>()

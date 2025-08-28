@@ -2,6 +2,7 @@ C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroo
 C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\toastr.js
 wwwroot\css\administracion-home.css
 wwwroot\css\animaciones.css
+wwwroot\css\configuracion.css
 wwwroot\css\confirmation-styles.css
 wwwroot\css\home-styles.css
 wwwroot\css\img\atendiendoPerro.jpg

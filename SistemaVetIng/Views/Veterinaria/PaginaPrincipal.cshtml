@@ -42,7 +42,58 @@
     </header>
 
     <main>
-       
+
+        <section id="configuracion-turnos">
+            <h2 class="section-title">Configuración de Turnos</h2>
+            <div class="row mb-3">
+                <div class="col-12 text-center">
+                    <a asp-controller="Turno" asp-action="GuardarConfiguracion" class="btnAdd">
+                        <i class="fas fa-cog"></i> Agregar/Modificar Configuración de Turnos
+                    </a>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Configuración Actual</h3>
+            @if (Model.ConfiguracionTurnos != null)
+            {
+                <table class="table config-table">
+                    <thead>
+                        <tr>
+                            <th>Horario de Trabajo</th>
+                            <th>Duración por Consulta</th>
+                            <th>Días Laborables</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.ConfiguracionTurnos.HoraInicio.ToString(@"hh\:mm") - @Model.ConfiguracionTurnos.HoraFin.ToString(@"hh\:mm")</td>
+                            <td>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta minutos</td>
+                            <td>
+                                @(Model.ConfiguracionTurnos.TrabajaLunes ? "Lunes, " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaMartes ? "Martes, " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaMiercoles ? "Miércoles, " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaJueves ? "Jueves, " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaViernes ? "Viernes, " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaSabado ? "Sábado, " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaDomingo ? "Domingo" : "")
+                            </td>
+                            <td>
+                                <a asp-controller="Turnos" asp-action="Configuracion" class="btnModificar">Modificar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info text-center">
+                    Aún no se ha configurado el horario de la veterinaria. Por favor, agregue una configuración.
+                </div>
+            }
+        </section>
+
+
         <section id="veterinarios">
             <h2 class="section-title">Gestión de Veterinarios</h2>
             <div class="cliente-busq">
@@ -96,88 +147,7 @@
                 </tbody>
             </table>
         </section>
-
-        <section id="configuracion-turnos">
-            <h2 class="section-title">Configuración de Turnos</h2>
-            <div class="form-section config-turnos-form-section">
-                <form asp-controller="Administracion" asp-action="GuardarConfiguracionTurnos" method="post" class="main-form">
-                    <input type="hidden" asp-for="ConfiguracionTurnos.Id" />
-                    <div class="form-group">
-                        <label asp-for="ConfiguracionTurnos.HoraInicio"></label>
-                        <input asp-for="ConfiguracionTurnos.HoraInicio" type="time" class="form-control" />
-                        <span asp-validation-for="ConfiguracionTurnos.HoraInicio" class="validation-error"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ConfiguracionTurnos.HoraFin"></label>
-                        <input asp-for="ConfiguracionTurnos.HoraFin" type="time" class="form-control" />
-                        <span asp-validation-for="ConfiguracionTurnos.HoraFin" class="validation-error"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ConfiguracionTurnos.DuracionMinutosPorConsulta"></label>
-                        <input asp-for="ConfiguracionTurnos.DuracionMinutosPorConsulta" type="number" class="form-control" />
-                        <span asp-validation-for="ConfiguracionTurnos.DuracionMinutosPorConsulta" class="validation-error"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Días Laborables:</label>
-                        <div class="dias-laborables-checkboxes">
-                            <div class="form-check">
-                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaLunes" class="form-check-input" />
-                                <label asp-for="ConfiguracionTurnos.TrabajaLunes" class="form-check-label"></label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaMartes" class="form-check-input" />
-                                <label asp-for="ConfiguracionTurnos.TrabajaMartes" class="form-check-label"></label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaMiercoles" class="form-check-input" />
-                                <label asp-for="ConfiguracionTurnos.TrabajaMiercoles" class="form-check-label"></label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaJueves" class="form-check-input" />
-                                <label asp-for="ConfiguracionTurnos.TrabajaJueves" class="form-check-label"></label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaViernes" class="form-check-input" />
-                                <label asp-for="ConfiguracionTurnos.TrabajaViernes" class="form-check-label"></label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaSabado" class="form-check-input" />
-                                <label asp-for="ConfiguracionTurnos.TrabajaSabado" class="form-check-label"></label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" asp-for="ConfiguracionTurnos.TrabajaDomingo" class="form-check-input" />
-                                <label asp-for="ConfiguracionTurnos.TrabajaDomingo" class="form-check-label"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Guardar Configuración</button>
-                    </div>
-                </form>
-            </div>
-
-            <h3 class="section-subtitle">Configuración Actual</h3>
-            <table class="table config-table">
-                <thead>
-                    <tr>
-                        <th>Horario de Trabajo</th>
-                        <th>Duración por Consulta</th>
-                        <th>Días Laborables</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@Model.ConfiguracionTurnos.HoraInicio.ToString(@"hh\:mm") - @Model.ConfiguracionTurnos.HoraFin.ToString(@"hh\:mm")</td>
-                        <td>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta minutos</td>
-                        <td>@Model.ConfiguracionTurnos.DiasLaborablesString</td>
-                        <td>
-                            <button type="button" class="btnModificar" onclick="scrollToConfigForm()">Modificar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        
 
         <section id="clientes">
             <h2 class="section-title">Gestión de Clientes</h2>

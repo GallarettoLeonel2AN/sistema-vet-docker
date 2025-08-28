@@ -16,19 +16,15 @@ namespace SistemaVetIng.Controllers
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
         private readonly ApplicationDbContext _context;
-        private readonly IToastNotification _toastNotification;
 
-        // Inyectamos los servicios necesarios
         public VeterinariaController(
             UserManager<Usuario> userManager,
             SignInManager<Usuario> signInManager,
-            ApplicationDbContext context, 
-            IToastNotification toastNotification)
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context; 
-            _toastNotification = toastNotification;
         }
         [HttpGet]
         public async Task<IActionResult> PaginaPrincipal()
@@ -126,37 +122,66 @@ namespace SistemaVetIng.Controllers
             return View("PaginaPrincipal", viewModelPagina);
         }
 
-        // Acciones para Configuración de Turnos **EN DESARROLLO**
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GuardarConfiguracionTurnos(DisponibilidadViewModel model)
+        [HttpGet]
+        public async Task<IActionResult> FiltrarCliente(string busqueda)
         {
-            if (ModelState.IsValid)
+            var consulta = _context.Clientes.AsQueryable();
+
+            if (!string.IsNullOrEmpty(busqueda))
             {
-                var config = await _context.Disponibilidades.FirstOrDefaultAsync(c => c.Id == 1);
-                if (config == null)
-                {
-                    config = new Disponibilidad { Id = 1 }; // Crear si no existe
-                    _context.Disponibilidades.Add(config);
-                }
-
-                config.HoraInicio = model.HoraInicio;
-                config.HoraFin = model.HoraFin;
-                config.DuracionMinutosPorConsulta = model.DuracionMinutosPorConsulta;
-                config.TrabajaLunes = model.TrabajaLunes;
-                config.TrabajaMartes = model.TrabajaMartes;
-                config.TrabajaMiercoles = model.TrabajaMiercoles;
-                config.TrabajaJueves = model.TrabajaJueves;
-                config.TrabajaViernes = model.TrabajaViernes;
-                config.TrabajaSabado = model.TrabajaSabado;
-                config.TrabajaDomingo = model.TrabajaDomingo;
-
-                await _context.SaveChangesAsync();
-                _toastNotification.AddSuccessToastMessage("¡Configuración de turnos guardada exitosamente.!");
-                return RedirectToAction(nameof(Index));
+                consulta = consulta.Where(c => c.Dni.ToString().Contains(busqueda));
             }
-            _toastNotification.AddErrorToastMessage("Error al guardar la configuración de turnos.");
-            return RedirectToAction(nameof(Index)); 
+
+            var clientesViewModel = await consulta
+                .Select(p => new ClienteViewModel
+                {
+                    Id = p.Id,
+                    NombreCompleto = $"{p.Nombre} {p.Apellido}",
+                    Telefono = p.Telefono,
+                    NombreUsuario = p.Usuario.Email,
+                })
+                .ToListAsync();
+
+            var viewModelPagina = new VeterinariaPaginaPrincipalViewModel
+            {
+                Clientes = clientesViewModel
+            };
+
+            return View("PaginaPrincipal", viewModelPagina);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> FiltrarMascota(string busqueda)
+        {
+            var consulta = _context.Mascotas.Include(m => m.Propietario).AsQueryable();
+
+            if (!string.IsNullOrEmpty(busqueda))
+            {
+                consulta = consulta.Where(m => m.Propietario.Dni.ToString().Contains(busqueda));
+            }
+
+            var mascotasViewModel = await consulta
+
+                .Select(m => new MascotaListViewModel
+                {
+                    Id = m.Id,
+                    NombreMascota = m.Nombre,
+                    Especie = m.Especie,
+                    Raza = m.Raza,
+                    Sexo = m.Sexo,
+                    EdadAnios = (DateTime.Now.Year - m.FechaNacimiento.Year),
+                    NombreDueno = $"{m.Propietario.Nombre} {m.Propietario.Apellido}"
+                })
+                .ToListAsync();
+
+            var viewModelPagina = new VeterinariaPaginaPrincipalViewModel
+            {
+                Mascotas = mascotasViewModel
+            };
+
+            return View("PaginaPrincipal", viewModelPagina);
+        }
+
+
     }
 }
