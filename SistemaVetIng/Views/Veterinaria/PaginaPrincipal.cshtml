@@ -47,7 +47,7 @@
             <h2 class="section-title">Configuración de Turnos</h2>
             <div class="row mb-3">
                 <div class="col-12 text-center">
-                    <a asp-controller="Turno" asp-action="GuardarConfiguracion" class="btnAdd">
+                    <a asp-controller="Veterinaria" asp-action="GuardarConfiguracion" class="btnAdd">
                         <i class="fas fa-cog"></i> Agregar/Modificar Configuración de Turnos
                     </a>
                 </div>
@@ -62,24 +62,20 @@
                             <th>Horario de Trabajo</th>
                             <th>Duración por Consulta</th>
                             <th>Días Laborables</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>@Model.ConfiguracionTurnos.HoraInicio.ToString(@"hh\:mm") - @Model.ConfiguracionTurnos.HoraFin.ToString(@"hh\:mm")</td>
-                            <td>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta minutos</td>
-                            <td>
-                                @(Model.ConfiguracionTurnos.TrabajaLunes ? "Lunes, " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaMartes ? "Martes, " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaMiercoles ? "Miércoles, " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaJueves ? "Jueves, " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaViernes ? "Viernes, " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaSabado ? "Sábado, " : "")
+                            <td>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta.ToString() minutos</td>
+                            <td> 
+                                @(Model.ConfiguracionTurnos.TrabajaLunes ? "Lunes " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaMartes ? "Martes " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaMiercoles ? "Miércoles " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaJueves ? "Jueves " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaViernes ? "Viernes " : "")
+                                @(Model.ConfiguracionTurnos.TrabajaSabado ? "Sábado " : "")
                                 @(Model.ConfiguracionTurnos.TrabajaDomingo ? "Domingo" : "")
-                            </td>
-                            <td>
-                                <a asp-controller="Turnos" asp-action="Configuracion" class="btnModificar">Modificar</a>
                             </td>
                         </tr>
                     </tbody>
@@ -87,9 +83,10 @@
             }
             else
             {
-                <div class="alert alert-info text-center">
-                    Aún no se ha configurado el horario de la veterinaria. Por favor, agregue una configuración.
-                </div>
+                <tr>
+                    <td colspan="4"> Aún no se ha configurado el horario de la veterinaria. Por favor, agregue una configuración.</td>
+                </tr>
+     
             }
         </section>
 

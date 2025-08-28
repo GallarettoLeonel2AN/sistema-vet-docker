@@ -16,20 +16,49 @@ namespace SistemaVetIng.Controllers
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly IToastNotification _toastNotification;
 
         public VeterinariaController(
             UserManager<Usuario> userManager,
             SignInManager<Usuario> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IToastNotification toastNotification)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _context = context; 
+            _context = context;
+            _toastNotification = toastNotification;
         }
         [HttpGet]
         public async Task<IActionResult> PaginaPrincipal()
         {
             var viewModel = new VeterinariaPaginaPrincipalViewModel();
+
+            // Carga la configuración de turnos desde la base de datos.
+            var configuracionDb = await _context.ConfiguracionVeterinarias.FirstOrDefaultAsync();
+
+            if (configuracionDb != null)
+            {
+                // Si la configuración existe en la BD, la mapeamos al ViewModel
+                viewModel.ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel
+                {
+                    HoraInicio = configuracionDb.HoraInicio,
+                    HoraFin = configuracionDb.HoraFin,
+                    DuracionMinutosPorConsulta = configuracionDb.DuracionMinutosPorConsulta,
+                    TrabajaLunes = configuracionDb.TrabajaLunes,
+                    TrabajaMartes = configuracionDb.TrabajaMartes,
+                    TrabajaMiercoles = configuracionDb.TrabajaMiercoles,
+                    TrabajaJueves = configuracionDb.TrabajaJueves,
+                    TrabajaViernes = configuracionDb.TrabajaViernes,
+                    TrabajaSabado = configuracionDb.TrabajaSabado,
+                    TrabajaDomingo = configuracionDb.TrabajaDomingo
+                };
+            }
+            else
+            {
+                // Si no hay configuración, la propiedad del ViewModel se mantiene como null
+                viewModel.ConfiguracionTurnos = null;
+            }
 
             //  Cargar Veterinario
             viewModel.Veterinarios = await _context.Veterinarios
@@ -182,6 +211,61 @@ namespace SistemaVetIng.Controllers
             return View("PaginaPrincipal", viewModelPagina);
         }
 
+
+        [HttpGet]
+        public IActionResult GuardarConfiguracion()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GuardarConfiguracion(ConfiguracionVeterinaria model)
+        {
+            if (!ModelState.IsValid)
+            {
+                _toastNotification.AddErrorToastMessage("Hay errores en el formulario. Por favor, corríjalos.");
+                return View(model);
+            }
+
+            try
+            {
+                // Buscamos la unica configuración existente
+                var configuracionExistente = await _context.ConfiguracionVeterinarias.FirstOrDefaultAsync();
+
+                if (configuracionExistente == null)
+                {
+                    // Si no existe, creamos una nueva configuracion
+                    _context.ConfiguracionVeterinarias.Add(model);
+                    _toastNotification.AddSuccessToastMessage("¡Configuración de turnos guardada exitosamente!");
+                }
+                else
+                {
+                    // Si ya existe, actualizamos
+                    configuracionExistente.HoraInicio = model.HoraInicio;
+                    configuracionExistente.HoraFin = model.HoraFin;
+                    configuracionExistente.DuracionMinutosPorConsulta = model.DuracionMinutosPorConsulta;
+                    configuracionExistente.TrabajaLunes = model.TrabajaLunes;
+                    configuracionExistente.TrabajaMartes = model.TrabajaMartes;
+                    configuracionExistente.TrabajaMiercoles = model.TrabajaMiercoles;
+                    configuracionExistente.TrabajaJueves = model.TrabajaJueves;
+                    configuracionExistente.TrabajaViernes = model.TrabajaViernes;
+                    configuracionExistente.TrabajaSabado = model.TrabajaSabado;
+                    configuracionExistente.TrabajaDomingo = model.TrabajaDomingo;
+
+                    _context.ConfiguracionVeterinarias.Update(configuracionExistente);
+                    _toastNotification.AddSuccessToastMessage("¡Configuración de turnos actualizada exitosamente!");
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            }
+            catch (Exception ex)
+            {
+                _toastNotification.AddErrorToastMessage("Ocurrió un error inesperado. Por favor, inténtelo de nuevo.");
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            }
+        }
 
     }
 }

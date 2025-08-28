@@ -1,9 +1,11 @@
-﻿namespace SistemaVetIng.ViewsModels
+﻿using SistemaVetIng.Models;
+
+namespace SistemaVetIng.ViewsModels
 {
     public class VeterinariaPaginaPrincipalViewModel
     {
         public List<VeterinarioViewModel> Veterinarios { get; set; }
-        public DisponibilidadViewModel ConfiguracionTurnos { get; set; }
+        public ConfiguracionVeterinariaViewModel ConfiguracionTurnos { get; set; }
         public List<ClienteViewModel> Clientes { get; set; } 
         public List<MascotaListViewModel> Mascotas { get; set; } 
 
@@ -18,7 +20,7 @@
             Veterinarios = new List<VeterinarioViewModel>();
             Clientes = new List<ClienteViewModel>();
             Mascotas = new List<MascotaListViewModel>();
-            ConfiguracionTurnos = new DisponibilidadViewModel(); // Inicializar para evitar NullReferenceException
+            ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel(); // Inicializar para evitar NullReferenceException
         }
     }
 }
