@@ -84,9 +84,9 @@ input[type="number"].form-control {
 .section-subtitle {
     font-size: 1.8em;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: var(--accent-color);
     text-align: center;
-    margin-top: 50px; 
+    margin-top: 50px;
     margin-bottom: 20px;
 }
 

@@ -130,6 +130,17 @@ main {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
 
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+}
+
+    .btn-secondary:hover {
+        background-color: darkred;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
 .btnBuscar{
     padding: 8px 15px;
     border-radius: 5px;

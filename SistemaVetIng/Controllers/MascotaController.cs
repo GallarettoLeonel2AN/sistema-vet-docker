@@ -49,7 +49,6 @@ namespace SistemaVetIng.Controllers
             var cliente = await _context.Clientes.FindAsync(clienteId);
             if (cliente == null)
             {
-                _toastNotification.AddErrorToastMessage("El cliente seleccionado no existe.");
                 return RedirectToAction(nameof(ListarClientes)); 
             }
 

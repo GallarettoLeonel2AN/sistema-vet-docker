@@ -31,13 +31,10 @@
                         <a href="#" class="social-icon twitter"><i class="fa-brands fa-twitter"></i></a>
                     </div>
                 </div>
-
                 <div class="formulario">
-                    @* Formulario que enviará los datos al método Login del AccountController *@
                     <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="login-form">
                         @Html.AntiForgeryToken()
-                        <div asp-validation-summary="ModelOnly" class="text-danger error-summary"></div> @* Mostrar errores de validación generales *@
-
+ 
                         <div class="form-group">
                             <label asp-for="UserName"></label>
                             <input asp-for="UserName" id="name" placeholder="Tu correo electrónico" class="form-control" /> 
@@ -52,7 +49,7 @@
 
                         <button type="submit" class="button login-button">Ingresar</button> 
 
-                        <p class="signup-link">¿No eres miembro? <a asp-controller="Cliente" asp-action="Registro" class="link-secondary"> Registrarme </a></p>
+                        <p class="signup-link">¿No eres miembro? <a asp-controller="Cliente" asp-action="RegistrarCliente" class="link-secondary"> Registrarme </a></p>
                         <a asp-controller="Account" asp-action="RecuperarContraseña" class="link-secondary forgot-password">¿Olvidaste tu contraseña?</a>
                     </form>
                 </div>
