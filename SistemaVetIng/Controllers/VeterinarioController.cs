@@ -6,6 +6,8 @@ using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
+using SistemaVetIng.Servicios.Implementacion;
+using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
 namespace SistemaVetIng.Controllers
@@ -13,21 +15,14 @@ namespace SistemaVetIng.Controllers
     [Authorize(Roles = "Veterinario,Veterinaria")]
     public class VeterinarioController : Controller
     {
-        private readonly UserManager<Usuario> _userManager;
-        private readonly SignInManager<Usuario> _signInManager;
-        private readonly ApplicationDbContext _context;
         private readonly IToastNotification _toastNotification;
+        private readonly IVeterinarioService _veterinarioService;
 
-        // Inyectamos los servicios necesarios
         public VeterinarioController(
-            UserManager<Usuario> userManager,
-            SignInManager<Usuario> signInManager,
-            ApplicationDbContext context,
+            IVeterinarioService veterinarioService,
             IToastNotification toastNotification)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _context = context;
+            _veterinarioService = veterinarioService;
             _toastNotification = toastNotification;
         }
 
@@ -36,7 +31,7 @@ namespace SistemaVetIng.Controllers
         {
 
             var viewModel = new VeterinarioPaginaPrincipalViewModel();
-
+            /**
             // Cargar Clientes en las tablas
             viewModel.Clientes = await _context.Clientes
                 .Select(c => new ClienteViewModel
@@ -63,15 +58,14 @@ namespace SistemaVetIng.Controllers
                     ClienteId = m.Propietario.Id
                 })
                 .ToListAsync();
-
+**/
             return View(viewModel);
         }
 
 
-        // **ACCIONES PARA LOS VETERINARIOS**
-
-        // ------------------ REGISTRAR VETERINARIO ------------------ 
         #region REGISTRAR VETERINARIO
+
+        [HttpGet]
         public IActionResult RegistrarVeterinario()
         {
             return View();
@@ -81,96 +75,46 @@ namespace SistemaVetIng.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegistrarVeterinario(VeterinarioRegistroViewModel model)
         {
-            // Validar el modelo
             if (!ModelState.IsValid)
             {
-                // Si hay errores de validación, vuelve a mostrar el formulario
+                _toastNotification.AddErrorToastMessage("Hubo errores al registrar el veterinario.");
                 return View(model);
             }
 
-            // Crear el objeto Usuario para Identity
-            var usuario = new Usuario
-            {
-                UserName = model.Email, // Usamos el email como nombre de usuario
-                Email = model.Email,
-                NombreUsuario = model.Nombre + "" + model.Apellido,
-
-            };
-
-            // Crear el usuario en la base de datos de Identity
-            var result = await _userManager.CreateAsync(usuario, model.Password);
-
-            if (!result.Succeeded)
-            {
-                // Si la creación falla, agrega los errores al ModelState
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-                _toastNotification.AddErrorToastMessage("Hubo errores al crear el usuario. Por favor, revise los datos");
-                return View(model);
-            }
-
-            // Asignar el rol al nuevo usuario
-            await _userManager.AddToRoleAsync(usuario, "Veterinario");
-
-            // Crear el objeto Veterinario con los datos adicionales
-            var veterinario = new Veterinario
-            {
-                Nombre = model.Nombre,
-                Apellido = model.Apellido,
-                Dni = model.Dni,
-                Direccion = model.Direccion,
-                Telefono = model.Telefono,
-                Matricula = model.Matricula,
-                UsuarioId = usuario.Id // Enlaza el Veterinario con el Usuario de Identity
-            };
-
-            // Guardar Veterionario
             try
             {
-                _context.Veterinarios.Add(veterinario);
-                await _context.SaveChangesAsync();
+                await _veterinarioService.Registrar(model);
+                _toastNotification.AddSuccessToastMessage("¡Veterinario registrado correctamente!");
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
             catch (Exception ex)
             {
-                // Manejar errores si no se puede guardar el Veterinario
-                Console.WriteLine($"Error al guardar el veterinario: {ex.Message}");
-                _toastNotification.AddErrorToastMessage("Error al guardar los datos del veterinario. Por favor, inténtelo de nuevo.");
+                _toastNotification.AddErrorToastMessage($"Error: {ex.Message}");
                 return View(model);
             }
-
-            return RedirectToAction("PaginaPrincipal", "Veterinaria");
         }
         #endregion
 
-        // ------------------ MODIFICAR VETERINARIO ------------------ 
-        #region MODIFICAR VETERINARIO 
+ 
+        #region MODIFICAR VETERINARIO
         [HttpGet]
-        public async Task<IActionResult> ModificarVeterinario(int? id)
+        public async Task<IActionResult> ModificarVeterinario(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            // Usamos .Include() para cargar explícitamente el objeto 'Usuario'
-            var veterinario = await _context.Veterinarios
-                .Include(v => v.Usuario)
-                .FirstOrDefaultAsync(v => v.Id == id);
-
+            var veterinario = await _veterinarioService.ObtenerPorId(id);
             if (veterinario == null)
             {
-                return NotFound();
+                _toastNotification.AddErrorToastMessage("Veterinario no encontrado.");
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
 
+            // Mapeo manual de la entidad al ViewModel para mostrarlo en el formulario de Modificar
             var viewModel = new VeterinarioEditarViewModel
             {
                 Id = veterinario.Id,
                 Nombre = veterinario.Nombre,
                 Apellido = veterinario.Apellido,
                 Dni = veterinario.Dni,
-                Email = veterinario.Usuario?.UserName,
+                Email = veterinario.Usuario?.Email,
                 Direccion = veterinario.Direccion,
                 Telefono = veterinario.Telefono,
                 Matricula = veterinario.Matricula
@@ -179,87 +123,56 @@ namespace SistemaVetIng.Controllers
             return View(viewModel);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ModificarVeterinario(VeterinarioEditarViewModel model)
         {
-            // Validar si el modelo recibido es válido
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // Buscar al veterinario existente en la base de datos por su ID
-                var veterinario = await _context.Veterinarios.FindAsync(model.Id);
-                if (veterinario == null)
-                {
-                    return NotFound();
-                }
-
-                // Actualizar las propiedades del modelo de la BD con los datos del ViewModel
-                veterinario.Nombre = model.Nombre;
-                veterinario.Apellido = model.Apellido;
-                veterinario.Dni = model.Dni;
-                veterinario.Direccion = model.Direccion;
-                veterinario.Telefono = model.Telefono;
-                veterinario.Matricula = model.Matricula;
-
-                await _context.SaveChangesAsync();
-                _toastNotification.AddSuccessToastMessage("¡Veterinario actualizado correctamente!");
-
-                return RedirectToAction("PaginaPrincipal", "Veterinaria");
-            }
-
-            // Si el modelo no es válido, devolver la vista con los errores
-            return View(model);
-        }
-        #endregion
-
-        // ------------------ ELIMINAR VETERINARIO ------------------ 
-        #region ELIMINAR VETERINARIO
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EliminarVeterinario(int? id)
-        {
-            // Validar que se recibió un ID
-            if (id == null)
-            {
-                _toastNotification.AddErrorToastMessage("No se pudo eliminar el veterinario. ID no proporcionado.");
-    
-                return RedirectToAction("PaginaPrincipal", "Veterinaria");
-            }
-
-            var veterinario = await _context.Veterinarios.Include(v => v.Usuario).FirstOrDefaultAsync(v => v.Id == id);
-
-            if (veterinario == null)
-            {
-                _toastNotification.AddErrorToastMessage("El veterinario que intenta eliminar no existe.");
-                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+                return View(model);
             }
 
             try
             {
-             
-                // Eliminar primero el veterinario
-                _context.Veterinarios.Remove(veterinario);
-                await _context.SaveChangesAsync();
+                await _veterinarioService.Modificar(model);
+                _toastNotification.AddSuccessToastMessage("¡Veterinario actualizado correctamente!");
+                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            }
+            catch (KeyNotFoundException)
+            {
+                _toastNotification.AddErrorToastMessage("Veterinario no encontrado.");
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _toastNotification.AddErrorToastMessage($"Error: {ex.Message}");
+                return View(model);
+            }
+        }
+        #endregion
 
-                // Eliminar luego el usuario asociado
-                if (veterinario.Usuario != null)
-                {
-                    var result = await _userManager.DeleteAsync(veterinario.Usuario);
-                    if (!result.Succeeded)
-                    {
-                        // Manejar el caso en que la eliminación del usuario falle
-                        _toastNotification.AddErrorToastMessage("No se pudo eliminar el usuario asociado al veterinario.");
-                        return RedirectToAction("PaginaPrincipal", "Veterinaria");
-                    }
-                }
+
+        #region ELIMINAR VETERINARIO
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarVeterinario(int id)
+        {
+            try
+            {
+                await _veterinarioService.Eliminar(id);
                 _toastNotification.AddSuccessToastMessage("El veterinario ha sido eliminado exitosamente.");
-               
+            }
+            catch (KeyNotFoundException)
+            {
+                _toastNotification.AddErrorToastMessage("El veterinario que intenta eliminar no existe.");
             }
             catch (DbUpdateException)
             {
-
                 _toastNotification.AddErrorToastMessage("No se pudo eliminar el veterinario. Hay registros asociados.");
+            }
+            catch (Exception ex)
+            {
+                _toastNotification.AddErrorToastMessage($"Error: {ex.Message}");
             }
 
             return RedirectToAction("PaginaPrincipal", "Veterinaria");

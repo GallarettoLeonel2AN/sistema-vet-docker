@@ -24,7 +24,7 @@
         <a href="/Veterinaria/PaginaPrincipal" class="logo"><i class="fa-solid fa-paw"></i> VetIng</a>
         <nav class="main-nav">
             <ul class="nav-list">
-                <li><a class="nav-link" href="#configuracion-turnos">Config. Turnos</a></li>
+                <li><a class="nav-link" href="#configuracion-turnos">Turnos</a></li>
                 <li><a class="nav-link" href="#veterinarios">Veterinarios</a></li>
                 <li><a class="nav-link" href="#clientes">Clientes</a></li>
                 <li><a class="nav-link" href="#mascotas">Mascotas</a></li>
@@ -182,7 +182,7 @@
                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
-                                    <a asp-controller="Mascota" asp-action="Registro" asp-route-clienteId="@cliente.Id" class="btn btn-primary">Registrar Mascota</a>
+                                    <a asp-controller="Mascota" asp-action="RegistrarMascota" asp-route-clienteId="@cliente.Id" class="btn btn-primary">Registrar Mascota</a>
                                 </td>
                             </tr>
                         }

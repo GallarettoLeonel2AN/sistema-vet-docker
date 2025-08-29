@@ -4,7 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NToastNotify;
 using SistemaVetIng.Data;
+using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
+using SistemaVetIng.Repository.Interfaces;
+using SistemaVetIng.Servicios.Implementacion;
+using SistemaVetIng.Servicios.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +32,13 @@ builder.Services.AddRazorPages();
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<SmtpSettings>>().Value);
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+// Inyección del Repositorio 
+builder.Services.AddScoped(typeof(IGeneralRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IGeneralRepository<Veterinario>, VeterinarioRepository>();
+
+// Inyección de Servicios
+builder.Services.AddScoped<IVeterinarioService, VeterinarioService>();
 
 // AddNToastNotifyToastr
 builder.Services.AddControllersWithViews()
