@@ -6,6 +6,7 @@ using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
+using SistemaVetIng.Repository.Implementacion;
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
@@ -36,9 +37,11 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 // Inyección del Repositorio 
 builder.Services.AddScoped(typeof(IGeneralRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IGeneralRepository<Veterinario>, VeterinarioRepository>();
+builder.Services.AddScoped<IGeneralRepository<Cliente>, ClienteRepository>();
 
 // Inyección de Servicios
 builder.Services.AddScoped<IVeterinarioService, VeterinarioService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
 
 // AddNToastNotifyToastr
 builder.Services.AddControllersWithViews()
