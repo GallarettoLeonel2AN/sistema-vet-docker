@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
+using SistemaVetIng.Models.Extension;
 using SistemaVetIng.Models.Indentity;
 using SistemaVetIng.Repository.Implementacion;
 using SistemaVetIng.Repository.Interfaces;
@@ -35,17 +36,8 @@ builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<SmtpSettings>
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // Inyección del Repositorio 
-builder.Services.AddScoped(typeof(IGeneralRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped<IGeneralRepository<Veterinario>, VeterinarioRepository>();
-builder.Services.AddScoped<IGeneralRepository<Cliente>, ClienteRepository>();
-builder.Services.AddScoped<IGeneralRepository<Mascota>,MascotaRepository>();
-builder.Services.AddScoped<IGeneralRepository<Chip>, ChipRepository>();
-
-// Inyección de Servicios
-builder.Services.AddScoped<IVeterinarioService, VeterinarioService>();
-builder.Services.AddScoped<IClienteService, ClienteService>();
-builder.Services.AddScoped<IMascotaService, MascotaService>();
-builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddRepositories()
+    .AddServices();
 
 // AddNToastNotifyToastr
 builder.Services.AddControllersWithViews()
