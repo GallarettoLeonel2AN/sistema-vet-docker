@@ -1,4 +1,6 @@
-﻿namespace SistemaVetIng.Repository.Interfaces
+﻿using SistemaVetIng.Models;
+
+namespace SistemaVetIng.Repository.Interfaces
 {
     public interface IGeneralRepository<T>
     {
@@ -8,5 +10,6 @@
         void Modificar(T entity);
         void Eliminar(T entity);
         Task Guardar();
+       
     }
 }

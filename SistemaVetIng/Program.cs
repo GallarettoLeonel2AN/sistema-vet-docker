@@ -38,9 +38,13 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped(typeof(IGeneralRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IGeneralRepository<Veterinario>, VeterinarioRepository>();
 builder.Services.AddScoped<IGeneralRepository<Cliente>, ClienteRepository>();
+builder.Services.AddScoped<IGeneralRepository<Mascota>,MascotaRepository>();
+builder.Services.AddScoped<IGeneralRepository<Chip>, ChipRepository>();
 
 // Inyección de Servicios
 builder.Services.AddScoped<IVeterinarioService, VeterinarioService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IMascotaService, MascotaService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
 // AddNToastNotifyToastr

@@ -1,0 +1,14 @@
+﻿using SistemaVetIng.Models;
+using SistemaVetIng.ViewsModels;
+
+namespace SistemaVetIng.Servicios.Interfaces
+{
+    public interface IMascotaService
+    {
+        Task<(bool success, string message)> Registrar(MascotaRegistroViewModel viewModel);
+        Task<(bool success, string message)> Modificar(MascotaEditarViewModel viewModel);
+        Task<(bool success, string message)> Eliminar(int id);
+        Task<Mascota> ObtenerPorId(int id);
+        Task<IEnumerable<Mascota>> ListarTodo();
+    }
+}

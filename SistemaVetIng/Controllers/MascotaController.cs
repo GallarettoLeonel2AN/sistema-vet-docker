@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
+using SistemaVetIng.Repository.Implementacion;
+using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 using System.Text;
 using System.Text.Json;
@@ -13,8 +15,10 @@ namespace SistemaVetIng.Controllers
     [Authorize(Roles = "Veterinario,Veterinaria")]
     public class MascotaController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IMascotaService _mascotaService;
+        private readonly IClienteService _clienteService;
         private readonly IToastNotification _toastNotification;
+       
 
         private readonly List<string> _razasPeligrosas = new List<string>
         {
@@ -23,46 +27,44 @@ namespace SistemaVetIng.Controllers
             "american staffordshire terrier", "pastor alemán"
         };
 
-        public MascotaController(ApplicationDbContext context, IToastNotification toastNotification)
+        public MascotaController(IMascotaService mascotaService, IClienteService clienteService, IToastNotification toastNotification)
         {
-            _context = context;
+
+            _mascotaService = mascotaService;
+            _clienteService = clienteService;
             _toastNotification = toastNotification;
         }
 
         // Listado de clientes para asociarle MASCOTAS
         public async Task<IActionResult> ListarClientes()
         {
-            var clientes = await _context.Clientes
-                                         .OrderBy(c => c.Apellido)
-                                         .ToListAsync();
+            var clientes = await _clienteService.ListarTodo();
             return View(clientes); 
         }
 
-        // **ACCIONES PARA LAS MASCOTAS**
-
-        // ------------------ REGISTRAR MASCOTA ------------------ 
+       
         #region REGISTRAR MASCOTA
 
         [HttpGet]
         public async Task<IActionResult> RegistrarMascota(int clienteId)
         {
-            var cliente = await _context.Clientes.FindAsync(clienteId);
+            // En este caso, el clienteId es un requisito para el registro de una mascota.
+            // Se puede usar para precargar datos en la vista.
+            var cliente = await _clienteService.ObtenerPorId(clienteId);
             if (cliente == null)
             {
-                return RedirectToAction(nameof(ListarClientes)); 
+                _toastNotification.AddInfoToastMessage("Seleccione un Cliente.");
+                return RedirectToAction(nameof(ListarClientes));
             }
 
-            var viewModel = new MascotaRegistroViewModel
+            ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
+
+            var model = new MascotaRegistroViewModel
             {
-                ClienteId = clienteId,
-                // Inicializamos RazaPeligrosa y Chip a false por defecto
-                RazaPeligrosa = false,
-                Chip = false
+                ClienteId = clienteId
             };
 
-            ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}"; // Pasamos el nombre para mostrarlo en la vista.
-
-            return View(viewModel);
+            return View(model);
         }
 
 
@@ -70,11 +72,12 @@ namespace SistemaVetIng.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegistrarMascota(MascotaRegistroViewModel model)
         {
+            // El método IsRazaPeligrosa ahora se llama en el servicio, pero podemos mantener la llamada aquí para la validación del modelo si es necesario.
             model.RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza);
 
             if (!ModelState.IsValid)
             {
-                var cliente = await _context.Clientes.FindAsync(model.ClienteId);
+                var cliente = await _clienteService.ObtenerPorId(model.ClienteId);
                 if (cliente != null)
                 {
                     ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
@@ -82,98 +85,26 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
 
-            var clienteExiste = await _context.Clientes.AnyAsync(c => c.Id == model.ClienteId);
-            if (!clienteExiste)
+            // Llama al servicio para manejar toda la lógica de negocio.
+            var (success, message) = await _mascotaService.Registrar(model);
+
+            if (success)
             {
-                _toastNotification.AddErrorToastMessage("El cliente asociado no es válido. Intente de nuevo.");
+                _toastNotification.AddSuccessToastMessage(message);
                 return RedirectToAction(nameof(ListarClientes));
             }
-
-            var mascota = new Mascota
+            else
             {
-                Nombre = model.Nombre,
-                Especie = model.Especie,
-                Raza = model.Raza,
-                FechaNacimiento = model.FechaNacimiento,
-                Sexo = model.Sexo,
-                RazaPeligrosa = model.RazaPeligrosa,
-                ClienteId = model.ClienteId
-                // La propiedad Chip de Mascota será asignada condicionalmente
-            };
-
-            // Handling HistoriaClinica
-            var historiaClinica = new HistoriaClinica();
-            historiaClinica.Mascota = mascota;
-            mascota.HistoriaClinica = historiaClinica;
-
-            try
-            {
-                _context.Mascotas.Add(mascota);
-                await _context.SaveChangesAsync(); // Guarda la mascota y su historia clínica
-
-                // *** Lógica para el CHIP y la API de Perros Peligrosos ***
-                bool apiCommunicationSuccess = true;
-                string apiMessage = "";
-
-                if (mascota.RazaPeligrosa)
+                // Maneja los errores devueltos por el servicio.
+                _toastNotification.AddErrorToastMessage(message);
+                // Si el error es por un cliente no válido, redirige a la lista de clientes.
+                if (message.Contains("El cliente asociado no es válido"))
                 {
-                    Chip chipAsociado = null; // Inicialmente no hay chip
-
-                    if (model.Chip)
-                    {
-                        // Si la mascota peligrosa tiene chip, creamos el objeto Chip
-                        chipAsociado = new Chip
-                        {
-                            Codigo = Guid.NewGuid().ToString("N").Substring(0, 16), // Genera un código de 16 caracteres hex
-                            MascotaId = mascota.Id // Asocia el chip con la Mascota recién creada
-                        };
-                        mascota.Chip = chipAsociado; // Asigna el chip a la mascota
-                        _context.Chips.Add(chipAsociado); // Añade el chip al contexto para guardarlo
-                        await _context.SaveChangesAsync(); // Guarda el chip
-                    }
-
-                    // Prepara los datos para enviar a la API de Perros Peligrosos
-                    var clienteAsociado = await _context.Clientes.FindAsync(model.ClienteId);
-
-                    // Llamamos a metodo SendDataToDangerousDogApi
-                    apiCommunicationSuccess = await SendDataToDangerousDogApi(
-                        mascota.Id,
-                        mascota.Nombre,
-                        mascota.Raza,
-                        mascota.RazaPeligrosa,
-                        model.Chip, // true/false del checkbox
-                        chipAsociado?.Codigo, // El código del chip (será null si no tiene chip)
-                        clienteAsociado.Dni,
-                        clienteAsociado.Nombre,
-                        clienteAsociado.Apellido
-                    );
-
-                    if (apiCommunicationSuccess)
-                    {
-                        apiMessage = (model.Chip)
-                            ? $"Datos de mascota peligrosa y chip (Código: {chipAsociado?.Codigo}) enviados exitosamente a la API externa."
-                            : "Notificación de mascota peligrosa sin chip enviada exitosamente a la API externa.";
-                    }
-                    else
-                    {
-                        //Si la comunicación con la API falla mostrar un error
-                        apiMessage = "Hubo un problema al comunicar con la API de perros peligrosos.";
-                    }
+                    return RedirectToAction(nameof(ListarClientes));
                 }
 
-                _toastNotification.AddSuccessToastMessage($"Mascota '{mascota.Nombre}' registrada correctamente. " + apiMessage);
-
-                return RedirectToAction(nameof(ListarClientes));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al registrar la mascota: {ex.Message}");
-                // Loggear el stack trace completo para mas detalles de error
-                Console.WriteLine(ex.StackTrace);
-
-                _toastNotification.AddErrorToastMessage("Error al registrar la mascota. Por favor, inténtelo de nuevo.");
-                // Vuelve a la vista con los datos para que el usuario no pierda lo que ya ingreso
-                var cliente = await _context.Clientes.FindAsync(model.ClienteId);
+                // Vuelve a la vista con los datos para que el usuario no pierda lo que ya ingresó.
+                var cliente = await _clienteService.ObtenerPorId(model.ClienteId);
                 if (cliente != null)
                 {
                     ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
@@ -184,30 +115,27 @@ namespace SistemaVetIng.Controllers
         #endregion
 
 
-        // ------------------ MODIFICAR MASCOTA ------------------
+        
         #region MODIFICAR MASCOTA
 
         [HttpGet]
         public async Task<IActionResult> ModificarMascota(int? id)
         {
-            // Validar que se recibió un ID
             if (id == null)
             {
                 _toastNotification.AddErrorToastMessage("No se pudo encontrar la mascota. ID no proporcionado.");
                 return RedirectToAction(nameof(ListarClientes));
             }
 
-            // Buscar la mascota en la base de datos
-            var mascota = await _context.Mascotas.Include(m => m.Propietario).FirstOrDefaultAsync(m => m.Id == id);
+            var mascota = await _mascotaService.ObtenerPorId(id.Value);
 
-            // Validar si la mascota existe
             if (mascota == null)
             {
                 _toastNotification.AddErrorToastMessage("La mascota que intenta editar no existe.");
                 return RedirectToAction(nameof(ListarClientes));
             }
 
-            // Mapear la entidad a un ViewModel para la vista
+            
             var viewModel = new MascotaEditarViewModel
             {
                 Id = mascota.Id,
@@ -218,13 +146,14 @@ namespace SistemaVetIng.Controllers
                 FechaNacimiento = mascota.FechaNacimiento,
                 Sexo = mascota.Sexo,
                 RazaPeligrosa = mascota.RazaPeligrosa,
-                Chip = (mascota.Chip != null) // Verifica si la mascota tiene un chip asociado
+                Chip = (mascota.Chip != null)
             };
 
-            // 5. Pasar el nombre del cliente a la vista
-            if (mascota.Propietario != null)
+           
+            var cliente = await _clienteService.ObtenerPorId(mascota.ClienteId);
+            if (cliente != null)
             {
-                ViewBag.ClienteNombre = $"{mascota.Propietario.Nombre} {mascota.Propietario.Apellido}";
+                ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
             }
 
             return View(viewModel);
@@ -234,13 +163,9 @@ namespace SistemaVetIng.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ModificarMascota(MascotaEditarViewModel model)
         {
-            // Volver a verificar si es una raza peligrosa, ya que el usuario pudo haberla cambiado
-            model.RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza);
-
             if (!ModelState.IsValid)
             {
-                // Si el modelo no es válido, vuelve a cargar el nombre del cliente y la vista
-                var cliente = await _context.Clientes.FindAsync(model.ClienteId);
+                var cliente = await _clienteService.ObtenerPorId(model.ClienteId);
                 if (cliente != null)
                 {
                     ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
@@ -249,83 +174,30 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
 
-            // 1. Buscar la mascota a editar en la base de datos
-            var mascota = await _context.Mascotas.Include(m => m.Chip).FirstOrDefaultAsync(m => m.Id == model.Id);
-
-            if (mascota == null)
-            {
-                _toastNotification.AddErrorToastMessage("La mascota que intenta editar no existe.");
-                return RedirectToAction(nameof(ListarClientes));
-            }
-
-            // 2. Actualizar las propiedades de la entidad con los datos del ViewModel
-            mascota.Nombre = model.Nombre;
-            mascota.Especie = model.Especie;
-            mascota.Raza = model.Raza;
-            mascota.FechaNacimiento = model.FechaNacimiento;
-            mascota.Sexo = model.Sexo;
-            mascota.RazaPeligrosa = model.RazaPeligrosa;
-
             try
             {
-                // 3. Manejar la lógica del chip
-                if (mascota.RazaPeligrosa && model.Chip && mascota.Chip == null)
+                var (success, message) = await _mascotaService.Modificar(model);
+
+                if (success)
                 {
-                    // Caso 1: Se convirtió en peligrosa y se le agregó un chip
-                    var nuevoChip = new Chip
+                    _toastNotification.AddSuccessToastMessage(message);
+                    return RedirectToAction(nameof(ListarClientes)); // Redirigir al cliente después de la modificación.
+                }
+                else
+                {
+                    _toastNotification.AddErrorToastMessage(message);
+                    var cliente = await _clienteService.ObtenerPorId(model.ClienteId);
+                    if (cliente != null)
                     {
-                        Codigo = Guid.NewGuid().ToString("N").Substring(0, 16),
-                        MascotaId = mascota.Id
-                    };
-                    mascota.Chip = nuevoChip;
-                    _context.Chips.Add(nuevoChip);
+                        ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
+                    }
+                    return View(model);
                 }
-                else if (mascota.RazaPeligrosa && !model.Chip && mascota.Chip != null)
-                {
-                    // Caso 2: Era peligrosa con chip y ahora ya no tiene chip
-                    _context.Chips.Remove(mascota.Chip);
-                    mascota.Chip = null;
-                }
-                // Si no es peligrosa, aseguramos que el chip se elimine si existía
-                else if (!mascota.RazaPeligrosa && mascota.Chip != null)
-                {
-                    _context.Chips.Remove(mascota.Chip);
-                    mascota.Chip = null;
-                }
-
-                // 4. Llamar a la API si es una raza peligrosa
-                if (mascota.RazaPeligrosa)
-                {
-                    var clienteAsociado = await _context.Clientes.FindAsync(model.ClienteId);
-                    await SendDataToDangerousDogApi(
-                       mascota.Id,
-                       mascota.Nombre,
-                       mascota.Raza,
-                       mascota.RazaPeligrosa,
-                       model.Chip,
-                       mascota.Chip?.Codigo,
-                       clienteAsociado.Dni,
-                       clienteAsociado.Nombre,
-                       clienteAsociado.Apellido
-                    );
-                }
-
-                // 5. Guardar los cambios
-                await _context.SaveChangesAsync();
-
-                _toastNotification.AddSuccessToastMessage($"Mascota '{mascota.Nombre}' actualizada correctamente.");
-        
-                return View("MascotaActualizada", mascota);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al actualizar la mascota: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
-                _toastNotification.AddErrorToastMessage("Error al actualizar la mascota. Por favor, inténtelo de nuevo.");
-              
-
-                // Vuelve a la vista con los datos para que el usuario no pierda lo que ya ingreso
-                var cliente = await _context.Clientes.FindAsync(model.ClienteId);
+                _toastNotification.AddErrorToastMessage($"Error inesperado: {ex.Message}");
+                var cliente = await _clienteService.ObtenerPorId(model.ClienteId);
                 if (cliente != null)
                 {
                     ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
@@ -341,90 +213,45 @@ namespace SistemaVetIng.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarMascota(int? id)
         {
-            // Validar que se recibió un ID
+            
             if (id == null)
             {
                 _toastNotification.AddErrorToastMessage("No se pudo eliminar la mascota. ID no proporcionado.");
+                if (User.IsInRole("Veterinario"))
+                {
+                    return RedirectToAction("PaginaPrincipal", "Veterinario");
+                }
+                else
+                {
+                    return RedirectToAction("PaginaPrincipal", "Veterinaria");
+                }
+                ;
+            }
+
+            var (success, message) = await _mascotaService.Eliminar(id.Value);
+
+            if (success)
+            {
+                _toastNotification.AddSuccessToastMessage(message);
+            }
+            else
+            {
+                _toastNotification.AddErrorToastMessage(message);
+            }
+
+            if (User.IsInRole("Veterinario"))
+            {
+                return RedirectToAction("PaginaPrincipal", "Veterinario");
+            }
+            else
+            {
                 return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
-
-            // Carga completa en cascada de todas las entidades relacionadas
-            var mascota = await _context.Mascotas
-                .Include(m => m.HistoriaClinica)
-                    .ThenInclude(h => h.Atenciones)
-                        .ThenInclude(a => a.Tratamiento)
-                .Include(m => m.HistoriaClinica)
-                    .ThenInclude(h => h.Atenciones)
-                        .ThenInclude(a => a.Vacunas)
-                .Include(m => m.HistoriaClinica)
-                    .ThenInclude(h => h.Atenciones)
-                        .ThenInclude(a => a.EstudiosComplementarios)
-                .Include(m => m.Chip)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (mascota == null)
-            {
-                _toastNotification.AddErrorToastMessage("La mascota que intenta eliminar no existe.");
-                return RedirectToAction("PaginaPrincipal", "Veterinaria");
-            }
-
-            try
-            {
-                // Eliminar primero las entidades relacionadas (Tratamiento, Vacuna, Estudio) de las atenciones.
-                if (mascota.HistoriaClinica?.Atenciones != null)
-                {
-                    foreach (var atencion in mascota.HistoriaClinica.Atenciones.ToList())
-                    {
-                        if (atencion.Tratamiento != null)
-                        {
-                            _context.Tratamientos.Remove(atencion.Tratamiento);
-                        }
-                        if (atencion.Vacunas != null)
-                        {
-                            _context.Vacunas.RemoveRange(atencion.Vacunas);
-                        }
-                        if (atencion.EstudiosComplementarios != null)
-                        {
-                            _context.Estudios.RemoveRange(atencion.EstudiosComplementarios);
-                        }
-                    }
-                    // Eliminar las Atenciones Veterinarias
-                    _context.AtencionesVeterinarias.RemoveRange(mascota.HistoriaClinica.Atenciones);
-                }
-
-                // Eliminar la Historia Clínica 
-                if (mascota.HistoriaClinica != null)
-                {
-                    _context.HistoriasClinicas.Remove(mascota.HistoriaClinica);
-                }
-
-                // Eliminar el Chip 
-                if (mascota.Chip != null)
-                {
-                    _context.Chips.Remove(mascota.Chip);
-                }
-
-                // 6. Finalmente, eliminar la mascota.
-                _context.Mascotas.Remove(mascota);
-
-                await _context.SaveChangesAsync();
-
-                _toastNotification.AddSuccessToastMessage("La mascota ha sido eliminada exitosamente.");
-        
-            }
-            catch (DbUpdateException ex)
-            {
-                Console.WriteLine($"Error al eliminar la mascota: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
-                _toastNotification.AddErrorToastMessage("No se pudo eliminar la mascota. Hay registros asociados.");
-         
-            }
-
-            return RedirectToAction("PaginaPrincipal", "Veterinaria");
+            ;
         }
         #endregion
 
-        // Método para verificar raza peligrosa 
+
         private bool IsRazaPeligrosa(string especie, string raza)
         {
             if (string.IsNullOrEmpty(especie) || string.IsNullOrEmpty(raza))
