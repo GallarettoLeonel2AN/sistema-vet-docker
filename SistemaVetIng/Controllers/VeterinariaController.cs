@@ -6,27 +6,27 @@ using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
+using SistemaVetIng.Servicios.Implementacion;
+using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
 namespace SistemaVetIng.Controllers
 {
-    [Authorize(Roles = "Veterinaria")] // Solamente pueden acceder los roles Veterinaria 
+    [Authorize(Roles = "Veterinaria")] 
     public class VeterinariaController : Controller
     {
-        private readonly UserManager<Usuario> _userManager;
-        private readonly SignInManager<Usuario> _signInManager;
+       
         private readonly ApplicationDbContext _context;
         private readonly IToastNotification _toastNotification;
-
+        private readonly IVeterinariaService _veterinariaService;
         public VeterinariaController(
-            UserManager<Usuario> userManager,
-            SignInManager<Usuario> signInManager,
+            IVeterinariaService service,
             ApplicationDbContext context,
             IToastNotification toastNotification)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            
             _context = context;
+            _veterinariaService = service;
             _toastNotification = toastNotification;
         }
         [HttpGet]
@@ -230,34 +230,8 @@ namespace SistemaVetIng.Controllers
 
             try
             {
-                // Buscamos la unica configuración existente
-                var configuracionExistente = await _context.ConfiguracionVeterinarias.FirstOrDefaultAsync();
-
-                if (configuracionExistente == null)
-                {
-                    // Si no existe, creamos una nueva configuracion
-                    _context.ConfiguracionVeterinarias.Add(model);
-                    _toastNotification.AddSuccessToastMessage("¡Configuración de turnos guardada exitosamente!");
-                }
-                else
-                {
-                    // Si ya existe, actualizamos
-                    configuracionExistente.HoraInicio = model.HoraInicio;
-                    configuracionExistente.HoraFin = model.HoraFin;
-                    configuracionExistente.DuracionMinutosPorConsulta = model.DuracionMinutosPorConsulta;
-                    configuracionExistente.TrabajaLunes = model.TrabajaLunes;
-                    configuracionExistente.TrabajaMartes = model.TrabajaMartes;
-                    configuracionExistente.TrabajaMiercoles = model.TrabajaMiercoles;
-                    configuracionExistente.TrabajaJueves = model.TrabajaJueves;
-                    configuracionExistente.TrabajaViernes = model.TrabajaViernes;
-                    configuracionExistente.TrabajaSabado = model.TrabajaSabado;
-                    configuracionExistente.TrabajaDomingo = model.TrabajaDomingo;
-
-                    _context.ConfiguracionVeterinarias.Update(configuracionExistente);
-                    _toastNotification.AddSuccessToastMessage("¡Configuración de turnos actualizada exitosamente!");
-                }
-
-                await _context.SaveChangesAsync();
+                await _veterinariaService.Agregar(model);
+                _toastNotification.AddErrorToastMessage("Configuracion guardada con exito.");
                 return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
             catch (Exception ex)

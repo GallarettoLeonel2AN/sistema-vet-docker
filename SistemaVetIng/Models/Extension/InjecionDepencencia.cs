@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using SistemaVetIng.Data;
 using SistemaVetIng.Repository.Implementacion;
 using SistemaVetIng.Repository.Interfaces;
@@ -25,17 +27,22 @@ namespace SistemaVetIng.Models.Extension
             services.AddScoped<IGeneralRepository<Cliente>, ClienteRepository>();
             services.AddScoped<IGeneralRepository<Mascota>, MascotaRepository>();
             services.AddScoped<IGeneralRepository<Chip>, ChipRepository>();
+            services.AddScoped<IGeneralRepository<ConfiguracionVeterinaria>, VeterinariaRepository>();
             return services;
         }
 
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();         
+            services.AddSingleton(sp => sp.GetRequiredService<IOptions<SmtpSettings>>().Value);           
             services.AddScoped<IVeterinarioService, VeterinarioService>();
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IMascotaService, MascotaService>();
             services.AddScoped<IClienteService, ClienteService>();
-
+            services.AddScoped<IVeterinariaService, VeterinariaService>();
             return services;
         }
     }

@@ -29,10 +29,8 @@ builder.Services.AddIdentity<Usuario, Rol>(options =>
 })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
+
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
-builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<SmtpSettings>>().Value);
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // Inyección del Repositorio 
