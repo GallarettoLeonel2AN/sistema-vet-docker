@@ -2,55 +2,134 @@
 
 @{
     ViewData["Title"] = $"Mascotas de {Model.Nombre} {Model.Apellido}";
+    Layout = null;
+
+    string controllerDestino = User.IsInRole("Veterinario") ? "Veterinario" : "Veterinaria";
 }
 
-<h1>Mascotas de @Model.Nombre @Model.Apellido</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="main-header">
+        <a href="#" class="logo">
+            <i class="fas fa-paw"></i>
+            <span>VetIng</span>
+        </a>
+        <a asp-controller="@controllerDestino" asp-action="PaginaPrincipal" class="sesion">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+    </header>
 
-<p>
-    Selecciona una mascota para ver su historial clínico completo.
-</p>
+    <!-- MAIN -->
+    <main class="v1-main-dashboard">
+        <section class="v1-section">
+            <h1 class="v1-section-title">Mascotas de @Model.Nombre @Model.Apellido</h1>
+            <p class="v1-section-subtitle">Selecciona una mascota para ver su historial clínico completo.</p>
 
-<hr />
-
-@if (Model.Mascotas == null || !Model.Mascotas.Any())
-{
-    <div class="alert alert-info" role="alert">
-        El cliente @Model.Nombre @Model.Apellido no tiene mascotas registradas.
-    </div>
-}
-else
-{
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>Nombre</th>
-                <th>Raza</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Sexo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var mascota in Model.Mascotas)
+            @if (Model.Mascotas == null || !Model.Mascotas.Any())
             {
-                <tr>
-                    <td>@mascota.Nombre</td>
-                    <td>@mascota.Raza</td>
-                    <td>@mascota.FechaNacimiento.ToShortDateString()</td>
-                    <td>@mascota.Sexo</td>
-                    <td>
-                        <a asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@mascota.Id" class="btn btn-sm btn-success">
-                            <i class="fas fa-file-medical"></i> Ver Historia Clínica
-                        </a>
-                    </td>
-                </tr>
+                <div class="custom-alert alert-info">
+                    El cliente @Model.Nombre @Model.Apellido no tiene mascotas registradas.
+                </div>
             }
-        </tbody>
-    </table>
-}
+            else
+            {
+                <div class="table-container">
+                    <table class="table responsive-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Raza</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Sexo</th>
+                                <th class="text-center">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var mascota in Model.Mascotas)
+                            {
+                                <tr>
+                                    <td data-label="Nombre:">@mascota.Nombre</td>
+                                    <td data-label="Raza:">@mascota.Raza</td>
+                                    <td data-label="Fecha Nac.:">@mascota.FechaNacimiento.ToShortDateString()</td>
+                                    <td data-label="Sexo:">@mascota.Sexo</td>
+                                    <td data-label="Acción:" class="text-center">
+                                        <a asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@mascota.Id" class="btnModificar">
+                                            <i class="fas fa-file-medical"></i> Ver Historia Clínica
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
 
-<div>
-    <a asp-action="ListaClientesParaSeguimiento" class="btn btn-secondary mt-3">
-        <i class="fas fa-arrow-left"></i> Volver a la lista de clientes
-    </a>
-</div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-col footer-info">
+            <div class="footer-logo-container">
+                <i class="fa-solid fa-paw footer-logo-icon"></i>
+                <h3 class="footer-brand">VetIng Software</h3>
+            </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+            <div class="footer-social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Acerca de VetIng</h4>
+            <ul class="footer-links">
+                <li><a href="#">Nuestra Historia</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Noticias y Blog</a></li>
+                <li><a href="#">Fundación VetIng</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Soporte</h4>
+            <ul class="footer-links">
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Guías de Usuario</a></li>
+                <li><a href="#">Descargar App Móvil</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>

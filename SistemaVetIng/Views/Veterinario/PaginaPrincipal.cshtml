@@ -1,6 +1,6 @@
 ﻿@model SistemaVetIng.ViewsModels.VeterinarioPaginaPrincipalViewModel
 @{
-    ViewData["Title"] = "VetIng Veterinario";
+    ViewData["Title"] = "VetIng - Veterinario";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -14,18 +14,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
           integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
 </head>
 
 <body>
     <header class="main-header">
-        <a href="#" class="logo"><i class="fa-solid fa-paw"></i> VetIng</a> <nav class="main-nav">
+        <a href="/Veterinario/PaginaPrincipal" class="logo"><i class="fa-solid fa-paw"></i> VetIng</a>
+        <nav class="main-nav">
             <ul class="nav-list">
-                <li><a class="nav-link" href="#citas">Turnos</a></li>
+                <li><a class="nav-link" href="#resumen">Resumen</a></li>
                 <li><a class="nav-link" href="#clientes">Clientes</a></li>
                 <li><a class="nav-link" href="#mascotas">Mascotas</a></li>
-                <li><a class="nav-link" href="#seguimiento">Seguimiento</a></li>
+                <li><a class="nav-link" href="#seguimiento-clinico">Seguimiento Clínico</a></li>
                 <li>
                     <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
                         <button type="submit" class="btn sesion nav-button">Cerrar Sesión</button>
@@ -38,126 +40,218 @@
         </div>
     </header>
 
-    <main>
-        <section id="citas">
-            <h2 class="section-title">Gestionar Turnos</h2> <div class="gestion-turnos">
-                <button class="btn btn-primary" onclick="location.href='@Url.Action("VerTurnos", "Turnos")'">Ver Turnos</button>
+    <main class="v1-main-dashboard">
+
+        <section id="resumen" class="v1-section">
+            <h2 class="v1-section-title">Resumen del Día</h2>
+            <div class="v1-card-grid">
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Citas para Hoy</h3>
+                        <i class="fa-regular fa-calendar-days v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            @* Reemplaza este valor estático con @Model.CantidadCitasHoy *@
+                            5
+                        </div>
+                        <p class="v1-card-description">+2 desde ayer</p>
+                    </div>
+                </div>
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Pacientes Atendidos</h3>
+                        <i class="fa-solid fa-paw v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            @* Reemplaza este valor estático con @Model.CantidadMascotasAtendidas *@
+                            12
+                        </div>
+                        <p class="v1-card-description">+3 nuevas este mes</p>
+                    </div>
+                </div>
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Ingresos Propios</h3>
+                        <i class="fa-solid fa-file-invoice-dollar v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            @* Reemplaza este valor estático con @Model.IngresosMensuales.ToString("N0") *@
+                            $1.250
+                        </div>
+                        <p class="v1-card-description">+8% vs mes anterior</p>
+                    </div>
+                </div>
+            </div>
+            <div class="v1-chart-and-list-container">
+                <div class="v1-card v1-appointment-list-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Citas de Hoy</h3>
+                        <p class="v1-card-description">Próximas citas programadas</p>
+                    </div>
+                    <div class="v1-card-content v1-appointment-list-content">
+                        <div class="v1-appointment-item">
+                            <div class="v1-appointment-info">
+                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                <div>
+                                    <p class="v1-appointment-time">10:30</p>
+                                    <p class="v1-appointment-pet">Max</p>
+                                    <p class="v1-appointment-owner">Juan Pérez</p>
+                                </div>
+                            </div>
+                            <div class="v1-appointment-badges">
+                                <span class="v1-badge v1-badge-secondary">Vacuna</span>
+                                <span class="v1-badge v1-badge-green">Confirmada</span>
+                            </div>
+                        </div>
+                        <div class="v1-appointment-item">
+                            <div class="v1-appointment-info">
+                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                <div>
+                                    <p class="v1-appointment-time">11:00</p>
+                                    <p class="v1-appointment-pet">Luna</p>
+                                    <p class="v1-appointment-owner">María Gómez</p>
+                                </div>
+                            </div>
+                            <div class="v1-appointment-badges">
+                                <span class="v1-badge v1-badge-secondary">Consulta</span>
+                                <span class="v1-badge v1-badge-yellow">Pendiente</span>
+                            </div>
+                        </div>
+                        <div class="v1-appointment-item">
+                            <div class="v1-appointment-info">
+                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                <div>
+                                    <p class="v1-appointment-time">11:30</p>
+                                    <p class="v1-appointment-pet">Rocky</p>
+                                    <p class="v1-appointment-owner">Carlos Fernández</p>
+                                </div>
+                            </div>
+                            <div class="v1-appointment-badges">
+                                <span class="v1-badge v1-badge-secondary">Revisión</span>
+                                <span class="v1-badge v1-badge-gray">Cancelada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="clientes">
-            <h2 class="section-title">Gestión de Clientes</h2>
-            <div class="cliente-busq">
-                <a asp-controller="Cliente" asp-action="RegistrarCliente" class="btnAdd">Registrar Nuevo Cliente</a>
-                <div class="buscador">
-                    <label for="busquedaCliente"> Buscar por Dni:</label> <input type="text" id="busquedaCliente" name="busqueda" placeholder="Ingrese el numero de documento">
-                    <button class="btnBuscar">Buscar</button>
-                </div>
+        <section id="clientes" class="v1-section">
+            <h2 class="v1-section-title">Gestión de Clientes</h2>
+            <div class="v1-section-actions">
+                <a asp-controller="Cliente" asp-action="RegistrarCliente" class="v1-btn v1-btn-primary">
+                    <i class="fa-solid fa-plus"></i> Registrar Nuevo
+                </a>
+                <form asp-controller="Veterinario" asp-action="PaginaPrincipal" method="get" class="v1-search-form">
+                    <div class="v1-input-group">
+                        <i class="fa-solid fa-search v1-input-icon"></i>
+                        <input type="text" id="busquedaCliente" name="busquedaCliente" placeholder="Buscar por DNI" class="v1-input" />
+                    </div>
+                </form>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre del Cliente</th>
-                        <th>Contacto</th>
-                        <th>Usuario</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Clientes != null && Model.Clientes.Any()) 
+            <div class="v1-card">
+                <div class="v1-card-header">
+                    <h3 class="v1-card-title">Lista de Clientes</h3>
+                </div>
+                <div class="v1-card-content v1-list-content">
+                    @if (Model.Clientes != null && Model.Clientes.Any())
                     {
                         @foreach (var cliente in Model.Clientes)
                         {
-                            <tr>
-                                <td>@cliente.NombreCompleto</td>
-                                <td>@cliente.Telefono</td>
-                                <td>@cliente.NombreUsuario</td>
-                                <td>
-                                    <a asp-controller="Cliente" asp-action="ModificarCliente" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
-                                    <a asp-controller="Cliente" asp-action="EliminarCliente" asp-route-id="@cliente.Id" class="btn btn-danger"
-                                       onclick="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');">Eliminar</a>
-                                    <a asp-controller="Mascota" asp-action="RegistrarMascota" asp-route-clienteId="@cliente.Id" class="btn btn-primary">Registrar Mascota</a>
-                                </td>
-                            </tr>
+                            <div class="v1-list-item">
+                                <div class="v1-list-info">
+                                    <div class="v1-avatar">@(cliente.NombreCompleto.Split(' ').FirstOrDefault()?.FirstOrDefault())@(cliente.NombreCompleto.Split(' ').LastOrDefault()?.FirstOrDefault())</div>
+                                    <div>
+                                        <p class="v1-list-name">@cliente.NombreCompleto</p>
+                                        <p class="v1-list-subtext">Telefono: @cliente.Telefono</p>
+                                        <p class="v1-list-subtext-small">@cliente.NombreUsuario</p>
+                                    </div>
+                                </div>
+                                <div class="v1-list-actions">
+                                    <a asp-controller="Cliente" asp-action="ModificarCliente" asp-route-id="@cliente.Id" class="v1-btn v1-btn-ghost"><i class="fa-solid fa-edit"></i></a>
+                                    <form asp-controller="Cliente" asp-action="EliminarCliente" asp-route-id="@cliente.Id" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');" style="display:inline;">
+                                        <button type="submit" class="v1-btn v1-btn-ghost v1-text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
                         }
                     }
                     else
                     {
-                        <tr>
-                            <td colspan="4">No hay clientes registrados.</td>
-                        </tr>
+                        <div class="v1-empty-state">No hay clientes registrados.</div>
                     }
-                </tbody>
-            </table>
-        </section>
-
-
-        <section id="mascotas">
-            <h2 class="section-title">Gestión de Mascotas</h2>
-            <div class="cliente-busq">
-                <a asp-controller="Mascota" asp-action="RegistrarMascota" class="btnAdd">Registrar Nueva Mascota</a>
-                <div class="buscador">
-                    <label for="busquedaMascota"> Buscar por Dueño:</label> <input type="text" id="busquedaMascota" name="busqueda" placeholder="Ingrese el nombre del dueño">
-                    <button class="btnBuscar">Buscar</button>
                 </div>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre de la Mascota</th>
-                        <th>Especie</th>
-                        <th>Raza</th>
-                        <th>Sexo</th>
-                        <th>Edad</th>
-                        <th>Dueño</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Mascotas != null && Model.Mascotas.Any()) 
+        </section>
+
+        <section id="mascotas" class="v1-section">
+            <h2 class="v1-section-title">Gestión de Mascotas</h2>
+            <div class="v1-section-actions">
+                <a asp-controller="Mascota" asp-action="RegistrarMascota" class="v1-btn v1-btn-primary">
+                    <i class="fa-solid fa-plus"></i> Registrar Nueva
+                </a>
+                <form asp-controller="Veterinario" asp-action="PaginaPrincipal" method="get" class="v1-search-form">
+                    <div class="v1-input-group">
+                        <i class="fa-solid fa-search v1-input-icon"></i>
+                        <input type="text" id="busquedaMascota" name="busquedaMascota" placeholder="Buscar por DNI del dueño" class="v1-input" />
+                    </div>
+                </form>
+            </div>
+            <div class="v1-card">
+                <div class="v1-card-header">
+                    <h3 class="v1-card-title">Registro de Mascotas</h3>
+                </div>
+                <div class="v1-card-content v1-list-content">
+                    @if (Model.Mascotas != null && Model.Mascotas.Any())
                     {
                         @foreach (var mascota in Model.Mascotas)
                         {
-                            <tr>
-                                <td>@mascota.NombreMascota</td>
-                                <td>@mascota.Especie</td>
-                                <td>@mascota.Raza</td>
-                                <td>@mascota.Sexo</td>
-                                <td>@mascota.EdadAnios años</td>
-                                <td>
-                                    <a asp-controller="Cliente" asp-action="Detalles" asp-route-id="@mascota.ClienteId" class="clienteTable">@mascota.NombreDueno</a>
-                                </td>
-                                <td>
-                                    <a asp-controller="Mascota" asp-action="ModificarMascota" asp-route-id="@mascota.Id" class="btnModificar">Editar</a>
-                                    <a asp-controller="Mascota" asp-action="Eliminar" asp-route-id="@mascota.Id" class="btn btn-danger"
-                                       onclick="return confirm('¿Estás seguro de que quieres eliminar a esta mascota?');">Eliminar</a>
-                                </td>
-                            </tr>
+                            <div class="v1-list-item">
+                                <div class="v1-list-info">
+                                    <div class="v1-pet-icon-bg">
+                                        <i class="fa-solid fa-heart v1-pet-icon"></i>
+                                    </div>
+                                    <div>
+                                        <p class="v1-list-name">@mascota.NombreMascota</p>
+                                        <p class="v1-list-subtext">@mascota.Especie &bull; @mascota.Raza</p>
+                                        <p class="v1-list-subtext-small">Propietario: @mascota.NombreDueno</p>
+                                    </div>
+                                </div>
+                                <div class="v1-list-actions">
+                                    <a asp-controller="Mascota" asp-action="ModificarMascota" asp-route-id="@mascota.Id" class="v1-btn v1-btn-ghost"><i class="fa-solid fa-edit"></i></a>
+                                    <form asp-controller="Mascota" asp-action="EliminarMascota" asp-route-id="@mascota.Id" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar a esta mascota?');" style="display:inline;">
+                                        <button type="submit" class="v1-btn v1-btn-ghost v1-text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
                         }
                     }
                     else
                     {
-                        <tr>
-                            <td colspan="6">No hay mascotas registradas.</td>
-                        </tr>
+                        <div class="v1-empty-state">No hay mascotas registradas.</div>
                     }
-                </tbody>
-            </table>
+                </div>
+            </div>
         </section>
 
-
-        <section class="seguimiento">
-            <h2 class="section-title">Seguimiento Clínico</h2>
-            <div class="clientes-btn-container">
-                <a asp-controller="HistoriaClinica" asp-action="ListaClientesParaSeguimiento" class="btnAdd">Ver Clientes</a>
+        <section id="seguimiento-clinico" class="v1-section">
+            <h2 class="v1-section-title">Seguimiento Clínico</h2>
+            <div class="v1-section-actions">
+                <a asp-controller="HistoriaClinica" asp-action="ListaClientesParaSeguimiento" class="v1-btn v1-btn-primary">
+                    <i class="fa-solid fa-file-waveform"></i> Nuevo Registro Clínico
+                </a>
             </div>
         </section>
     </main>
 
     <footer class="main-footer">
         <div class="footer-col footer-info">
-            <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
-            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p> <div class="footer-social-icons">
+            <div class="footer-logo-container"> <i class="fa-solid fa-user-doctor footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+            <div class="footer-social-icons">
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#"><i class="fa-brands fa-facebook"></i></a>
                 <a href="#"><i class="fa-brands fa-youtube"></i></a>
@@ -165,7 +259,8 @@
             </div>
         </div>
         <div class="footer-col">
-            <h4 class="footer-heading">Acerca de VetIng</h4> <ul class="footer-links">
+            <h4 class="footer-heading">Acerca de VetIng</h4>
+            <ul class="footer-links">
                 <li><a href="#">Nuestra Historia</a></li>
                 <li><a href="#">Equipo</a></li>
                 <li><a href="#">Noticias y Blog</a></li>
@@ -173,7 +268,8 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4 class="footer-heading">Soporte</h4> <ul class="footer-links">
+            <h4 class="footer-heading">Soporte</h4>
+            <ul class="footer-links">
                 <li><a href="#">Preguntas Frecuentes</a></li>
                 <li><a href="#">Contacto</a></li>
                 <li><a href="#">Guías de Usuario</a></li>
@@ -194,16 +290,19 @@
         </div>
     </footer>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script>
-        // Logica de JS para menu hamburguesa
+        // Lógica de JS para menú hamburguesa
         const hamburger = document.querySelector('.hamburger-menu');
-        const mainNav = document.querySelector('.main-nav'); 
+        const mainNav = document.querySelector('.main-nav');
 
         hamburger.addEventListener('click', () => {
             mainNav.classList.toggle('active');
         });
 
-        document.querySelectorAll('.nav-link, .nav-button, .sesion').forEach(link => { 
+        document.querySelectorAll('.nav-link, .nav-button, .sesion').forEach(link => {
             link.addEventListener('click', () => {
                 mainNav.classList.remove('active');
             });

@@ -438,3 +438,7 @@
         font-weight: 600;
         color: var(--v1-text-secondary);
     }
+
+.v1-section {
+    margin-top: 80px; 
+}

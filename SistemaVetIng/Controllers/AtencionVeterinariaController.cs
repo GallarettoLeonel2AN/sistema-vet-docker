@@ -10,7 +10,7 @@ using System.Security.Claims; // Necesario para obtener el ID del usuario loguea
 
 namespace SistemaVetIng.Controllers
 {
-    [Authorize(Roles = "Veterinario")] // Solo visible para usuarios de tipo Veterinario
+    [Authorize(Roles = "Veterinario,Veterinaria")]
     public class AtencionVeterinariaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,7 @@ namespace SistemaVetIng.Controllers
 
         // Muestra el formulario para registrar una nueva atención veterinaria.
         [HttpGet]
-        public async Task<IActionResult> Crear(int historiaClinicaId)
+        public async Task<IActionResult>Crear(int historiaClinicaId)
         {
             // Verificamos que la Historia Clínica exista
             var historiaClinica = await _context.HistoriasClinicas

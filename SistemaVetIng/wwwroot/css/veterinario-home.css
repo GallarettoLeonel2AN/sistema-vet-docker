@@ -38,7 +38,7 @@ body {
 
 main {
     background-color: var(--bg-dark);
-    padding-top: 70px;
+    padding-top: 80px;
 }
 
 /* Encabezado (Header) - Actualizado con tus variables */
@@ -854,7 +854,6 @@ textarea.form-control {
     background-color: #95a5a6;
     border-radius: 10px;
     padding: 15px 20px;
-    width: 100%;
     margin-top: 25px;
     color: var(--text-color-light);
     cursor: pointer;
@@ -876,7 +875,6 @@ textarea.form-control {
     background-color: var(--primary-color);
     border-radius: 10px;
     padding: 15px 20px;
-    width: 100%;
     margin-top: 25px;
     color: var(--text-color-light);
     cursor: pointer;

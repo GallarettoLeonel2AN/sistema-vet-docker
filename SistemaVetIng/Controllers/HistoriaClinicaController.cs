@@ -6,7 +6,7 @@ using SistemaVetIng.Data;
 
 namespace SistemaVetIng.Controllers
 {
-    [Authorize(Roles = "Veterinario")] // Solo los veterinarios pueden acceder
+    [Authorize(Roles = "Veterinario,Veterinaria")]
     public class HistoriaClinicaController : Controller
     {
         private readonly ApplicationDbContext _context;
