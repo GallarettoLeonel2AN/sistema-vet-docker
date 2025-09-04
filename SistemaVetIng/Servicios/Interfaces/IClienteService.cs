@@ -10,5 +10,6 @@ namespace SistemaVetIng.Servicios.Interfaces
         Task Eliminar(int id);
         Task<Cliente> ObtenerPorId(int id);
         Task<IEnumerable<Cliente>> ListarTodo();
+        Task<IEnumerable<Cliente>> FiltrarPorBusqueda(string busqueda);
     }
 }

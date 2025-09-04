@@ -282,6 +282,18 @@ namespace SistemaVetIng.Servicios.Implementacion
            return await _mascotaRepository.ObtenerPorId(id);
         }
 
+        public async Task<IEnumerable<Mascota>> FiltrarPorBusqueda(string busqueda)
+        {
+            var mascotas = await _mascotaRepository.ListarTodo();
+
+            if (!string.IsNullOrEmpty(busqueda))
+            {
+                return mascotas.Where(m => m.Propietario?.Dni.ToString().Contains(busqueda) ?? false);
+            }
+
+            return mascotas;
+        }
+
 
         #region API PERROSPELIGROSOS
         // Metodo para enviar datos a la API de Perros Peligrosos

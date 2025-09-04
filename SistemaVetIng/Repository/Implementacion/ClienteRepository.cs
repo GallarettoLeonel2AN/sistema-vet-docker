@@ -26,8 +26,7 @@ namespace SistemaVetIng.Repository.Implementacion
             => _context.SaveChangesAsync();
 
         public async Task<IEnumerable<Cliente>> ListarTodo()
-            => await _context.Clientes.OrderBy(c => c.Apellido)
-                                         .ToListAsync();
+            => await _context.Clientes.Include(c => c.Usuario).ToListAsync();
 
         public void Modificar(Cliente entity)
         {

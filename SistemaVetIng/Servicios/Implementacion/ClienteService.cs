@@ -112,6 +112,17 @@ namespace SistemaVetIng.Servicios.Implementacion
         {
             return await _clienteRepository.ObtenerPorId(id);
         }
+        public async Task<IEnumerable<Cliente>> FiltrarPorBusqueda(string busqueda)
+        {
+            var clientes = await _clienteRepository.ListarTodo();
+
+            if (!string.IsNullOrEmpty(busqueda))
+            {
+                return clientes.Where(c => c.Dni.ToString().Contains(busqueda));
+            }
+
+            return clientes;
+        }
 
     }
 }

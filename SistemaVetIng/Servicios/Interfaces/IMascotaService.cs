@@ -10,5 +10,6 @@ namespace SistemaVetIng.Servicios.Interfaces
         Task<(bool success, string message)> Eliminar(int id);
         Task<Mascota> ObtenerPorId(int id);
         Task<IEnumerable<Mascota>> ListarTodo();
+        Task<IEnumerable<Mascota>> FiltrarPorBusqueda(string busqueda);
     }
 }

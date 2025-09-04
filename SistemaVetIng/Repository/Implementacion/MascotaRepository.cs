@@ -21,7 +21,7 @@ namespace SistemaVetIng.Repository.Implementacion
             => await _context.SaveChangesAsync();
 
         public async Task<IEnumerable<Mascota>> ListarTodo()
-            => await _context.Mascotas.ToListAsync();
+            =>  await _context.Mascotas.Include(m => m.Propietario).ToListAsync();
 
         public void Modificar(Mascota entity)
         {

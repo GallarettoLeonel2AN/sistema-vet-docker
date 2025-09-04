@@ -1,0 +1,440 @@
+﻿/* -- Variables y configuración base -- */
+:root {
+    /* Mapeo a tu paleta de colores */
+    --v1-primary: var(--primary-color);
+    --v1-secondary: var(--border-color);
+    --v1-background: var(--bg-dark);
+    --v1-card-bg: var(--card-bg);
+    --v1-text-primary: var(--text-color-light);
+    --v1-text-secondary: rgba(255, 255, 255, 0.7);
+    --v1-text-danger: var(--error-color);
+    /* Colores de los badges ajustados para el tema oscuro */
+    --v1-badge-secondary-bg: var(--input-bg);
+    --v1-badge-secondary-text: var(--text-color-light);
+    --v1-badge-green-bg: var(--accent-color);
+    --v1-badge-green-text: var(--text-color-dark);
+    --v1-badge-yellow-bg: #facc15; /* Nuevo amarillo */
+    --v1-badge-yellow-text: #333; /* Texto oscuro */
+    --v1-badge-gray-bg: #383838;
+    --v1-badge-gray-text: #a0a0a0;
+}
+
+/* -- Estilos del Contenedor Principal -- */
+.v1-main-dashboard {
+    padding: 2rem;
+    background-color: var(--v1-background);
+}
+
+/* -- Secciones y Títulos -- */
+.v1-section {
+    margin-bottom: 2.5rem;
+}
+
+.v1-section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--v1-text-primary);
+    margin-bottom: 1rem;
+}
+
+.v1-section-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.v1-empty-state {
+    text-align: center;
+    color: var(--v1-text-secondary);
+    padding: 2rem;
+    border: 1px dashed var(--v1-secondary);
+    border-radius: 0.5rem;
+}
+
+/* -- Tarjetas (Cards) -- */
+.v1-card {
+    background-color: var(--v1-card-bg);
+    border: 1px solid var(--v1-secondary);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
+.v1-card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--v1-secondary);
+}
+
+.v1-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.v1-card-description {
+    font-size: 0.875rem;
+    color: var(--v1-text-secondary);
+}
+
+.v1-card-content {
+    padding: 1.5rem;
+}
+
+/* -- Grid de Tarjetas de Resumen -- */
+.v1-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.v1-card-grid-reports {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.v1-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.v1-card-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--v1-text-secondary);
+}
+
+.v1-card-icon {
+    font-size: 1.25rem;
+    color: var(--v1-primary);
+}
+
+.v1-card-value {
+    font-size: 2.25rem;
+    font-weight: bold;
+    line-height: 1;
+    color: var(--v1-text-primary);
+}
+
+/* -- Estilos para la sección de reportes -- */
+.v1-report-card {
+    background-color: var(--input-bg);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(135deg, var(--card-bg) 0%, #1e1e1e 100%);
+}
+
+    .v1-report-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 100% 100%, rgba(92, 103, 255, 0.2) 0%, rgba(92, 103, 255, 0) 50%);
+        transition: opacity 0.4s ease;
+        opacity: 0;
+    }
+
+    .v1-report-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px var(--shadow-color);
+    }
+
+        .v1-report-card:hover::before {
+            opacity: 1;
+        }
+
+.v1-report-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+    z-index: 1;
+    position: relative;
+}
+
+.v1-report-value {
+    /* Aumenta el tamaño de la fuente para que se destaque más */
+    font-size: 2rem;
+    /* Mantiene el peso de la fuente en negrita para una mejor visibilidad */
+    font-weight: 700;
+    /* Utiliza un color principal para la marca */
+    color: var(--primary-color);
+    /* Asegura que el número esté sobre otros elementos */
+    z-index: 1;
+    /* Posicionamiento para control preciso del diseño */
+    position: relative;
+    /* Añade una sombra de texto sutil para darle profundidad y un toque de elegancia */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* -- Gráficos y Listas de Citas -- */
+.v1-chart-and-list-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .v1-chart-and-list-container {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.v1-appointment-list-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.v1-appointment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--v1-secondary);
+    padding-bottom: 0.75rem;
+}
+
+    .v1-appointment-item:last-child {
+        border-bottom: none;
+    }
+
+.v1-appointment-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.v1-appointment-icon {
+    font-size: 1.25rem;
+    color: var(--v1-primary);
+}
+
+.v1-appointment-time {
+    font-weight: 600;
+    color: var(--v1-text-primary);
+    margin: 0;
+}
+
+.v1-appointment-pet, .v1-appointment-owner {
+    font-size: 0.875rem;
+    color: var(--v1-text-secondary);
+    margin: 0;
+}
+
+.v1-appointment-badges {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.v1-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Aplicando los nuevos colores a los badges */
+.v1-badge-secondary {
+    background-color: var(--v1-badge-secondary-bg);
+    color: var(--v1-badge-secondary-text);
+}
+
+.v1-badge-green {
+    background-color: var(--v1-badge-green-bg);
+    color: var(--v1-badge-green-text);
+}
+
+.v1-badge-yellow {
+    background-color: var(--v1-badge-yellow-bg);
+    color: var(--v1-badge-yellow-text);
+}
+
+.v1-badge-gray {
+    background-color: var(--v1-badge-gray-bg);
+    color: var(--v1-badge-gray-text);
+}
+
+/* -- Listas de elementos (Veterinarios, Clientes, Mascotas) -- */
+.v1-list-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.v1-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-medium); /* Uso de un color de tu paleta */
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+    .v1-list-item:hover {
+        background-color: rgba(92, 103, 255, 0.08); /* Uso de tu color primario con opacidad */
+    }
+
+.v1-list-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.v1-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--v1-secondary);
+    color: var(--v1-text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.v1-pet-icon-bg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--v1-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.v1-pet-icon {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.v1-list-name {
+    font-weight: 600;
+    margin: 0;
+    color: var(--v1-text-primary);
+}
+
+.v1-list-subtext {
+    font-size: 0.875rem;
+    color: var(--v1-text-secondary);
+    margin: 0;
+}
+
+.v1-list-subtext-small {
+    font-size: 0.75rem;
+    color: var(--v1-text-secondary);
+    margin: 0;
+}
+
+.v1-list-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* -- Botones y Formularios -- */
+.v1-btn {
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.v1-btn-primary {
+    background-color: var(--v1-primary);
+    color: white;
+    border: 1px solid var(--v1-primary);
+}
+
+    .v1-btn-primary:hover {
+        background-color: #3182ce;
+        border-color: #3182ce;
+    }
+
+.v1-btn-ghost {
+    background-color: transparent;
+    border: none;
+    color: var(--v1-text-secondary);
+}
+
+    .v1-btn-ghost:hover {
+        background-color: var(--v1-secondary);
+    }
+
+.v1-text-danger {
+    color: var(--v1-text-danger);
+}
+
+.v1-search-form {
+    display: flex;
+    align-items: center;
+}
+
+.v1-input-group {
+    position: relative;
+    width: 250px;
+}
+
+.v1-input-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--v1-text-secondary);
+}
+
+.v1-input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    padding-left: 2.5rem;
+    border: 1px solid var(--v1-secondary);
+    border-radius: 0.5rem;
+    transition: border-color 0.2s;
+    background-color: var(--input-bg); /* Uso de un color de tu paleta */
+    color: var(--text-color-light); /* Uso de un color de tu paleta */
+}
+
+    .v1-input:focus {
+        outline: none;
+        border-color: var(--v1-primary);
+    }
+
+/* -- Estilos de Información (Configuración) -- */
+.v1-info-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .v1-info-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.v1-info-item {
+    font-size: 1rem;
+    color: var(--v1-text-primary);
+}
+
+    .v1-info-item strong {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+        color: var(--v1-text-secondary);
+    }

@@ -4,16 +4,7 @@
     ViewData["Title"] = "Seleccionar Cliente";
     Layout = null;
 
-    // Obtiene el controlador de destino según el rol del usuario
-    string controllerDestino = "";
-    if (User.IsInRole("Veterinario"))
-    {
-        controllerDestino = "Veterinario";
-    }
-    else 
-    {
-        controllerDestino = "Veterinaria";
-    };
+    string controllerDestino = User.IsInRole("Veterinario") ? "Veterinario" : "Veterinaria";
 }
 
 <!DOCTYPE html>
@@ -23,6 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -31,14 +24,20 @@
             <i class="fas fa-paw"></i>
             <span>VetIng</span>
         </a>
-        <a asp-controller="@controllerDestino" asp-action="PaginaPrincipal" class="btn sesion">
+        <a asp-controller="@controllerDestino" asp-action="PaginaPrincipal" class="sesion">
             <i class="fas fa-arrow-left"></i> Volver al Inicio
         </a>
     </header>
 
-    <main>
-        <section>
-            <h1 class="section-title">Seleccionar Cliente para Asociar Mascota</h1>
+    <main class="v1-main-dashboard">
+        <section class="v1-section">
+            <h1 class="v1-section-title">Seleccionar Cliente</h1>
+
+            <div class="v1-section-actions">
+                <a asp-controller="Cliente" asp-action="RegistrarCliente" class="btnAdd">
+                    <i class="fas fa-user-plus"></i> Registrar Nuevo Cliente
+                </a>
+            </div>
 
             @if (Model != null && Model.Any())
             {
@@ -62,7 +61,7 @@
                                     <td data-label="DNI:">@cliente.Dni</td>
                                     <td data-label="Teléfono:">@cliente.Telefono</td>
                                     <td data-label="Acción:" class="text-center">
-                                        <a asp-controller="Mascota" asp-action="RegistrarMascota" asp-route-clienteId="@cliente.Id" class="btn btn-primary btn-sm">
+                                        <a asp-controller="Mascota" asp-action="RegistrarMascota" asp-route-clienteId="@cliente.Id" class="btnModificar">
                                             <i class="fas fa-plus"></i> Asociar Mascota
                                         </a>
                                     </td>
@@ -74,12 +73,7 @@
             }
             else
             {
-                <div class="alert alert-info empty-state-message custom-alert">No se encontraron clientes en el sistema.</div>
-                <p class="text-center" style="margin-top: 20px;">
-                    <a asp-controller="Cliente" asp-action="RegistrarCliente" class="btn btn-secondary">
-                        <i class="fas fa-user-plus"></i> Registrar Nuevo Cliente
-                    </a>
-                </p>
+                <div class="custom-alert alert-info">No se encontraron clientes en el sistema.</div>
             }
         </section>
     </main>
@@ -87,7 +81,8 @@
     <footer class="main-footer">
         <div class="footer-col footer-info">
             <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
-            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p> <div class="footer-social-icons">
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+            <div class="footer-social-icons">
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#"><i class="fa-brands fa-facebook"></i></a>
                 <a href="#"><i class="fa-brands fa-youtube"></i></a>
@@ -95,7 +90,8 @@
             </div>
         </div>
         <div class="footer-col">
-            <h4 class="footer-heading">Acerca de VetIng</h4> <ul class="footer-links">
+            <h4 class="footer-heading">Acerca de VetIng</h4>
+            <ul class="footer-links">
                 <li><a href="#">Nuestra Historia</a></li>
                 <li><a href="#">Equipo</a></li>
                 <li><a href="#">Noticias y Blog</a></li>
@@ -103,7 +99,8 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4 class="footer-heading">Soporte</h4> <ul class="footer-links">
+            <h4 class="footer-heading">Soporte</h4>
+            <ul class="footer-links">
                 <li><a href="#">Preguntas Frecuentes</a></li>
                 <li><a href="#">Contacto</a></li>
                 <li><a href="#">Guías de Usuario</a></li>

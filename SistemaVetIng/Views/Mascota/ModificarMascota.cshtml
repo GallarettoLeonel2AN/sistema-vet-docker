@@ -102,8 +102,9 @@
                 </div>
 
                 <div class="form-actions">
-                    <a asp-controller="Mascota" asp-action="ListaMascotas" asp-route-clienteId="@Model.ClienteId" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>
+                    <button type="submit" class="button register-button">Guardar Cambios</button>
+                    <a asp-controller="Mascota" asp-action="ListaMascotas" asp-route-clienteId="@Model.ClienteId" class="btnBack">Cancelar</a>
+ 
                 </div>
             </form>
         </section>

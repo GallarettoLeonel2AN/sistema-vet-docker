@@ -18,7 +18,6 @@ namespace SistemaVetIng.Servicios.Implementacion
             _userManager = userManager;
         }
 
-        // REGISTRAR VETERINARIO
         public async Task<Veterinario> Registrar(VeterinarioRegistroViewModel viewModel)
         {
             // Crear el usuario de Identity
@@ -48,14 +47,12 @@ namespace SistemaVetIng.Servicios.Implementacion
                 UsuarioId = usuario.Id
             };
 
-            // Repository
             await _veterinarioRepository.Agregar(veterinario);
             await _veterinarioRepository.Guardar();
 
             return veterinario;
         }
 
-        // MODIFICAR VETERINARIO
         public async Task<Veterinario> Modificar(VeterinarioEditarViewModel viewModel)
         {
   
@@ -65,7 +62,6 @@ namespace SistemaVetIng.Servicios.Implementacion
                 throw new KeyNotFoundException("Veterinario no encontrado.");
             }
 
-            // Lógica de negocio: Mapear los datos del ViewModel a la entidad
             veterinario.Nombre = viewModel.Nombre;
             veterinario.Apellido = viewModel.Apellido;
             veterinario.Dni = viewModel.Dni;
@@ -79,7 +75,6 @@ namespace SistemaVetIng.Servicios.Implementacion
             return veterinario;
         }
 
-        // ELIMINAR VETERINARIO
         public async Task Eliminar(int id)
         {
             var veterinario = await _veterinarioRepository.ObtenerPorId(id);
@@ -101,16 +96,29 @@ namespace SistemaVetIng.Servicios.Implementacion
             }
         }
 
-        // Método para obtener un veterinario por ID
         public async Task<Veterinario> ObtenerPorId(int id)
         {
             return await _veterinarioRepository.ObtenerPorId(id);
         }
 
-        // Método para listar todos los veterinarios
         public async Task<IEnumerable<Veterinario>> ListarTodo()
         {
             return await _veterinarioRepository.ListarTodo();
+        }
+
+        public async Task<IEnumerable<Veterinario>> FiltrarPorBusqueda(string busqueda)
+        {
+          
+            var veterinarios = await _veterinarioRepository.ListarTodo();
+
+            if (!string.IsNullOrEmpty(busqueda))
+            {
+                return veterinarios
+                    .Where(v => v.Nombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+                                v.Apellido.Contains(busqueda, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return veterinarios;
         }
     }
 }

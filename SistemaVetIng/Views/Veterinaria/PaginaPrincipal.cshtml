@@ -1,7 +1,7 @@
 ﻿@model SistemaVetIng.ViewsModels.VeterinariaPaginaPrincipalViewModel
 @{
     ViewData["Title"] = "VetIng - Administración";
-    Layout = null; 
+    Layout = null;
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
           integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -24,11 +24,11 @@
         <a href="/Veterinaria/PaginaPrincipal" class="logo"><i class="fa-solid fa-paw"></i> VetIng</a>
         <nav class="main-nav">
             <ul class="nav-list">
+                <li><a class="nav-link" href="#resumen">Resumen</a></li>
                 <li><a class="nav-link" href="#configuracion-turnos">Turnos</a></li>
                 <li><a class="nav-link" href="#veterinarios">Veterinarios</a></li>
                 <li><a class="nav-link" href="#clientes">Clientes</a></li>
                 <li><a class="nav-link" href="#mascotas">Mascotas</a></li>
-                <li><a class="nav-link" href="#reportes">Reportes</a></li>
                 <li>
                     <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
                         <button type="submit" class="btn sesion nav-button">Cerrar Sesión</button>
@@ -41,254 +41,376 @@
         </div>
     </header>
 
-    <main>
+    <main class="v1-main-dashboard">
 
-        <section id="configuracion-turnos">
-            <h2 class="section-title">Configuración de Turnos</h2>
-            <div class="row mb-3">
-                <div class="col-12 text-center">
-                    <a asp-controller="Veterinaria" asp-action="GuardarConfiguracion" class="btnAdd">
-                        <i class="fas fa-cog"></i> Agregar/Modificar Configuración de Turnos
-                    </a>
+        <section id="resumen" class="v1-section">
+            <h2 class="v1-section-title">Resumen del Panel</h2>
+            <div class="v1-card-grid">
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Citas Hoy</h3>
+                        <i class="fa-regular fa-calendar-days v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            @* Reemplaza este valor estático con @Model.CantidadCitasHoy *@
+                            28
+                        </div>
+                        <p class="v1-card-description">+12 desde ayer</p>
+                    </div>
+                </div>
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Clientes Activos</h3>
+                        <i class="fa-solid fa-users v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            @* Reemplaza este valor estático con @Model.CantidadClientesActivos *@
+                            154
+                        </div>
+                        <p class="v1-card-description">+7 este mes</p>
+                    </div>
+                </div>
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Mascotas Registradas</h3>
+                        <i class="fa-solid fa-heart v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            @* Reemplaza este valor estático con @Model.CantidadMascotasRegistradas *@
+                            312
+                        </div>
+                        <p class="v1-card-description">+11 este mes</p>
+                    </div>
+                </div>
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Ingresos Mensuales</h3>
+                        <i class="fa-regular fa-file-lines v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            @* Reemplaza este valor estático con @Model.IngresosMensuales.ToString("N0") *@
+                            $18,500
+                        </div>
+                        <p class="v1-card-description">+15% vs mes anterior</p>
+                    </div>
                 </div>
             </div>
-
-            <h3 class="section-subtitle">Configuración Actual</h3>
-            @if (Model.ConfiguracionTurnos != null)
-            {
-                <table class="table config-table">
-                    <thead>
-                        <tr>
-                            <th>Horario de Trabajo</th>
-                            <th>Duración por Consulta</th>
-                            <th>Días Laborables</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@Model.ConfiguracionTurnos.HoraInicio.ToString(@"hh\:mm") - @Model.ConfiguracionTurnos.HoraFin.ToString(@"hh\:mm")</td>
-                            <td>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta.ToString() minutos</td>
-                            <td> 
-                                @(Model.ConfiguracionTurnos.TrabajaLunes ? "Lunes " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaMartes ? "Martes " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaMiercoles ? "Miércoles " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaJueves ? "Jueves " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaViernes ? "Viernes " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaSabado ? "Sábado " : "")
-                                @(Model.ConfiguracionTurnos.TrabajaDomingo ? "Domingo" : "")
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <tr>
-                    <td colspan="4"> Aún no se ha configurado el horario de la veterinaria. Por favor, agregue una configuración.</td>
-                </tr>
-     
-            }
+            <div class="v1-chart-and-list-container">
+                <div class="v1-card v1-chart-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Reportes Analíticos</h3>
+                        <a href="#" class="v1-btn v1-btn-primary">Ver todos los reportes</a>
+                    </div>
+                    <div class="v1-card-content v1-card-grid-reports">
+                        <div class="v1-card v1-report-card">
+                            <div class="v1-report-content">
+                                <h3 class="v1-report-title">Cantidad de Perros Peligrosos</h3>
+                                <div class="v1-report-value">@Model.CantidadPerrosPeligrosos</div>
+                            </div>
+                        </div>
+                        <div class="v1-card v1-report-card">
+                            <div class="v1-report-content">
+                                <h3 class="v1-report-title">Raza con Mayor Demanda</h3>
+                                <div class="v1-report-value">@Model.RazaMayorDemanda</div>
+                            </div>
+                        </div>
+                        <div class="v1-card v1-report-card">
+                            <div class="v1-report-content">
+                                <h3 class="v1-report-title">Total de Ingresos Mensuales</h3>
+                                <div class="v1-report-value">$@Model.IngresosMensualesEstimados.ToString("N2")</div>
+                            </div>
+                        </div>
+                        <div class="v1-card v1-report-card">
+                            <div class="v1-report-content">
+                                <h3 class="v1-report-title">Ingresos Diarios</h3>
+                                <div class="v1-report-value">$@Model.IngresosDiariosEstimados.ToString("N2")</div>
+                            </div>
+                        </div>
+                        <div class="v1-card v1-report-card">
+                            <div class="v1-report-content">
+                                <h3 class="v1-report-title">Datos</h3>
+                                <div class="v1-report-value">Informacion</div>
+                            </div>
+                        </div>
+                        <div class="v1-card v1-report-card">
+                            <div class="v1-report-content">
+                                <h3 class="v1-report-title">Datos</h3>
+                                <div class="v1-report-value">Informacion</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="v1-card v1-appointment-list-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Citas de Hoy</h3>
+                        <p class="v1-card-description">Próximas citas programadas</p>
+                    </div>
+                    <div class="v1-card-content v1-appointment-list-content">
+                        <div class="v1-appointment-item">
+                            <div class="v1-appointment-info">
+                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                <div>
+                                    <p class="v1-appointment-time">10:30</p>
+                                    <p class="v1-appointment-pet">Max</p>
+                                    <p class="v1-appointment-owner">Juan Pérez</p>
+                                </div>
+                            </div>
+                            <div class="v1-appointment-badges">
+                                <span class="v1-badge v1-badge-secondary">Vacuna</span>
+                                <span class="v1-badge v1-badge-green">Confirmada</span>
+                            </div>
+                        </div>
+                        <div class="v1-appointment-item">
+                            <div class="v1-appointment-info">
+                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                <div>
+                                    <p class="v1-appointment-time">11:00</p>
+                                    <p class="v1-appointment-pet">Luna</p>
+                                    <p class="v1-appointment-owner">María Gómez</p>
+                                </div>
+                            </div>
+                            <div class="v1-appointment-badges">
+                                <span class="v1-badge v1-badge-secondary">Consulta</span>
+                                <span class="v1-badge v1-badge-yellow">Pendiente</span>
+                            </div>
+                        </div>
+                        <div class="v1-appointment-item">
+                            <div class="v1-appointment-info">
+                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                <div>
+                                    <p class="v1-appointment-time">11:30</p>
+                                    <p class="v1-appointment-pet">Rocky</p>
+                                    <p class="v1-appointment-owner">Carlos Fernández</p>
+                                </div>
+                            </div>
+                            <div class="v1-appointment-badges">
+                                <span class="v1-badge v1-badge-secondary">Revisión</span>
+                                <span class="v1-badge v1-badge-gray">Cancelada</span>
+                            </div>
+                        </div>
+                        @* @if (Model.CitasRecientes != null && Model.CitasRecientes.Any()) *@
+                        @* { *@
+                        @* @foreach (var appointment in Model.CitasRecientes) *@
+                        @* { *@
+                        @* <div class="v1-appointment-item"> *@
+                        @* <div class="v1-appointment-info"> *@
+                        @* <i class="fa-regular fa-clock v1-appointment-icon"></i> *@
+                        @* <div> *@
+                        @* <p class="v1-appointment-time">@appointment.HoraTurno.ToString(@"hh\:mm")</p> *@
+                        @* <p class="v1-appointment-pet">@appointment.NombreMascota</p> *@
+                        @* <p class="v1-appointment-owner">@appointment.NombreCliente</p> *@
+                        @* </div> *@
+                        @* </div> *@
+                        @* <div class="v1-appointment-badges"> *@
+                        @* <span class="v1-badge v1-badge-secondary">@appointment.TipoServicio</span> *@
+                        @* <span class="v1-badge @(appointment.Estado == "Confirmada" ? "v1-badge-green" : appointment.Estado == "Pendiente" ? "v1-badge-yellow" : "v1-badge-gray")"> *@
+                        @* @appointment.Estado *@
+                        @* </span> *@
+                        @* </div> *@
+                        @* </div> *@
+                        @* } *@
+                        @* } *@
+                        @* else *@
+                        @* { *@
+                        @* <div class="v1-empty-state">No hay citas recientes.</div> *@
+                        @* } *@
+                    </div>
+                </div>
+            </div>
         </section>
 
+        <section id="configuracion-turnos" class="v1-section">
+            <h2 class="v1-section-title">Configuración de Turnos</h2>
+            <div class="v1-section-actions">
+                <a asp-controller="Veterinaria" asp-action="GuardarConfiguracion" class="v1-btn v1-btn-primary">
+                    <i class="fas fa-cog"></i> Agregar/Modificar Configuración
+                </a>
+            </div>
+            <div class="v1-card">
+                <div class="v1-card-header">
+                    <h3 class="v1-card-title">Configuración Actual</h3>
+                </div>
+                <div class="v1-card-content">
+                    @if (Model.ConfiguracionTurnos != null)
+                    {
+                        <div class="v1-info-grid">
+                            <div class="v1-info-item">
+                                <strong>Horario de Trabajo:</strong>
+                                <span>@Model.ConfiguracionTurnos.HoraInicio.ToString(@"hh\:mm") - @Model.ConfiguracionTurnos.HoraFin.ToString(@"hh\:mm")</span>
+                            </div>
+                            <div class="v1-info-item">
+                                <strong>Duración por Consulta:</strong>
+                                <span>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta.ToString() minutos</span>
+                            </div>
+                            <div class="v1-info-item">
+                                <strong>Días Laborables:</strong>
+                                <span>
+                                    @(Model.ConfiguracionTurnos.TrabajaLunes ? "Lunes " : "")
+                                    @(Model.ConfiguracionTurnos.TrabajaMartes ? "Martes " : "")
+                                    @(Model.ConfiguracionTurnos.TrabajaMiercoles ? "Miércoles " : "")
+                                    @(Model.ConfiguracionTurnos.TrabajaJueves ? "Jueves " : "")
+                                    @(Model.ConfiguracionTurnos.TrabajaViernes ? "Viernes " : "")
+                                    @(Model.ConfiguracionTurnos.TrabajaSabado ? "Sábado " : "")
+                                    @(Model.ConfiguracionTurnos.TrabajaDomingo ? "Domingo" : "")
+                                </span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="v1-empty-state">Aún no se ha configurado el horario.</div>
+                    }
+                </div>
+            </div>
+        </section>
 
-        <section id="veterinarios">
-            <h2 class="section-title">Gestión de Veterinarios</h2>
-            <div class="cliente-busq">
-                <a asp-controller="Veterinario" asp-action="RegistrarVeterinario" class="btnAdd">Registrar Nuevo Veterinario</a>
-                <form asp-controller="Veterinaria" asp-action="FiltrarVeterinario" method="get">
-                    <div class="buscador">
-                        <label for="busquedaVeterinario">Buscar por Nombre:</label>
-                        <input type="text" id="busquedaVeterinario" name="busqueda" placeholder="Ingrese el nombre del veterinario">
-                        <button type="submit" class="btnBuscar">Buscar</button>
+        <section id="veterinarios" class="v1-section">
+            <h2 class="v1-section-title">Gestión de Veterinarios</h2>
+            <div class="v1-section-actions">
+                <a asp-controller="Veterinario" asp-action="RegistrarVeterinario" class="v1-btn v1-btn-primary">
+                    <i class="fa-solid fa-plus"></i> Registrar Nuevo
+                </a>
+                <form asp-controller="Veterinaria" asp-action="PaginaPrincipal" method="get" class="v1-search-form">
+                    <div class="v1-input-group">
+                        <i class="fa-solid fa-search v1-input-icon"></i>
+                        <input type="text" id="busquedaVeterinario" name="busquedaVeterinario" placeholder="Buscar por nombre" class="v1-input" />
                     </div>
                 </form>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre Completo</th>
-                        <th>Matrícula</th>
-                        <th>Teléfono</th>
-                        <th>Nombre Usuario</th>
-                        <th>Direccion</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="v1-card">
+                <div class="v1-card-header">
+                    <h3 class="v1-card-title">Lista de Veterinarios</h3>
+                </div>
+                <div class="v1-card-content v1-list-content">
                     @if (Model.Veterinarios != null && Model.Veterinarios.Any())
                     {
                         @foreach (var veterinario in Model.Veterinarios)
                         {
-                            <tr>
-                                <td>@veterinario.NombreCompleto</td>
-                                <td>@veterinario.Matricula</td>
-                                <td>@veterinario.Telefono</td>
-                                <td>@veterinario.NombreUsuario</td>
-                                <td>@veterinario.Direccion</td>
-                                <td>
-                                    <a asp-controller="Veterinario" asp-action="ModificarVeterinario" asp-route-id="@veterinario.Id" class="btnModificar">Editar</a>
-                                    <form asp-controller="Veterinario" asp-action="EliminarVeterinario" asp-route-id="@veterinario.Id" method="post" style="display:inline;"
-                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este veterinario?');">
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <div class="v1-list-item">
+                                <div class="v1-list-info">
+                                    <div class="v1-avatar">@(veterinario.NombreCompleto.Split(' ').FirstOrDefault()?.FirstOrDefault())@(veterinario.NombreCompleto.Split(' ').LastOrDefault()?.FirstOrDefault())</div>
+                                    <div>
+                                        <p class="v1-list-name">Dr. @veterinario.NombreCompleto</p>
+                                        <p class="v1-list-subtext">Matrícula: @veterinario.Matricula</p>
+                                        <p class="v1-list-subtext-small">@veterinario.Telefono</p>
+                                    </div>
+                                </div>
+                                <div class="v1-list-actions">
+                                    <a asp-controller="Veterinario" asp-action="ModificarVeterinario" asp-route-id="@veterinario.Id" class="v1-btn v1-btn-ghost"><i class="fa-solid fa-edit"></i></a>
+                                    <form asp-controller="Veterinario" asp-action="EliminarVeterinario" asp-route-id="@veterinario.Id" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este veterinario?');" style="display:inline;">
+                                        <button type="submit" class="v1-btn v1-btn-ghost v1-text-danger"><i class="fa-solid fa-trash"></i></button>
                                     </form>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         }
                     }
                     else
                     {
-                        <tr>
-                            <td colspan="6">No hay veterinarios registrados.</td>
-                        </tr>
+                        <div class="v1-empty-state">No hay veterinarios registrados.</div>
                     }
-                </tbody>
-            </table>
+                </div>
+            </div>
         </section>
-        
 
-        <section id="clientes">
-            <h2 class="section-title">Gestión de Clientes</h2>
-            <div class="cliente-busq">
-                <a asp-controller="Cliente" asp-action="RegistrarCliente" class="btnAdd">Registrar Nuevo Cliente</a>
-                <form asp-controller="Veterinaria" asp-action="FiltrarCliente" method="get">
-                    <div class="buscador">
-                        <label for="busquedaCliente">Buscar por Dni:</label>
-                        <input type="text" id="busquedaCliente" name="busqueda" placeholder="Ingrese el numero de documento">
-                        <button type="submit" class="btnBuscar">Buscar</button>
+        <section id="clientes" class="v1-section">
+            <h2 class="v1-section-title">Gestión de Clientes</h2>
+            <div class="v1-section-actions">
+                <a asp-controller="Cliente" asp-action="RegistrarCliente" class="v1-btn v1-btn-primary">
+                    <i class="fa-solid fa-plus"></i> Registrar Nuevo
+                </a>
+                <form asp-controller="Veterinaria" asp-action="PaginaPrincipal" method="get" class="v1-search-form">
+                    <div class="v1-input-group">
+                        <i class="fa-solid fa-search v1-input-icon"></i>
+                        <input type="text" id="busquedaCliente" name="busquedaCliente" placeholder="Buscar por DNI" class="v1-input" />
                     </div>
                 </form>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre del Cliente</th>
-                        <th>Contacto</th>
-                        <th>Usuario</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="v1-card">
+                <div class="v1-card-header">
+                    <h3 class="v1-card-title">Lista de Clientes</h3>
+                </div>
+                <div class="v1-card-content v1-list-content">
                     @if (Model.Clientes != null && Model.Clientes.Any())
                     {
                         @foreach (var cliente in Model.Clientes)
                         {
-                            <tr>
-                                <td>@cliente.NombreCompleto</td>
-                                <td>@cliente.Telefono</td>
-                                <td>@cliente.NombreUsuario</td>
-                                <td>
-                                    <a asp-controller="Cliente" asp-action="ModificarCliente" asp-route-id="@cliente.Id" class="btnModificar">Editar</a>
-                                    <form asp-controller="Cliente" asp-action="EliminarCliente" asp-route-id="@cliente.Id" method="post" style="display:inline;"
-                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');">
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <div class="v1-list-item">
+                                <div class="v1-list-info">
+                                    <div class="v1-avatar">@(cliente.NombreCompleto.Split(' ').FirstOrDefault()?.FirstOrDefault())@(cliente.NombreCompleto.Split(' ').LastOrDefault()?.FirstOrDefault())</div>
+                                    <div>
+                                        <p class="v1-list-name">@cliente.NombreCompleto</p>
+                                        <p class="v1-list-subtext">Telefono: @cliente.Telefono</p>
+                                        <p class="v1-list-subtext-small">@cliente.NombreUsuario</p>
+                                    </div>
+                                </div>
+                                <div class="v1-list-actions">
+                                    <a asp-controller="Cliente" asp-action="ModificarCliente" asp-route-id="@cliente.Id" class="v1-btn v1-btn-ghost"><i class="fa-solid fa-edit"></i></a>
+                                    <form asp-controller="Cliente" asp-action="EliminarCliente" asp-route-id="@cliente.Id" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este cliente?');" style="display:inline;">
+                                        <button type="submit" class="v1-btn v1-btn-ghost v1-text-danger"><i class="fa-solid fa-trash"></i></button>
                                     </form>
-                                    <a asp-controller="Mascota" asp-action="RegistrarMascota" asp-route-clienteId="@cliente.Id" class="btn btn-primary">Registrar Mascota</a>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         }
                     }
                     else
                     {
-                        <tr>
-                            <td colspan="4">No hay clientes registrados.</td>
-                        </tr>
+                        <div class="v1-empty-state">No hay clientes registrados.</div>
                     }
-                </tbody>
-            </table>
+                </div>
+            </div>
         </section>
 
-        <section id="mascotas">
-            <h2 class="section-title">Gestión de Mascotas</h2>
-            <div class="cliente-busq">
-                <a asp-controller="Mascota" asp-action="RegistrarMascota" class="btnAdd">Registrar Nueva Mascota</a>
-                <form asp-controller="Veterinaria" asp-action="FiltrarMascota" method="get">
-                    <div class="buscador">
-                        <label for="busquedaMascota">Buscar por Dueño:</label>
-                        <input type="text" id="busquedaMascota" name="busqueda" placeholder="Ingrese el numero de documento">
-                        <button type="submit" class="btnBuscar">Buscar</button>
+        <section id="mascotas" class="v1-section">
+            <h2 class="v1-section-title">Gestión de Mascotas</h2>
+            <div class="v1-section-actions">
+                <a asp-controller="Mascota" asp-action="RegistrarMascota" class="v1-btn v1-btn-primary">
+                    <i class="fa-solid fa-plus"></i> Registrar Nueva
+                </a>
+                <form asp-controller="Veterinaria" asp-action="PaginaPrincipal" method="get" class="v1-search-form">
+                    <div class="v1-input-group">
+                        <i class="fa-solid fa-search v1-input-icon"></i>
+                        <input type="text" id="busquedaMascota" name="busquedaMascota" placeholder="Buscar por DNI del dueño" class="v1-input" />
                     </div>
                 </form>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre de la Mascota</th>
-                        <th>Especie</th>
-                        <th>Raza</th>
-                        <th>Sexo</th>
-                        <th>Edad</th>
-                        <th>Dueño</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="v1-card">
+                <div class="v1-card-header">
+                    <h3 class="v1-card-title">Registro de Mascotas</h3>
+                </div>
+                <div class="v1-card-content v1-list-content">
                     @if (Model.Mascotas != null && Model.Mascotas.Any())
                     {
                         @foreach (var mascota in Model.Mascotas)
                         {
-                            <tr>
-                                <td>@mascota.NombreMascota</td>
-                                <td>@mascota.Especie</td>
-                                <td>@mascota.Raza</td>
-                                <td>@mascota.Sexo</td>
-                                <td>@mascota.EdadAnios años</td>
-                                <td>
-                                    <a asp-controller="Cliente" asp-action="Detalles" asp-route-id="@mascota.ClienteId" class="clienteTable">@mascota.NombreDueno</a>
-                                </td>
-                                <td>
-                                    <a asp-controller="Mascota" asp-action="ModificarMascota" asp-route-id="@mascota.Id" class="btnModificar">Editar</a>
-                                    <form asp-controller="Mascota" asp-action="EliminarMascota" asp-route-id="@mascota.Id" method="post" style="display:inline;"
-                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar a esta mascota?');">
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <div class="v1-list-item">
+                                <div class="v1-list-info">
+                                    <div class="v1-pet-icon-bg">
+                                        <i class="fa-solid fa-heart v1-pet-icon"></i>
+                                    </div>
+                                    <div>
+                                        <p class="v1-list-name">@mascota.NombreMascota</p>
+                                        <p class="v1-list-subtext">@mascota.Especie &bull; @mascota.Raza</p>
+                                        <p class="v1-list-subtext-small">Propietario: @mascota.NombreDueno</p>
+                                    </div>
+                                </div>
+                                <div class="v1-list-actions">
+                                    <a asp-controller="Mascota" asp-action="ModificarMascota" asp-route-id="@mascota.Id" class="v1-btn v1-btn-ghost"><i class="fa-solid fa-edit"></i></a>
+                                    <form asp-controller="Mascota" asp-action="EliminarMascota" asp-route-id="@mascota.Id" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar a esta mascota?');" style="display:inline;">
+                                        <button type="submit" class="v1-btn v1-btn-ghost v1-text-danger"><i class="fa-solid fa-trash"></i></button>
                                     </form>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         }
                     }
                     else
                     {
-                        <tr>
-                            <td colspan="6">No hay mascotas registradas.</td>
-                        </tr>
+                        <div class="v1-empty-state">No hay mascotas registradas.</div>
                     }
-                </tbody>
-            </table>
-        </section>
-
-        <section id="reportes">
-            <h2 class="section-title">Reportes Analíticos</h2>
-            <div class="report-cards-container">
-                <div class="report-card">
-                    <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Perros Peligrosos Registrados</h3>
-                        <p class="card-value">@Model.CantidadPerrosPeligrosos</p>
-                    </div>
                 </div>
-                <div class="report-card">
-                    <div class="card-icon"><i class="fa-solid fa-dog"></i></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Raza con Mayor Demanda</h3>
-                        <p class="card-value">@Model.RazaMayorDemanda</p>
-                    </div>
-                </div>
-                <div class="report-card">
-                    <div class="card-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Ingresos Mensuales Estimados</h3>
-                        <p class="card-value">$@Model.IngresosMensualesEstimados.ToString("N2")</p>
-                    </div>
-                </div>
-                <div class="report-card">
-                    <div class="card-icon"><i class="fa-solid fa-dollar-sign"></i></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Ingresos Diarios Estimados</h3>
-                        <p class="card-value">$@Model.IngresosDiariosEstimados.ToString("N2")</p>
-                    </div>
-                </div>
-            </div>
-            <div class="clientes-btn-container" style="margin-top: 30px;">
-                <a href="#" class="btnAdd">Ver Reportes Detallados</a>
             </div>
         </section>
     </main>
@@ -340,7 +462,7 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script>
-        // Lógica de JS para menú hamburguesa 
+        // Lógica de JS para menú hamburguesa
         const hamburger = document.querySelector('.hamburger-menu');
         const mainNav = document.querySelector('.main-nav');
 
@@ -353,11 +475,6 @@
                 mainNav.classList.remove('active');
             });
         });
-
-        // Función para scroll a la sección de configuración de turnos
-        function scrollToConfigForm() {
-            document.getElementById('configuracion-turnos').scrollIntoView({ behavior: 'smooth' });
-        }
     </script>
     @await Component.InvokeAsync("NToastNotify")
 </body>

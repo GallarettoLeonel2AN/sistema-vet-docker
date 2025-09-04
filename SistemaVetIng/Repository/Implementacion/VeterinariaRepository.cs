@@ -5,10 +5,10 @@ using SistemaVetIng.Repository.Interfaces;
 
 namespace SistemaVetIng.Repository.Implementacion
 {
-    public class VeterinariaRepository : IGeneralRepository<ConfiguracionVeterinaria>
+    public class VeterinariaConfiguracionRepository : IGeneralRepository<ConfiguracionVeterinaria>
     {
         private readonly ApplicationDbContext _contextoConfiguracion;
-        public VeterinariaRepository(ApplicationDbContext contextoConfiguracion)
+        public VeterinariaConfiguracionRepository(ApplicationDbContext contextoConfiguracion)
         {
             _contextoConfiguracion = contextoConfiguracion;
         }
@@ -18,23 +18,22 @@ namespace SistemaVetIng.Repository.Implementacion
 
         public void Modificar(ConfiguracionVeterinaria entity)
         {
-            _contextoConfiguracion.ConfiguracionVeterinarias.Attach(entity);
-            _contextoConfiguracion.Entry(entity).State = EntityState.Modified;
+    
         }
-
         public async Task<ConfiguracionVeterinaria> ObtenerPorId(int id)
-            => await _contextoConfiguracion.ConfiguracionVeterinarias.FirstOrDefaultAsync(m => m.Id == id);
+            => await _contextoConfiguracion.ConfiguracionVeterinarias.FirstOrDefaultAsync(c => c.Id == id);
         public async Task Guardar()
              => await _contextoConfiguracion.SaveChangesAsync();
 
-        public Task<IEnumerable<ConfiguracionVeterinaria>> ListarTodo()
+        public async Task<IEnumerable<ConfiguracionVeterinaria>> ListarTodo()
         {
-            throw new NotImplementedException();
+            return await _contextoConfiguracion.ConfiguracionVeterinarias.ToListAsync();
         }
 
         public void Eliminar(ConfiguracionVeterinaria entity)
         {
-            throw new NotImplementedException();
+          
         }
+
     }
 }

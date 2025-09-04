@@ -1,10 +1,12 @@
-﻿using SistemaVetIng.Models;
+﻿using SistemaVetIng.ViewsModels;
 
 namespace SistemaVetIng.Servicios.Interfaces
 {
     public interface IVeterinariaService
     {
-       Task<ConfiguracionVeterinaria> Agregar(ConfiguracionVeterinaria model);
-        
+       Task<VeterinariaPaginaPrincipalViewModel> PaginaPrincipalAsync(
+       string busquedaVeterinario = null,
+       string busquedaCliente = null,
+       string busquedaMascota = null);
     }
 }

@@ -41,25 +41,30 @@ main {
     padding-top: 70px;
 }
 
-/* Encabezado (Header) */
+/* Encabezado (Header) - Actualizado con tus variables */
 .main-header {
-    background-color: var(--bg-dark);
-    width: 100%;
-    position: fixed;
-    top: 0;
+    background-color: var(--bg-dark); /* Fondo oscuro de tu paleta */
+    color: var(--text-color-light); /* Color de texto claro de tu paleta */
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 70px;
-    padding: 0 40px;
+    position: fixed;
+    top: 0;
+    width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 10px var(--shadow-color);
+    border-bottom: 3px solid var(--border-color); /* Borde inferior usando tu color de borde */
+    box-shadow: 0 4px 15px var(--shadow-color); /* Sombra de tu paleta */
 }
 
+/* Estilos para el logo y el texto de la marca */
 .logo {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text-color-light);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color-light); /* Color de texto claro de tu paleta */
+    text-decoration: none;
+    transition: color 0.3s ease;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -67,24 +72,30 @@ main {
 
     .logo i {
         font-size: 35px;
-        color: var(--primary-color);
+        color: var(--primary-color); /* Color primario de tu paleta para el icono */
     }
 
-/* Navegación principal (navbar) */
+    .logo:hover {
+        color: var(--primary-color); /* Color primario de tu paleta al pasar el mouse */
+    }
+
+/* Navegación principal (navbar) - Actualizado con tus variables */
 .main-nav .nav-list {
     display: flex;
-    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2.5rem; /* Espacio entre los elementos de la lista */
     align-items: center;
 }
 
-.main-nav .nav-link,
-.main-nav .nav-button {
-    color: var(--text-color-light);
-    font-size: var(--font-size-base);
+.main-nav .nav-link {
+    color: var(--text-color-light); /* Color de texto claro de tu paleta */
+    text-decoration: none;
     font-weight: 500;
-    padding: 8px 0;
+    transition: color 0.3s ease, transform 0.2s ease;
     position: relative;
-    transition: color 0.3s ease;
+    padding: 8px 0;
 }
 
     .main-nav .nav-link::after {
@@ -94,131 +105,45 @@ main {
         bottom: 0;
         width: 0;
         height: 2px;
-        background-color: var(--primary-color);
+        background-color: var(--primary-color); /* Color primario de tu paleta para la línea */
         transition: width 0.3s ease;
     }
 
     .main-nav .nav-link:hover {
-        color: var(--primary-color);
+        color: var(--primary-color); /* Color primario de tu paleta al pasar el mouse */
+        transform: translateY(-2px);
     }
 
         .main-nav .nav-link:hover::after {
             width: 100%;
         }
 
-/* Botones base */
-.btn {
-    display: inline-block;
-    padding: 10px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1em;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
-}
-
-    .btn-primary:hover {
-        background-color: #4a55ff;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    }
-
-.btn-secondary {
-    background-color: var(--secondary-color);
-    color: var(--text-color-light);
-}
-
-    .btn-secondary:hover {
-        background-color: darkred;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    }
-
-.btnBuscar{
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: none;
-    margin-right: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-    .btnBuscar:hover {
-        background-color: #4a55ff;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
-
-.nav-button {
-    font-size: 2px;
-    padding: 20px;
-    color: var(--error-color);
-}
-
-/* Botón de Cerrar Sesión específico para veterinario */
-.main-nav .nav-button {
-    font-size: 0.9em; 
-    padding: 8px 18px; 
-}
-
+/* Botón de Cerrar Sesión - Actualizado con tus variables */
 .sesion {
-    display: inline-block;
-    padding: 8px 18px; 
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9em; 
-    text-align: center;
+    background-color: transparent; /* Fondo transparente */
+    color: var(--secondary-color); /* Color secundario de tu paleta para el texto */
+    padding: 0.5rem 1rem;
+    border-radius: 9999px; /* Borde redondeado */
+    font-weight: bold;
+    border: 2px solid var(--secondary-color); /* Borde con tu color secundario */
     cursor: pointer;
-    background-color: transparent;
-    color: var(--secondary-color); 
-    border: 2px solid var(--secondary-color); 
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-size: 0.9em;
 }
 
     .sesion:hover {
-        background-color: var(--secondary-color); 
-        color: var(--text-color-light); 
+        background-color: var(--secondary-color); /* Fondo con tu color secundario al pasar el mouse */
+        color: var(--text-color-light); /* Color de texto claro al pasar el mouse */
         transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 4px 10px var(--shadow-color); /* Sombra de tu paleta */
     }
 
-/* Hamburger Menu Icon */
+/* Hamburger Menu Icon - Actualizado con tus variables */
 .hamburger-menu {
-    display: none;
-    font-size: 30px;
-    color: var(--text-color-light);
+    display: none; /* Oculto por defecto en escritorios */
+    color: var(--text-color-light); /* Color de texto claro de tu paleta */
+    font-size: 1.5rem;
     cursor: pointer;
-}
-
-/* Secciones principales de la página del veterinario */
-section {
-    padding: 60px 40px;
-    background-color: var(--bg-dark);
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-    section:nth-child(odd) {
-        background-color: var(--bg-medium);
-    }
-
-.section-title {
-    font-size: 2.5em;
-    font-weight: 800;
-    color: var(--primary-color);
-    text-align: center;
-    margin-bottom: 40px;
 }
 
 /* Estilos de las tablas */
@@ -278,8 +203,8 @@ section {
 .btnModificar, .btn-danger {
     padding: 8px 15px;
     border-radius: 5px;
-    background-color: yellowgreen;
-    color:white;
+    background-color: var(--accent-color); /* Usando tu accent-color */
+    color: var(--text-color-dark); /* Color de texto oscuro para el botón de editar */
     cursor: pointer;
     font-size: 0.9em;
     font-weight: 600;
@@ -290,7 +215,7 @@ section {
 }
 
     .btnModificar:hover {
-        background-color: #4a55ff;
+        background-color: #8cff66; /* Un tono un poco más claro de accent-color */
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
@@ -305,21 +230,23 @@ section {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
+
 .clienteTable {
     font-size: 16px;
     color: white;
     border-radius: 5px;
     background-color: dimgrey;
     font-size: 0.9em;
-    padding:5px;
+    padding: 5px;
     font-weight: 600;
     transition: all 0.3s ease;
     border: none;
     margin-right: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
     .clienteTable:hover {
-        background-color: #4a55ff;
+        background-color: var(--primary-color);
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
@@ -334,11 +261,11 @@ section {
     box-shadow: 0 5px 15px var(--shadow-color);
 }
 
-.seguimiento{
+.seguimiento {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction:column;
+    flex-direction: column;
     padding: 20px;
     background-color: var(--card-bg);
     border-radius: 10px;
@@ -346,9 +273,9 @@ section {
 }
 
 /* Regla para las secciones de Clientes y Mascotas que tienen buscador y botón de añadir */
-.clientes-btn-container { 
+.clientes-btn-container {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     padding: 20px;
     background-color: var(--card-bg);
@@ -535,11 +462,11 @@ section {
 
 
 /* Media Queries para Responsive Design */
-
 @media (max-width: 1024px) {
     .section-title {
         font-size: 2.2em;
     }
+
     .buscador {
         width: 100%;
         justify-content: flex-start;
@@ -559,7 +486,7 @@ section {
     .main-nav {
         display: none;
         flex-direction: column;
-        position: absolute;
+        position: fixed;
         top: 70px;
         left: 0;
         width: 100%;
@@ -720,28 +647,28 @@ section {
 /* Formularios */
 .registrar-form-main {
     padding: 60px 40px;
-    padding-top: 100px; 
+    padding-top: 100px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    min-height: calc(100vh - 70px); 
+    min-height: calc(100vh - 70px);
     background-color: var(--bg-dark);
 }
 
 .form-section {
-    background-color: var(--card-bg); 
+    background-color: var(--card-bg);
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 5px 20px var(--shadow-color); 
+    box-shadow: 0 5px 20px var(--shadow-color);
     width: 100%;
-    max-width: 600px; 
-    text-align: center; 
+    max-width: 600px;
+    text-align: center;
 }
 
     .form-section .section-title {
         margin-bottom: 20px;
         color: var(--primary-color);
-        font-size: 2em; 
+        font-size: 2em;
     }
 
 .form-subtitle {
@@ -759,15 +686,15 @@ section {
 }
 
     .form-group label {
-        display: block; 
-        margin-bottom: 8px; 
+        display: block;
+        margin-bottom: 8px;
         font-weight: 600;
         color: var(--text-color-light);
         font-size: 1em;
     }
 
 .form-control {
-    width: 100%; 
+    width: 100%;
     padding: 12px 15px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -779,27 +706,26 @@ section {
 }
 
     .form-control:focus {
-        border-color: var(--primary-color); 
-        box-shadow: 0 0 0 3px rgba(92, 103, 255, 0.3); 
-        outline: none; 
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(92, 103, 255, 0.3);
+        outline: none;
     }
 
     .form-control::placeholder {
-        color: #888; 
+        color: #888;
     }
 
     .form-control[type="date"] {
-        
-        color-scheme: dark; 
+        color-scheme: dark;
     }
 
 textarea.form-control {
-    resize: vertical; 
+    resize: vertical;
     min-height: 80px;
 }
 
 .validation-error {
-    color: var(--error-color); 
+    color: var(--error-color);
     font-size: 0.85em;
     margin-top: 5px;
     display: block;
@@ -807,8 +733,8 @@ textarea.form-control {
 
 .form-actions {
     display: flex;
-    justify-content: flex-end; 
-    gap: 15px; 
+    justify-content: flex-end;
+    gap: 15px;
     margin-top: 30px;
 }
 
@@ -822,13 +748,13 @@ textarea.form-control {
 .form-check {
     display: flex;
     align-items: center;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .form-check-input {
-    width: 2em; 
+    width: 2em;
     height: 1em;
-    margin-right: 0.7em; 
+    margin-right: 0.7em;
     background-color: var(--input-bg);
     border: 1px solid var(--border-color);
     appearance: none;
@@ -859,18 +785,18 @@ textarea.form-control {
     }
 
     .form-check-input:checked::before {
-        transform: translate(calc(2em - 1em - 0.2em)) translateY(-50%); 
+        transform: translate(calc(2em - 1em - 0.2em)) translateY(-50%);
     }
 
 
 .form-check-label {
-    margin-bottom: 0; 
-    font-weight: normal; 
+    margin-bottom: 0;
+    font-weight: normal;
     color: var(--text-color-light);
     cursor: pointer;
 }
 
-/* Alertas genéricas  */
+/* Alertas genéricas */
 .custom-alert {
     padding: 15px;
     margin-top: 20px;
@@ -881,17 +807,17 @@ textarea.form-control {
 }
 
 .alert-success {
-    background-color: #28a745; 
+    background-color: #28a745;
     color: white;
 }
 
 .alert-danger {
-    background-color: #dc3545; 
+    background-color: #dc3545;
     color: white;
 }
 
 .alert-info {
-    background-color: #17a2b8; 
+    background-color: #17a2b8;
     color: white;
 }
 
@@ -899,11 +825,11 @@ textarea.form-control {
 /* Responsive para el formulario */
 @media (max-width: 768px) {
     .registrar-form-main {
-        padding: 80px 20px 40px 20px; 
+        padding: 80px 20px 40px 20px;
     }
 
     .form-section {
-        padding: 30px; 
+        padding: 30px;
     }
 
         .form-section .section-title {
@@ -911,11 +837,56 @@ textarea.form-control {
         }
 
     .form-actions {
-        flex-direction: column; 
+        flex-direction: column;
         gap: 10px;
     }
 
         .form-actions .btn {
-            width: 100%; 
+            width: 100%;
         }
 }
+
+.btnBack {
+    text-decoration: none;
+    font-size: 1.1em;
+    text-align: center;
+    font-weight: 700;
+    background-color: #95a5a6;
+    border-radius: 10px;
+    padding: 15px 20px;
+    width: 100%;
+    margin-top: 25px;
+    color: var(--text-color-light);
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+    .btnBack:hover {
+        background-color: #7f8c8d;
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+.button.register-button {
+    text-decoration: none;
+    font-size: 1.1em;
+    text-align: center;
+    font-weight: 700;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    padding: 15px 20px;
+    width: 100%;
+    margin-top: 25px;
+    color: var(--text-color-light);
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+    .button.register-button:hover {
+        background-color: #4a55ff;
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(92, 103, 255, 0.4);
+    }

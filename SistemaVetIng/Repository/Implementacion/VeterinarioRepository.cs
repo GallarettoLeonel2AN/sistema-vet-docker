@@ -13,7 +13,7 @@ public class VeterinarioRepository : IGeneralRepository<Veterinario>
     }
 
     public async Task<IEnumerable<Veterinario>> ListarTodo()
-        => await _context.Veterinarios.ToListAsync();
+        => await _context.Veterinarios.Include(v => v.Usuario).ToListAsync();
 
 
     public async Task<Veterinario> ObtenerPorId(int id)

@@ -181,17 +181,16 @@ body {
     }
 
 /* Botones y Enlaces */
-.button.register-button { 
+.button.register-button {
     text-decoration: none;
     font-size: 1.1em;
-    text-transform: uppercase;
     text-align: center;
     font-weight: 700;
     background-color: var(--primary-color);
-    border-radius: 8px;
-    padding: 12px 20px;
+    border-radius: 10px;
+    padding: 15px 20px;
     width: 100%;
-    margin-top: 20px; 
+    margin-top: 25px;
     color: var(--text-color-light);
     cursor: pointer;
     border: none;
@@ -202,7 +201,7 @@ body {
     .button.register-button:hover {
         background-color: #4a55ff;
         transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 15px rgba(92, 103, 255, 0.4);
     }
 
 .signin-link {
@@ -223,6 +222,29 @@ body {
     .link-secondary:hover {
         color: var(--primary-color);
         text-decoration: underline;
+    }
+
+.btnBack {
+    text-decoration: none;
+    font-size: 1.1em;
+    text-align: center;
+    font-weight: 700;
+    background-color: #95a5a6;
+    border-radius: 10px;
+    padding: 15px 20px;
+    width: 100%;
+    margin-top: 25px;
+    color: var(--text-color-light);
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+    .btnBack:hover {
+        background-color: #7f8c8d;
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     }
 
 /* Mensajes de Alerta */
