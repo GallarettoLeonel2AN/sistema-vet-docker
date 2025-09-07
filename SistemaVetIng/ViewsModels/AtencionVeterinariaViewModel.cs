@@ -1,12 +1,14 @@
 ﻿// Archivo: ViewsModels/AtencionVeterinariaViewModel.cs
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering; // Para SelectListItem
 
 namespace SistemaVetIng.ViewsModels
 {
     public class AtencionVeterinariaViewModel
     {
         // Propiedades de AtencionVeterinaria
+        [Display(Name = "Fecha de Atención")]
+        public DateTime Fecha { get; set; } = DateTime.Now;
+
         [Required(ErrorMessage = "El diagnóstico es obligatorio.")]
         [StringLength(500, ErrorMessage = "El diagnóstico no puede exceder los 500 caracteres.")]
         [Display(Name = "Diagnóstico")]

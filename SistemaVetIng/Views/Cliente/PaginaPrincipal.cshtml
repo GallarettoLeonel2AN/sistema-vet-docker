@@ -1,0 +1,301 @@
+﻿@model SistemaVetIng.ViewsModels.ClientePaginaPrincipalViewModel
+@{
+    ViewData["Title"] = "VetIng - Cliente";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header class="main-header">
+        <a href="/Cliente/PaginaPrincipal" class="logo"><i class="fa-solid fa-paw"></i> VetIng</a>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="#resumen">Resumen</a></li>
+                <li><a class="nav-link" href="#turnos">Mis Turnos</a></li>
+                <li><a class="nav-link" href="#mascotas">Mis Mascotas</a></li>
+                <li><a class="nav-link" href="#seguimiento">Seguimiento Clínico</a></li>
+                <li><a class="nav-link" href="#pagos">Pagos</a></li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                        <button type="submit" class="btn sesion nav-button">Cerrar Sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        <div class="hamburger-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+
+    <main class="v1-main-dashboard">
+
+        <!-- Resumen -->
+        <section id="resumen" class="v1-section">
+            <h2 class="v1-section-title">Mi Resumen</h2>
+            <div class="v1-card-grid">
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Turnos de Hoy</h3>
+                        <i class="fa-regular fa-calendar-days v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        @*<div class="v1-card-value">@Model.CantidadTurnosHoy</div>*@ 
+                        <div class="v1-card-value">5</div>
+                        <p class="v1-card-description">Agendados para hoy</p>
+                    </div>
+                </div>
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Próximos Turnos</h3>
+                        <i class="fa-solid fa-clock v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        @*<div class="v1-card-value">@Model.CantidadTurnosPendientes</div>*@
+                        <div class="v1-card-value">1</div>
+                        <p class="v1-card-description">Reservados para los próximos dias</p>
+                    </div>
+                </div>
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Mis Mascotas</h3>
+                        <i class="fa-solid fa-heart v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        @*<div class="v1-card-value">@Model.CantidadMascotas</div>*@
+                        <div class="v1-card-value">2</div>
+                        <p class="v1-card-description">Registradas en VetIng</p>
+                    </div>
+                </div>
+                <div class="v1-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Pagos Pendientes</h3>
+                        <i class="fa-solid fa-credit-card v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        @*<div class="v1-card-value">$@Model.TotalPagosPendientes.ToString("N2")</div>*@
+                        <div class="v1-card-value">2</div>
+                        <p class="v1-card-description">En espera de confirmación</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Turnos -->
+        <section id="turnos" class="v1-section">
+            <h2 class="v1-section-title">Mis Turnos</h2>
+            <div class="v1-section-actions">
+                <a asp-controller="Cliente" asp-action="ReservarTurno" class="v1-btn v1-btn-primary">
+                    <i class="fa-solid fa-plus"></i> Reservar Turno
+                </a>
+            </div>
+            <div class="v1-card">
+                <div class="v1-card-header">
+                    <h3 class="v1-card-title">Próximos Turnos</h3>
+                </div>
+                @* <div class="v1-card-content v1-appointment-list-content">
+                    @if (Model.ProximosTurnos != null && Model.ProximosTurnos.Any())
+                    {
+                        @foreach (var turno in Model.ProximosTurnos)
+                        {
+                            <div class="v1-appointment-item">
+                                <div class="v1-appointment-info">
+                                    <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                    <div>
+                                        <p class="v1-appointment-time">@turno.FechaHora.ToString("HH:mm dd/MM")</p>
+                                        <p class="v1-appointment-pet">@turno.NombreMascota</p>
+                                        <p class="v1-appointment-owner">Veterinario: @turno.NombreVeterinario</p>
+                                    </div>
+                                </div>
+                                <div class="v1-appointment-badges">
+                                    <span class="v1-badge v1-badge-secondary">@turno.TipoServicio</span>
+                                    <span class="v1-badge @(turno.Estado == "Confirmada" ? "v1-badge-green" : turno.Estado == "Pendiente" ? "v1-badge-yellow" : "v1-badge-gray")">@turno.Estado</span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="v1-empty-state">No tienes turnos programados.</div>
+                    }
+                </div>*@
+
+                <div class="v1-card-content v1-appointment-list-content">
+                            <div class="v1-appointment-item">
+                                <div class="v1-appointment-info">
+                                    <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                    <div>
+                                        <p class="v1-appointment-time">FechaTurno</p>
+                                        <p class="v1-appointment-pet">NombreMascota</p>
+                                        <p class="v1-appointment-owner">Veterinario: NombreVet?</p>
+                                    </div>
+                                </div>
+                                <div class="v1-appointment-badges">
+                                    <span class="v1-badge-badge-gray">EstadoTurno</span>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mascotas -->
+        <section id="mascotas" class="v1-section">
+            <h2 class="v1-section-title">Mis Mascotas</h2>
+            <div class="v1-card">
+                <div class="v1-card-content v1-list-content">
+                    @if (Model.Mascotas != null && Model.Mascotas.Any())
+                    {
+                        @foreach (var mascota in Model.Mascotas)
+                        {
+                            <div class="v1-list-item">
+                                <div class="v1-list-info">
+                                    <div class="v1-pet-icon-bg"><i class="fa-solid fa-heart v1-pet-icon"></i></div>
+                                    <div>
+                                        <p class="v1-list-name">@mascota.NombreMascota</p>
+                                        <p class="v1-list-subtext">@mascota.Especie &bull; @mascota.Raza</p>
+                                    </div>
+                                </div>
+                                <div class="v1-list-actions">
+                                    <a asp-controller="Mascota" asp-action="Detalle" asp-route-id="@mascota.Id" class="v1-btn v1-btn-ghost"><i class="fa-solid fa-eye"></i></a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="v1-empty-state">No tienes mascotas registradas.</div>
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Seguimiento Clínico -->
+        <section id="seguimiento" class="v1-section">
+            <h2 class="v1-section-title">Seguimiento Clínico</h2>
+            <div class="v1-card">
+                <div class="v1-card-content v1-list-content">
+                    @* Primero verificamos si hay atenciones *@
+                    @if (Model.HistoriaClinicas.Atenciones != null && Model.HistoriaClinicas.Atenciones.Any())
+                    {
+                        @foreach (var atencion in Model.HistoriaClinicas.Atenciones.OrderByDescending(a => a.Fecha))
+                        {
+                            <div class="v1-list-item">
+                                <div class="v1-list-info">
+                                    <p class="v1-list-name">@Model.HistoriaClinicas.MascotaNombre</p>
+                                    <p class="v1-list-subtext">@atencion.Diagnostico</p>
+                                    <p class="v1-list-subtext-small">Fecha: @atencion.Fecha.ToShortDateString()</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="v1-empty-state">No tienes historial clínico registrado aún.</div>
+                    }
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Pagos -->
+        <section id="pagos" class="v1-section">
+            <h2 class="v1-section-title">Pagos</h2>
+            <div class="v1-card">
+                <div class="v1-card-content v1-list-content">
+                  @*   @if (Model.PagosPendientes != null && Model.PagosPendientes.Any())
+                   {
+                        @foreach (var pago in Model.PagosPendientes)
+                        {
+                            <div class="v1-list-item">
+                                <div class="v1-list-info">
+                                    <p class="v1-list-name">Servicio: @pago.Descripcion</p>
+                                    <p class="v1-list-subtext">Monto: $@pago.Monto.ToString("N2")</p>
+                                </div>
+                                <div class="v1-list-actions">
+                                    <a asp-controller="Pago" asp-action="RealizarPago" asp-route-id="@pago.Id" class="v1-btn v1-btn-primary"><i class="fa-solid fa-credit-card"></i> Pagar</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="v1-empty-state">No tienes pagos pendientes.</div>
+                     } *@
+
+                    <div class="v1-list-item">
+                        <div class="v1-list-info">
+                            <p class="v1-list-name">Servicio: Vacunacion </p>
+                            <p class="v1-list-subtext">Monto: $1000</p>
+                        </div>
+                        <div class="v1-list-actions">
+                            <a asp-controller="Pago" asp-action="RealizarPago" asp-route-id="pagoid" class="v1-btn v1-btn-primary"><i class="fa-solid fa-credit-card"></i> Pagar</a>
+                        </div>
+                    </div>
+                     
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-col footer-info">
+            <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+            <div class="footer-social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Acerca de VetIng</h4>
+            <ul class="footer-links">
+                <li><a href="#">Nuestra Historia</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Noticias y Blog</a></li>
+                <li><a href="#">Fundación VetIng</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Soporte</h4>
+            <ul class="footer-links">
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Guías de Usuario</a></li>
+                <li><a href="#">Descargar App Móvil</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mainNav = document.querySelector('.main-nav');
+        hamburger.addEventListener('click', () => mainNav.classList.toggle('active'));
+    </script>
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>

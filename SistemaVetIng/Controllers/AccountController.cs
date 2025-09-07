@@ -165,7 +165,7 @@ namespace SistemaVetIng.Controllers
                         }
                         else if (await _userManager.IsInRoleAsync(user, "Cliente"))
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("PaginaPrincipal", "Cliente");
                         }
                         else
                         {

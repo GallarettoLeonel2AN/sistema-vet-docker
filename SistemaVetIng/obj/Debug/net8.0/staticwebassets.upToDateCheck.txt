@@ -1,9 +1,10 @@
-C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\noty.js
-C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\toastr.js
+C:\Users\Ulises\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\noty.js
+C:\Users\Ulises\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\toastr.js
 wwwroot\css\administracion-home.css
 wwwroot\css\animaciones.css
 wwwroot\css\configuracion.css
 wwwroot\css\confirmation-styles.css
+wwwroot\css\css-unificado.css
 wwwroot\css\home-styles.css
 wwwroot\css\img\atendiendoPerro.jpg
 wwwroot\css\img\camaleon.jpg
