@@ -96,7 +96,8 @@ namespace SistemaVetIng.Controllers
                 Id = c.Id,
                 NombreCompleto = $"{c.Nombre} {c.Apellido}",
                 Telefono = c.Telefono,
-                NombreUsuario = c.Usuario?.Email
+                NombreUsuario = c.Usuario?.Email,
+                DNI = c.Dni
             }).ToList();
 
             // Cargar Mascotas en las tablas
