@@ -166,8 +166,9 @@
                                     <div class="v1-avatar">@(cliente.NombreCompleto.Split(' ').FirstOrDefault()?.FirstOrDefault())@(cliente.NombreCompleto.Split(' ').LastOrDefault()?.FirstOrDefault())</div>
                                     <div>
                                         <p class="v1-list-name">@cliente.NombreCompleto</p>
-                                        <p class="v1-list-subtext">Telefono: @cliente.Telefono</p>
-                                        <p class="v1-list-subtext-small">@cliente.NombreUsuario</p>
+                                        <p class="v1-list-subtext">Dni: @cliente.DNI</p>
+                                        <p class="v1-list-subtext-small">Telefono: @cliente.Telefono</p>
+                                        <p class="v1-list-subtext-small">Usuario: @cliente.NombreUsuario</p>
                                     </div>
                                 </div>
                                 <div class="v1-list-actions">

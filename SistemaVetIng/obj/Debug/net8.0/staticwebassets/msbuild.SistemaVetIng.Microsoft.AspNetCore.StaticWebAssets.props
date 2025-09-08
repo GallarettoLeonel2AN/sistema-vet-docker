@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>sxmisvr1ha</Fingerprint>
-      <Integrity>oKyCtFc5bbYuxgM1dGQZH/nrR1eKiK1z98AvS3IRAWk=</Integrity>
+      <Fingerprint>ew3aziavzd</Fingerprint>
+      <Integrity>Ph1vWqXMPzo82FA07YVL/lHYXJN2eXVE9zyOyb4ttYk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\configuracion.css'))</OriginalItemSpec>
@@ -71,6 +71,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\confirmation-styles.css'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\css-unificado.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>SistemaVetIng</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/SistemaVetIng</BasePath>
+      <RelativePath>css/css-unificado.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>ob6jv0hj72</Fingerprint>
+      <Integrity>PAqKfDeZzKbJGK9FEzyefjd39eK7V6Qo+luqk896qV8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\css-unificado.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\home-styles.css'))">
       <SourceType>Package</SourceType>
@@ -534,8 +552,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>wgqyrma7r9</Fingerprint>
-      <Integrity>gC1ABSIx9wBdOiOaR8ZfaHVDkmbrCRMgbyU+oP4GOmc=</Integrity>
+      <Fingerprint>wp81in9x6m</Fingerprint>
+      <Integrity>nD9xocs2ugm/68nGvDIVBEjve93zlmaToXysa4sbOGQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\login-styles.css'))</OriginalItemSpec>
@@ -552,8 +570,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>nd8ncd31qj</Fingerprint>
-      <Integrity>K9rvsDLHq0IEqUAER8GTUJ42xkbtJeG8o489fL0jixc=</Integrity>
+      <Fingerprint>pnwf3dossw</Fingerprint>
+      <Integrity>FQqHmyKXNdp8rxWp9QAj/QZ4rs2NrKDKQcQZzvfPqQY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\registrar-cliente-style.css'))</OriginalItemSpec>
@@ -588,11 +606,29 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>t7bz1dirxe</Fingerprint>
-      <Integrity>dwcKH1TyNyPlgYm4LzuuKMw5PdAjEt9Msc6SXB72gL8=</Integrity>
+      <Fingerprint>pg2l33fbsb</Fingerprint>
+      <Integrity>uX5CSU9w0JNVsC3PXPy8Wg0dduAS9rcnLj/eMwOpxdw=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\veterinario-home.css'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\veterinary-dashboard.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>SistemaVetIng</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/SistemaVetIng</BasePath>
+      <RelativePath>css/veterinary-dashboard.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>1ykyyu10wc</Fingerprint>
+      <Integrity>iUiOQZG3yF91DBS4kTjeKRAcn1UDJy/CFMv5v8BKc3o=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\veterinary-dashboard.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))">
       <SourceType>Package</SourceType>
