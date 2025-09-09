@@ -28,14 +28,6 @@ namespace SistemaVetIng.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> PaginaPrincipal()
-        {
-
-            var viewModel = new ClientePaginaPrincipalViewModel();
-            return View(viewModel);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> ReservarTurno()
         {
             // 1. Obtener la información necesaria
@@ -54,6 +46,17 @@ namespace SistemaVetIng.Controllers
             // 4. Pasar el ViewModel a la vista
             return View(viewModel);
         }
+
+
+        #region PAGINA PRINCIPAL
+        [HttpGet]
+        public async Task<IActionResult> PaginaPrincipal()
+        {
+
+            var viewModel = new ClientePaginaPrincipalViewModel();
+            return View(viewModel);
+        }
+        #endregion
 
 
         #region REGISTRAR CLIENTE

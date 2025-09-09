@@ -40,6 +40,7 @@ namespace SistemaVetIng.Controllers
             _toastNotification = toastNotification;
             _veterinariaService = veterinariaService;
         }
+
         #region PAGINA PRINCIPAL
         [HttpGet]
         public async Task<IActionResult> PaginaPrincipal(
@@ -134,8 +135,6 @@ namespace SistemaVetIng.Controllers
             return View(viewModel);
         }
         #endregion
-
-
 
         #region CONFIGURACION HORARIOS
         [HttpGet]

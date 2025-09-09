@@ -32,6 +32,7 @@ namespace SistemaVetIng.Controllers
             _mascotaService = mascotaService;
         }
 
+        #region PAGINA PRINCIPAL
         [HttpGet]
         public async Task<IActionResult> PaginaPrincipal(string busquedaCliente = null,
             string busquedaMascota = null)
@@ -95,6 +96,7 @@ namespace SistemaVetIng.Controllers
 **/
             return View(viewModel);
         }
+        #endregion
 
 
         #region REGISTRAR VETERINARIO

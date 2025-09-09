@@ -35,21 +35,23 @@ namespace SistemaVetIng.Controllers
             _toastNotification = toastNotification;
         }
 
+
+
+        #region LISTARCLIENTES
         // Listado de clientes para asociarle MASCOTAS
         public async Task<IActionResult> ListarClientes()
         {
             var clientes = await _clienteService.ListarTodo();
             return View(clientes); 
         }
+        #endregion
 
-       
         #region REGISTRAR MASCOTA
 
         [HttpGet]
         public async Task<IActionResult> RegistrarMascota(int clienteId)
         {
-            // En este caso, el clienteId es un requisito para el registro de una mascota.
-            // Se puede usar para precargar datos en la vista.
+
             var cliente = await _clienteService.ObtenerPorId(clienteId);
             if (cliente == null)
             {
@@ -72,8 +74,6 @@ namespace SistemaVetIng.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegistrarMascota(MascotaRegistroViewModel model)
         {
-            // El método IsRazaPeligrosa ahora se llama en el servicio, pero podemos mantener la llamada aquí para la validación del modelo si es necesario.
-            model.RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza);
 
             if (!ModelState.IsValid)
             {
@@ -114,8 +114,6 @@ namespace SistemaVetIng.Controllers
         }
         #endregion
 
-
-        
         #region MODIFICAR MASCOTA
 
         [HttpGet]
@@ -207,7 +205,6 @@ namespace SistemaVetIng.Controllers
         }
         #endregion
 
-        // ------------------ ELIMINAR MASCOTA ------------------
         #region ELIMINAR MASCOTA
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -251,92 +248,6 @@ namespace SistemaVetIng.Controllers
         }
         #endregion
 
-
-        private bool IsRazaPeligrosa(string especie, string raza)
-        {
-            if (string.IsNullOrEmpty(especie) || string.IsNullOrEmpty(raza))
-            {
-                return false;
-            }
-
-            var especieLower = especie.ToLower().Trim();
-            var razaLower = raza.ToLower().Trim();
-
-            return especieLower == "perro" && _razasPeligrosas.Contains(razaLower);
-        }
-
-
-        #region API PERROSPELIGROSOS
-        // Metodo para enviar datos a la API de Perros Peligrosos
-        private async Task<bool> SendDataToDangerousDogApi(
-            int mascotaId,
-            string nombreMascota,
-            string razaMascota,
-            bool esRazaPeligrosa,
-            bool tieneChip, // Si el checkbox fue marcado
-            string chipCodigo, 
-            long clienteDni,
-            string clienteNombre,
-            string clienteApellido)
-        {
-            // URL API 
-            var apiEndpoint = "http://localhost:5075/api/perros-peligrosos/registrar"; 
-
-            // Objeto de datos a enviar a API
-            var dataToSend = new
-            {
-                MascotaId = mascotaId,
-                NombreMascota = nombreMascota,
-                RazaMascota = razaMascota,
-                EsRazaPeligrosa = esRazaPeligrosa,
-                TieneChip = tieneChip,
-                ChipCodigo = chipCodigo, // Será null si no tiene chip
-                ClienteDni = clienteDni,
-                ClienteNombre = clienteNombre,
-                ClienteApellido = clienteApellido,
-                FechaRegistro = DateTime.Now 
-            };
-
-            using (var client = new HttpClient())
-            {
-                var jsonContent = new StringContent(
-                    JsonSerializer.Serialize(dataToSend),
-                    Encoding.UTF8,
-                    "application/json"
-                );
-
-                try
-                {
-                    Console.WriteLine($"Enviando a API de Perros Peligrosos: {jsonContent.ReadAsStringAsync().Result}");
-                    var response = await client.PostAsync(apiEndpoint, jsonContent);
-
-                    // Si la API retorna un código de estado de exito
-                    if (response.IsSuccessStatusCode)
-                    {
-                        Console.WriteLine($"Respuesta exitosa de la API: {await response.Content.ReadAsStringAsync()}");
-                        return true;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Error de API ({response.StatusCode}): {await response.Content.ReadAsStringAsync()}");
-                        return false;
-                    }
-                }
-                catch (HttpRequestException httpEx)
-                {
-                    // Errores de red,DNS,conexión rechazada,etc
-                    Console.WriteLine($"Error de conexión HTTP con la API: {httpEx.Message}");
-                    return false;
-                }
-                catch (Exception ex)
-                {
-                    // Otros errores (serialización,etc)
-                    Console.WriteLine($"Error general al enviar datos a la API: {ex.Message}");
-                    return false;
-                }
-            }
-        }
-        #endregion
 
     }
 }

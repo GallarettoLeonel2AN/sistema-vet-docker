@@ -1,7 +1,7 @@
 ﻿@model SistemaVetIng.ViewsModels.AtencionVeterinariaViewModel
 
 @{
-    ViewData["Title"] = $"Nueva Atención para {ViewBag.MascotaNombre}";
+    ViewData["Title"] = $"Nueva Atención para {Model.MascotaNombre}";
     Layout = null;
 }
 
@@ -24,17 +24,17 @@
             <i class="fas fa-paw"></i>
             <span>VetIng</span>
         </a>
-        <a asp-controller="HistoriaClinica" asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@ViewBag.MascotaId" class="btn sesion">
+        <a asp-controller="HistoriaClinica" asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@Model.MascotaId" class="btn sesion">
             <i class="fas fa-arrow-left"></i> Volver
         </a>
     </header>
 
     <main class="registrar-form-main">
         <section class="form-section">
-            <h2 class="section-title">Nueva Atención para <span class="v1-text-primary">@ViewBag.MascotaNombre</span></h2>
-            <p class="form-subtitle">Propietario: <strong>@ViewBag.PropietarioNombre</strong></p>
+            <h2 class="section-title">Nueva Atención para <span class="v1-text-primary">@Model.MascotaNombre</span></h2>
+            <p class="form-subtitle">Propietario: <strong>@Model.PropietarioNombre</strong></p>
 
-            <form asp-action="Crear" method="post" class="main-form">
+            <form asp-action="RegistrarAtencion" asp-controller="AtencionVeterinaria" method="post" class="main-form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="HistoriaClinicaId" />
 
@@ -49,7 +49,6 @@
                     <input asp-for="PesoKg" class="form-control" type="number" step="0.01" placeholder="Ej: 5.25" />
                     <span asp-validation-for="PesoKg" class="text-danger validation-error"></span>
                 </div>
-
 
                 <h4 class="v1-section-title">Tratamiento</h4>
                 <div class="form-group">
@@ -78,7 +77,6 @@
                     <span asp-validation-for="ObservacionesTratamiento" class="text-danger validation-error"></span>
                 </div>
 
-
                 <h4 class="v1-card-title">
                     Vacunas
                     <button type="button" id="add-vacuna-btn" class="button register-button v1-btn-sm ms-2">
@@ -86,10 +84,8 @@
                     </button>
                 </h4>
                 <div id="vacunas-container">
-                    @* Los elementos de vacuna se agregarán aquí por JavaScript *@
+                    @* Las vacunas se cargan aca por JS *@
                 </div>
-
-
 
                 <h4 class="v1-card-title">
                     Estudios Complementarios
@@ -98,14 +94,14 @@
                     </button>
                 </h4>
                 <div id="estudios-container">
-                    @* Los elementos de estudio se agregarán aquí por JavaScript *@
+                    @* Los estudios complementarios se cargan aca por JS *@
                 </div>
 
                 <div class="form-actions mt-4">
                     <button type="submit" class="button register-button">
                         <i class="fas fa-save"></i> Guardar Atención
                     </button>
-                    <a asp-controller="HistoriaClinica" asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@ViewBag.MascotaId" class="btnBack">
+                    <a asp-controller="HistoriaClinica" asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@Model.MascotaId" class="btnBack">
                         <i class="fas fa-arrow-left"></i> Cancelar y Volver
                     </a>
                 </div>
@@ -160,9 +156,9 @@
         <div class="v1-input-group mb-2">
             <select name="" class="form-control" required>
                 <option value="">Seleccione una vacuna...</option>
-                @if (ViewBag.VacunasDisponibles != null)
+                @if (Model.VacunasDisponibles != null)
                 {
-                    foreach (var item in ViewBag.VacunasDisponibles)
+                    foreach (var item in Model.VacunasDisponibles)
                     {
                         <option value="@item.Value">@item.Text</option>
                     }
@@ -178,9 +174,9 @@
         <div class="v1-input-group mb-2">
             <select name="" class="form-control" required>
                 <option value="">Seleccione un estudio...</option>
-                @if (ViewBag.EstudiosDisponibles != null)
+                @if (Model.EstudiosDisponibles != null)
                 {
-                    foreach (var item in ViewBag.EstudiosDisponibles)
+                    foreach (var item in Model.EstudiosDisponibles)
                     {
                         <option value="@item.Value">@item.Text</option>
                     }

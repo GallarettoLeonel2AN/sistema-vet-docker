@@ -1,5 +1,5 @@
-﻿// Archivo: ViewsModels/AtencionVeterinariaViewModel.cs
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SistemaVetIng.ViewsModels
 {
@@ -12,30 +12,35 @@ namespace SistemaVetIng.ViewsModels
         [Required(ErrorMessage = "El diagnóstico es obligatorio.")]
         [StringLength(500, ErrorMessage = "El diagnóstico no puede exceder los 500 caracteres.")]
         [Display(Name = "Diagnóstico")]
-        public string Diagnostico { get; set; }
+        public string? Diagnostico { get; set; }
 
         [Required(ErrorMessage = "El peso es obligatorio.")]
         [Range(0.1, 500.0, ErrorMessage = "El peso debe estar entre 0.1 y 500 kg.")]
         [Display(Name = "Peso (kg)")]
         public float PesoKg { get; set; }
 
-        // Clave foránea para la Historia Clínica a la que pertenece esta atención
+        // Clave foránea para la Historia Clínica
         [Required]
         public int HistoriaClinicaId { get; set; }
 
         // Propiedad para el ID del veterinario que realiza la atención
-        // Lo obtendremos del usuario logueado, no del formulario
         public int VeterinarioId { get; set; }
 
+        public int MascotaId { get; set; }
+        public string? MascotaNombre { get; set; }
+        public string? PropietarioNombre { get; set; }
 
-        // --- Propiedades para el Tratamiento (Opcional) ---
-        // Usaremos un booleano para decidir si se crea un tratamiento
+        // Propiedades para los SelectList de la vista
+        public SelectList? VacunasDisponibles { get; set; }
+        public SelectList? EstudiosDisponibles { get; set; }
+        public object? VacunasConPrecio { get; set; }
+        public object? EstudiosConPrecio { get; set; }
 
         [Required(ErrorMessage = "El medicamento es obligatorio.")]
         [StringLength(200, ErrorMessage = "El medicamento no puede exceder los 200 caracteres.")]
         [Display(Name = "Medicamento")]
         public string? Medicamento { get; set; }
-        
+
         [Required(ErrorMessage = "La dosis es obligatoria.")]
         [StringLength(200, ErrorMessage = "La dosis no puede exceder los 200 caracteres.")]
         [Display(Name = "Dosis")]
@@ -49,13 +54,13 @@ namespace SistemaVetIng.ViewsModels
         [Required(ErrorMessage = "La duración es obligatoria.")]
         [Range(0, 365, ErrorMessage = "La duración debe ser entre 0 y 365 días.")]
         [Display(Name = "Duración (días)")]
-        public string? DuracionDias { get; set; }
+        public string DuracionDias { get; set; }
 
         [StringLength(500, ErrorMessage = "Las observaciones no pueden exceder los 500 caracteres.")]
         [Display(Name = "Observaciones del Tratamiento")]
         public string? ObservacionesTratamiento { get; set; }
 
-
+        // Colecciones para las selecciones del usuario
         public List<int> EstudiosSeleccionadosIds { get; set; } = new List<int>();
         public List<int> VacunasSeleccionadasIds { get; set; } = new List<int>();
     }

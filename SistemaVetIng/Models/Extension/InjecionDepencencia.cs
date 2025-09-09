@@ -28,6 +28,8 @@ namespace SistemaVetIng.Models.Extension
             services.AddScoped<IGeneralRepository<Mascota>, MascotaRepository>();
             services.AddScoped<IGeneralRepository<Chip>, ChipRepository>();
             services.AddScoped<IGeneralRepository<ConfiguracionVeterinaria>, VeterinariaConfiguracionRepository>();
+            services.AddScoped<IHistoriaClinicaRepository, HistoriaClinicaRepository>();
+            services.AddScoped<IAtencionVeterinariaRepository, AtencionVeterinariaRepository>();
             return services;
         }
 
@@ -44,6 +46,8 @@ namespace SistemaVetIng.Models.Extension
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IVeterinariaConfigService, VeterinariaConfigService>();
             services.AddScoped<IVeterinariaService, VeterinariaService>();
+            services.AddScoped<IHistoriaClinicaService, HistoriaClinicaService>();
+            services.AddScoped<IAtencionVeterinariaService, AtencionVeterinariaService>();
             return services;
         }
     }
