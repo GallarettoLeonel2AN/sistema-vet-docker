@@ -1,54 +1,40 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using SistemaVetIng.Models.Indentity; 
+using SistemaVetIng.Models.Indentity;
+using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewModels; 
 using SistemaVetIng.ViewsModels; 
 using System.Text.Encodings.Web; // Usado para codificar texto de forma segura en URLs.
 
 namespace SistemaVetIng.Controllers
 {
-    // Controladora cuentas => inicio de sesión, cierre de sesión y la recuperación de contraseñas.
     public class AccountController : Controller
     {
-        private readonly SignInManager<Usuario> _signInManager; // Gestiona el proceso de inicio y cierre de sesión.
-        private readonly UserManager<Usuario> _userManager; //  Nos permite interactuar con los datos del usuario (buscar, asignar roles, generar tokens)
-        private readonly IEmailSender _emailSender; // Servicio para enviar correos electrónicos => para la recuperación de contraseña.
+        private readonly IAccountService _accountService;
 
-        public AccountController(SignInManager<Usuario> signInManager, UserManager<Usuario> userManager, IEmailSender emailSender)
+        public AccountController(IAccountService accountService)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
-            _emailSender = emailSender;
-        }
-
-        // --- Acciones HTTP GET (Para mostrar los formularios) ---
-        [HttpGet]
-        public IActionResult RecuperarContraseña()
-        {
-            return View();
+            _accountService = accountService;
         }
 
         [HttpGet]
-        public IActionResult ConfirmacionEnlaceReset()
-        {
-            return View();
-        }
+        public IActionResult RecuperarContraseña() => View();
 
         [HttpGet]
-       
-        public async Task<IActionResult> ResetPassword(string code = null, string userId = null)
+        public IActionResult ConfirmacionEnlaceReset() => View();
+
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword(string? code = null, string? userId = null)
         {
             if (code == null || userId == null)
             {
                 return RedirectToAction(nameof(Login));
             }
 
-            // Busca al usuario con el userId y obtén su email
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _accountService.EncontrarUsuarioId(userId);
             if (user == null)
             {
-                // Maneja el caso en que el usuario no se encuentre
                 return RedirectToAction(nameof(Login));
             }
 
@@ -56,7 +42,6 @@ namespace SistemaVetIng.Controllers
             return View(model);
         }
 
-        // Mostrar el formulario de inicio de sesión.
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
@@ -64,10 +49,9 @@ namespace SistemaVetIng.Controllers
             return View();
         }
 
-        // --- Acciones HTTP POST (Para procesar datos de formularios) ---
 
         [HttpPost]
-        [ValidateAntiForgeryToken] // Fundamental para prevenir ataques
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(RecuperarContraseñaViewModel model)
         {
             if (!ModelState.IsValid)
@@ -75,33 +59,21 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
 
-            var user = await _userManager.FindByEmailAsync(model.Email);
-
-            // Importante para la seguridad: evita enumeración de usuarios.
-            if (user == null)
+            var code = await _accountService.GenerarPasswordResetToken(model.Email);
+            if (code == null)
             {
+                // Importante por seguridad: redirige sin dar pistas.
                 return View("Login");
             }
-            // Generar el token de restablecimiento de contraseña
-            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            // Crear el enlace de callback para el correo electrónico
-            var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-            // Enviar el correo electrónico con el enlace
-            await _emailSender.SendEmailAsync(
-                model.Email,
-                "Restablecer Contraseña",
-                $"Por favor, restablezca su contraseña haciendo clic en este enlace: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>enlace</a>"
-            );
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = (await _accountService.EncontrarUsuarioPorEmail(model.Email))?.Id, code = code }, protocol: HttpContext.Request.Scheme);
+            await _accountService.EnviarPasswordResetEmail(model.Email, HtmlEncoder.Default.Encode(callbackUrl));
 
             return View("ConfirmacionEnlaceReset");
         }
 
-        // ResetPassword Procesa el formulario donde el usuario ingresa su *nueva* contraseña.
-        // Si el usuario no existe (o el token es inválido), redirige a la confirmación
-        // Si el token es válido, se puede cambiar la contraseña del usuario.
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(CambiarContraseñaViewModel model)
         {
             if (!ModelState.IsValid)
@@ -109,99 +81,70 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
 
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
+            var (success, errors) = await _accountService.ResetPassword(model);
+            if (success)
             {
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
-            }
-
-            foreach (var error in result.Errors)
+            foreach (var error in errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+
             return View(model);
         }
 
-        // Mostrar la confirmación después de un restablecimiento de contraseña exitoso.
         [HttpGet]
-        public IActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
+        public IActionResult ResetPasswordConfirmation() => View();
 
-        // Inicio de sesión del usuario. Valida las credenciales proporcionadas.
-        // Si el login es exitoso
-        // Busca el usuario y, segun su rol ('Veterinario' 'Cliente' 'Administrador')
-        // lo redirige a la página principal específica para ese rol.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(
-                    model.UserName,
-                    model.Password,
-                    model.RememberMe,
-                    lockoutOnFailure: false
-                );
-
-                if (result.Succeeded)
-                {
-                    var user = await _userManager.FindByNameAsync(model.UserName);
-                    if (user != null)
-                    {
-                        if (await _userManager.IsInRoleAsync(user, "Veterinario"))
-                        {
-                            return RedirectToAction("PaginaPrincipal", "Veterinario");
-                        }
-                        else if (await _userManager.IsInRoleAsync(user, "Cliente"))
-                        {
-                            return RedirectToAction("PaginaPrincipal", "Cliente");
-                        }
-                        else
-                        {
-                            return RedirectToAction("PaginaPrincipal", "Veterinaria");
-                        }
-                    }
-                    if (Url.IsLocalUrl(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                if (result.IsLockedOut)
-                {
-                    ModelState.AddModelError(string.Empty, "La cuenta está bloqueada.");
-                    return View(model);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Intento de inicio de sesión inválido.");
-                    return View(model);
-                }
+                return View(model);
             }
+
+            var result = await _accountService.PasswordSignIn(model);
+
+            if (result.Succeeded)
+            {
+                var controllerName = await _accountService.GetRedireccionPorRol(model.UserName);
+
+                if (controllerName != null)
+                {
+                    return RedirectToAction("PaginaPrincipal", controllerName);
+                }
+
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (result.IsLockedOut)
+            {
+                ModelState.AddModelError(string.Empty, "La cuenta está bloqueada.");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Intento de inicio de sesión inválido.");
+            }
+
             return View(model);
         }
 
-        // Cierre de sesión del usuario.
-        // Redirige al usuario a la página de inicio.
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
+            await _accountService.SignOut();
             return RedirectToAction("Index", "Home");
         }
     }

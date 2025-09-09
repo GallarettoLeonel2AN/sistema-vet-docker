@@ -48,6 +48,7 @@ namespace SistemaVetIng.Models.Extension
             services.AddScoped<IVeterinariaService, VeterinariaService>();
             services.AddScoped<IHistoriaClinicaService, HistoriaClinicaService>();
             services.AddScoped<IAtencionVeterinariaService, AtencionVeterinariaService>();
+            services.AddScoped<IAccountService, AccountService>();
             return services;
         }
     }
