@@ -13,13 +13,13 @@ namespace SistemaVetIng.Servicios.Implementacion
 {
     public class MascotaService : IMascotaService
     {
-        private readonly IGeneralRepository<Mascota> _mascotaRepository;
+        private readonly IMascotaRepository _mascotaRepository;
         private readonly IGeneralRepository<Cliente> _clienteRepository;
         private readonly IGeneralRepository<Chip> _chipRepository;
         private readonly ApplicationDbContext _context;
 
 
-        public MascotaService(IGeneralRepository<Mascota> mascotaRepository, IGeneralRepository<Cliente> clienteRepository, IGeneralRepository<Chip> chipRepository, ApplicationDbContext context)
+        public MascotaService(IMascotaRepository mascotaRepository, IGeneralRepository<Cliente> clienteRepository, IGeneralRepository<Chip> chipRepository, ApplicationDbContext context)
         {
             _mascotaRepository = mascotaRepository;
             _clienteRepository = clienteRepository;
@@ -292,6 +292,11 @@ namespace SistemaVetIng.Servicios.Implementacion
             }
 
             return mascotas;
+        }
+
+        public async Task<IEnumerable<Mascota>> ListarMascotasPorClienteId(int clienteId)
+        {
+            return await _mascotaRepository.ListarMascotasPorClienteId(clienteId);
         }
 
 

@@ -27,25 +27,6 @@ namespace SistemaVetIng.Controllers
             _mascotaService = mascotaService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ReservarTurno()
-        {
-            // 1. Obtener la información necesaria
-            var clienteId = _clienteService.ObtenerPorId;
-
-            // 2. Obtener las listas de datos (Mascotas y Veterinarios)
-            var mascotasDelCliente = await _mascotaService.ListarTodo();
-
-            // 3. Crear y rellenar el ViewModel
-            var viewModel = new ReservaTurnoViewModel
-            {
-                Mascotas = (List<Mascota>)mascotasDelCliente,
-                HasMascotas = mascotasDelCliente.Any()
-            };
-
-            // 4. Pasar el ViewModel a la vista
-            return View(viewModel);
-        }
 
 
         #region PAGINA PRINCIPAL

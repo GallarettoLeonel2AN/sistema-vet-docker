@@ -14,6 +14,6 @@
         public Veterinario Veterinario { get; set; }
         public int VeterinarioId { get; set; }
         public Mascota? Mascota { get; set; } // Puede ser null si es Primera Cita
-        public int MascotaId { get; set; }
+        public int? MascotaId { get; set; }
     }
 }

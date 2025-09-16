@@ -18,6 +18,8 @@ namespace SistemaVetIng.ViewsModels
 
         public bool PrimeraCita { get; set; }
 
+        public int ClienteId { get; set; }
+
         // La MascotaId no es obligatoria si es PrimeraCita
         public int? MascotaId { get; set; }
 

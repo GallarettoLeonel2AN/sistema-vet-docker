@@ -202,11 +202,11 @@ namespace SistemaVetIng.Migrations
                     b.Property<int>("DuracionMinutosPorConsulta")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("HoraFin")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("HoraFin")
+                        .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("HoraInicio")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("HoraInicio")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("TrabajaDomingo")
                         .HasColumnType("bit");
@@ -602,7 +602,7 @@ namespace SistemaVetIng.Migrations
                     b.Property<TimeSpan>("Horario")
                         .HasColumnType("time");
 
-                    b.Property<int>("MascotaId")
+                    b.Property<int?>("MascotaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Motivo")

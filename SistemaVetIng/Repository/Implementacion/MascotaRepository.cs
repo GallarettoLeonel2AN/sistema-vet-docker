@@ -5,7 +5,7 @@ using SistemaVetIng.Repository.Interfaces;
 
 namespace SistemaVetIng.Repository.Implementacion
 {
-    public class MascotaRepository : IGeneralRepository<Mascota>
+    public class MascotaRepository : IMascotaRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -39,6 +39,11 @@ namespace SistemaVetIng.Repository.Implementacion
         {
             // Usa Include para cargar la entidad relacionada Chip.
             return await _context.Mascotas.Include(m => m.Chip).FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+        public async Task<IEnumerable<Mascota>> ListarMascotasPorClienteId(int clienteId)
+        {
+            return await _context.Mascotas.Where(m => m.ClienteId == clienteId).ToListAsync();
         }
     }
 }

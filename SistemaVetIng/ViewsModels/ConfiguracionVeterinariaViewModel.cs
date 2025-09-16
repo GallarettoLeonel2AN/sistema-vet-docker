@@ -11,12 +11,12 @@ namespace SistemaVetIng.Models
         [Required(ErrorMessage = "La hora de inicio es obligatoria.")]
         [DataType(DataType.Time)]
         [Display(Name = "Hora de Inicio")]
-        public TimeSpan HoraInicio { get; set; }
+        public DateTime HoraInicio { get; set; }
 
         [Required(ErrorMessage = "La hora de fin es obligatoria.")]
         [DataType(DataType.Time)]
         [Display(Name = "Hora de Fin")]
-        public TimeSpan HoraFin { get; set; }
+        public DateTime HoraFin { get; set; }
 
         [Required(ErrorMessage = "La duración por consulta es obligatoria.")]
         [Range(1, 120, ErrorMessage = "La duración de la consulta debe estar entre 1 y 120 minutos.")]

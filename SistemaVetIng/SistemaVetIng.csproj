@@ -28,7 +28,7 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Views\Turno\" />
+    <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 
 </Project>

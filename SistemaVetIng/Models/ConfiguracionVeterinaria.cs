@@ -3,8 +3,8 @@
     public class ConfiguracionVeterinaria
     {
         public int Id { get; set; }
-        public TimeSpan HoraInicio { get; set; }
-        public TimeSpan HoraFin { get; set; }
+        public DateTime HoraInicio { get; set; }
+        public DateTime HoraFin { get; set; }
         public int DuracionMinutosPorConsulta { get; set; }
         public bool TrabajaLunes { get; set; }
         public bool TrabajaMartes { get; set; }
