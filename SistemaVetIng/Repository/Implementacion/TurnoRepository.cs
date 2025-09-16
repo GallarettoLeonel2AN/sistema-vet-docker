@@ -30,5 +30,9 @@ namespace SistemaVetIng.Repository.Implementacion
         {
             await _context.SaveChangesAsync();
         }
+        
+
+        public async Task<IEnumerable<Turno>> ListarTodo()
+         => await _context.Turnos.ToListAsync();
     }
 }

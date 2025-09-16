@@ -43,7 +43,10 @@ namespace SistemaVetIng.Repository.Implementacion
 
         public async Task<IEnumerable<Mascota>> ListarMascotasPorClienteId(int clienteId)
         {
-            return await _context.Mascotas.Where(m => m.ClienteId == clienteId).ToListAsync();
+            return await _context.Mascotas
+                .Where(m => m.ClienteId == clienteId)
+                .Include(m => m.Propietario)
+                .ToListAsync();
         }
     }
 }

@@ -74,11 +74,6 @@ namespace SistemaVetIng.Data
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Turno>()
-                .HasOne(t => t.Veterinario)
-                .WithMany(v => v.Turnos)
-                .HasForeignKey(t => t.VeterinarioId)
-                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Turno>()
                 .HasOne(t => t.Cliente)
@@ -120,6 +115,12 @@ namespace SistemaVetIng.Data
                 .HasOne(c => c.Mascota)
                 .WithOne(m => m.Chip)
                 .HasForeignKey<Chip>(c => c.MascotaId);
+
+            // Mascota Cliente
+            modelBuilder.Entity<Mascota>()
+                .HasOne(m => m.Propietario)
+                .WithMany(c => c.Mascotas)
+                .HasForeignKey(m => m.ClienteId);
         }
 
 

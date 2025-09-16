@@ -46,7 +46,9 @@ namespace SistemaVetIng.Servicios.Implementacion
                 Horario = model.Horario,
                 Motivo = model.Motivo,
                 MascotaId = model.MascotaId,
-                ClienteId = model.ClienteId 
+                ClienteId = model.ClienteId,
+                Estado = "Pendiente",
+                PrimeraCita = model.PrimeraCita
             };
 
             await _turnoRepository.AgregarTurno(turno);

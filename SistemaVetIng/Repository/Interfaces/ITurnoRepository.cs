@@ -7,5 +7,6 @@ namespace SistemaVetIng.Repository.Interfaces
         Task<IEnumerable<Turno>> GetTurnosByFecha(DateTime fecha);
         Task AgregarTurno(Turno turno);
         Task Guardar();
+        Task<IEnumerable<Turno>> ListarTodo();
     }
 }

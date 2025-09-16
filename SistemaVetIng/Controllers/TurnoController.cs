@@ -41,7 +41,7 @@ namespace SistemaVetIng.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var mascotasDelCliente = await _mascotaService.ListarMascotasPorClienteId(usuarioActual.Id);
+            var mascotasDelCliente = (await _mascotaService.ListarMascotasPorClienteId(usuarioActual.Id)).ToList();
 
             var viewModel = new ReservaTurnoViewModel
             {
@@ -74,7 +74,6 @@ namespace SistemaVetIng.Controllers
 
             if (!ModelState.IsValid)
             {
-
                 var usuarioActual = await _userManager.GetUserAsync(User);
 
                 if (usuarioActual != null)
