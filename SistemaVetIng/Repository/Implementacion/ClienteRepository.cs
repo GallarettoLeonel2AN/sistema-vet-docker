@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SistemaVetIng.Repository.Implementacion
 {
-    public class ClienteRepository : IGeneralRepository<Cliente>
+    public class ClienteRepository : IClienteRepository
     {
 
         private readonly ApplicationDbContext _context;
@@ -36,5 +36,11 @@ namespace SistemaVetIng.Repository.Implementacion
 
         public async Task<Cliente> ObtenerPorId(int id)
             => await _context.Clientes.Include(c => c.Usuario).FirstOrDefaultAsync(x => x.Id == id);
+
+        public async Task<Cliente> ObtenerPorIdUsuario(int Usuario)
+        {
+          return await _context.Clientes.FirstOrDefaultAsync(c => c.UsuarioId == Usuario);
+
+        }
     }
 }

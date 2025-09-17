@@ -624,8 +624,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>1ykyyu10wc</Fingerprint>
-      <Integrity>iUiOQZG3yF91DBS4kTjeKRAcn1UDJy/CFMv5v8BKc3o=</Integrity>
+      <Fingerprint>tph863k718</Fingerprint>
+      <Integrity>T0K+bJM95XrRLWbF4EzJO11DrJHh9JEQtTHIqvuQ5GM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\veterinary-dashboard.css'))</OriginalItemSpec>

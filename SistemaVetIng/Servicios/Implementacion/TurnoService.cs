@@ -2,6 +2,9 @@
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SistemaVetIng.Servicios.Implementacion
 {
@@ -10,12 +13,10 @@ namespace SistemaVetIng.Servicios.Implementacion
         private readonly IVeterinariaConfigService _veterinariaService;
         private readonly ITurnoRepository _turnoRepository;
 
-
         public TurnoService(IVeterinariaConfigService veterinariaService, ITurnoRepository turnoRepository)
         {
             _veterinariaService = veterinariaService;
             _turnoRepository = turnoRepository;
-
         }
 
         public async Task<List<string>> GetHorariosDisponiblesAsync(DateTime fecha)
@@ -79,12 +80,7 @@ namespace SistemaVetIng.Servicios.Implementacion
             while (horaActual < horaFin)
             {
                 horarios.Add(horaActual.ToString("HH:mm"));
-
-                // Divide la operación para depurar
-                var proximaHora = horaActual.Add(TimeSpan.FromMinutes(duracion));
-
-                // Pon un punto de interrupción aquí y revisa el valor de 'proximaHora'
-                horaActual = proximaHora;
+                horaActual = horaActual.Add(TimeSpan.FromMinutes(duracion));
             }
 
             return horarios;

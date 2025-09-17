@@ -12,10 +12,10 @@ namespace SistemaVetIng.Servicios.Implementacion
     public class ClienteService : IClienteService
     {
 
-        private readonly IGeneralRepository<Cliente> _clienteRepository;
+        private readonly IClienteRepository _clienteRepository;
         private readonly UserManager<Usuario> _userManager;
 
-        public ClienteService(IGeneralRepository<Cliente> clienteRepository, UserManager<Usuario> userManager)
+        public ClienteService(IClienteRepository clienteRepository, UserManager<Usuario> userManager)
         {
             _clienteRepository = clienteRepository;
             _userManager = userManager;
@@ -123,6 +123,9 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             return clientes;
         }
-
+        public async Task<Cliente> ObtenerPorIdUsuario(int id)
+        {
+            return await _clienteRepository.ObtenerPorIdUsuario(id);
+        }
     }
 }

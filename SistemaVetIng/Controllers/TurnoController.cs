@@ -1,35 +1,34 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NToastNotify;
-using SistemaVetIng.Data;
-using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace SistemaVetIng.Controllers
 {
     public class TurnoController : Controller
     {
-
-
         private readonly IToastNotification _toastNotification;
         private readonly IMascotaService _mascotaService;
         private readonly ITurnoService _turnoService;
+        private readonly IClienteService _clienteService;
         private readonly UserManager<Usuario> _userManager;
 
         public TurnoController(
             IToastNotification toastNotification,
             IMascotaService mascotaService,
             UserManager<Usuario> userManager,
+            IClienteService clienteService,
             ITurnoService turnoService)
         {
             _toastNotification = toastNotification;
             _mascotaService = mascotaService;
             _userManager = userManager;
             _turnoService = turnoService;
+            _clienteService = clienteService;
         }
 
         [HttpGet]
@@ -41,7 +40,15 @@ namespace SistemaVetIng.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var mascotasDelCliente = (await _mascotaService.ListarMascotasPorClienteId(usuarioActual.Id)).ToList();
+            var cliente = await _clienteService.ObtenerPorIdUsuario(usuarioActual.Id);
+            if (cliente == null)
+            {
+                _toastNotification.AddWarningToastMessage("Debe completar su perfil de cliente para reservar un turno.");
+                // Redirige a donde el usuario pueda crear su perfil de cliente
+                return RedirectToAction("CrearPerfil", "Cliente");
+            }
+
+            var mascotasDelCliente = (await _mascotaService.ListarMascotasPorClienteId(cliente.Id)).ToList();
 
             var viewModel = new ReservaTurnoViewModel
             {
@@ -52,13 +59,11 @@ namespace SistemaVetIng.Controllers
             return View(viewModel);
         }
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reservar(ReservaTurnoViewModel model)
         {
-            // Logiva para manejar Primera Cita
+            // Lógica para manejar Primera Cita
             if (model.PrimeraCita)
             {
                 model.MascotaId = null;
@@ -71,29 +76,33 @@ namespace SistemaVetIng.Controllers
                 }
             }
 
-
-            if (!ModelState.IsValid)
+            var usuarioActual = await _userManager.GetUserAsync(User);
+            if (usuarioActual == null)
             {
-                var usuarioActual = await _userManager.GetUserAsync(User);
-
-                if (usuarioActual != null)
-                {
-                    model.Mascotas = (await _mascotaService.ListarMascotasPorClienteId(usuarioActual.Id)).ToList();
-                }
-                return View("ReservarTurno", model);
+                return Json(new { success = false, message = "Usuario no autenticado." });
             }
 
-            var cliente = await _userManager.GetUserAsync(User);
+            var cliente = await _clienteService.ObtenerPorIdUsuario(usuarioActual.Id);
             if (cliente == null)
             {
-                return Unauthorized();
+                return Json(new { success = false, message = "No se encontró el perfil de cliente." });
             }
+
             model.ClienteId = cliente.Id;
 
-            await _turnoService.ReservarTurnoAsync(model);
+         
+         
 
-            _toastNotification.AddSuccessToastMessage("¡Turno reservado con éxito!");
-            return RedirectToAction("PaginaPrincipal", "Cliente");
+            try
+            {
+                await _turnoService.ReservarTurnoAsync(model);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                // Registra la excepción para fines de depuración
+                return Json(new { success = false, message = "Ocurrió un error al reservar el turno." });
+            }
         }
 
         [HttpGet]
@@ -110,6 +119,5 @@ namespace SistemaVetIng.Controllers
             var horarios = await _turnoService.GetHorariosDisponiblesAsync(fechaSeleccionada);
             return Json(horarios);
         }
-
     }
 }

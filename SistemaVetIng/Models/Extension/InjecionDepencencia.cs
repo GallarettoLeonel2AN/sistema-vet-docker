@@ -24,7 +24,7 @@ namespace SistemaVetIng.Models.Extension
         {
             services.AddScoped(typeof(IGeneralRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IGeneralRepository<Veterinario>, VeterinarioRepository>();
-            services.AddScoped<IGeneralRepository<Cliente>, ClienteRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IMascotaRepository, MascotaRepository>();
             services.AddScoped<IGeneralRepository<Chip>, ChipRepository>();
             services.AddScoped<IGeneralRepository<ConfiguracionVeterinaria>, VeterinariaConfiguracionRepository>();

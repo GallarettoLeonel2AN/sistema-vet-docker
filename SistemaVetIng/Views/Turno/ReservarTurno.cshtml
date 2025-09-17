@@ -1,218 +1,258 @@
 ﻿@model SistemaVetIng.ViewsModels.ReservaTurnoViewModel
 
 @{
-    ViewData["Title"] = "Reservar Turno";
-    Layout = null;
+	ViewData["Title"] = "Reservar Turno";
+	Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"]</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+	<link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
 </head>
 <body>
-    <header class="main-header">
-        <a href="/Cliente/PaginaPrincipal" class="logo">
-            <i class="fas fa-paw"></i>
-            <span>VetIng</span>
-        </a>
-        <a asp-controller="Cliente" asp-action="PaginaPrincipal" class="btn sesion">
-            <i class="fas fa-arrow-left"></i> Volver al Inicio
-        </a>
-    </header>
+	<header class="main-header">
+		<a href="/Cliente/PaginaPrincipal" class="logo">
+			<i class="fas fa-paw"></i>
+			<span>VetIng</span>
+		</a>
+		<a asp-controller="Cliente" asp-action="PaginaPrincipal" class="btn sesion">
+			<i class="fas fa-arrow-left"></i> Volver al Inicio
+		</a>
+	</header>
 
-    <main class="registrar-form-main">
-        <section class="form-section">
-            <h2 class="section-title">Reservar Turno</h2>
-            <form asp-controller="Turno" asp-action="Reservar" method="post" class="main-form">
-                @Html.AntiForgeryToken()
+	<main class="registrar-form-main">
+		<section class="form-section">
+			<h2 class="section-title">Reservar Turno</h2>
+			<form asp-controller="Turno" asp-action="Reservar" method="post" class="main-form">
+				@Html.AntiForgeryToken()
 
-                <div class="form-group">
-                    <label asp-for="Fecha"></label>
-                    <input type="date" asp-for="Fecha" class="form-control" id="fechaTurno" required
-                           value="@(DateTime.Now.ToString("yyyy-MM-dd"))" />
-                    <span asp-validation-for="Fecha" class="text-danger validation-error"></span>
-                </div>
+				<div class="form-group">
+					<label asp-for="Fecha"></label>
+					<input type="date" asp-for="Fecha" class="form-control" id="fechaTurno" required
+										 value="@(DateTime.Now.ToString("yyyy-MM-dd"))" />
+					<span asp-validation-for="Fecha" class="text-danger validation-error"></span>
+				</div>
 
-                <div class="form-group" id="horariosDisponiblesContainer" style="display:none;">
-                    <label>Horarios Disponibles</label>
-                    <input type="hidden" asp-for="Horario" id="horarioHiddenInput" />
-                    <div class="horario-opciones" id="horariosOpciones">
-                    </div>
-                </div>
+				<div class="form-group" id="horariosDisponiblesContainer" style="display:none;">
+					<label>Horarios Disponibles</label>
+					<input type="hidden" asp-for="Horario" id="horarioHiddenInput" />
+					<div class="horario-opciones" id="horariosOpciones">
+					</div>
+				</div>
 
-                @if (Model.HasMascotas)
-                {
-                    <div class="form-group">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="primeraCitaCheckbox" asp-for="PrimeraCita" />
-                            <label class="form-check-label" for="primeraCitaCheckbox">Reservar para una nueva mascota (Primera Cita)</label>
-                        </div>
-                    </div>
-                }
+				@if (Model.HasMascotas)
+				{
+					<div class="form-group">
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" id="primeraCitaCheckbox" asp-for="PrimeraCita" />
+							<label class="form-check-label" for="primeraCitaCheckbox">Reservar para una nueva mascota (Primera Cita)</label>
+						</div>
+					</div>
+				}
 
-                <div id="mascotaContainer" class="form-group" style="@(Model.HasMascotas ? "" : "display:none;")">
-                    <label asp-for="MascotaId"></label>
-                    <select asp-for="MascotaId" class="form-control" id="mascotaSelect">
-                        <option value="">-- Selecciona una mascota --</option>
-                        @if (Model.Mascotas != null)
-                        {
-                            @foreach (var mascota in Model.Mascotas)
-                            {
-                                <option value="@mascota.Id">@mascota.Nombre (@mascota.Especie)</option>
-                            }
-                        }
-                    </select>
-                </div>
+				<div id="mascotaContainer" class="form-group" style="@(Model.HasMascotas ? "" : "display:none;")">
+					<label asp-for="MascotaId"></label>
+					<select asp-for="MascotaId" class="form-control" id="mascotaSelect">
+						<option value="">-- Selecciona una mascota --</option>
+						@if (Model.Mascotas != null)
+						{
+							@foreach (var mascota in Model.Mascotas)
+							{
+								<option value="@mascota.Id">@mascota.Nombre (@mascota.Especie)</option>
+							}
+						}
+					</select>
+				</div>
 
-                <div class="form-group">
-                    <label asp-for="Motivo"></label>
-                    <textarea asp-for="Motivo" class="form-control" rows="3" placeholder="Describe brevemente el motivo de la consulta."></textarea>
-                    <span asp-validation-for="Motivo" class="text-danger validation-error"></span>
-                </div>
+				<div class="form-group">
+					<label asp-for="Motivo"></label>
+					<textarea asp-for="Motivo" class="form-control" rows="3" placeholder="Describe brevemente el motivo de la consulta."></textarea>
+					<span asp-validation-for="Motivo" class="text-danger validation-error"></span>
+				</div>
 
-                <div class="form-actions">
-                    <button type="submit" class="button register-button">
-                        <i class="fa-solid fa-calendar-plus"></i> Confirmar Turno
-                    </button>
-                </div>
-            </form>
-        </section>
-    </main>
+				<div class="form-actions">
+					<button type="submit" class="button register-button">
+						<i class="fa-solid fa-calendar-plus"></i> Confirmar Turno
+					</button>
+				</div>
+			</form>
+		</section>
+	</main>
 
-    <footer class="main-footer">
-        <div class="footer-col footer-info">
-            <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
-            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
-            <div class="footer-social-icons">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            </div>
-        </div>
-        <div class="footer-col">
-            <h4 class="footer-heading">Acerca de VetIng</h4>
-            <ul class="footer-links">
-                <li><a href="#">Nuestra Historia</a></li>
-                <li><a href="#">Equipo</a></li>
-                <li><a href="#">Noticias y Blog</a></li>
-                <li><a href="#">Fundación VetIng</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4 class="footer-heading">Soporte</h4>
-            <ul class="footer-links">
-                <li><a href="#">Preguntas Frecuentes</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Guías de Usuario</a></li>
-                <li><a href="#">Descargar App Móvil</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4 class="footer-heading">Legal</h4>
-            <ul class="footer-links">
-                <li><a href="#">Términos y Condiciones</a></li>
-                <li><a href="#">Política de Privacidad</a></li>
-                <li><a href="#">Aviso Legal</a></li>
-                <li><a href="#">Cookies</a></li>
-            </ul>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
-        </div>
-    </footer>
+	<footer class="main-footer">
+		<div class="footer-col footer-info">
+			<div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
+			<p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+			<div class="footer-social-icons">
+				<a href="#"><i class="fa-brands fa-instagram"></i></a>
+				<a href="#"><i class="fa-brands fa-facebook"></i></a>
+				<a href="#"><i class="fa-brands fa-youtube"></i></a>
+				<a href="#"><i class="fa-brands fa-twitter"></i></a>
+			</div>
+		</div>
+		<div class="footer-col">
+			<h4 class="footer-heading">Acerca de VetIng</h4>
+			<ul class="footer-links">
+				<li><a href="#">Nuestra Historia</a></li>
+				<li><a href="#">Equipo</a></li>
+				<li><a href="#">Noticias y Blog</a></li>
+				<li><a href="#">Fundación VetIng</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
+			<h4 class="footer-heading">Soporte</h4>
+			<ul class="footer-links">
+				<li><a href="#">Preguntas Frecuentes</a></li>
+				<li><a href="#">Contacto</a></li>
+				<li><a href="#">Guías de Usuario</a></li>
+				<li><a href="#">Descargar App Móvil</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
+			<h4 class="footer-heading">Legal</h4>
+			<ul class="footer-links">
+				<li><a href="#">Términos y Condiciones</a></li>
+				<li><a href="#">Política de Privacidad</a></li>
+				<li><a href="#">Aviso Legal</a></li>
+				<li><a href="#">Cookies</a></li>
+			</ul>
+		</div>
+		<div class="footer-bottom">
+			<p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+		</div>
+	</footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script>
-        // Lógica para el menú de hamburguesa
-        const hamburger = document.querySelector('.hamburger-menu');
-        const mainNav = document.querySelector('.main-nav');
-        if (hamburger) {
-            hamburger.addEventListener('click', () => mainNav.classList.toggle('active'));
-        }
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script>
+		// Lógica para el menú de hamburguesa
+		const hamburger = document.querySelector('.hamburger-menu');
+		const mainNav = document.querySelector('.main-nav');
+		if (hamburger) {
+			hamburger.addEventListener('click', () => mainNav.classList.toggle('active'));
+		}
 
-        // Lógica para la Primera Cita
-        document.addEventListener('DOMContentLoaded', function () {
-            const primeraCitaCheckbox = document.getElementById('primeraCitaCheckbox');
-            const mascotaContainer = document.getElementById('mascotaContainer');
-            const mascotaSelect = document.getElementById('mascotaSelect');
+		// Lógica para la Primera Cita
+		document.addEventListener('DOMContentLoaded', function () {
+			const primeraCitaCheckbox = document.getElementById('primeraCitaCheckbox');
+			const mascotaContainer = document.getElementById('mascotaContainer');
+			const mascotaSelect = document.getElementById('mascotaSelect');
 
-            function toggleMascotaSelection() {
-                if (primeraCitaCheckbox.checked) {
-                    mascotaContainer.style.display = 'none';
-                    mascotaSelect.removeAttribute('required');
-                } else {
-                    mascotaContainer.style.display = 'block';
-                    mascotaSelect.setAttribute('required', 'required');
-                }
-            }
+			function toggleMascotaSelection() {
+				if (primeraCitaCheckbox.checked) {
+					mascotaContainer.style.display = 'none';
+					mascotaSelect.removeAttribute('required');
+				} else {
+					mascotaContainer.style.display = 'block';
+					mascotaSelect.setAttribute('required', 'required');
+				}
+			}
 
-            if (primeraCitaCheckbox) {
-                primeraCitaCheckbox.addEventListener('change', toggleMascotaSelection);
-                toggleMascotaSelection();
-            }
+			if (primeraCitaCheckbox) {
+				primeraCitaCheckbox.addEventListener('change', toggleMascotaSelection);
+				toggleMascotaSelection();
+			}
 
-            // Lógica para cargar los horarios disponibles
-            const fechaTurnoInput = $('#fechaTurno');
-            const horariosDisponiblesContainer = $('#horariosDisponiblesContainer');
-            const horariosOpcionesDiv = $('#horariosOpciones');
-            const horarioHiddenInput = $('#horarioHiddenInput');
+			// Lógica para cargar los horarios disponibles
+			const fechaTurnoInput = $('#fechaTurno');
+			const horariosDisponiblesContainer = $('#horariosDisponiblesContainer');
+			const horariosOpcionesDiv = $('#horariosOpciones');
+			const horarioHiddenInput = $('#horarioHiddenInput');
 
-            function cargarHorariosDisponibles() {
-                const fechaSeleccionada = fechaTurnoInput.val();
+			function cargarHorariosDisponibles() {
+				const fechaSeleccionada = fechaTurnoInput.val();
 
-                if (fechaSeleccionada) {
-                    horariosOpcionesDiv.empty().html('<p>Cargando horarios...</p>');
-                    horariosDisponiblesContainer.show();
+				if (fechaSeleccionada) {
+					horariosOpcionesDiv.empty().html('<p>Cargando horarios...</p>');
+					horariosDisponiblesContainer.show();
 
-                    $.ajax({
-                        url: '@Url.Action("ObtenerHorariosDisponibles", "Turno")',
-                        type: 'GET',
-                        data: { fecha: fechaSeleccionada },
-                        success: function(horarios) {
-                            horariosOpcionesDiv.empty();
-                            if (horarios && horarios.length > 0) {
-                                horarios.forEach(horario => {
-                                    const btn = `<button type="button" class="horario-btn" data-horario="${horario}">${horario}</button>`;
-                                    horariosOpcionesDiv.append(btn);
-                                });
-                            } else {
-                                horariosOpcionesDiv.html('<p>No hay horarios disponibles para la fecha seleccionada.</p>');
-                            }
-                        },
-                        error: function() {
-                            horariosOpcionesDiv.html('<p>Ocurrió un error al cargar los horarios. Por favor, intente de nuevo.</p>');
-                        }
-                    });
-                } else {
-                    horariosDisponiblesContainer.hide();
-                    horarioHiddenInput.val('');
-                }
-            }
+					$.ajax({
+						url: '@Url.Action("ObtenerHorariosDisponibles", "Turno")',
+						type: 'GET',
+						data: { fecha: fechaSeleccionada },
+						success: function(horarios) {
+							horariosOpcionesDiv.empty();
+							if (horarios && horarios.length > 0) {
+								horarios.forEach(horario => {
+									const btn = `<button type="button" class="horario-btn" data-horario="${horario}">${horario}</button>`;
+									horariosOpcionesDiv.append(btn);
+								});
+							} else {
+								horariosOpcionesDiv.html('<p>No hay horarios disponibles para la fecha seleccionada.</p>');
+							}
+						},
+						error: function() {
+							horariosOpcionesDiv.html('<p>Ocurrió un error al cargar los horarios. Por favor, intente de nuevo.</p>');
+						}
+					});
+				} else {
+					horariosDisponiblesContainer.hide();
+					horarioHiddenInput.val('');
+				}
+			}
 
-            // Lógica para seleccionar un botón de horario
-            horariosOpcionesDiv.on('click', '.horario-btn', function() {
-                horariosOpcionesDiv.find('.horario-btn').removeClass('selected');
-                $(this).addClass('selected');
-                horarioHiddenInput.val($(this).data('horario'));
-            });
+			// Lógica para seleccionar un botón de horario
+			horariosOpcionesDiv.on('click', '.horario-btn', function() {
+				horariosOpcionesDiv.find('.horario-btn').removeClass('selected');
+				$(this).addClass('selected');
+				horarioHiddenInput.val($(this).data('horario'));
+			});
 
-            // Escucha los cambios en el input de fecha
-            fechaTurnoInput.on('change', cargarHorariosDisponibles);
+			// Escucha los cambios en el input de fecha
+			fechaTurnoInput.on('change', cargarHorariosDisponibles);
 
-            // Llama a la función al cargar la página para inicializar
-            cargarHorariosDisponibles();
-        });
-    </script>
+			// Llama a la función al cargar la página para inicializar
+			cargarHorariosDisponibles();
 
-    @await Component.InvokeAsync("NToastNotify")
+			// NUEVA LÓGICA PARA EL ENVÍO DEL FORMULARIO CON AJAX
+			const reservaForm = $('form.main-form');
+			reservaForm.on('submit', function (e) {
+				e.preventDefault();
+
+				const formData = new FormData(this);
+				const submitButton = $(this).find('button[type="submit"]');
+
+				submitButton.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Reservando...');
+
+				$.ajax({
+					url: this.action,
+					type: this.method,
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+						if (response.success) {
+							toastr.success("¡Turno reservado con éxito!");
+
+							// Vuelve a cargar los horarios para refrescar la lista
+							cargarHorariosDisponibles();
+
+							// Limpia el formulario y oculta los horarios
+							reservaForm[0].reset();
+							horariosOpcionesDiv.empty();
+							horariosDisponiblesContainer.hide();
+						} else {
+							toastr.error(response.message || "Ocurrió un error al reservar el turno.");
+						}
+					},
+					error: function(xhr, status, error) {
+						toastr.error("Ocurrió un error al conectar con el servidor. Por favor, intente de nuevo.");
+					},
+					complete: function() {
+						submitButton.prop('disabled', false).html('<i class="fa-solid fa-calendar-plus"></i> Confirmar Turno');
+					}
+				});
+			});
+		});
+	</script>
+
+	@await Component.InvokeAsync("NToastNotify")
 </body>
 </html>
