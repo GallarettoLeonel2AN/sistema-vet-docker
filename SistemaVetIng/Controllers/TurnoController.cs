@@ -75,6 +75,12 @@ namespace SistemaVetIng.Controllers
                     ModelState.AddModelError("MascotaId", "Por favor, seleccione una mascota.");
                 }
             }
+            // Lógica para manejar Primera Cita
+            if (!model.HasMascotas)
+            {
+                model.PrimeraCita = true;
+                model.MascotaId = null;
+            }
 
             var usuarioActual = await _userManager.GetUserAsync(User);
             if (usuarioActual == null)
