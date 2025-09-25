@@ -44,8 +44,8 @@ namespace SistemaVetIng.Controllers
             if (cliente == null)
             {
                 _toastNotification.AddWarningToastMessage("Debe completar su perfil de cliente para reservar un turno.");
-                // Redirige a donde el usuario pueda crear su perfil de cliente
-                return RedirectToAction("CrearPerfil", "Cliente");
+           
+                return RedirectToAction("RegistrarCliente", "Cliente");
             }
 
             var mascotasDelCliente = (await _mascotaService.ListarMascotasPorClienteId(cliente.Id)).ToList();
@@ -90,8 +90,6 @@ namespace SistemaVetIng.Controllers
 
             model.ClienteId = cliente.Id;
 
-         
-         
 
             try
             {

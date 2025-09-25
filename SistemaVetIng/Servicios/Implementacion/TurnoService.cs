@@ -27,16 +27,26 @@ namespace SistemaVetIng.Servicios.Implementacion
                 return new List<string>(); // No hay configuración, no hay horarios disponibles.
             }
 
-            // Obtener la lista de todos los posibles horarios según la config
-            var horariosPosibles = GenerarHorarios(configuracion, fecha);
+            try
+            {
+                // Obtener la lista de todos los posibles horarios según la config
+                var horariosPosibles = GenerarHorarios(configuracion, fecha);
 
-            // Obtener los turnos ya ocupados para esa fecha
-            var turnosOcupados = (await _turnoRepository.GetTurnosByFecha(fecha)).Select(t => t.Horario.ToString("HH:mm")).ToHashSet();
+                // Obtener los turnos ya ocupados para esa fecha
+                var turnosOcupados = (await _turnoRepository.GetTurnosByFecha(fecha))
+                    .Select(t => t.Horario.ToString(@"hh\:mm")) 
+                    .ToHashSet();
 
-            // Filtrar y obtener los horarios disponibles
-            var horariosDisponibles = horariosPosibles.Where(h => !turnosOcupados.Contains(h)).ToList();
+                // Filtrar y obtener los horarios disponibles
+                var horariosDisponibles = horariosPosibles.Where(h => !turnosOcupados.Contains(h)).ToList();
 
-            return horariosDisponibles;
+                return horariosDisponibles;
+            }
+            catch (Exception ex)
+            {
+                  Console.WriteLine($"Error al obtener turnos ocupados: {ex.Message}");
+        return new List<string>(); 
+            }
         }
 
         public async Task ReservarTurnoAsync(ReservaTurnoViewModel model)
@@ -79,7 +89,7 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             while (horaActual < horaFin)
             {
-                horarios.Add(horaActual.ToString("HH:mm"));
+                horarios.Add(horaActual.ToString(@"HH\:mm"));
                 horaActual = horaActual.Add(TimeSpan.FromMinutes(duracion));
             }
 
