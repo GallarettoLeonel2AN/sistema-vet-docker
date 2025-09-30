@@ -2,7 +2,6 @@
 using SistemaVetIng.Data;
 using SistemaVetIng.Models;
 using SistemaVetIng.Repository.Interfaces;
-using System.Threading.Tasks;
 
 namespace SistemaVetIng.Repository.Implementacion
 {
@@ -39,7 +38,7 @@ namespace SistemaVetIng.Repository.Implementacion
 
         public async Task<Cliente> ObtenerPorIdUsuario(int Usuario)
         {
-          return await _context.Clientes.FirstOrDefaultAsync(c => c.UsuarioId == Usuario);
+            return await _context.Clientes.FirstOrDefaultAsync(c => c.UsuarioId == Usuario);
 
         }
     }

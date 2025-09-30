@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
-using SistemaVetIng.Data;
-using SistemaVetIng.Models;
-using SistemaVetIng.Models.Indentity;
-using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
@@ -66,7 +61,7 @@ namespace SistemaVetIng.Controllers
                 NombreDueno = $"{m.Propietario?.Nombre} {m.Propietario?.Apellido}",
                 ClienteId = m.Propietario?.Id ?? 0
             }).ToList();
-           
+
             return View(viewModel);
         }
         #endregion
@@ -104,7 +99,7 @@ namespace SistemaVetIng.Controllers
         }
         #endregion
 
- 
+
         #region MODIFICAR VETERINARIO
         [HttpGet]
         public async Task<IActionResult> ModificarVeterinario(int id)

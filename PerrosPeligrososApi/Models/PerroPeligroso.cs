@@ -17,14 +17,14 @@ namespace PerrosPeligrososApi.Models
         public string Raza { get; set; }
         public int MascotaIdOriginal { get; set; }
 
-        // Información del cliente que registró esta mascota peligrosa
+        // Información del cliente que registró esta mascota 
         public long ClienteDni { get; set; }
         [StringLength(100)]
         public string ClienteNombre { get; set; }
         [StringLength(100)]
         public string ClienteApellido { get; set; }
 
-        public DateTime FechaRegistroApi { get; set; } = DateTime.Now; // Fecha en que se registró en esta API
+        public DateTime FechaRegistroApi { get; set; } = DateTime.Now; // Fecha en que se registró 
 
         public ChipPerroPeligroso? Chip { get; set; } // Puede ser nulo si no tiene chip
     }

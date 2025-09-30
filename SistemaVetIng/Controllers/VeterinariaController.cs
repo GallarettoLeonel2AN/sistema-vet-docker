@@ -1,36 +1,30 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NToastNotify;
-using SistemaVetIng.Data;
 using SistemaVetIng.Models;
-using SistemaVetIng.Models.Indentity;
-using SistemaVetIng.Repository.Implementacion;
-using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
 namespace SistemaVetIng.Controllers
 {
-    [Authorize(Roles = "Veterinaria")] 
+    [Authorize(Roles = "Veterinaria")]
     public class VeterinariaController : Controller
     {
-       
+
         private readonly IToastNotification _toastNotification;
         private readonly IVeterinariaConfigService _veterinariaConfigService;
         private readonly IVeterinarioService _veterinarioService;
         private readonly IClienteService _clienteService;
         private readonly IMascotaService _mascotaService;
-        private readonly IVeterinariaService _veterinariaService;
+        
 
         public VeterinariaController(
             IVeterinariaConfigService service,
             IToastNotification toastNotification,
             IMascotaService mascotaService,
             IClienteService clienteService,
-            IVeterinarioService veterinarioService,
-            IVeterinariaService veterinariaService
+            IVeterinarioService veterinarioService
+            
             )
         {
             _mascotaService = mascotaService;
@@ -38,7 +32,7 @@ namespace SistemaVetIng.Controllers
             _clienteService = clienteService;
             _veterinariaConfigService = service;
             _toastNotification = toastNotification;
-            _veterinariaService = veterinariaService;
+           
         }
 
         #region PAGINA PRINCIPAL
@@ -129,8 +123,8 @@ namespace SistemaVetIng.Controllers
                  .FirstOrDefault();
 
             viewModel.RazaMayorDemanda = razaMayorDemanda;
-            viewModel.IngresosMensualesEstimados = 1500.00m; 
-            viewModel.IngresosDiariosEstimados = 5000.00m;    
+            viewModel.IngresosMensualesEstimados = 1500.00m;
+            viewModel.IngresosDiariosEstimados = 5000.00m;
 
             return View(viewModel);
         }

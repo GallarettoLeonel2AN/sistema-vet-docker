@@ -4,8 +4,6 @@ using SistemaVetIng.Models.Indentity;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewModels;
 using SistemaVetIng.ViewsModels;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SistemaVetIng.Servicios.Implementacion
 {
@@ -48,7 +46,7 @@ namespace SistemaVetIng.Servicios.Implementacion
             {
                 return "Cliente";
             }
-            return "Veterinaria"; 
+            return "Veterinaria";
         }
 
         public async Task<string?> GenerarPasswordResetToken(string email)
@@ -84,7 +82,7 @@ namespace SistemaVetIng.Servicios.Implementacion
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                return (false, new List<IdentityError>()); // No se encontraron errores, pero el usuario no existe.
+                return (false, new List<IdentityError>()); 
             }
 
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);

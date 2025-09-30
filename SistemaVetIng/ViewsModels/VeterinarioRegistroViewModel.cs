@@ -5,7 +5,7 @@ namespace SistemaVetIng.ViewsModels
 {
     public class VeterinarioRegistroViewModel
     {
-        // Propiedades de Usuario/Identity
+        
         [Required(ErrorMessage = "El email es obligatorio.")]
         [EmailAddress(ErrorMessage = "Formato de email inválido.")]
         [Display(Name = "Email")]
@@ -17,7 +17,7 @@ namespace SistemaVetIng.ViewsModels
         [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} y un máximo de {1} caracteres.", MinimumLength = 6)]
         public string Password { get; set; }
 
-        // Propiedades de la Persona
+        
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(100)]
         public string Nombre { get; set; }
@@ -38,7 +38,7 @@ namespace SistemaVetIng.ViewsModels
        
         public long Telefono { get; set; }
 
-        // Propiedades específicas del Veterinario
+        
         [Required(ErrorMessage = "La matrícula es obligatoria.")]
         [StringLength(50)]
         public string Matricula { get; set; }

@@ -18,8 +18,8 @@ namespace PerrosPeligrososApi.Controllers
             _context = context;
         }
 
-        // Endpoint para registrar un perro peligroso
-        [HttpPost("registrar")] // POST a /api/perros-peligrosos/registrar
+        
+        [HttpPost("registrar")] 
         public async Task<IActionResult> Registrar([FromBody] PerroPeligrosoRegistroDto registroDto) 
         {
 
@@ -39,7 +39,7 @@ namespace PerrosPeligrososApi.Controllers
                     ClienteDni = registroDto.ClienteDni,
                     ClienteNombre = registroDto.ClienteNombre,
                     ClienteApellido = registroDto.ClienteApellido,
-                    FechaRegistroApi = DateTime.Now // La fecha de registro en esta API
+                    FechaRegistroApi = DateTime.Now 
                 }; 
 
                 if (registroDto.TieneChip && !string.IsNullOrEmpty(registroDto.ChipCodigo))
@@ -52,7 +52,7 @@ namespace PerrosPeligrososApi.Controllers
                 }
 
                 _context.PerrosPeligrosos.Add(perroPeligroso);
-                await _context.SaveChangesAsync(); // Guarda el perro peligroso y su chip (si existe)
+                await _context.SaveChangesAsync(); 
 
                 _logger.LogInformation("--------------------------------------------------");
                 _logger.LogInformation($"Registro de Perro Peligroso guardado en la base de datos de la API:");

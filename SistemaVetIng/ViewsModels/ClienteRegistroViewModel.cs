@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Principal;
 
 namespace SistemaVetIng.ViewsModels
 {
     public class ClienteRegistroViewModel
     {
-        // Usuario(Identity)
+
         [Required(ErrorMessage = "El nombre es obligatorio")]
         public string Nombre { get; set; }
 

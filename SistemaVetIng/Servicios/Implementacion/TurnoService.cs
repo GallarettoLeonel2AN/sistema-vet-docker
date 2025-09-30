@@ -2,9 +2,6 @@
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SistemaVetIng.Servicios.Implementacion
 {
@@ -34,7 +31,7 @@ namespace SistemaVetIng.Servicios.Implementacion
 
                 // Obtener los turnos ya ocupados para esa fecha
                 var turnosOcupados = (await _turnoRepository.GetTurnosByFecha(fecha))
-                    .Select(t => t.Horario.ToString(@"hh\:mm")) 
+                    .Select(t => t.Horario.ToString(@"hh\:mm"))
                     .ToHashSet();
 
                 // Filtrar y obtener los horarios disponibles
@@ -44,8 +41,8 @@ namespace SistemaVetIng.Servicios.Implementacion
             }
             catch (Exception ex)
             {
-                  Console.WriteLine($"Error al obtener turnos ocupados: {ex.Message}");
-        return new List<string>(); 
+                Console.WriteLine($"Error al obtener turnos ocupados: {ex.Message}");
+                return new List<string>();
             }
         }
 

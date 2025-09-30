@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
@@ -14,7 +13,7 @@ namespace SistemaVetIng.Controllers
         private readonly IAtencionVeterinariaService _atencionService;
         private readonly IToastNotification _toastNotification;
         private readonly IHistoriaClinicaService _historiaClinicaService;
-        public AtencionVeterinariaController(IAtencionVeterinariaService atencionService, 
+        public AtencionVeterinariaController(IAtencionVeterinariaService atencionService,
             IToastNotification toastNotification,
             IHistoriaClinicaService historiaClinicaService)
         {

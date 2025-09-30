@@ -1,14 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NToastNotify;
-using SistemaVetIng.Data;
-using SistemaVetIng.Models;
-using SistemaVetIng.Repository.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
-using System.Text;
-using System.Text.Json;
 
 namespace SistemaVetIng.Controllers
 {
@@ -18,7 +12,7 @@ namespace SistemaVetIng.Controllers
         private readonly IMascotaService _mascotaService;
         private readonly IClienteService _clienteService;
         private readonly IToastNotification _toastNotification;
-       
+
 
         private readonly List<string> _razasPeligrosas = new List<string>
         {
@@ -38,11 +32,11 @@ namespace SistemaVetIng.Controllers
 
 
         #region LISTARCLIENTES
-        // Listado de clientes para asociarle MASCOTAS
+       
         public async Task<IActionResult> ListarClientes()
         {
             var clientes = await _clienteService.ListarTodo();
-            return View(clientes); 
+            return View(clientes);
         }
         #endregion
 
@@ -85,7 +79,7 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
 
-            // Llama al servicio para manejar toda la lógica de negocio.
+            
             var (success, message) = await _mascotaService.Registrar(model);
 
             if (success)
@@ -95,7 +89,7 @@ namespace SistemaVetIng.Controllers
             }
             else
             {
-                // Maneja los errores devueltos por el servicio.
+                
                 _toastNotification.AddErrorToastMessage(message);
                 // Si el error es por un cliente no válido, redirige a la lista de clientes.
                 if (message.Contains("El cliente asociado no es válido"))
@@ -103,7 +97,7 @@ namespace SistemaVetIng.Controllers
                     return RedirectToAction(nameof(ListarClientes));
                 }
 
-                // Vuelve a la vista con los datos para que el usuario no pierda lo que ya ingresó.
+                
                 var cliente = await _clienteService.ObtenerPorId(model.ClienteId);
                 if (cliente != null)
                 {
@@ -133,7 +127,7 @@ namespace SistemaVetIng.Controllers
                 return RedirectToAction(nameof(ListarClientes));
             }
 
-            
+
             var viewModel = new MascotaEditarViewModel
             {
                 Id = mascota.Id,
@@ -147,7 +141,7 @@ namespace SistemaVetIng.Controllers
                 Chip = (mascota.Chip != null)
             };
 
-           
+
             var cliente = await _clienteService.ObtenerPorId(mascota.ClienteId);
             if (cliente != null)
             {
@@ -179,7 +173,7 @@ namespace SistemaVetIng.Controllers
                 if (success)
                 {
                     _toastNotification.AddSuccessToastMessage(message);
-                    return RedirectToAction(nameof(ListarClientes)); // Redirigir al cliente después de la modificación.
+                    return RedirectToAction(nameof(ListarClientes)); 
                 }
                 else
                 {
@@ -210,7 +204,7 @@ namespace SistemaVetIng.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarMascota(int? id)
         {
-            
+
             if (id == null)
             {
                 _toastNotification.AddErrorToastMessage("No se pudo eliminar la mascota. ID no proporcionado.");

@@ -1,11 +1,8 @@
-﻿// Archivo: Services/EmailSender.cs
-using MailKit.Net.Smtp;
+﻿
 using MailKit.Security;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using MimeKit;
 using MimeKit.Text;
-using System.Net.Mail;
-using System.Threading.Tasks;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 

@@ -1,30 +1,24 @@
-﻿using Microsoft.AspNetCore.Identity; 
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
-using SistemaVetIng.Data; 
-using SistemaVetIng.Models; 
-using SistemaVetIng.Models.Indentity;
-using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
-using SistemaVetIng.Views.Veterinaria;
-using SistemaVetIng.ViewsModels; 
+using SistemaVetIng.ViewsModels;
 
 namespace SistemaVetIng.Controllers
 {
 
     public class ClienteController : Controller
     {
- 
+
         private readonly IToastNotification _toastNotification;
         private readonly IClienteService _clienteService;
-        private readonly IMascotaService _mascotaService;
+        
 
-        public ClienteController(IToastNotification toastNotification, IClienteService clienteService, IMascotaService mascotaService)
+        public ClienteController(IToastNotification toastNotification, IClienteService clienteService)
         {
             _toastNotification = toastNotification;
             _clienteService = clienteService;
-            _mascotaService = mascotaService;
+            
         }
 
 
@@ -61,7 +55,7 @@ namespace SistemaVetIng.Controllers
             {
                 await _clienteService.Registrar(model);
                 _toastNotification.AddSuccessToastMessage("¡Cliente registrado correctamente!");
-                // Redireccion
+                
                 if (User.IsInRole("Veterinario"))
                 {
                     return RedirectToAction("PaginaPrincipal", "Veterinario");
@@ -101,7 +95,8 @@ namespace SistemaVetIng.Controllers
                 else
                 {
                     return RedirectToAction("PaginaPrincipal", "Veterinaria");
-                };
+                }
+                ;
             }
 
             var viewModel = new ClienteEditarViewModel
@@ -141,7 +136,8 @@ namespace SistemaVetIng.Controllers
                 else
                 {
                     return RedirectToAction("PaginaPrincipal", "Veterinaria");
-                };
+                }
+                ;
             }
             catch (KeyNotFoundException)
             {
@@ -153,7 +149,7 @@ namespace SistemaVetIng.Controllers
                 _toastNotification.AddErrorToastMessage($"Error: {ex.Message}");
                 return View(model);
             }
-           
+
         }
         #endregion
 

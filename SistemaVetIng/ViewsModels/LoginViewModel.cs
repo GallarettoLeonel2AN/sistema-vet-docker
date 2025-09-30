@@ -1,13 +1,13 @@
-﻿// Models/ViewModels/LoginViewModel.cs (o AuthViewModels/LoginViewModel.cs)
+﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace SistemaVetIng.ViewModels // Ajusta el namespace según tu proyecto
+namespace SistemaVetIng.ViewModels 
 {
     public class LoginViewModel
     {
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [Display(Name = "Usuario")]
-        public string UserName { get; set; } // O Email, si usas email para login
+        public string UserName { get; set; } 
 
         [Required(ErrorMessage = "La contraseña es obligatoria.")]
         [DataType(DataType.Password)]

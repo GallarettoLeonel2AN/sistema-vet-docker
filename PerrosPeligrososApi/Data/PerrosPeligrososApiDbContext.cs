@@ -10,7 +10,7 @@ namespace PerrosPeligrososApi.Data
         {
         }
 
-        // DbSets 
+       
         public DbSet<PerroPeligroso> PerrosPeligrosos { get; set; }
         public DbSet<ChipPerroPeligroso> ChipsPerroPeligroso { get; set; }
 

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SistemaVetIng.Models;
-using SistemaVetIng.Repository.Implementacion;
+﻿using SistemaVetIng.Models;
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 
@@ -45,7 +42,7 @@ namespace SistemaVetIng.Servicios.Implementacion
                 await _veterinariaRepository.Guardar();
             }
             catch (Exception ex)
-            {          
+            {
                 throw new Exception("No se pudo guardar la configuración.");
             }
 

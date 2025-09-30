@@ -1,21 +1,15 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using NToastNotify;
 using SistemaVetIng.Data;
-using SistemaVetIng.Models;
 using SistemaVetIng.Models.Extension;
 using SistemaVetIng.Models.Indentity;
-using SistemaVetIng.Repository.Implementacion;
-using SistemaVetIng.Repository.Interfaces;
-using SistemaVetIng.Servicios.Implementacion;
-using SistemaVetIng.Servicios.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración de servicios
+// Configuración de conexion
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -49,8 +43,8 @@ builder.Services.AddControllersWithViews()
         ProgressBar = true,
 
         // Duración y comportamiento
-        TimeOut = 5000, 
-        ExtendedTimeOut = 1000, 
+        TimeOut = 5000,
+        ExtendedTimeOut = 1000,
         NewestOnTop = true,
         TapToDismiss = false // La notificación no se cierra al hacer clic
     });
@@ -78,12 +72,12 @@ using (var scope = app.Services.CreateScope())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// Middleware de Autenticación, Autorización y Routing (orden correcto)
+
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Middleware de NToastNotify 
+
 app.UseNToastNotify();
 
 app.MapControllerRoute(

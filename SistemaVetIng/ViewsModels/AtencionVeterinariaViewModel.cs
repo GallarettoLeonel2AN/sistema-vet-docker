@@ -19,11 +19,11 @@ namespace SistemaVetIng.ViewsModels
         [Display(Name = "Peso (kg)")]
         public float PesoKg { get; set; }
 
-        // Clave foránea para la Historia Clínica
+        
         [Required]
         public int HistoriaClinicaId { get; set; }
 
-        // Propiedad para el ID del veterinario que realiza la atención
+        
         public int VeterinarioId { get; set; }
 
         public int MascotaId { get; set; }
@@ -60,7 +60,7 @@ namespace SistemaVetIng.ViewsModels
         [Display(Name = "Observaciones del Tratamiento")]
         public string? ObservacionesTratamiento { get; set; }
 
-        // Colecciones para las selecciones del usuario
+        
         public List<int> EstudiosSeleccionadosIds { get; set; } = new List<int>();
         public List<int> VacunasSeleccionadasIds { get; set; } = new List<int>();
     }

@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaVetIng.Data;
+using SistemaVetIng.Models;
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
-using SistemaVetIng.Models;
 using System.Text;
-using SistemaVetIng.Data;
+using System.Text.Json;
 
 namespace SistemaVetIng.Servicios.Implementacion
 {
@@ -26,7 +24,7 @@ namespace SistemaVetIng.Servicios.Implementacion
             _chipRepository = chipRepository;
             _context = context;
         }
-        
+
         private readonly List<string> _razasPeligrosas = new List<string>
         {
             "pitbull", "rottweiler", "dogo argentino", "fila brasileiro",
@@ -49,14 +47,14 @@ namespace SistemaVetIng.Servicios.Implementacion
 
         public async Task<(bool success, string message)> Registrar(MascotaRegistroViewModel model)
         {
-            // Validar la existencia del cliente antes de continuar.
+            
             var clienteExiste = await _clienteRepository.ObtenerPorId(model.ClienteId);
             if (clienteExiste == null)
             {
                 return (false, "El cliente asociado no es válido. Intente de nuevo.");
             }
 
-            // Crear una nueva instancia de Mascota a partir del ViewModel.
+            // Crear  Mascota a partir del ViewModel.
             var mascota = new Mascota
             {
                 Nombre = model.Nombre,
@@ -64,13 +62,13 @@ namespace SistemaVetIng.Servicios.Implementacion
                 Raza = model.Raza,
                 FechaNacimiento = model.FechaNacimiento,
                 Sexo = model.Sexo,
-                RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza), // Asume que este método existe en el servicio.
+                RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza), 
                 ClienteId = model.ClienteId,
-                HistoriaClinica = new HistoriaClinica() // La HistoriaClinica se crea automáticamente.
+                HistoriaClinica = new HistoriaClinica() 
             };
 
             // Lógica para el CHIP y la API de Perros Peligrosos.
-            
+
             string apiMessage = string.Empty;
             bool apiCommunicationSuccess = true;
             if (mascota.RazaPeligrosa)
@@ -116,17 +114,17 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             try
             {
-                // Registrar la mascota y el chip (si aplica) de forma transaccional.
+                // Registrar la mascota y el chip (si aplica)
                 await _mascotaRepository.Agregar(mascota);
 
-                // Guardar cambios en el repositorio.
+            
                 await _mascotaRepository.Guardar();
 
                 return (true, $"Mascota '{mascota.Nombre}' registrada correctamente. " + apiMessage);
             }
             catch (Exception ex)
             {
-                // Devolver un error específico para manejar en la controladora.
+               
                 return (false, $"Error al registrar la mascota: {ex.Message}");
             }
         }
@@ -134,24 +132,24 @@ namespace SistemaVetIng.Servicios.Implementacion
 
         public async Task<(bool success, string message)> Modificar(MascotaEditarViewModel model)
         {
-            
-            var mascota = await _mascotaRepository.ObtenerPorId(model.Id); 
+
+            var mascota = await _mascotaRepository.ObtenerPorId(model.Id);
             if (mascota == null)
             {
                 return (false, "La mascota que intenta editar no existe.");
             }
 
-           
+
             mascota.Nombre = model.Nombre;
             mascota.Especie = model.Especie;
             mascota.Raza = model.Raza;
             mascota.FechaNacimiento = model.FechaNacimiento;
             mascota.Sexo = model.Sexo;
-            mascota.RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza); 
+            mascota.RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza);
 
             try
             {
-                
+
                 if (mascota.RazaPeligrosa && model.Chip && mascota.Chip == null)
                 {
                     // Caso 1: Se convirtió en peligrosa y se le agregó un chip.
@@ -161,7 +159,7 @@ namespace SistemaVetIng.Servicios.Implementacion
                         MascotaId = mascota.Id
                     };
                     mascota.Chip = nuevoChip;
-                    await _chipRepository.Agregar(nuevoChip); 
+                    await _chipRepository.Agregar(nuevoChip);
                 }
                 else if (mascota.RazaPeligrosa && !model.Chip && mascota.Chip != null)
                 {
@@ -193,7 +191,7 @@ namespace SistemaVetIng.Servicios.Implementacion
                     );
                 }
 
-                // 5. Guardar los cambios.
+               
                 _mascotaRepository.Modificar(mascota);
                 await _mascotaRepository.Guardar();
 
@@ -201,13 +199,13 @@ namespace SistemaVetIng.Servicios.Implementacion
             }
             catch (Exception ex)
             {
-                
+
                 return (false, $"Error al actualizar la mascota: {ex.Message}");
             }
         }
         public async Task<(bool success, string message)> Eliminar(int id)
         {
-            // Cargar la mascota y todas sus entidades relacionadas en un solo query.
+          
             var mascota = await _context.Mascotas
                 .Include(m => m.HistoriaClinica)
                     .ThenInclude(h => h.Atenciones)
@@ -237,24 +235,24 @@ namespace SistemaVetIng.Servicios.Implementacion
                         if (atencion.Vacunas != null) _context.Vacunas.RemoveRange(atencion.Vacunas);
                         if (atencion.EstudiosComplementarios != null) _context.Estudios.RemoveRange(atencion.EstudiosComplementarios);
                     }
-                   
+
                     _context.AtencionesVeterinarias.RemoveRange(mascota.HistoriaClinica.Atenciones);
                 }
 
-              
+
                 if (mascota.HistoriaClinica != null)
                 {
                     _context.HistoriasClinicas.Remove(mascota.HistoriaClinica);
                 }
 
-                
+
                 if (mascota.Chip != null)
                 {
                     _chipRepository.Eliminar(mascota.Chip);
                 }
-                
+
                 _mascotaRepository.Eliminar(mascota);
- 
+
                 await _mascotaRepository.Guardar();
 
                 return (true, "La mascota ha sido eliminada exitosamente.");
@@ -273,13 +271,13 @@ namespace SistemaVetIng.Servicios.Implementacion
 
         public async Task<IEnumerable<Mascota>> ListarTodo()
         {
-           return await _mascotaRepository.ListarTodo();
+            return await _mascotaRepository.ListarTodo();
         }
 
-        
+
         public async Task<Mascota> ObtenerPorId(int id)
         {
-           return await _mascotaRepository.ObtenerPorId(id);
+            return await _mascotaRepository.ObtenerPorId(id);
         }
 
         public async Task<IEnumerable<Mascota>> FiltrarPorBusqueda(string busqueda)

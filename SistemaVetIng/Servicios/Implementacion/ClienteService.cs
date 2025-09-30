@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
-using SistemaVetIng.Repository.Implementacion;
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
@@ -24,15 +22,15 @@ namespace SistemaVetIng.Servicios.Implementacion
         #region REGISTRAR CLIENTE
         public async Task<Cliente> Registrar(ClienteRegistroViewModel viewModel)
         {
-           
+
             var usuario = new Usuario
             {
-                UserName = viewModel.Email, 
+                UserName = viewModel.Email,
                 Email = viewModel.Email,
                 NombreUsuario = $"{viewModel.Nombre} {viewModel.Apellido}",
             };
 
-            // Intentamos crear el usuario en el sistema de autenticación de Identity con la contraseña proporcionada.
+            //creaamos el usuario con la autenticación de Identity con la contraseña proporcionada en la vista.
 
             var result = await _userManager.CreateAsync(usuario, viewModel.Password);
             if (!result.Succeeded)
@@ -59,6 +57,7 @@ namespace SistemaVetIng.Servicios.Implementacion
         }
         #endregion
 
+        #region MODIFICAR CLIENTE
         public async Task<Cliente> Modificar(ClienteEditarViewModel model)
         {
 
@@ -79,7 +78,9 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             return cliente;
         }
+        #endregion
 
+        #region ELIMINAR CLIENTE
         public async Task Eliminar(int id)
         {
             var cliente = await _clienteRepository.ObtenerPorId(id);
@@ -102,7 +103,9 @@ namespace SistemaVetIng.Servicios.Implementacion
             }
 
         }
+        #endregion
 
+        #region FILTRADO CLIENTES
         public async Task<IEnumerable<Cliente>> ListarTodo()
         {
             return await _clienteRepository.ListarTodo();
@@ -127,5 +130,6 @@ namespace SistemaVetIng.Servicios.Implementacion
         {
             return await _clienteRepository.ObtenerPorIdUsuario(id);
         }
+        #endregion
     }
 }

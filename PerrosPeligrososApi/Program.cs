@@ -3,9 +3,9 @@ using PerrosPeligrososApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-// Configuración de CORS para permitir cualquier origen (modo desarrollo/pruebas)
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -18,7 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// cadena conexion
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<PerrosPeligrososApiDbContext>(options =>
@@ -27,7 +27,7 @@ builder.Services.AddDbContext<PerrosPeligrososApiDbContext>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -37,8 +37,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-// Usa la política de CORS definida
-app.UseCors("AllowAllOrigins"); // Cambiado a "AllowAllOrigins"
+
+app.UseCors("AllowAllOrigins"); 
 
 app.MapControllers();
 

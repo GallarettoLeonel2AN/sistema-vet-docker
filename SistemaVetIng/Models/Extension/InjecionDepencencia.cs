@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SistemaVetIng.Data;
 using SistemaVetIng.Repository.Implementacion;
@@ -9,7 +8,7 @@ using SistemaVetIng.Servicios.Interfaces;
 
 namespace SistemaVetIng.Models.Extension
 {
-    public static class InjecionDepencencia 
+    public static class InjecionDepencencia
     {
         public static IServiceCollection AddDatabase(
            this IServiceCollection services,
@@ -39,8 +38,8 @@ namespace SistemaVetIng.Models.Extension
         {
 
             services.AddControllersWithViews();
-            services.AddRazorPages();         
-            services.AddSingleton(sp => sp.GetRequiredService<IOptions<SmtpSettings>>().Value);           
+            services.AddRazorPages();
+            services.AddSingleton(sp => sp.GetRequiredService<IOptions<SmtpSettings>>().Value);
             services.AddScoped<IVeterinarioService, VeterinarioService>();
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IMascotaService, MascotaService>();

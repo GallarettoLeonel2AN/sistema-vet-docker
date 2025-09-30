@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using SistemaVetIng.Models;
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
@@ -31,7 +30,7 @@ namespace SistemaVetIng.Servicios.Implementacion
                 HistoriaClinicaId = historiaClinicaId
             };
 
-            // Pasar datos para la vista sin usar ViewBag
+            // Pasar datos para la vista 
             viewModel.MascotaNombre = historiaClinica.Mascota.Nombre;
             viewModel.PropietarioNombre = $"{historiaClinica.Mascota.Propietario?.Nombre} {historiaClinica.Mascota.Propietario?.Apellido}";
             viewModel.MascotaId = historiaClinica.Mascota.Id;
@@ -50,7 +49,7 @@ namespace SistemaVetIng.Servicios.Implementacion
 
         public async Task<string> CreateAtencionVeterinaria(AtencionVeterinariaViewModel model, ClaimsPrincipal user)
         {
-            // Lógica de validación y de negocio
+            
             var userIdString = user.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userIdInt))
             {
@@ -106,7 +105,7 @@ namespace SistemaVetIng.Servicios.Implementacion
             await _repository.AgregarAtencionVeterinaria(atencion);
             await _repository.SaveChangesAsync();
 
-            return null; // Éxito
+            return null; 
         }
     }
 }

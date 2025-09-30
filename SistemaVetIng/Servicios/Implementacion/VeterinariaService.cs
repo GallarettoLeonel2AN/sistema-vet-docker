@@ -1,5 +1,4 @@
 ﻿using SistemaVetIng.Models;
-using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
@@ -11,7 +10,7 @@ namespace SistemaVetIng.Servicios.Implementacion
         private readonly IClienteService _clienteService;
         private readonly IMascotaService _mascotaService;
         private readonly IVeterinariaConfigService _veterinariaConfigService;
-    
+
         public VeterinariaService(
             IVeterinarioService veterinarioService,
             IClienteService clienteService,
@@ -29,7 +28,7 @@ namespace SistemaVetIng.Servicios.Implementacion
         {
             var viewModel = new VeterinariaPaginaPrincipalViewModel();
 
-        
+
             var configuracionDb = (await _veterinariaConfigService.ListarTodo()).FirstOrDefault();
             if (configuracionDb != null)
             {
@@ -98,6 +97,6 @@ namespace SistemaVetIng.Servicios.Implementacion
             viewModel.IngresosDiariosEstimados = 5000.00m;
 
             return viewModel;
-        }  
+        }
     }
 }

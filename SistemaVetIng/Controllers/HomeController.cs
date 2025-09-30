@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SistemaVetIng.Models;
 using SistemaVetIng.Servicios.Interfaces;
-using System.Diagnostics;
 
 namespace SistemaVetIng.Controllers
 {

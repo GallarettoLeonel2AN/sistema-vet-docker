@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using SistemaVetIng.Models.Indentity;
+﻿using Microsoft.AspNetCore.Mvc;
 using SistemaVetIng.Servicios.Interfaces;
-using SistemaVetIng.ViewModels; 
-using SistemaVetIng.ViewsModels; 
+using SistemaVetIng.ViewModels;
+using SistemaVetIng.ViewsModels;
 using System.Text.Encodings.Web; // Usado para codificar texto de forma segura en URLs.
 
 namespace SistemaVetIng.Controllers
@@ -62,7 +59,7 @@ namespace SistemaVetIng.Controllers
             var code = await _accountService.GenerarPasswordResetToken(model.Email);
             if (code == null)
             {
-                // Importante por seguridad: redirige sin dar pistas.
+                
                 return View("Login");
             }
 

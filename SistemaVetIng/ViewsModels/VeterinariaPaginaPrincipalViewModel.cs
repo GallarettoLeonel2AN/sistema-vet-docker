@@ -9,7 +9,7 @@ namespace SistemaVetIng.ViewsModels
         public List<ClienteViewModel> Clientes { get; set; } 
         public List<MascotaListViewModel> Mascotas { get; set; } 
 
-        // Propiedades para los reportes analíticos !!Simulado!!
+        // Propiedades para los reportes analíticos simulados
         public int CantidadPerrosPeligrosos { get; set; }
         public string RazaMayorDemanda { get; set; } 
         public decimal IngresosMensualesEstimados { get; set; } 
@@ -20,7 +20,7 @@ namespace SistemaVetIng.ViewsModels
             Veterinarios = new List<VeterinarioViewModel>();
             Clientes = new List<ClienteViewModel>();
             Mascotas = new List<MascotaListViewModel>();
-            ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel(); // Inicializar para evitar NullReferenceException
+            ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel(); /
         }
     }
 }

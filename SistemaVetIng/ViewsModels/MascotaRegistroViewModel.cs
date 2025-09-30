@@ -1,4 +1,4 @@
-﻿// Archivo: ViewsModels/MascotaRegistroViewModel.cs
+﻿
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,7 +6,7 @@ namespace SistemaVetIng.ViewsModels
 {
     public class MascotaRegistroViewModel
     {
-        // Atributos de la Mascota
+        
         [Required(ErrorMessage = "La especie de la mascota es obligatorio.")]
         public string Especie { get; set; }
 
@@ -30,12 +30,12 @@ namespace SistemaVetIng.ViewsModels
         [Display(Name = "Chip")]
         public bool Chip { get; set; }
 
-        // Propiedad para el Id del cliente seleccionado
+        //  Id del cliente seleccionado
         [Required(ErrorMessage = "Debes seleccionar un cliente propietario.")]
         [Display(Name = "Propietario")]
         public int ClienteId { get; set; }
 
-        // Esta propiedad se usará en la vista para crear la lista desplegable de clientes.
+        // lista desplegable de clientes.
         public IEnumerable<SelectListItem>? Clientes { get; set; }
     }
 }

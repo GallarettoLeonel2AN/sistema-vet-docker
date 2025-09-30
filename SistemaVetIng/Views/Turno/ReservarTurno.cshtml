@@ -211,7 +211,7 @@
 			// Llama a la función al cargar la página para inicializar
 			cargarHorariosDisponibles();
 
-			// NUEVA LÓGICA PARA EL ENVÍO DEL FORMULARIO CON AJAX
+			//  logica formularios con Ajax
 			const reservaForm = $('form.main-form');
 			reservaForm.on('submit', function (e) {
 				e.preventDefault();
@@ -230,6 +230,8 @@
 					success: function(response) {
 						if (response.success) {
 							toastr.success("¡Turno reservado con éxito!");
+
+							 setTimeout(() => window.location.href = response.redirectUrl, 2000);
 
 							// Vuelve a cargar los horarios para refrescar la lista
 							cargarHorariosDisponibles();

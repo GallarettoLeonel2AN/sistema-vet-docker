@@ -5,7 +5,6 @@ using SistemaVetIng.Models.Indentity;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 using System.Globalization;
-using System.Threading.Tasks;
 
 namespace SistemaVetIng.Controllers
 {
@@ -44,7 +43,7 @@ namespace SistemaVetIng.Controllers
             if (cliente == null)
             {
                 _toastNotification.AddWarningToastMessage("Debe completar su perfil de cliente para reservar un turno.");
-           
+
                 return RedirectToAction("RegistrarCliente", "Cliente");
             }
 
@@ -100,13 +99,18 @@ namespace SistemaVetIng.Controllers
             try
             {
                 await _turnoService.ReservarTurnoAsync(model);
-                return Json(new { success = true });
+                return Json(new
+                {
+                    success = true,
+                    redirectUrl = Url.Action("PaginaPrincipal", "Cliente")
+                });
             }
             catch (Exception ex)
             {
-                // Registra la excepción para fines de depuración
-                return Json(new { success = false, message = "Ocurrió un error al reservar el turno." });
+                return Json(new { success = false, message = ex.Message });
             }
+
+
         }
 
         [HttpGet]
