@@ -52,7 +52,8 @@ namespace SistemaVetIng.Controllers
             var viewModel = new ReservaTurnoViewModel
             {
                 Mascotas = mascotasDelCliente.ToList(),
-                HasMascotas = mascotasDelCliente.Any()
+                HasMascotas = mascotasDelCliente.Any(),
+                
             };
 
             return View(viewModel);
@@ -62,6 +63,13 @@ namespace SistemaVetIng.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reservar(ReservaTurnoViewModel model)
         {
+            // No permitir fechas pasadas
+            if (model.Fecha.Date < DateTime.Today)
+            {
+                return Json(new { success = false, message = "No se puede reservar un turno para una fecha pasada." });
+            }
+
+
             // Lógica para manejar Primera Cita
             if (model.PrimeraCita)
             {
@@ -120,6 +128,12 @@ namespace SistemaVetIng.Controllers
             DateTime fechaSeleccionada;
 
             if (!DateTime.TryParseExact(fecha, formatoFecha, CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaSeleccionada))
+            {
+                return Json(new List<string>());
+            }
+
+            // Si la fecha es pasada, regresamos lista vacía sin llamar al servicio
+            if (fechaSeleccionada.Date < DateTime.Today)
             {
                 return Json(new List<string>());
             }

@@ -160,8 +160,32 @@
 				toggleMascotaSelection();
 			}
 
-			// Lógica para cargar los horarios disponibles
+
+
+			// Logica de Restriccion de Fechas anteriores
+
+			function getTodayDateString() {
+				const today = new Date();
+				const year = today.getFullYear();
+				// Los meses y días necesitan un cero inicial si son menores de 10
+				const month = String(today.getMonth() + 1).padStart(2, '0');
+				const day = String(today.getDate()).padStart(2, '0');
+				return `${year}-${month}-${day}`;
+			}
+
 			const fechaTurnoInput = $('#fechaTurno');
+			const minDate = getTodayDateString();
+
+			// La restricción 'min' al input de fecha evita selección visual 
+			fechaTurnoInput.attr('min', minDate);
+
+			if (fechaTurnoInput.val() < minDate) {
+				fechaTurnoInput.val(minDate);
+			}
+
+
+
+			// Lógica para cargar los horarios disponibles
 			const horariosDisponiblesContainer = $('#horariosDisponiblesContainer');
 			const horariosOpcionesDiv = $('#horariosOpciones');
 			const horarioHiddenInput = $('#horarioHiddenInput');
@@ -170,6 +194,15 @@
 				const fechaSeleccionada = fechaTurnoInput.val();
 
 				if (fechaSeleccionada) {
+
+					// Validación fecha seleccionada en el frontend antes de la llamada AJAX
+					if (fechaSeleccionada < minDate) {
+						horariosOpcionesDiv.empty().html('<p class="text-danger validation-error">No se pueden buscar horarios para fechas pasadas.</p>');
+						horariosDisponiblesContainer.show();
+						horarioHiddenInput.val('');
+						return;
+					}
+
 					horariosOpcionesDiv.empty().html('<p>Cargando horarios...</p>');
 					horariosDisponiblesContainer.show();
 
@@ -185,11 +218,11 @@
 									horariosOpcionesDiv.append(btn);
 								});
 							} else {
-								horariosOpcionesDiv.html('<p>No hay horarios disponibles para la fecha seleccionada.</p>');
+								horariosOpcionesDiv.html('<p class="text-danger validation-error">No hay horarios disponibles para la fecha seleccionada. La veterinaria no trabaja este dia</p>');
 							}
 						},
 						error: function() {
-							horariosOpcionesDiv.html('<p>Ocurrió un error al cargar los horarios. Por favor, intente de nuevo.</p>');
+							horariosOpcionesDiv.html('<p class="text-danger validation-error">Ocurrió un error al cargar los horarios. Por favor, intente de nuevo.</p>');
 						}
 					});
 				} else {
@@ -215,6 +248,12 @@
 			const reservaForm = $('form.main-form');
 			reservaForm.on('submit', function (e) {
 				e.preventDefault();
+
+				 // Revisamos la fecha seleccionada antes de enviar
+				if (fechaTurnoInput.val() < minDate) {
+					toastr.error("La fecha seleccionada no es válida. Debe ser hoy o una fecha futura.");
+					return; // Detiene el envío del formulario
+				}
 
 				const formData = new FormData(this);
 				const submitButton = $(this).find('button[type="submit"]');
