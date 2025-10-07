@@ -3,7 +3,7 @@
   "builds": [
     {
       "src": "SistemaVetIng.csproj",
-      "use": "@jake-xyz/vercel-csharp@latest"
+      "use": "jamieleslie/vercel-csharp@latest"
     }
   ],
   "routes": [
