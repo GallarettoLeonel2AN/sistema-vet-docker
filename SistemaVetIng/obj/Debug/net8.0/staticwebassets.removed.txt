@@ -1,3 +1,0 @@
-C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\noty.js
-C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\toastr.js
-C:\Users\leo\source\repos\Veting29_9_25\SistemaVetIng\wwwroot\js\site.js

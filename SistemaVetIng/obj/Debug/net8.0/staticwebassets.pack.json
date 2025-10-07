@@ -157,8 +157,20 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
+      "Id": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\wwwroot\\js\\atencionVeterinaria.js",
+      "PackagePath": "staticwebassets\\js\\atencionVeterinaria.js"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\wwwroot\\js\\dashboard.js",
+      "PackagePath": "staticwebassets\\js\\dashboard.js"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\wwwroot\\js\\menuhamburguesa.js",
+      "PackagePath": "staticwebassets\\js\\menuhamburguesa.js"
+    },
+    {
+      "Id": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
+      "PackagePath": "staticwebassets\\js\\reservaTurno.js"
     },
     {
       "Id": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\wwwroot\\lib\\bootstrap\\LICENSE",
