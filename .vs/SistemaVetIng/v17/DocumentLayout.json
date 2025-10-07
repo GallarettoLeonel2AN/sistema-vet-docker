@@ -1,94 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\",
+  "WorkspaceRootPath": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}|Elementos de la soluci\u00F3n{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}|C:\\Users\\leo\\source\\repos\\Veting29_9_25\\vercel.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}|Elementos de la soluci\u00F3n{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}|solutionrelative:vercel.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\veterinario\\registrarveterinario.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\veterinario\\registrarveterinario.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\veterinario\\paginaprincipal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\veterinario\\paginaprincipal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\veterinario\\modificarveterinario.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\veterinario\\modificarveterinario.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\veterinaria\\paginaprincipal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\veterinaria\\paginaprincipal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\veterinaria\\guardarconfiguracion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\veterinaria\\guardarconfiguracion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\turno\\reservarturno.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\turno\\reservarturno.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\mascota\\registrarmascota.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\mascota\\registrarmascota.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\mascota\\modificarmascota.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\mascota\\modificarmascota.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\mascota\\mascotaactualizada.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\mascota\\mascotaactualizada.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\mascota\\listarclientes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\mascota\\listarclientes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\historiaclinica\\mascotascliente.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\historiaclinica\\mascotascliente.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\historiaclinica\\detallehistoriaclinica.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\historiaclinica\\detallehistoriaclinica.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\historiaclinica\\listaclientesparaseguimiento.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\historiaclinica\\listaclientesparaseguimiento.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\dashboard\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\dashboard\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\cliente\\registrarcliente.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\cliente\\registrarcliente.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|c:\\users\\leo\\source\\repos\\veting29_9_25\\perrospeligrososapi\\controllers\\perrospeligrososcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|solutionrelative:perrospeligrososapi\\controllers\\perrospeligrososcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,285 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\_ViewStart.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:56:04.052Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:56:03.068Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RegistrarVeterinario.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinario\\RegistrarVeterinario.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Veterinario\\RegistrarVeterinario.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinario\\RegistrarVeterinario.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Veterinario\\RegistrarVeterinario.cshtml",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAAAGIAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:55:58.18Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PaginaPrincipal.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinario\\PaginaPrincipal.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Veterinario\\PaginaPrincipal.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinario\\PaginaPrincipal.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Veterinario\\PaginaPrincipal.cshtml",
-              "ViewState": "AgIAAB0BAAAAAAAAAAAAACsBAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:55:49.515Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ModificarVeterinario.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinario\\ModificarVeterinario.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Veterinario\\ModificarVeterinario.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinario\\ModificarVeterinario.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Veterinario\\ModificarVeterinario.cshtml",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:55:45.835Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PaginaPrincipal.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinaria\\PaginaPrincipal.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Veterinaria\\PaginaPrincipal.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinaria\\PaginaPrincipal.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Veterinaria\\PaginaPrincipal.cshtml",
-              "ViewState": "AgIAANQBAAAAAAAAAAAAANsBAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:55:33.899Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GuardarConfiguracion.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinaria\\GuardarConfiguracion.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Veterinaria\\GuardarConfiguracion.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinaria\\GuardarConfiguracion.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Veterinaria\\GuardarConfiguracion.cshtml",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAAJwAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:55:23.491Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ReservarTurno.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:55:22.074Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Error.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Shared\\Error.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Shared\\Error.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Shared\\Error.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Shared\\Error.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:54:53.458Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "_ValidationScriptsPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:54:52.37Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_LoginPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Shared\\_LoginPartial.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Shared\\_LoginPartial.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Shared\\_LoginPartial.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Shared\\_LoginPartial.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:54:50.858Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:54:49.226Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "RegistrarMascota.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\RegistrarMascota.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Mascota\\RegistrarMascota.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\RegistrarMascota.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Mascota\\RegistrarMascota.cshtml",
-              "ViewState": "AgIAAKIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:54:37.706Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ModificarMascota.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\ModificarMascota.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Mascota\\ModificarMascota.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\ModificarMascota.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Mascota\\ModificarMascota.cshtml",
-              "ViewState": "AgIAAJkAAAAAAAAAAAAAAKcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:54:13.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "MascotaActualizada.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\MascotaActualizada.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Mascota\\MascotaActualizada.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\MascotaActualizada.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Mascota\\MascotaActualizada.cshtml",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:54:10.019Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "ListarClientes.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\ListarClientes.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Mascota\\ListarClientes.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\ListarClientes.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Mascota\\ListarClientes.cshtml",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAAAH0AAABiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:54:03.758Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAJwAAAAAAAAAAAAAAKUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:53:54.152Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "MascotasCliente.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\HistoriaClinica\\MascotasCliente.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\HistoriaClinica\\MascotasCliente.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\HistoriaClinica\\MascotasCliente.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\HistoriaClinica\\MascotasCliente.cshtml",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAAAIIAAABiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:53:47.352Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ListaClientesParaSeguimiento.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\HistoriaClinica\\ListaClientesParaSeguimiento.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\HistoriaClinica\\ListaClientesParaSeguimiento.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\HistoriaClinica\\ListaClientesParaSeguimiento.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\HistoriaClinica\\ListaClientesParaSeguimiento.cshtml",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHoAAABiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:53:19.999Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "DetalleHistoriaClinica.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\HistoriaClinica\\DetalleHistoriaClinica.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\HistoriaClinica\\DetalleHistoriaClinica.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\HistoriaClinica\\DetalleHistoriaClinica.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\HistoriaClinica\\DetalleHistoriaClinica.cshtml",
-              "ViewState": "AgIAANIAAAAAAAAAAAAAAN8AAABiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:53:07.766Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Dashboard.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Dashboard\\Dashboard.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Dashboard\\Dashboard.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Dashboard\\Dashboard.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Dashboard\\Dashboard.cshtml",
-              "ViewState": "AgIAAB0BAAAAAAAAAAAAACsBAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:52:20.35Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -387,15 +30,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "RegistrarCliente.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Cliente\\RegistrarCliente.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Cliente\\RegistrarCliente.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Cliente\\RegistrarCliente.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Cliente\\RegistrarCliente.cshtml",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T19:52:10.533Z",
+              "DocumentIndex": 0,
+              "Title": "vercel.json",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\vercel.json",
+              "RelativeDocumentMoniker": "vercel.json",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\vercel.json",
+              "RelativeToolTip": "vercel.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-07T20:42:21.019Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PerrosPeligrososController.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "RelativeDocumentMoniker": "PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "RelativeToolTip": "PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwDYAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T02:55:20.087Z",
               "EditorCaption": ""
             }
           ]
