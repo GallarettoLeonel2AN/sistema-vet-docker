@@ -290,25 +290,11 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script src="~/js/dashboard.js" asp-append-version="true"></script>
+    <script src="~/js/menuhamburguesa.js" asp-append-version="true"></script>
 
     <script>
-        // Lógica de JS para menú hamburguesa
-        const hamburger = document.querySelector('.hamburger-menu');
-        const mainNav = document.querySelector('.main-nav');
-
-        hamburger.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.nav-link, .nav-button, .sesion').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-            });
-        });
-
         // Lógica de Semaforización
         $(document).ready(function() {
-            // Esto se haría idealmente con el valor del Model
             // Usamos la variable @(Model.TasaAusencia * 100).ToString("F1")% para leer el valor del DOM.
             const tasaText = $('#tasaAusenciaValue').text().trim();
             const tasa = parseFloat(tasaText.replace('%', '')) / 100;

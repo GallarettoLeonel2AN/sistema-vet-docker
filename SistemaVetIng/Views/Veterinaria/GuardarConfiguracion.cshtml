@@ -151,21 +151,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script>
-        // Lógica de JS para menú hamburguesa
-        const hamburger = document.querySelector('.hamburger-menu');
-        const mainNav = document.querySelector('.main-nav');
-
-        hamburger.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.nav-link, .nav-button, .sesion').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-            });
-        });
-    </script>
+    <script src="~/js/menuhamburguesa.js" asp-append-version="true"></script>
     @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>

@@ -1,5 +1,6 @@
 ﻿@model SistemaVetIng.ViewsModels.AtencionVeterinariaViewModel
 
+
 @{
     ViewData["Title"] = $"Nueva Atención para {Model.MascotaNombre}";
     Layout = null;
@@ -16,7 +17,7 @@
     <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header class="main-header">
@@ -192,34 +193,8 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let vacunaIndex = 0;
-            let estudioIndex = 0;
+    <script src="~/js/atencionVeterinaria.js" asp-append-version="true"></script>
 
-            $('#add-vacuna-btn').click(function () {
-                const template = document.getElementById('vacuna-template');
-                const clone = template.content.cloneNode(true);
-                const selectElement = clone.querySelector('select');
-                selectElement.name = `VacunasSeleccionadasIds[${vacunaIndex}]`;
-                $('#vacunas-container').append(clone);
-                vacunaIndex++;
-            });
-
-            $('#add-estudio-btn').click(function () {
-                const template = document.getElementById('estudio-template');
-                const clone = template.content.cloneNode(true);
-                const selectElement = clone.querySelector('select');
-                selectElement.name = `EstudiosSeleccionadosIds[${estudioIndex}]`;
-                $('#estudios-container').append(clone);
-                estudioIndex++;
-            });
-
-            $(document).on('click', '.remove-item-btn', function () {
-                $(this).closest('.v1-input-group').remove();
-            });
-        });
-    </script>
     @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>

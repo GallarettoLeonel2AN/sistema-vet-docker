@@ -291,11 +291,7 @@
         </div>
     </footer>
 
-    <script>
-        const hamburger = document.querySelector('.hamburger-menu');
-        const mainNav = document.querySelector('.main-nav');
-        hamburger.addEventListener('click', () => mainNav.classList.toggle('active'));
-    </script>
+    <script src="~/js/menuhamburguesa.js" asp-append-version="true"></script>
     @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>
