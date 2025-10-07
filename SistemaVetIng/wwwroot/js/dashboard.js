@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
 
-    // Almacenamos los objetos de Chart.js en variables globales para poder destruirlos
-    // y redibujarlos (necesario para el drill-down y el cambio de filtros).
     let rendimientoChart;
     let serviciosChart;
     let especiesChart;
@@ -11,17 +9,14 @@
     let currentIngresosLevel = 1; // 1: Anual, 2: Mensual, 3: Semanal
     let selectedAnio = null;
     let selectedMes = null;
-    // ----------------------------------------------------------------------
 
     // Estado para el Drill Down de Rendimiento: Nivel 1 = Vets; Nivel 2 = Turnos del Vet seleccionado
     let currentDrillDownLevel = 1;
     let selectedVeterinarioId = null;
 
-    // -----------------------------------------------------------------
-    // 1. DIBUJO DE GRÁFICOS (Funciones de renderizado)
-    // -----------------------------------------------------------------
 
-    // ************* TUS FUNCIONES EXISTENTES (renderRendimientoChart, renderServiciosChart, renderEspeciesChart) *************
+    // 1. DIBUJO DE GRÁFICOS (Funciones de renderizado)
+
 
     /**
      * Dibuja el gráfico de Rendimiento de Turnos por Veterinario (Drill Down Nivel 1).
@@ -196,9 +191,8 @@
         });
     }
 
-    // ***************************************************************************************************
-    // 🚀 LÓGICA DE INGRESO: Nivel 1 (Anual) -> Nivel 2 (Mensual) -> Nivel 3 (Semanal)
-    // ***************************************************************************************************
+
+    // LÓGICA DE INGRESO: Nivel 1 (Anual) -> Nivel 2 (Mensual) -> Nivel 3 (Semanal)
 
     /**
      * Dibuja el gráfico de Ingresos: Nivel 1 (Anual).
@@ -349,7 +343,7 @@
                     const points = ingresosChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
                     if (points.length) {
                         const index = points[0].index;
-                        selectedMes = data[index].mes; // Guardamos el mes
+                        selectedMes = data[index].mes;
 
                         // PASO AL NIVEL 3: SEMANAS
                         handleIngresosDrillDownToLevel3(data[index].ingresosSemanales);
@@ -427,22 +421,19 @@
         $('#ingresosDrillDownTitle').text(`Ingresos Semanales de ${selectedMes} (${selectedAnio})`);
     }
 
-    // ************* FIN DE FUNCIONES DE RENDERIZADO DE INGRESOS *************
 
-    // -----------------------------------------------------------------
     // 2. LÓGICA DE INTERACCIÓN (Filtros y Drill Down)
-    // -----------------------------------------------------------------
 
-    // ************* Lógica de Rendimiento de Vets (handleDrillDownToLevel2, renderTurnosDetalleChart, handleDrillUp) *************
+    // Lógica de Rendimiento de Vets (handleDrillDownToLevel2, renderTurnosDetalleChart, handleDrillUp)
 
     /**
-     * Simula (o manejará) la transición al Drill Down Nivel 2: Turnos de un Vet específico.
+     *  Transición al Drill Down Nivel 2: Turnos de un Vet específico.
      */
     function handleDrillDownToLevel2(vetId, vetName) {
         selectedVeterinarioId = vetId;
         currentDrillDownLevel = 2;
 
-        // --- SIMULACIÓN DE DATOS (AQUÍ hariamos la llamada AJAX) ---
+        // --- SIMULACIÓN DE DATOS (aca hariamos la llamada AJAX) ---
         const level2Data = [
             { nombreVeterinario: 'Semana 1', finalizados: 30, cancelados: 5, pendientes: 1 },
             { nombreVeterinario: 'Semana 2', finalizados: 35, cancelados: 2, pendientes: 2 },
@@ -506,7 +497,7 @@
     }
 
     /**
-     * Simula (o maneja) la transición de vuelta al Drill Down Nivel 1 (Vets).
+     * Transición de vuelta al Drill Down Nivel 1 (Vets).
      */
     function handleDrillUp() {
         if (currentDrillDownLevel > 1) {
@@ -520,12 +511,11 @@
     // Asignar evento al botón "Volver (Drill Up)"
     $('#drillUpButton').on('click', handleDrillUp);
 
-    // ************* FIN Lógica de Rendimiento de Vets *************
 
-    // --- Lógica de Navegación de Ingresos (Drill Up) ---
+    // Lógica de Navegación de Ingresos (Drill Up)
 
     /**
-     * Simula la transición al Drill Down Nivel 2: Meses.
+     * Transición al Drill Down Nivel 2: Meses.
      * @param {Array} monthlyData - Lista de objetos IngresosMensualesData.
      */
     function handleIngresosDrillDownToLevel2(monthlyData) {
@@ -533,7 +523,7 @@
     }
 
     /**
-     * Simula la transición al Drill Down Nivel 3: Semanas.
+     * Transición al Drill Down Nivel 3: Semanas.
      * @param {Array} weeklyData - Lista de objetos IngresosSemanalesData.
      */
     function handleIngresosDrillDownToLevel3(weeklyData) {
@@ -562,10 +552,10 @@
     // Asignar evento al botón "Volver (Drill Up)" específico de Ingresos
     $('#ingresosDrillUpButton').on('click', handleIngresosDrillUp);
 
-    // ************* Simulación de Razas *************
 
+    //Simulación de Razas
     /**
-     * Simula la actualización de la lista de razas basada en la especie seleccionada
+     * Actualización de la lista de razas basada en la especie seleccionada
      */
     function updateRazasList(especie) {
         let html = '';
@@ -600,26 +590,10 @@
         $('#drillDownRazas').html(html);
     }
 
-    // ************* Fin Simulación de Razas *************
 
 
-    // Asignar evento al botón de "Aplicar Filtros" (Aquí es donde se haría la llamada AJAX general)
-    $('#applyFilters').on('click', function () {
-        console.log("Aplicando filtros y recargando dashboard...");
-        handleDrillUp(); // Para asegurar que volvemos al Nivel 1 de Rendimiento con los nuevos filtros
-        handleIngresosDrillUp(); // Para asegurar que volvemos al Nivel 1 de Ingresos
-        loadDashboardData();
-    });
+    //  CARGA DE DATOS INICIAL
 
-
-    // -----------------------------------------------------------------
-    // 3. CARGA DE DATOS INICIAL
-    // -----------------------------------------------------------------
-
-    /**
-     * Función que simula la carga inicial de todos los datos del ViewModel.
-     * En el siguiente paso, esta función contendrá la llamada AJAX a la Controller.
-     */
     function loadDashboardData() {
         console.log("Cargando datos del Dashboard desde el ViewModel...");
 
@@ -632,19 +606,19 @@
         // 3. Gráfico de Especies
         renderEspeciesChart(initialEspeciesData);
 
-        // 4. Actualizamos el KPI de Ausencia para el semáforo
+        // 4. Actualizamos la Ausencia para el semáforo
         updateKpiSemaforo(initialTasaAusencia);
 
-        // 5. Gráfico de Ingresos: ¡AHORA LLAMAMOS AL NIVEL 1 ANUAL!
+        // 5. Gráfico de Ingresos
         renderIngresosNivel1Chart(initialIngresosAnualesData);
     }
 
-    // Implementación simple de la semaforización de KPI
+    // Implementación simple de la semaforización
     function updateKpiSemaforo(tasa) {
         const card = $('#kpi-ausencia-card');
         card.removeClass('indicator-rojo indicator-amarillo indicator-verde');
 
-        // Se usa la lógica de tu semáforización: Rojo (>15%) | Amarillo (5-15%) | Verde (<5%)
+        // Rojo (>15%) | Amarillo (5-15%) | Verde (<5%)
         if (tasa > 0.15) {
             card.addClass('indicator-rojo');
         } else if (tasa >= 0.05) {

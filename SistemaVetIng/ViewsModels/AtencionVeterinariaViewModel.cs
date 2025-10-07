@@ -56,6 +56,7 @@ namespace SistemaVetIng.ViewsModels
         [Display(Name = "Duración (días)")]
         public string DuracionDias { get; set; }
 
+        [Required(ErrorMessage = "Las observaciones son obligatorias.")]
         [StringLength(500, ErrorMessage = "Las observaciones no pueden exceder los 500 caracteres.")]
         [Display(Name = "Observaciones del Tratamiento")]
         public string? ObservacionesTratamiento { get; set; }
