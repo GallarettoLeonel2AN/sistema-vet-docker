@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\veting29_9_25\\sistemaveting\\vercel.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\vercel.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|c:\\users\\leo\\source\\repos\\veting29_9_25\\perrospeligrososapi\\controllers\\perrospeligrososcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|solutionrelative:perrospeligrososapi\\controllers\\perrospeligrososcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -31,27 +27,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "vercel.json",
-              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\vercel.json",
-              "RelativeDocumentMoniker": "SistemaVetIng\\vercel.json",
-              "ToolTip": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\vercel.json",
-              "RelativeToolTip": "SistemaVetIng\\vercel.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-07T20:59:31.672Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "PerrosPeligrososController.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
               "RelativeDocumentMoniker": "PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
               "ToolTip": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
               "RelativeToolTip": "PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwDYAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAqwDYAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T02:55:20.087Z"
+              "WhenOpened": "2025-09-30T02:55:20.087Z",
+              "EditorCaption": ""
             }
           ]
         }
