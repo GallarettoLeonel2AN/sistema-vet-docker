@@ -239,10 +239,15 @@
 .v1-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: 600;
 }
-
+.centrar{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-weight: 700;
+}
 /* Aplicando los nuevos colores a los badges */
 .v1-badge-secondary {
     background-color: var(--v1-badge-secondary-bg);

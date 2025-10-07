@@ -20,7 +20,7 @@ namespace SistemaVetIng.ViewsModels
             Veterinarios = new List<VeterinarioViewModel>();
             Clientes = new List<ClienteViewModel>();
             Mascotas = new List<MascotaListViewModel>();
-            ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel(); /
+            ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel(); 
         }
     }
 }

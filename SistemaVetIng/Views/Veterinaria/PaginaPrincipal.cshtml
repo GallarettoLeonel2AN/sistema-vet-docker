@@ -103,45 +103,53 @@
                 <div class="v1-card v1-chart-card">
                     <div class="v1-card-header">
                         <h3 class="v1-card-title">Reportes Analíticos</h3>
-                        <a href="#" class="v1-btn v1-btn-primary">Ver todos los reportes</a>
                     </div>
                     <div class="v1-card-content v1-card-grid-reports">
-                        <div class="v1-card v1-report-card">
-                            <div class="v1-report-content">
-                                <h3 class="v1-report-title">Cantidad de Perros Peligrosos</h3>
-                                <div class="v1-report-value">@Model.CantidadPerrosPeligrosos</div>
+                     
+                        <div class="v1-card">
+                            <div class="v1-card-header">
+                                <h3 class="v1-card-title">Cant. Perros Peligrosos</h3>
+                                <i class="fa-solid fa-dog v1-card-icon"></i>
+                            </div>
+                            <div class="v1-card-content">
+                                <div class="v1-card-value">
+                                    5
+                                </div>
+                                <p class="v1-card-description">API Provincial</p>
                             </div>
                         </div>
-                        <div class="v1-card v1-report-card">
-                            <div class="v1-report-content">
-                                <h3 class="v1-report-title">Raza con Mayor Demanda</h3>
-                                <div class="v1-report-value">@Model.RazaMayorDemanda</div>
+
+          
+                        <div class="v1-card">
+                            <div class="v1-card-header">
+                                <h3 class="v1-card-title">Vacuna más frecuente</h3>
+                                <i class="fa-solid fa-syringe v1-card-icon"></i>
+                            </div>
+                            <div class="v1-card-content">
+                                <div class="v1-card-value">
+                                    Parvovirus
+                                </div>
+                                <p class="v1-card-description">Lote-B456</p>
                             </div>
                         </div>
-                        <div class="v1-card v1-report-card">
-                            <div class="v1-report-content">
-                                <h3 class="v1-report-title">Total de Ingresos Mensuales</h3>
-                                <div class="v1-report-value">$@Model.IngresosMensualesEstimados.ToString("N2")</div>
+
+
+                        <div class="v1-card">
+                            <div class="v1-card-header">
+                                <h3 class="v1-card-title">Estudio más solicitado</h3>
+                                <i class="fa-solid fa-magnifying-glass v1-card-icon"></i>
+                            </div>
+                            <div class="v1-card-content">
+                                <div class="v1-card-value">
+                                    Ecografía
+                                </div>
+                                <p class="v1-card-description">$15.000</p>
                             </div>
                         </div>
-                        <div class="v1-card v1-report-card">
-                            <div class="v1-report-content">
-                                <h3 class="v1-report-title">Ingresos Diarios</h3>
-                                <div class="v1-report-value">$@Model.IngresosDiariosEstimados.ToString("N2")</div>
-                            </div>
-                        </div>
-                        <div class="v1-card v1-report-card">
-                            <div class="v1-report-content">
-                                <h3 class="v1-report-title">Datos</h3>
-                                <div class="v1-report-value">Informacion</div>
-                            </div>
-                        </div>
-                        <div class="v1-card v1-report-card">
-                            <div class="v1-report-content">
-                                <h3 class="v1-report-title">Datos</h3>
-                                <div class="v1-report-value">Informacion</div>
-                            </div>
-                        </div>
+
+                        <a asp-controller="Dashboard" asp-action="Dashboard" class="v1-btn v1-btn-primary">
+                            <i class="fa-solid fa-chart-simple"></i>Ver todos los reportes
+                        </a>
                     </div>
                 </div>
                 <div class="v1-card v1-appointment-list-card">

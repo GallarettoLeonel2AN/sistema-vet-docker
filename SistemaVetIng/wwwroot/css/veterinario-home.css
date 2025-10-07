@@ -930,3 +930,34 @@ textarea.form-control {
         color: white;
         border-color: #5d5dff;
     }
+
+    /* DASHBOARD */
+#chartRendimiento {
+    min-height: 350px;
+    max-height: 450px;
+    width: 100%;
+}
+
+#chartServicios,
+#chartEspecies {
+ 
+    min-height: 300px;
+    max-height: 400px;
+    width: 100%;
+}
+
+#chartRendimiento,
+#chartServicios,
+#chartEspecies {
+    height: 400px !important;
+    width: 100% !important;
+}
+
+.chart-ingresos {
+    max-width: 2500px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.5rem;
+}
+
+

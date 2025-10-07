@@ -1,0 +1,330 @@
+﻿@model SistemaVetIng.ViewsModels.DashboardViewModel
+@{
+    ViewData["Title"] = "VetIng - Dashboard de Reportes";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header class="main-header">
+        <a href="/Veterinaria/PaginaPrincipal" class="logo"><i class="fa-solid fa-paw"></i> VetIng</a>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="/Veterinaria/PaginaPrincipal">Volver a la Pagina Principal</a></li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                        <button type="submit" class="btn sesion nav-button">Cerrar Sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        <div class="hamburger-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+
+    <main class="v1-main-dashboard">
+
+
+        <section id="dashboard-inicio" class="v1-section">
+            <h2 class="v1-section-title">Dashboard Analítico de Gestión</h2>
+
+            <div class="v1-card-grid">
+                <div class="v1-card kpi-card kpi-ausencia" id="kpi-ausencia-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Citas de hoy</h3>
+                        <i class="fa-solid fa-calendar-times v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div id="tasaAusenciaValue" class="v1-card-value">
+                           12
+                        </div>
+                        <p class="v1-card-description" id="tasaAusenciaRef">
+                            +12 desde ayer
+                        </p>
+                    </div>
+                </div>
+
+                <div class="v1-card kpi-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Ingresos del día</h3>
+                        <i class="fa-solid fa-money-bill-wave v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            $4.500
+                        </div>
+                        <p class="v1-card-description">+20% vs ayer </p>
+                    </div>
+                </div>
+
+                <div class="v1-card kpi-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Mascotas Registradas</h3>
+                        <i class="fa-solid fa-bone v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            312
+                        </div>
+                        <p class="v1-card-description">+20 este mes</p>
+                    </div>
+                </div>
+
+                <div class="v1-card kpi-card">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Clientes Registrados</h3>
+                        <i class="fa-solid fa-user v1-card-icon"></i>
+                    </div>
+                    <div class="v1-card-content">
+                        <div class="v1-card-value">
+                            312
+                        </div>
+                        <p class="v1-card-description">+20 este mes</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="v1-chart-and-list-container dashboard-main-charts">
+                    <div class="v1-card v1-chart-card v1-col-8">
+                        <div class="v1-card-header">
+                            <h3 class="v1-card-title" id="ingresosDrillDownTitle">Rendimiento de Ingresos: Visión Anual</h3>
+
+                            <button id="ingresosDrillUpButton" class="v1-btn v1-btn-ghost" style="display:none;">
+                                <i class="fa-solid fa-arrow-up"></i> Volver (Nivel Superior)
+                            </button>
+                        </div>
+                        <div class="v1-card-content">
+                            <div style="height: 400px;">
+                                <canvas id="chartIngresosMensuales"></canvas>
+                            </div>
+                        </div>
+                     </div>
+
+                <div class="v1-card v1-metrics-card v1-col-12 v1-col-lg-4">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Métricas Clave (Acumulado)</h3>
+                    </div>
+                    <div class="v1-card-content v1-info-grid" style="grid-template-columns: 1fr;">
+
+                        <div class="v1-info-item">
+                            <strong><i class="fa-solid fa-money-bill-trend-up v1-card-icon"></i> Ingreso Real Total:</strong>
+                            <span class="v1-text-success">@* @string.Format("{0:C0}", Model.IngresoTotalReal) *@ $1.6M</span>
+                        </div>
+
+                        <div class="v1-info-item">
+                            <strong><i class="fa-solid fa-bullseye v1-card-icon"></i> Meta Proyectada:</strong>
+                            <span class="v1-text-primary">@* @string.Format("{0:C0}", Model.MetaTotal) *@ $1.8M</span>
+                        </div>
+
+                        <div class="v1-info-item">
+                            <strong><i class="fa-solid fa-gauge-high v1-card-icon"></i> Cumplimiento:</strong>
+                            <span class="v1-text-warning">@* @string.Format("{0:P1}", Model.PorcentajeCumplimiento) *@ 88.9%</span>
+                        </div>
+
+                        <div class="v1-info-item">
+                            <strong><i class="fa-solid fa-calendar-alt v1-card-icon"></i> Promedio Mensual:</strong>
+                            <span class="v1-text-info">@* @string.Format("{0:C0}", Model.PromedioMensual) *@ $133K</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="v1-chart-and-list-container dashboard-main-charts">
+
+                <div class="v1-card v1-chart-card v1-col-8">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title" id="drillDownTitle">Rendimiento de Turnos por Veterinario (Nivel 1)</h3>
+                        <button id="drillUpButton" class="v1-btn v1-btn-ghost" style="display:none;"><i class="fa-solid fa-arrow-up"></i> Volver </button>
+                    </div>
+                    <div class="v1-card-content">
+                        <div style="height: 400px;">
+                            <canvas id="chartRendimiento"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="v1-card v1-chart-card v1-col-4">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Servicios Más Solicitados</h3>
+                    </div>
+                    <div class="v1-card-content">
+                        <div style="height: 400px;">
+                            <canvas id="chartServicios"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="v1-chart-and-list-container dashboard-bottom-row">
+                <div class="v1-card v1-chart-card v1-col-4">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Distribución por Especie</h3>
+                    </div>
+                    <div class="v1-card-content">
+                        <div style="height: 450px;">
+                            <canvas id="chartEspecies"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="v1-card v1-col-8">
+                    <div class="v1-card-header">
+                        <h3 class="v1-card-title">Análisis de Razas y Perros Peligrosos</h3>
+                    </div>
+                    <div class="v1-card-content v1-info-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="v1-info-item">
+                            <strong><i class="fa-solid fa-exclamation-triangle" style="color: #ed3535;"></i> Peligrosos:</strong>
+                            <span class="v1-text-danger">@* @Model.PeligrososCount *@ 18</span>
+                        </div>
+                        <div class="v1-info-item">
+                            <strong><i class="fa-solid fa-dog v1-card-icon"></i> No Peligrosos:</strong>
+                            <span class="v1-text-primary">@* @Model.NoPeligrososCount *@ 140</span>
+                        </div>
+                        <div class="v1-info-item">
+                            <strong><i class="fa-solid fa-star" style="color:#FFD43B;"></i> Raza Frecuente:</strong>
+                            <span>@* @Model.RazaMayorDemanda *@ Ovejero Alemán</span>
+                        </div>
+                    </div>
+                    <div class="centrar">
+                        <h3 class="v1-card-title centrar">Top Razas por Especie Seleccionada:</h3>
+                            </div>
+                    <div id="drillDownRazas" class="v1-list-content">
+                        <div class="v1-empty-state">Seleccione una especie en el gráfico de torta para ver el detalle.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="main-footer">
+        <div class="footer-col footer-info">
+            <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+            <div class="footer-social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Acerca de VetIng</h4>
+            <ul class="footer-links">
+                <li><a href="#">Nuestra Historia</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Noticias y Blog</a></li>
+                <li><a href="#">Fundación VetIng</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Soporte</h4>
+            <ul class="footer-links">
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Guías de Usuario</a></li>
+                <li><a href="#">Descargar App Móvil</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+        </div>
+    </footer>
+
+
+    <script>
+
+          const initialRendimientoData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                        Model.RendimientoVeterinarios,
+                        new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase }
+                ));
+
+        const initialServiciosData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                        Model.TopServicios,
+                        new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase }
+                ));
+
+        const initialEspeciesData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                        Model.DistribucionEspecies,
+                        new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase }
+                ));
+
+        const initialIngresosAnualesData  = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+            Model.IngresosAnuales,
+            new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase }
+        ));
+        const initialTasaAusencia = @Model.TasaAusencia.ToString(System.Globalization.CultureInfo.InvariantCulture);
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+
+    <script>
+        // Lógica de JS para menú hamburguesa
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mainNav = document.querySelector('.main-nav');
+
+        hamburger.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link, .nav-button, .sesion').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+
+        // Lógica de Semaforización
+        $(document).ready(function() {
+            // Esto se haría idealmente con el valor del Model
+            // Usamos la variable @(Model.TasaAusencia * 100).ToString("F1")% para leer el valor del DOM.
+            const tasaText = $('#tasaAusenciaValue').text().trim();
+            const tasa = parseFloat(tasaText.replace('%', '')) / 100;
+            const card = $('#kpi-ausencia-card');
+
+            card.removeClass('indicator-rojo indicator-amarillo indicator-verde');
+
+            if (tasa > 0.15) {
+                card.addClass('indicator-rojo');
+            } else if (tasa >= 0.05) {
+                card.addClass('indicator-amarillo');
+            } else {
+                card.addClass('indicator-verde');
+            }
+        });
+    </script>
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>
