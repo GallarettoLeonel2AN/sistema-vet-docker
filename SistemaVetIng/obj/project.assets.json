@@ -11004,23 +11004,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ulipv\\.nuget\\packages\\": {},
+    "C:\\Users\\leo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj",
+      "projectUniqueName": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\SistemaVetIng.csproj",
       "projectName": "SistemaVetIng",
-      "projectPath": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\SistemaVetIng\\SistemaVetIng.csproj",
-      "packagesPath": "C:\\Users\\ulipv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\SistemaVetIng\\obj\\",
+      "projectPath": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\SistemaVetIng.csproj",
+      "packagesPath": "C:\\Users\\leo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\SistemaVetIng\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ulipv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\leo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11047,7 +11047,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -11113,7 +11113,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+>>>>>>> e70ea591507a8b036c80b5880d2a178c5a093d76
       }
     }
   }

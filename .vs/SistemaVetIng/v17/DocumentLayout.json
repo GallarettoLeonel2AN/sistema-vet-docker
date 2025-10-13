@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\",
+  "WorkspaceRootPath": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\viewsmodels\\horariodiaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\viewsmodels\\horariodiaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -28,6 +29,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\models\\turno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\models\\turno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|c:\\users\\leo\\source\\repos\\veting29_9_25\\perrospeligrososapi\\controllers\\perrospeligrososcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|solutionrelative:perrospeligrososapi\\controllers\\perrospeligrososcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> e70ea591507a8b036c80b5880d2a178c5a093d76
     }
   ],
   "DocumentGroupContainers": [
@@ -37,6 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 3,
           "Children": [
             {
@@ -44,6 +50,11 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+=======
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+>>>>>>> e70ea591507a8b036c80b5880d2a178c5a093d76
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
@@ -54,6 +65,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< HEAD
               "Title": "HorarioDiaViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\ViewsModels\\HorarioDiaViewModel.cs",
               "RelativeDocumentMoniker": "SistemaVetIng\\ViewsModels\\HorarioDiaViewModel.cs",
@@ -137,6 +149,16 @@
               "ViewState": "AgIAABIAAAAAAAAAAAA5wB4AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T21:54:23.699Z",
+=======
+              "Title": "PerrosPeligrososController.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "RelativeDocumentMoniker": "PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\Veting29_9_25\\PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "RelativeToolTip": "PerrosPeligrososApi\\Controllers\\PerrosPeligrososController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAqwDYAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T02:55:20.087Z",
+>>>>>>> e70ea591507a8b036c80b5880d2a178c5a093d76
               "EditorCaption": ""
             }
           ]
