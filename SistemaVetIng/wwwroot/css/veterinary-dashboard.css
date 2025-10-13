@@ -449,3 +449,34 @@
 .v1-section {
     margin-top: 80px; 
 }
+
+.v1-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+    .v1-table th, .v1-table td {
+        padding: 12px 15px;
+        border: 1px solid var(--v1-background);
+        text-align: left;
+    }
+
+.v1-table th {
+    background-color: var(--v1-background);
+}
+
+.v1-badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.9em;
+}
+
+.v1-badge-success {
+    background-color: #28a745;
+}
+
+.v1-badge-danger {
+    background-color: #dc3545;
+}

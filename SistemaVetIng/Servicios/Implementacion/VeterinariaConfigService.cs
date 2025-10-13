@@ -6,52 +6,58 @@ namespace SistemaVetIng.Servicios.Implementacion
 {
     public class VeterinariaConfigService : IVeterinariaConfigService
     {
+        private readonly IConfiguracionVeterinariaRepository _configRepository;
 
-        private readonly IGeneralRepository<ConfiguracionVeterinaria> _veterinariaRepository;
-
-        public VeterinariaConfigService(IGeneralRepository<ConfiguracionVeterinaria> veterinariaRepository)
+        public VeterinariaConfigService(IConfiguracionVeterinariaRepository configRepository)
         {
-            _veterinariaRepository = veterinariaRepository;
+            _configRepository = configRepository;
         }
 
-        public async Task<ConfiguracionVeterinaria> Agregar(ConfiguracionVeterinaria model)
+        public async Task<ConfiguracionVeterinaria> ObtenerConfiguracionAsync()
+        {
+            return await _configRepository.ObtenerConfiguracionConHorariosAsync();
+        }
+
+        public async Task<ConfiguracionVeterinaria> Guardar(ConfiguracionVeterinaria model)
         {
             try
             {
-                var configuracionExistente = (await _veterinariaRepository.ListarTodo()).FirstOrDefault();
+                var configExistente = await _configRepository.ObtenerConfiguracionConHorariosAsync();
 
-                if (configuracionExistente == null)
+                if (configExistente == null)
                 {
-                    await _veterinariaRepository.Agregar(model);
+                    await _configRepository.AgregarAsync(model);
                 }
                 else
                 {
-                    // Si ya existe, actualizamos sus propiedades con los datos del model
-                    configuracionExistente.HoraInicio = model.HoraInicio;
-                    configuracionExistente.HoraFin = model.HoraFin;
-                    configuracionExistente.DuracionMinutosPorConsulta = model.DuracionMinutosPorConsulta;
-                    configuracionExistente.TrabajaLunes = model.TrabajaLunes;
-                    configuracionExistente.TrabajaMartes = model.TrabajaMartes;
-                    configuracionExistente.TrabajaMiercoles = model.TrabajaMiercoles;
-                    configuracionExistente.TrabajaJueves = model.TrabajaJueves;
-                    configuracionExistente.TrabajaViernes = model.TrabajaViernes;
-                    configuracionExistente.TrabajaSabado = model.TrabajaSabado;
-                    configuracionExistente.TrabajaDomingo = model.TrabajaDomingo;
+                    // Si ya existe, actualizamos sus propiedades.
+                    configExistente.DuracionMinutosPorConsulta = model.DuracionMinutosPorConsulta;
+
+                    // Actualizamos los horarios uno por uno.
+                    foreach (var horarioNuevo in model.HorariosPorDia)
+                    {
+                        var horarioExistente = configExistente.HorariosPorDia
+                            .FirstOrDefault(h => h.DiaSemana == horarioNuevo.DiaSemana);
+
+                        if (horarioExistente != null)
+                        {
+                            horarioExistente.EstaActivo = horarioNuevo.EstaActivo;
+                            horarioExistente.HoraInicio = horarioNuevo.HoraInicio;
+                            horarioExistente.HoraFin = horarioNuevo.HoraFin;
+                        }
+                    }
+
+                    _configRepository.Actualizar(configExistente);
                 }
 
-                await _veterinariaRepository.Guardar();
+                await _configRepository.GuardarCambiosAsync();
+                return model;
             }
             catch (Exception ex)
             {
-                throw new Exception("No se pudo guardar la configuración.");
+
+                throw new Exception("No se pudo guardar la configuración.", ex);
             }
-
-            return model;
-        }
-
-        public async Task<IEnumerable<ConfiguracionVeterinaria>> ListarTodo()
-        {
-            return await _veterinariaRepository.ListarTodo();
         }
     }
 }

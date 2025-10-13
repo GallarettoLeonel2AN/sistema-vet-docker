@@ -30,6 +30,7 @@ namespace SistemaVetIng.Models.Extension
             services.AddScoped<IHistoriaClinicaRepository, HistoriaClinicaRepository>();
             services.AddScoped<IAtencionVeterinariaRepository, AtencionVeterinariaRepository>();
             services.AddScoped<ITurnoRepository, TurnoRepository>();
+            services.AddScoped<IConfiguracionVeterinariaRepository, ConfiguracionVeterinariaRepository>();
             return services;
         }
 

@@ -44,23 +44,25 @@ namespace SistemaVetIng.Controllers
         {
             var viewModel = new VeterinariaPaginaPrincipalViewModel();
 
-            // Carga la configuración de turnos desde la base de datos.
-            var configuracionDb = (await _veterinariaConfigService.ListarTodo()).FirstOrDefault();
+            //  Cargar ConfiguracionHoraria
+
+            var configuracionDb = await _veterinariaConfigService.ObtenerConfiguracionAsync();
 
             if (configuracionDb != null)
             {
+
                 viewModel.ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel
                 {
-                    HoraInicio = configuracionDb.HoraInicio,
-                    HoraFin = configuracionDb.HoraFin,
+                    Id = configuracionDb.Id,
                     DuracionMinutosPorConsulta = configuracionDb.DuracionMinutosPorConsulta,
-                    TrabajaLunes = configuracionDb.TrabajaLunes,
-                    TrabajaMartes = configuracionDb.TrabajaMartes,
-                    TrabajaMiercoles = configuracionDb.TrabajaMiercoles,
-                    TrabajaJueves = configuracionDb.TrabajaJueves,
-                    TrabajaViernes = configuracionDb.TrabajaViernes,
-                    TrabajaSabado = configuracionDb.TrabajaSabado,
-                    TrabajaDomingo = configuracionDb.TrabajaDomingo
+
+                    Horarios = configuracionDb.HorariosPorDia.Select(h => new HorarioDiaViewModel
+                    {
+                        DiaSemana = h.DiaSemana,
+                        EstaActivo = h.EstaActivo,
+                        HoraInicio = (DateTime)h.HoraInicio,
+                        HoraFin = (DateTime)h.HoraFin
+                    }).OrderBy(h => h.DiaSemana).ToList() 
                 };
             }
             else
@@ -68,10 +70,11 @@ namespace SistemaVetIng.Controllers
                 viewModel.ConfiguracionTurnos = null;
             }
 
+
             //  Cargar Veterinario
             var veterinarios = string.IsNullOrWhiteSpace(busquedaVeterinario)
-            ? await _veterinarioService.ListarTodo()
-            : await _veterinarioService.FiltrarPorBusqueda(busquedaVeterinario);
+                ? await _veterinarioService.ListarTodo()
+                : await _veterinarioService.FiltrarPorBusqueda(busquedaVeterinario);
             viewModel.Veterinarios = veterinarios.Select(p => new VeterinarioViewModel
             {
                 Id = p.Id,
@@ -84,8 +87,8 @@ namespace SistemaVetIng.Controllers
 
             // Cargar Clientes en las tablas
             var clientes = string.IsNullOrWhiteSpace(busquedaCliente)
-            ? await _clienteService.ListarTodo()
-            : await _clienteService.FiltrarPorBusqueda(busquedaCliente);
+                ? await _clienteService.ListarTodo()
+                : await _clienteService.FiltrarPorBusqueda(busquedaCliente);
             viewModel.Clientes = clientes.Select(c => new ClienteViewModel
             {
                 Id = c.Id,
@@ -97,8 +100,8 @@ namespace SistemaVetIng.Controllers
 
             // Cargar Mascotas en las tablas
             var mascotas = string.IsNullOrWhiteSpace(busquedaMascota)
-            ? await _mascotaService.ListarTodo()
-            : await _mascotaService.FiltrarPorBusqueda(busquedaMascota);
+                ? await _mascotaService.ListarTodo()
+                : await _mascotaService.FiltrarPorBusqueda(busquedaMascota);
             viewModel.Mascotas = mascotas.Select(m => new MascotaListViewModel
             {
                 Id = m.Id,
@@ -113,7 +116,6 @@ namespace SistemaVetIng.Controllers
 
 
             // Hardcoded de datos para Reportes Analíticos 
-            // Cards
             viewModel.CantidadPerrosPeligrosos = 5;
 
             var razaMayorDemanda = mascotas
@@ -132,31 +134,85 @@ namespace SistemaVetIng.Controllers
 
         #region CONFIGURACION HORARIOS
         [HttpGet]
-        public IActionResult GuardarConfiguracion()
+        public async Task<IActionResult> GuardarConfiguracion()
         {
-            return View();
+            var config = await _veterinariaConfigService.ObtenerConfiguracionAsync();
+            var viewModel = new ConfiguracionVeterinariaViewModel();
+
+            if (config != null)
+            {
+                // Si ya existe una configuración, la mapeamos
+                viewModel.Id = config.Id;
+                viewModel.DuracionMinutosPorConsulta = config.DuracionMinutosPorConsulta;
+                viewModel.Horarios = config.HorariosPorDia.Select(h => new HorarioDiaViewModel
+                {
+                    DiaSemana = h.DiaSemana,
+                    EstaActivo = h.EstaActivo,
+                    HoraInicio = h.HoraInicio.HasValue ? h.HoraInicio.Value : DateTime.MinValue,
+                    HoraFin = h.HoraFin.HasValue ? h.HoraFin.Value : DateTime.MinValue
+                }).OrderBy(h => h.DiaSemana).ToList();
+            }
+            else
+            {
+                // Si NO existe configuración, creamos una por defecto para la vista.
+                viewModel.DuracionMinutosPorConsulta = 30; // Un valor inicial
+
+                // Creamos una lista con los días de la semana (en orden)
+                var diasDeLaSemana = new[] {
+            DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday,
+            DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday
+        };
+
+                foreach (var dia in diasDeLaSemana)
+                {
+                    // Agregamos un objeto HorarioDiaViewModel por cada día a la lista
+                    viewModel.Horarios.Add(new HorarioDiaViewModel
+                    {
+                        DiaSemana = dia,
+                        EstaActivo = false // Empiezan desactivados
+                    });
+                }
+            }
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GuardarConfiguracion(ConfiguracionVeterinaria model)
+        public async Task<IActionResult> GuardarConfiguracion(ConfiguracionVeterinariaViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                _toastNotification.AddErrorToastMessage("Hay errores en el formulario. Por favor, corríjalos.");
+               
                 return View(model);
             }
 
             try
             {
-                await _veterinariaConfigService.Agregar(model);
+                // Mapeamos el ViewModel al modelo de dominio.
+                var configParaGuardar = new ConfiguracionVeterinaria
+                {
+                    Id = model.Id,
+                    DuracionMinutosPorConsulta = model.DuracionMinutosPorConsulta,
+                    HorariosPorDia = model.Horarios.Select(h => new HorarioDia
+                    {
+                        DiaSemana = h.DiaSemana,
+                        EstaActivo = h.EstaActivo,
+                        // Si está activo, usa el valor, si no, usa el valor por defecto.
+                        HoraInicio = h.EstaActivo ? h.HoraInicio : DateTime.MinValue,
+                        HoraFin = h.EstaActivo ? h.HoraFin : DateTime.MinValue
+                    }).ToList()
+                };
+
+                await _veterinariaConfigService.Guardar(configParaGuardar);
+
                 _toastNotification.AddSuccessToastMessage("Configuración guardada con éxito.");
                 return RedirectToAction("PaginaPrincipal", "Veterinaria");
             }
             catch (Exception ex)
             {
-                _toastNotification.AddErrorToastMessage("Ocurrió un error inesperado. Por favor, inténtelo de nuevo.");
-                return RedirectToAction("PaginaPrincipal", "Veterinaria");
+                _toastNotification.AddErrorToastMessage("Ocurrió un error inesperado.");
+                return View(model);
             }
         }
         #endregion

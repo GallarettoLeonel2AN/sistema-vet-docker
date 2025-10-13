@@ -18,39 +18,34 @@ namespace SistemaVetIng.Servicios.Implementacion
 
         public async Task<List<string>> GetHorariosDisponiblesAsync(DateTime fecha)
         {
-            var configuracion = (await _veterinariaService.ListarTodo()).FirstOrDefault();
-            if (configuracion == null)
+            var configuracion = await _veterinariaService.ObtenerConfiguracionAsync();
+            if (configuracion == null || configuracion.HorariosPorDia == null)
             {
-                return new List<string>(); // No hay configuración, no hay horarios disponibles.
+                return new List<string>();
             }
 
             try
             {
-                // Obtener la lista de todos los posibles horarios según la config
                 var horariosPosibles = GenerarHorarios(configuracion, fecha);
-
-                // Obtener los turnos ya ocupados para esa fecha
                 var turnosOcupados = (await _turnoRepository.GetTurnosByFecha(fecha))
                     .Select(t => t.Horario.ToString(@"hh\:mm"))
                     .ToHashSet();
-
-                // Filtrar y obtener los horarios disponibles
                 var horariosDisponibles = horariosPosibles.Where(h => !turnosOcupados.Contains(h)).ToList();
-
                 return horariosDisponibles;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al obtener turnos ocupados: {ex.Message}");
+                Console.WriteLine($"Error al obtener horarios disponibles: {ex.Message}");
                 return new List<string>();
             }
         }
+
 
         public async Task ReservarTurnoAsync(ReservaTurnoViewModel model)
         {
             var turno = new Turno
             {
-                Fecha = model.Fecha,
+                Fecha = model.Fecha.Date,
                 Horario = model.Horario,
                 Motivo = model.Motivo,
                 MascotaId = model.MascotaId,
@@ -66,28 +61,22 @@ namespace SistemaVetIng.Servicios.Implementacion
         private List<string> GenerarHorarios(ConfiguracionVeterinaria config, DateTime fecha)
         {
             var horarios = new List<string>();
-            var diaSemana = fecha.DayOfWeek;
+            var diaDeLaSemana = fecha.DayOfWeek;
+            var horarioDelDia = config.HorariosPorDia.FirstOrDefault(h => h.DiaSemana == diaDeLaSemana);
 
-            // Verifica si la veterinaria trabaja ese día de la semana
-            if ((diaSemana == DayOfWeek.Monday && !config.TrabajaLunes) ||
-                (diaSemana == DayOfWeek.Tuesday && !config.TrabajaMartes) ||
-                (diaSemana == DayOfWeek.Wednesday && !config.TrabajaMiercoles) ||
-                (diaSemana == DayOfWeek.Thursday && !config.TrabajaJueves) ||
-                (diaSemana == DayOfWeek.Friday && !config.TrabajaViernes) ||
-                (diaSemana == DayOfWeek.Saturday && !config.TrabajaSabado) ||
-                (diaSemana == DayOfWeek.Sunday && !config.TrabajaDomingo))
+            if (horarioDelDia == null || !horarioDelDia.EstaActivo || !horarioDelDia.HoraInicio.HasValue || !horarioDelDia.HoraFin.HasValue)
             {
-                return horarios; // Devuelve una lista vacía si no trabaja ese día
+                return horarios;
             }
 
-            var horaActual = config.HoraInicio;
-            var horaFin = config.HoraFin;
+            var horaActual = horarioDelDia.HoraInicio.Value;
+            var horaFin = horarioDelDia.HoraFin.Value;
             var duracion = config.DuracionMinutosPorConsulta;
 
             while (horaActual < horaFin)
             {
-                horarios.Add(horaActual.ToString(@"HH\:mm"));
-                horaActual = horaActual.Add(TimeSpan.FromMinutes(duracion));
+                horarios.Add(horaActual.ToString("HH:mm"));
+                horaActual = horaActual.AddMinutes(duracion);
             }
 
             return horarios;

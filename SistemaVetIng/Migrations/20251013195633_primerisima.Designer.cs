@@ -12,8 +12,8 @@ using SistemaVetIng.Data;
 namespace SistemaVetIng.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250917021646_turnoi")]
-    partial class turnoi
+    [Migration("20251013195633_primerisima")]
+    partial class primerisima
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -614,16 +614,11 @@ namespace SistemaVetIng.Migrations
                     b.Property<bool>("PrimeraCita")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("VeterinarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("MascotaId");
-
-                    b.HasIndex("VeterinarioId");
 
                     b.ToTable("Turnos");
                 });
@@ -935,10 +930,6 @@ namespace SistemaVetIng.Migrations
                         .HasForeignKey("MascotaId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("SistemaVetIng.Models.Veterinario", null)
-                        .WithMany("Turnos")
-                        .HasForeignKey("VeterinarioId");
-
                     b.Navigation("Cliente");
 
                     b.Navigation("Mascota");
@@ -1000,11 +991,6 @@ namespace SistemaVetIng.Migrations
                 {
                     b.Navigation("Mascotas");
 
-                    b.Navigation("Turnos");
-                });
-
-            modelBuilder.Entity("SistemaVetIng.Models.Veterinario", b =>
-                {
                     b.Navigation("Turnos");
                 });
 #pragma warning restore 612, 618

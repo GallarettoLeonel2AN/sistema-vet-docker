@@ -22,28 +22,31 @@ namespace SistemaVetIng.Servicios.Implementacion
         }
 
         public async Task<VeterinariaPaginaPrincipalViewModel> PaginaPrincipalAsync(
-            string busquedaVeterinario = null,
-            string busquedaCliente = null,
-            string busquedaMascota = null)
+     string busquedaVeterinario = null,
+     string busquedaCliente = null,
+     string busquedaMascota = null)
         {
             var viewModel = new VeterinariaPaginaPrincipalViewModel();
 
 
-            var configuracionDb = (await _veterinariaConfigService.ListarTodo()).FirstOrDefault();
+            var configuracionDb = await _veterinariaConfigService.ObtenerConfiguracionAsync();
+
             if (configuracionDb != null)
             {
+  
                 viewModel.ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel
                 {
-                    HoraInicio = configuracionDb.HoraInicio,
-                    HoraFin = configuracionDb.HoraFin,
+                    Id = configuracionDb.Id,
                     DuracionMinutosPorConsulta = configuracionDb.DuracionMinutosPorConsulta,
-                    TrabajaLunes = configuracionDb.TrabajaLunes,
-                    TrabajaMartes = configuracionDb.TrabajaMartes,
-                    TrabajaMiercoles = configuracionDb.TrabajaMiercoles,
-                    TrabajaJueves = configuracionDb.TrabajaJueves,
-                    TrabajaViernes = configuracionDb.TrabajaViernes,
-                    TrabajaSabado = configuracionDb.TrabajaSabado,
-                    TrabajaDomingo = configuracionDb.TrabajaDomingo
+
+                    Horarios = configuracionDb.HorariosPorDia.Select(h => new HorarioDiaViewModel
+                    {
+                        DiaSemana = h.DiaSemana,
+                        EstaActivo = h.EstaActivo,
+                        HoraInicio = h.HoraInicio.HasValue ? h.HoraInicio.Value : DateTime.MinValue,
+                        HoraFin = h.HoraFin.HasValue ? h.HoraFin.Value : DateTime.MinValue
+
+                    }).OrderBy(h => h.DiaSemana).ToList()
                 };
             }
             else
@@ -51,7 +54,10 @@ namespace SistemaVetIng.Servicios.Implementacion
                 viewModel.ConfiguracionTurnos = null;
             }
 
-            var veterinarios = await _veterinarioService.FiltrarPorBusqueda(busquedaVeterinario);
+            var veterinarios = string.IsNullOrWhiteSpace(busquedaVeterinario)
+                ? await _veterinarioService.ListarTodo()
+                : await _veterinarioService.FiltrarPorBusqueda(busquedaVeterinario);
+
             viewModel.Veterinarios = veterinarios.Select(p => new VeterinarioViewModel
             {
                 Id = p.Id,
@@ -62,16 +68,23 @@ namespace SistemaVetIng.Servicios.Implementacion
                 Matricula = p.Matricula,
             }).ToList();
 
-            var clientes = await _clienteService.FiltrarPorBusqueda(busquedaCliente);
+            var clientes = string.IsNullOrWhiteSpace(busquedaCliente)
+                ? await _clienteService.ListarTodo()
+                : await _clienteService.FiltrarPorBusqueda(busquedaCliente);
+
             viewModel.Clientes = clientes.Select(c => new ClienteViewModel
             {
                 Id = c.Id,
                 NombreCompleto = $"{c.Nombre} {c.Apellido}",
                 Telefono = c.Telefono,
-                NombreUsuario = c.Usuario?.Email
+                NombreUsuario = c.Usuario?.Email,
+                DNI = c.Dni 
             }).ToList();
 
-            var mascotas = await _mascotaService.FiltrarPorBusqueda(busquedaMascota);
+            var mascotas = string.IsNullOrWhiteSpace(busquedaMascota)
+                ? await _mascotaService.ListarTodo()
+                : await _mascotaService.FiltrarPorBusqueda(busquedaMascota);
+
             viewModel.Mascotas = mascotas.Select(m => new MascotaListViewModel
             {
                 Id = m.Id,
@@ -87,12 +100,13 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             viewModel.CantidadPerrosPeligrosos = 5;
 
-            var mostRequestedBreed = mascotas
+            var razaMayorDemanda = mascotas
                  .GroupBy(m => m.Raza)
                  .OrderByDescending(g => g.Count())
                  .Select(g => g.Key)
                  .FirstOrDefault();
 
+            viewModel.RazaMayorDemanda = razaMayorDemanda;
             viewModel.IngresosMensualesEstimados = 1500.00m;
             viewModel.IngresosDiariosEstimados = 5000.00m;
 

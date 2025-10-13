@@ -45,60 +45,44 @@
             <div class="form-container">
                 <form asp-controller="Veterinaria" asp-action="GuardarConfiguracion" method="post" class="form-card">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
 
                     <div class="form-group">
-                        <label asp-for="HoraInicio" class="form-label">Hora de Inicio:</label>
-                        <input asp-for="HoraInicio" type="time" class="form-control" />
-                        <span asp-validation-for="HoraInicio" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="HoraFin" class="form-label">Hora de Fin:</label>
-                        <input asp-for="HoraFin" type="time" class="form-control" />
-                        <span asp-validation-for="HoraFin" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="DuracionMinutosPorConsulta" class="form-label">Duración de la Consulta (minutos):</label>
+                        <label asp-for="DuracionMinutosPorConsulta" class="form-label"></label>
                         <input asp-for="DuracionMinutosPorConsulta" type="number" class="form-control" min="1" />
                         <span asp-validation-for="DuracionMinutosPorConsulta" class="text-danger"></span>
                     </div>
 
-                    <h4 class="form-subtitle">Días Laborables</h4>
-                    <div class="form-group checkbox-group">
-                        <div class="checkbox-item">
-                            <input asp-for="TrabajaLunes" type="checkbox" />
-                            <label asp-for="TrabajaLunes">Lunes</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input asp-for="TrabajaMartes" type="checkbox" />
-                            <label asp-for="TrabajaMartes">Martes</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input asp-for="TrabajaMiercoles" type="checkbox" />
-                            <label asp-for="TrabajaMiercoles">Miércoles</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input asp-for="TrabajaJueves" type="checkbox" />
-                            <label asp-for="TrabajaJueves">Jueves</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input asp-for="TrabajaViernes" type="checkbox" />
-                            <label asp-for="TrabajaViernes">Viernes</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input asp-for="TrabajaSabado" type="checkbox" />
-                            <label asp-for="TrabajaSabado">Sábado</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input asp-for="TrabajaDomingo" type="checkbox" />
-                            <label asp-for="TrabajaDomingo">Domingo</label>
-                        </div>
+                    <h4 class="form-subtitle">Días y Horarios Laborables</h4>
+
+                    <div class="schedule-table">
+                        @for (var i = 0; i < Model.Horarios.Count; i++)
+                        {
+                            <div class="schedule-row form-group">
+                                <input type="hidden" asp-for="Horarios[i].DiaSemana" />
+
+                                <div class="checkbox-item">
+                                    <input asp-for="Horarios[i].EstaActivo" type="checkbox" class="day-toggle" data-index="@i" />
+                                    <label asp-for="Horarios[i].EstaActivo">@Model.Horarios[i].NombreDia</label>
+                                </div>
+
+                                <div class="time-inputs" id="time-inputs-@i">
+                                    <div class="time-group">
+                                        <label asp-for="Horarios[i].HoraInicio" class="form-label">Inicio:</label>
+                                        <input asp-for="Horarios[i].HoraInicio" type="time" class="form-control" />
+                                    </div>
+                                    <div class="time-group">
+                                        <label asp-for="Horarios[i].HoraFin" class="form-label">Fin:</label>
+                                        <input asp-for="Horarios[i].HoraFin" type="time" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
 
                     <div class="form-actions">
                         <button type="submit" class="button register-button">Guardar Configuración</button>
-                        <a asp-controller="Veterinaria" asp-action="PaginaPrincipal" class="btnBack">Volver a la Página Principal</a>
+                        <a asp-controller="Veterinaria" asp-action="PaginaPrincipal" class="btnBack">Volver</a>
                     </div>
                 </form>
             </div>
@@ -152,6 +136,26 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/menuhamburguesa.js" asp-append-version="true"></script>
+    <script>
+        // Script para habilitar/deshabilitar los inputs de hora según el checkbox
+        $(document).ready(function () {
+            $('.day-toggle').each(function () {
+                var index = $(this).data('index');
+                var timeInputs = $('#time-inputs-' + index + ' input[type="time"]');
+
+                // Estado inicial al cargar la página
+                timeInputs.prop('disabled', !$(this).is(':checked'));
+
+                // Evento al cambiar el checkbox
+                $(this).change(function () {
+                    timeInputs.prop('disabled', !$(this).is(':checked'));
+                    if (!$(this).is(':checked')) {
+                        timeInputs.val(''); // Limpiar valores si se deshabilita
+                    }
+                });
+            });
+        });
+    </script>
     @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>

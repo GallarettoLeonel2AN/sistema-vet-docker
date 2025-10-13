@@ -1,5 +1,3 @@
-C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\noty.js
-C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\toastr.js
 wwwroot\css\administracion-home.css
 wwwroot\css\animaciones.css
 wwwroot\css\configuracion.css
@@ -36,10 +34,10 @@ wwwroot\css\site.css
 wwwroot\css\veterinario-home.css
 wwwroot\css\veterinary-dashboard.css
 wwwroot\favicon.ico
+wwwroot\js\atencionVeterinaria.js
 wwwroot\js\dashboard.js
 wwwroot\js\menuhamburguesa.js
 wwwroot\js\reservaTurno.js
-wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -97,4 +95,5 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\js\atencionVeterinaria.js
+C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\noty.js
+C:\Users\ulipv\.nuget\packages\ntoastnotify\8.0.0\contentFiles\any\net6.0\wwwroot\toastr.js

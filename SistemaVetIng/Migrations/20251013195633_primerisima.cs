@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SistemaVetIng.Migrations
 {
     /// <inheritdoc />
-    public partial class turnoi : Migration
+    public partial class primerisima : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -346,8 +346,7 @@ namespace SistemaVetIng.Migrations
                     Motivo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PrimeraCita = table.Column<bool>(type: "bit", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
-                    MascotaId = table.Column<int>(type: "int", nullable: true),
-                    VeterinarioId = table.Column<int>(type: "int", nullable: true)
+                    MascotaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -364,11 +363,6 @@ namespace SistemaVetIng.Migrations
                         principalTable: "Personas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Turnos_Personas_VeterinarioId",
-                        column: x => x.VeterinarioId,
-                        principalTable: "Personas",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -621,11 +615,6 @@ namespace SistemaVetIng.Migrations
                 name: "IX_Turnos_MascotaId",
                 table: "Turnos",
                 column: "MascotaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Turnos_VeterinarioId",
-                table: "Turnos",
-                column: "VeterinarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vacunas_AtencionVeterinariaId",

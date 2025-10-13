@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SistemaVetIng.Models.Indentity;
 using SistemaVetIng.Models;
+using SistemaVetIng.Models.Indentity;
+using System.Diagnostics;
 
 namespace SistemaVetIng.Data
 {
     public class ApplicationDbContext : IdentityDbContext<Usuario, Rol, int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) { }
+            : base(options) {}
+
 
         // DbSets de cada entidad
         public DbSet<Persona> Personas { get; set; }
@@ -122,7 +124,6 @@ namespace SistemaVetIng.Data
                 .WithMany(c => c.Mascotas)
                 .HasForeignKey(m => m.ClienteId);
         }
-
 
     }
 }

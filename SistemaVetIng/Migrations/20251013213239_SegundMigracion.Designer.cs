@@ -12,8 +12,8 @@ using SistemaVetIng.Data;
 namespace SistemaVetIng.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250917021805_VetSinTurno")]
-    partial class VetSinTurno
+    [Migration("20251013213239_SegundMigracion")]
+    partial class SegundMigracion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -205,33 +205,6 @@ namespace SistemaVetIng.Migrations
                     b.Property<int>("DuracionMinutosPorConsulta")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("HoraFin")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("HoraInicio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("TrabajaDomingo")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("TrabajaJueves")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("TrabajaLunes")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("TrabajaMartes")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("TrabajaMiercoles")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("TrabajaSabado")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("TrabajaViernes")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("ConfiguracionVeterinarias");
@@ -314,6 +287,36 @@ namespace SistemaVetIng.Migrations
                         .IsUnique();
 
                     b.ToTable("HistoriasClinicas");
+                });
+
+            modelBuilder.Entity("SistemaVetIng.Models.HorarioDia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ConfiguracionVeterinariaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiaSemana")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("EstaActivo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("HoraFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("HoraInicio")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConfiguracionVeterinariaId");
+
+                    b.ToTable("HorarioDia");
                 });
 
             modelBuilder.Entity("SistemaVetIng.Models.Indentity.Rol", b =>
@@ -868,6 +871,17 @@ namespace SistemaVetIng.Migrations
                     b.Navigation("Mascota");
                 });
 
+            modelBuilder.Entity("SistemaVetIng.Models.HorarioDia", b =>
+                {
+                    b.HasOne("SistemaVetIng.Models.ConfiguracionVeterinaria", "ConfiguracionVeterinaria")
+                        .WithMany("HorariosPorDia")
+                        .HasForeignKey("ConfiguracionVeterinariaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ConfiguracionVeterinaria");
+                });
+
             modelBuilder.Entity("SistemaVetIng.Models.Mascota", b =>
                 {
                     b.HasOne("SistemaVetIng.Models.Cliente", "Propietario")
@@ -967,6 +981,11 @@ namespace SistemaVetIng.Migrations
                     b.Navigation("EstudiosComplementarios");
 
                     b.Navigation("Vacunas");
+                });
+
+            modelBuilder.Entity("SistemaVetIng.Models.ConfiguracionVeterinaria", b =>
+                {
+                    b.Navigation("HorariosPorDia");
                 });
 
             modelBuilder.Entity("SistemaVetIng.Models.HistoriaClinica", b =>

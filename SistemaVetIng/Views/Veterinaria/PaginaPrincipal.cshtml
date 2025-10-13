@@ -243,30 +243,78 @@
                     <h3 class="v1-card-title">Configuración Actual</h3>
                 </div>
                 <div class="v1-card-content">
-                    @if (Model.ConfiguracionTurnos != null)
+                    @if (Model.ConfiguracionTurnos != null && Model.ConfiguracionTurnos.Horarios.Any())
                     {
-                        <div class="v1-info-grid">
-                            <div class="v1-info-item">
-                                <strong>Horario de Trabajo:</strong>
-                                <span>@Model.ConfiguracionTurnos.HoraInicio.ToString(@"hh\:mm") - @Model.ConfiguracionTurnos.HoraFin.ToString(@"hh\:mm")</span>
-                            </div>
-                            <div class="v1-info-item">
-                                <strong>Duración por Consulta:</strong>
-                                <span>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta.ToString() minutos</span>
-                            </div>
-                            <div class="v1-info-item">
-                                <strong>Días Laborables:</strong>
-                                <span>
-                                    @(Model.ConfiguracionTurnos.TrabajaLunes ? "Lunes " : "")
-                                    @(Model.ConfiguracionTurnos.TrabajaMartes ? "Martes " : "")
-                                    @(Model.ConfiguracionTurnos.TrabajaMiercoles ? "Miércoles " : "")
-                                    @(Model.ConfiguracionTurnos.TrabajaJueves ? "Jueves " : "")
-                                    @(Model.ConfiguracionTurnos.TrabajaViernes ? "Viernes " : "")
-                                    @(Model.ConfiguracionTurnos.TrabajaSabado ? "Sábado " : "")
-                                    @(Model.ConfiguracionTurnos.TrabajaDomingo ? "Domingo" : "")
-                                </span>
-                            </div>
+                        <div class="v1-info-item" style="margin-bottom: 20px;">
+                            <strong>Duración por Consulta:</strong>
+                            <span>@Model.ConfiguracionTurnos.DuracionMinutosPorConsulta minutos</span>
                         </div>
+
+                        <table class="v1-table">
+                            <thead>
+                                <tr>
+                                    <th>Día de la Semana</th>
+                                    <th>Estado</th>
+                                    <th>Horario Laboral</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var dia in Model.ConfiguracionTurnos.Horarios)
+                                {
+                                    <tr>
+                                        <td>
+                                           
+                                            @switch (dia.DiaSemana)
+                                            {
+                                                case DayOfWeek.Monday:
+                                                    <span>Lunes</span>
+                                                    break;
+                                                case DayOfWeek.Tuesday:
+                                                    <span>Martes</span>
+                                                    break;
+                                                case DayOfWeek.Wednesday:
+                                                    <span>Miércoles</span>
+                                                    break;
+                                                case DayOfWeek.Thursday:
+                                                    <span>Jueves</span>
+                                                    break;
+                                                case DayOfWeek.Friday:
+                                                    <span>Viernes</span>
+                                                    break;
+                                                case DayOfWeek.Saturday:
+                                                    <span>Sábado</span>
+                                                    break;
+                                                case DayOfWeek.Sunday:
+                                                    <span>Domingo</span>
+                                                    break;
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (dia.EstaActivo)
+                                            {
+                                                <span class="v1-badge v1-badge-success">Activo</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="v1-badge v1-badge-danger">Inactivo</span>
+                                            }
+                                        </td>
+                                        <td>
+                             
+                                            @if (dia.EstaActivo && dia.HoraInicio != DateTime.MinValue)
+                                            {
+                             
+                                                <span>@dia.HoraInicio.ToString("HH:mm") - @dia.HoraFin.ToString("HH:mm")</span>
+                                            }
+                                            else
+                                            {
+                                                <span>-</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     }
                     else
                     {
