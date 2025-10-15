@@ -1,0 +1,197 @@
+﻿@model SistemaVetIng.ViewsModels.TurnoViewModel
+
+
+@{
+    ViewData["Title"] = $"Nueva Atención para {Model.NombreMascota}";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="main-header">
+        <a href="/Veterinario/PaginaPrincipal" class="logo">
+            <i class="fas fa-paw"></i>
+            <span>VetIng</span>
+        </a>
+    </header>
+
+    <main class="registrar-form-main">
+        <section class="form-section">
+            <h2 class="section-title">Nueva Atención para <span class="v1-text-primary">@Model.NombreMascota</span></h2>
+            <p class="form-subtitle">Propietario: <strong>@Model.NombreCliente</strong></p>
+
+            <form asp-action="RegistrarAtencion" asp-controller="AtencionVeterinaria" method="post" class="main-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="HistoriaClinicaId" />
+
+                <div class="form-group">
+                    <label asp-for="Diagnostico" class="v1-control-label"></label>
+                    <textarea asp-for="Diagnostico" class="form-control" rows="3" placeholder="Descripción del diagnóstico..."></textarea>
+                    <span asp-validation-for="Diagnostico" class="text-danger validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PesoKg" class="v1-control-label"></label>
+                    <input asp-for="PesoKg" class="form-control" type="number" step="0.01" placeholder="Ej: 5.25" />
+                    <span asp-validation-for="PesoKg" class="text-danger validation-error"></span>
+                </div>
+
+                <h4 class="v1-section-title">Tratamiento</h4>
+                <div class="form-group">
+                    <label asp-for="Medicamento" class="v1-control-label"></label>
+                    <input asp-for="Medicamento" class="form-control" placeholder="Ej: Amoxicilina" />
+                    <span asp-validation-for="Medicamento" class="text-danger validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Dosis" class="v1-control-label"></label>
+                    <input asp-for="Dosis" class="form-control" placeholder="Ej: 10mg/kg" />
+                    <span asp-validation-for="Dosis" class="text-danger validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Frecuencia" class="v1-control-label"></label>
+                    <input asp-for="Frecuencia" class="form-control" placeholder="Ej: Cada 8 horas" />
+                    <span asp-validation-for="Frecuencia" class="text-danger validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DuracionDias" class="v1-control-label"></label>
+                    <input asp-for="DuracionDias" class="form-control" type="number" placeholder="Duración en días" />
+                    <span asp-validation-for="DuracionDias" class="text-danger validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ObservacionesTratamiento" class="v1-control-label"></label>
+                    <textarea asp-for="ObservacionesTratamiento" class="form-control" rows="3" placeholder="Observaciones adicionales sobre el tratamiento..."></textarea>
+                    <span asp-validation-for="ObservacionesTratamiento" class="text-danger validation-error"></span>
+                </div>
+
+                <h4 class="v1-card-title">
+                    Vacunas
+                    <button type="button" id="add-vacuna-btn" class="button register-button v1-btn-sm ms-2">
+                        <i class="fas fa-plus-circle"></i> Agregar Vacuna
+                    </button>
+                </h4>
+                <div id="vacunas-container">
+                    @* Las vacunas se cargan aca por JS *@
+                </div>
+
+                <h4 class="v1-card-title">
+                    Estudios Complementarios
+                    <button type="button" id="add-estudio-btn" class="button register-button v1-btn-sm ms-2">
+                        <i class="fas fa-plus-circle"></i> Agregar Estudio
+                    </button>
+                </h4>
+                <div id="estudios-container">
+                    @* Los estudios complementarios se cargan aca por JS *@
+                </div>
+
+                <div class="form-actions mt-4">
+                    <button type="submit" class="button register-button">
+                        <i class="fas fa-save"></i> Guardar Atención
+                    </button>
+                    <a asp-controller="HistoriaClinica" asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@Model.MascotaId" class="btnBack">
+                        <i class="fas fa-arrow-left"></i> Cancelar y Volver
+                    </a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-col footer-info">
+            <div class="footer-logo-container"> <i class="fa-solid fa-paw footer-logo-icon"></i> <h3 class="footer-brand">VetIng Software</h3> </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+            <div class="footer-social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Acerca de VetIng</h4>
+            <ul class="footer-links">
+                <li><a href="#">Nuestra Historia</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Noticias y Blog</a></li>
+                <li><a href="#">Fundación VetIng</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Soporte</h4>
+            <ul class="footer-links">
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Guías de Usuario</a></li>
+                <li><a href="#">Descargar App Móvil</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+        </div>
+    </footer>
+
+    <template id="vacuna-template">
+        <div class="v1-input-group mb-2">
+            <select name="" class="form-control" required>
+                <option value="">Seleccione una vacuna...</option>
+                @if (Model.VacunasDisponibles != null)
+                {
+                    foreach (var item in Model.VacunasDisponibles)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            <button type="button" class="v1-btn v1-btn-ghost v1-text-danger remove-item-btn">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+    </template>
+
+    <template id="estudio-template">
+        <div class="v1-input-group mb-2">
+            <select name="" class="form-control" required>
+                <option value="">Seleccione un estudio...</option>
+                @if (Model.EstudiosDisponibles != null)
+                {
+                    foreach (var item in Model.EstudiosDisponibles)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            <button type="button" class="v1-btn v1-btn-ghost v1-text-danger remove-item-btn">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+    </template>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/atencionVeterinaria.js" asp-append-version="true"></script>
+
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>

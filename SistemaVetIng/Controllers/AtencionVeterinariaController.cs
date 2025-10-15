@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NToastNotify;
+using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
@@ -13,16 +15,26 @@ namespace SistemaVetIng.Controllers
         private readonly IAtencionVeterinariaService _atencionService;
         private readonly IToastNotification _toastNotification;
         private readonly IHistoriaClinicaService _historiaClinicaService;
+        private readonly ITurnoService _turnoService;
+        private readonly IVacunaService _vacunaService;
+        private readonly IEstudioService _estudioService;
+
         public AtencionVeterinariaController(IAtencionVeterinariaService atencionService,
             IToastNotification toastNotification,
-            IHistoriaClinicaService historiaClinicaService)
+            IHistoriaClinicaService historiaClinicaService,
+            ITurnoService turnoService,
+            IVacunaService vacunaService,
+            IEstudioService estudioService)
         {
             _atencionService = atencionService;
             _toastNotification = toastNotification;
             _historiaClinicaService = historiaClinicaService;
+            _turnoService = turnoService;
+            _vacunaService = vacunaService;
+            _estudioService = estudioService;
         }
 
-        #region REGISTRAR ATENCION
+        #region REGISTRAR ATENCION SINTURNO
         [HttpGet]
         public async Task<IActionResult> RegistrarAtencion(int historiaClinicaId)
         {
@@ -78,6 +90,81 @@ namespace SistemaVetIng.Controllers
             }
             return RedirectToAction("ListaClientesParaSeguimiento", "HistoriaClinica");
         }
-    }
     #endregion
+
+
+    #region REGISTRAR ATENCION TURNO
+
+    [HttpGet]
+        public async Task<IActionResult> AtencionPorTurno(int turnoId)
+        {
+
+            var todasLasVacunas = await _vacunaService.ListarTodoAsync();
+            var todosLosEstudios = await _estudioService.ListarTodoAsync();
+
+
+            var turno = await _turnoService.ObtenerPorIdConDatosAsync(turnoId); 
+            if (turno == null)
+            {
+                _toastNotification.AddErrorToastMessage("El turno no fue encontrado.");
+                return RedirectToAction("PaginaPrincipal", "Veterinario");
+            }
+
+            if (turno.PrimeraCita && turno.MascotaId == null)
+            {
+                _toastNotification.AddInfoToastMessage("Es una primera cita. Por favor, registra primero la mascota.");
+                return RedirectToAction("Crear", "Mascota", new { clienteId = turno.ClienteId, turnoIdParaRedireccion = turno.Id });
+            }
+
+            var viewModel = new AtencionPorTurnoViewModel
+            {
+                TurnoId = turno.Id,
+                MascotaId = turno.MascotaId.Value,
+                NombreMascota = turno.Mascota.Nombre,
+                NombreCliente = $"{turno.Cliente.Nombre} {turno.Cliente.Apellido}",
+                VacunasDisponibles = new SelectList(todasLasVacunas, "Id", "Nombre"),
+                EstudiosDisponibles = new SelectList(todosLosEstudios, "Id", "Nombre")
+            };
+
+            // 4. Mostramos la nueva vista.
+            return View("AtencionVeterinariaPorTurno", viewModel);
+        }
+
+
+        // ===== MÉTODO POST: Guarda la atención y actualiza el turno =====
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AtencionPorTurno(AtencionPorTurnoViewModel model)
+        {
+            var todasLasVacunas = await _vacunaService.ListarTodoAsync();
+            var todosLosEstudios = await _estudioService.ListarTodoAsync();
+
+            if (!ModelState.IsValid)
+            {
+                _toastNotification.AddErrorToastMessage("Por favor, corrige los errores del formulario.");
+                // Si hay un error, debemos volver a cargar los dropdowns antes de mostrar la vista.
+                model.VacunasDisponibles = new SelectList(todasLasVacunas, "Id", "Nombre");
+                model.EstudiosDisponibles = new SelectList(todosLosEstudios, "Id", "Nombre");
+                return View("AtencionVeterinariaPorTurno", model);
+            }
+
+            try
+            {
+                // Llamamos a un servicio que encapsula toda la lógica de guardado.
+                await _atencionService.RegistrarAtencionDesdeTurnoAsync(model);
+
+                _toastNotification.AddSuccessToastMessage("Atención registrada y turno finalizado con éxito.");
+                return RedirectToAction("PaginaPrincipal", "Veterinario");
+            }
+            catch (Exception ex)
+            {
+                // Loguear el error 'ex' es una buena práctica.
+                _toastNotification.AddErrorToastMessage("Ocurrió un error inesperado al guardar la atención.");
+                model.VacunasDisponibles = new SelectList(todasLasVacunas, "Id", "Nombre");
+                model.EstudiosDisponibles = new SelectList(todosLosEstudios, "Id", "Nombre");
+                return View("AtencionVeterinariaPorTurno", model);
+            }
+        }
+        #endregion
+    }
 }

@@ -170,7 +170,11 @@
                                     </div>
                                 </div>
                                 <div class="v1-list-actions">
-                                    <a asp-controller="Mascota" asp-action="Detalle" asp-route-id="@mascota.Id" class="v1-btn v1-btn-ghost"><i class="fa-solid fa-eye"></i></a>
+                                    <a asp-controller="Mascota" asp-action="Detalle" asp-route-id="@mascota.Id" class="v1-btn v1-btn-ghost">
+                                        <span class="v1-badge v1-badge-secondary">
+                                            Historial Clinico
+                                        </span><i class="fa-solid fa-eye"></i>
+                                    </a>
                                 </div>
                             </div>
                         }
@@ -182,34 +186,6 @@
                 </div>
             </div>
         </section>
-
-        
-        <section id="seguimiento" class="v1-section">
-            <h2 class="v1-section-title">Seguimiento Clínico</h2>
-            <div class="v1-card">
-                <div class="v1-card-content v1-list-content">
-                    @* Primero verificamos si hay atenciones *@
-                    @if (Model.HistoriaClinicas.Atenciones != null && Model.HistoriaClinicas.Atenciones.Any())
-                    {
-                        @foreach (var atencion in Model.HistoriaClinicas.Atenciones.OrderByDescending(a => a.Fecha))
-                        {
-                            <div class="v1-list-item">
-                                <div class="v1-list-info">
-                                    <p class="v1-list-name">@Model.HistoriaClinicas.MascotaNombre</p>
-                                    <p class="v1-list-subtext">@atencion.Diagnostico</p>
-                                    <p class="v1-list-subtext-small">Fecha: @atencion.Fecha.ToShortDateString()</p>
-                                </div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <div class="v1-empty-state">No tienes historial clínico registrado aún.</div>
-                    }
-                </div>
-            </div>
-        </section>
-
 
         
         <section id="pagos" class="v1-section">

@@ -31,6 +31,8 @@ namespace SistemaVetIng.Models.Extension
             services.AddScoped<IAtencionVeterinariaRepository, AtencionVeterinariaRepository>();
             services.AddScoped<ITurnoRepository, TurnoRepository>();
             services.AddScoped<IConfiguracionVeterinariaRepository, ConfiguracionVeterinariaRepository>();
+            services.AddScoped<IVacunaRepository, VacunaRepository>();
+            services.AddScoped<IEstudioRepository, EstudioRepository>();
             return services;
         }
 
@@ -51,6 +53,8 @@ namespace SistemaVetIng.Models.Extension
             services.AddScoped<IAtencionVeterinariaService, AtencionVeterinariaService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ITurnoService, TurnoService>();
+            services.AddScoped<IVacunaService, VacunaService>();
+            services.AddScoped<IEstudioService, EstudioService>();
 
             return services;
         }
