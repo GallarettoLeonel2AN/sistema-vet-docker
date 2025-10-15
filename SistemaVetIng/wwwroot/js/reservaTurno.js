@@ -46,12 +46,15 @@ function initializeReservaTurno(horariosUrl) {
     function cargarHorariosDisponibles() {
         const fechaSeleccionada = fechaTurnoInput.val();
 
+        // Siempre limpiamos el horario seleccionado al cambiar la fecha.
+        horarioHiddenInput.val('');
+        horariosOpcionesDiv.find('.horario-btn').removeClass('selected');
+
         if (fechaSeleccionada) {
 
             if (fechaSeleccionada < minDate) {
                 horariosOpcionesDiv.empty().html('<p class="text-danger validation-error">No se pueden buscar horarios para fechas pasadas.</p>');
                 horariosDisponiblesContainer.show();
-                horarioHiddenInput.val('');
                 return;
             }
 
@@ -65,15 +68,11 @@ function initializeReservaTurno(horariosUrl) {
                 success: function (horarios) {
                     horariosOpcionesDiv.empty();
 
-                    let horariosValidos = horarios; // Por defecto, usamos todos los horarios recibidos.
+                    let horariosValidos = horarios;
 
-                    // Verificamos si la fecha seleccionada es hoy
                     if (fechaSeleccionada === minDate) {
                         const ahora = new Date();
-                        // String con la hora actual en formato HH:mm para poder comparar
                         const horaActualString = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
-
-                        // Filtramos la lista, manteniendo solo los horarios que son mayores a la hora actual
                         horariosValidos = horarios.filter(horario => horario > horaActualString);
                     }
 
@@ -92,7 +91,6 @@ function initializeReservaTurno(horariosUrl) {
             });
         } else {
             horariosDisponiblesContainer.hide();
-            horarioHiddenInput.val('');
         }
     }
 

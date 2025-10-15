@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SistemaVetIng.Migrations
 {
     /// <inheritdoc />
-    public partial class primerisima : Migration
+    public partial class primera : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,16 +61,7 @@ namespace SistemaVetIng.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HoraInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HoraFin = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DuracionMinutosPorConsulta = table.Column<int>(type: "int", nullable: false),
-                    TrabajaLunes = table.Column<bool>(type: "bit", nullable: false),
-                    TrabajaMartes = table.Column<bool>(type: "bit", nullable: false),
-                    TrabajaMiercoles = table.Column<bool>(type: "bit", nullable: false),
-                    TrabajaJueves = table.Column<bool>(type: "bit", nullable: false),
-                    TrabajaViernes = table.Column<bool>(type: "bit", nullable: false),
-                    TrabajaSabado = table.Column<bool>(type: "bit", nullable: false),
-                    TrabajaDomingo = table.Column<bool>(type: "bit", nullable: false)
+                    DuracionMinutosPorConsulta = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,6 +226,29 @@ namespace SistemaVetIng.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HorarioDia",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DiaSemana = table.Column<int>(type: "int", nullable: false),
+                    EstaActivo = table.Column<bool>(type: "bit", nullable: false),
+                    HoraInicio = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    HoraFin = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ConfiguracionVeterinariaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HorarioDia", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HorarioDia_ConfiguracionVeterinarias_ConfiguracionVeterinariaId",
+                        column: x => x.ConfiguracionVeterinariaId,
+                        principalTable: "ConfiguracionVeterinarias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -576,6 +590,11 @@ namespace SistemaVetIng.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_HorarioDia_ConfiguracionVeterinariaId",
+                table: "HorarioDia",
+                column: "ConfiguracionVeterinariaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Mascotas_ClienteId",
                 table: "Mascotas",
                 column: "ClienteId");
@@ -650,10 +669,10 @@ namespace SistemaVetIng.Migrations
                 name: "Chips");
 
             migrationBuilder.DropTable(
-                name: "ConfiguracionVeterinarias");
+                name: "Estudios");
 
             migrationBuilder.DropTable(
-                name: "Estudios");
+                name: "HorarioDia");
 
             migrationBuilder.DropTable(
                 name: "Pagos");
@@ -666,6 +685,9 @@ namespace SistemaVetIng.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "ConfiguracionVeterinarias");
 
             migrationBuilder.DropTable(
                 name: "MetodosPago");
