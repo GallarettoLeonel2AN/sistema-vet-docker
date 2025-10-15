@@ -1,4 +1,5 @@
-﻿using SistemaVetIng.ViewsModels;
+﻿using SistemaVetIng.Models;
+using SistemaVetIng.ViewsModels;
 
 namespace SistemaVetIng.Servicios.Interfaces
 {
@@ -6,5 +7,7 @@ namespace SistemaVetIng.Servicios.Interfaces
     {
         Task<List<string>> GetHorariosDisponiblesAsync(DateTime fecha);
         Task ReservarTurnoAsync(ReservaTurnoViewModel model);
+        Task<IEnumerable<Turno>> ObtenerTurnosAsync();
+        Task<IEnumerable<Turno>> ObtenerTurnosPorClienteIdAsync(int clienteId);
     }
 }

@@ -101,25 +101,33 @@
             </div>
             <div class="v1-card">
                 <div class="v1-card-header">
-                    <h3 class="v1-card-title">Próximos Turnos</h3>
+                    <h3 class="v1-card-title">Turnos</h3>
                 </div>
-                @* <div class="v1-card-content v1-appointment-list-content">
-                    @if (Model.ProximosTurnos != null && Model.ProximosTurnos.Any())
+                <div class="v1-card-content v1-appointment-list-content">
+                    @if (Model.Turnos != null && Model.Turnos.Any())
                     {
-                        @foreach (var turno in Model.ProximosTurnos)
+                        @foreach (var turno in Model.Turnos)
                         {
                             <div class="v1-appointment-item">
                                 <div class="v1-appointment-info">
                                     <i class="fa-regular fa-clock v1-appointment-icon"></i>
                                     <div>
-                                        <p class="v1-appointment-time">@turno.FechaHora.ToString("HH:mm dd/MM")</p>
-                                        <p class="v1-appointment-pet">@turno.NombreMascota</p>
-                                        <p class="v1-appointment-owner">Veterinario: @turno.NombreVeterinario</p>
+                                        <p class="v1-appointment-time">@turno.Fecha.ToString("dd/MM/yyyy")</p>
+                                        <p class="v1-appointment-time">@turno.Horario.ToString(@"hh\:mm") hs</p>
+
+                                        @if (turno.PrimeraCita)
+                                        {
+                                            <p class="v1-appointment-pet"><strong>Primera Cita</strong></p>
+                                        }
+                                        else
+                                        {
+                                            <p class="v1-appointment-pet">@(turno.Mascota?.Nombre ?? "Mascota Eliminada")</p>
+                                        }
                                     </div>
                                 </div>
                                 <div class="v1-appointment-badges">
-                                    <span class="v1-badge v1-badge-secondary">@turno.TipoServicio</span>
-                                    <span class="v1-badge @(turno.Estado == "Confirmada" ? "v1-badge-green" : turno.Estado == "Pendiente" ? "v1-badge-yellow" : "v1-badge-gray")">@turno.Estado</span>
+                                    <span class="v1-badge v1-badge-secondary">@turno.Motivo</span>
+                                    <span class="v1-badge @(turno.Estado == "Finalizado" ? "v1-badge-green" : turno.Estado == "Pendiente" ? "v1-badge-yellow" : "v1-badge-gray")">@turno.Estado</span>
                                 </div>
                             </div>
                         }
@@ -128,22 +136,6 @@
                     {
                         <div class="v1-empty-state">No tienes turnos programados.</div>
                     }
-                </div>*@
-
-                <div class="v1-card-content v1-appointment-list-content">
-                            <div class="v1-appointment-item">
-                                <div class="v1-appointment-info">
-                                    <i class="fa-regular fa-clock v1-appointment-icon"></i>
-                                    <div>
-                                        <p class="v1-appointment-time">FechaTurno</p>
-                                        <p class="v1-appointment-pet">NombreMascota</p>
-                                        <p class="v1-appointment-owner">Veterinario: NombreVet?</p>
-                                    </div>
-                                </div>
-                                <div class="v1-appointment-badges">
-                                    <span class="v1-badge-badge-gray">EstadoTurno</span>
-                                </div>
-                            </div>
                 </div>
             </div>
         </section>

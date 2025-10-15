@@ -8,5 +8,6 @@ namespace SistemaVetIng.Repository.Interfaces
         Task AgregarTurno(Turno turno);
         Task Guardar();
         Task<IEnumerable<Turno>> ListarTodo();
+        Task<IEnumerable<Turno>> ObtenerTurnosPorClienteIdAsync(int clienteId);
     }
 }

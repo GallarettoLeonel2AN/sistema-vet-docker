@@ -16,11 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaVetIng")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31e49fd883b80686f021831496d116dabc0f9750")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0cf30cd4ec6b9af1179f6106e021daf917f013a")]
->>>>>>> e70ea591507a8b036c80b5880d2a178c5a093d76
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+585d5aac078aef8b9557e2d1448c5de5acd00b6c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaVetIng")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaVetIng")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

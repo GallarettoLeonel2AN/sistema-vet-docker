@@ -81,5 +81,16 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             return horarios;
         }
+
+
+        public async Task<IEnumerable<Turno>> ObtenerTurnosAsync()
+        {
+            return await _turnoRepository.ListarTodo();
+        }
+
+        public async Task<IEnumerable<Turno>> ObtenerTurnosPorClienteIdAsync(int clienteId)
+        {
+            return await _turnoRepository.ObtenerTurnosPorClienteIdAsync(clienteId);
+        }
     }
 }

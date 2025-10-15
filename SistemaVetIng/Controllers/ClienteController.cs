@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
+using SistemaVetIng.Models;
+using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
+using System.Security.Claims;
 
 namespace SistemaVetIng.Controllers
 {
@@ -12,15 +15,17 @@ namespace SistemaVetIng.Controllers
 
         private readonly IToastNotification _toastNotification;
         private readonly IClienteService _clienteService;
+        private readonly ITurnoService _turnoService;
         
 
-        public ClienteController(IToastNotification toastNotification, IClienteService clienteService)
+        public ClienteController(IToastNotification toastNotification, 
+            IClienteService clienteService,
+            ITurnoService turnoService)
         {
             _toastNotification = toastNotification;
             _clienteService = clienteService;
-            
+            _turnoService = turnoService;
         }
-
 
 
         #region PAGINA PRINCIPAL
@@ -28,7 +33,39 @@ namespace SistemaVetIng.Controllers
         public async Task<IActionResult> PaginaPrincipal()
         {
 
+            var usuarioIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Convertir el ID (string) a un entero (int).
+            if (!int.TryParse(usuarioIdString, out int usuarioIdNumerico))
+            {
+                return BadRequest("El formato ID de usuario no es valido");
+            }
+
+            var cliente = await _clienteService.ObtenerPorIdUsuario(usuarioIdNumerico);
+
             var viewModel = new ClientePaginaPrincipalViewModel();
+
+            var turnos = await _turnoService.ObtenerTurnosPorClienteIdAsync(cliente.Id);
+
+            if (turnos != null && turnos.Any())
+            {
+                viewModel.Turnos = turnos.Select(t => new TurnoViewModel
+                {
+                    Id = t.Id,
+                    Fecha = t.Fecha,
+                    Horario = t.Horario,
+                    Estado = t.Estado,
+                    Motivo = t.Motivo,
+                    PrimeraCita = t.PrimeraCita,
+                    Cliente = t.Cliente,
+                    Mascota = t.Mascota,
+                }).ToList();
+            }
+            else
+            {
+                viewModel.Turnos = new List<TurnoViewModel>();
+            }
+
             return View(viewModel);
         }
         #endregion

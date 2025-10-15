@@ -51,9 +51,10 @@ namespace SistemaVetIng.Controllers
 
             var viewModel = new ReservaTurnoViewModel
             {
-                Mascotas = mascotasDelCliente.ToList(),
+                Mascotas = mascotasDelCliente,
                 HasMascotas = mascotasDelCliente.Any(),
-                
+                // Si NO tiene mascotas !mascotasDelCliente.Any(), PrimeraCita true
+                PrimeraCita = !mascotasDelCliente.Any()
             };
 
             return View(viewModel);
@@ -79,14 +80,8 @@ namespace SistemaVetIng.Controllers
             {
                 if (model.MascotaId == null || model.MascotaId == 0)
                 {
-                    ModelState.AddModelError("MascotaId", "Por favor, seleccione una mascota.");
+                    ModelState.AddModelError("MascotaId", "Debe seleccionar una mascota si no es la primera cita.");
                 }
-            }
-            // Lógica para manejar Primera Cita
-            if (!model.HasMascotas)
-            {
-                model.PrimeraCita = true;
-                model.MascotaId = null;
             }
 
             var usuarioActual = await _userManager.GetUserAsync(User);

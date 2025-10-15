@@ -1,39 +1,34 @@
 ﻿
 // Logica principal del formulario de reserva
-
 function initializeReservaTurno(horariosUrl) {
-    const primeraCitaCheckbox = document.getElementById('primeraCitaCheckbox');
-    const mascotaContainer = document.getElementById('mascotaContainer');
-    const mascotaSelect = document.getElementById('mascotaSelect');
+    const primeraCitaCheckbox = $('#primeraCitaCheckbox');
+    const mascotaContainer = $('#mascotaContainer');
+    const mascotaSelect = $('#mascotaSelect');
 
-    // Elementos de fecha y horario
     const fechaTurnoInput = $('#fechaTurno');
     const horariosDisponiblesContainer = $('#horariosDisponiblesContainer');
     const horariosOpcionesDiv = $('#horariosOpciones');
     const horarioHiddenInput = $('#horarioHiddenInput');
-
-    // Formulario de reserva
     const reservaForm = $('form.main-form');
-
 
     // Logica para alternar la seleccion de mascota (Primera Cita)
     function toggleMascotaSelection() {
-        if (primeraCitaCheckbox && primeraCitaCheckbox.checked) {
-            mascotaContainer.style.display = 'none';
-            mascotaSelect.removeAttribute('required');
+        if (primeraCitaCheckbox.length && primeraCitaCheckbox.is(':checked')) {
+            mascotaContainer.hide();
+            mascotaSelect.prop('required', false); 
+            mascotaSelect.val(""); 
         } else {
-            mascotaContainer.style.display = 'block';
-            mascotaSelect.setAttribute('required', 'required');
+            mascotaContainer.show();
+            mascotaSelect.prop('required', true);
         }
     }
 
-    if (primeraCitaCheckbox) {
-        primeraCitaCheckbox.addEventListener('change', toggleMascotaSelection);
+    if (primeraCitaCheckbox.length) {
+        primeraCitaCheckbox.on('change', toggleMascotaSelection);
         toggleMascotaSelection();
     }
 
-
-    // Logica para la restriccion de fecha anteriores a la de hoy
+    // Logica para la restriccion de fecha anteriores a la de hoy 
     function getTodayDateString() {
         const today = new Date();
         const year = today.getFullYear();
@@ -41,16 +36,13 @@ function initializeReservaTurno(horariosUrl) {
         const day = String(today.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     }
-
     const minDate = getTodayDateString();
     fechaTurnoInput.attr('min', minDate);
-
     if (fechaTurnoInput.val() < minDate) {
         fechaTurnoInput.val(minDate);
     }
 
-
-    // Logica para cargar los horarios disponibles 
+    // Logica para cargar los horarios disponibles
     function cargarHorariosDisponibles() {
         const fechaSeleccionada = fechaTurnoInput.val();
 
@@ -67,19 +59,31 @@ function initializeReservaTurno(horariosUrl) {
             horariosDisponiblesContainer.show();
 
             $.ajax({
-                // Usamos la URL inyectada
                 url: horariosUrl,
                 type: 'GET',
                 data: { fecha: fechaSeleccionada },
                 success: function (horarios) {
                     horariosOpcionesDiv.empty();
-                    if (horarios && horarios.length > 0) {
-                        horarios.forEach(horario => {
+
+                    let horariosValidos = horarios; // Por defecto, usamos todos los horarios recibidos.
+
+                    // Verificamos si la fecha seleccionada es hoy
+                    if (fechaSeleccionada === minDate) {
+                        const ahora = new Date();
+                        // String con la hora actual en formato HH:mm para poder comparar
+                        const horaActualString = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
+
+                        // Filtramos la lista, manteniendo solo los horarios que son mayores a la hora actual
+                        horariosValidos = horarios.filter(horario => horario > horaActualString);
+                    }
+
+                    if (horariosValidos && horariosValidos.length > 0) {
+                        horariosValidos.forEach(horario => {
                             const btn = `<button type="button" class="horario-btn" data-horario="${horario}">${horario}</button>`;
                             horariosOpcionesDiv.append(btn);
                         });
                     } else {
-                        horariosOpcionesDiv.html('<p class="text-danger validation-error">No hay horarios disponibles para la fecha seleccionada. La veterinaria no trabaja este dia</p>');
+                        horariosOpcionesDiv.html('<p class="text-danger validation-error">No hay horarios disponibles para la fecha seleccionada.</p>');
                     }
                 },
                 error: function () {
@@ -92,31 +96,38 @@ function initializeReservaTurno(horariosUrl) {
         }
     }
 
-    // Logica para seleccionar un boton de horario
+    // Logica para seleccionar un boton de horario 
     horariosOpcionesDiv.on('click', '.horario-btn', function () {
         horariosOpcionesDiv.find('.horario-btn').removeClass('selected');
         $(this).addClass('selected');
         horarioHiddenInput.val($(this).data('horario'));
     });
 
-    // Escucha los cambios en el input de fecha
     fechaTurnoInput.on('change', cargarHorariosDisponibles);
-
-    // Llama a la funcion al cargar la pagina para inicializar
     cargarHorariosDisponibles();
 
     // Logica para el envio del formulario con Ajax
     reservaForm.on('submit', function (e) {
         e.preventDefault();
 
-        if (fechaTurnoInput.val() < minDate) {
-            toastr.error("La fecha seleccionada no es válida. Debe ser hoy o una fecha futura.");
-            return;
+        const esPrimeraCita = primeraCitaCheckbox.length ? primeraCitaCheckbox.is(':checked') : false;
+        const mascotaSeleccionada = mascotaSelect.val();
+        const horarioSeleccionado = horarioHiddenInput.val();
+
+        if (!horarioSeleccionado) {
+            toastr.error("Por favor, selecciona una fecha y un horario disponible.");
+            return; 
         }
+
+        // Condición de error: NO es primera cita Y NO se seleccionó mascota
+        if (!esPrimeraCita && (mascotaSeleccionada === "" || mascotaSeleccionada === null)) {
+            toastr.error("Por favor, selecciona una mascota o marca la opción de 'Primera Cita'.");
+            return; 
+        }
+
 
         const formData = new FormData(this);
         const submitButton = $(this).find('button[type="submit"]');
-
         submitButton.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Reservando...');
 
         $.ajax({
@@ -128,14 +139,9 @@ function initializeReservaTurno(horariosUrl) {
             success: function (response) {
                 if (response.success) {
                     toastr.success("¡Turno reservado con éxito!");
-
+                    // Redirige dspues de 2 segundos para que el usuario vea el mensaje
                     setTimeout(() => window.location.href = response.redirectUrl, 2000);
 
-                    cargarHorariosDisponibles();
-
-                    reservaForm[0].reset();
-                    horariosOpcionesDiv.empty();
-                    horariosDisponiblesContainer.hide();
                 } else {
                     toastr.error(response.message || "Ocurrió un error al reservar el turno.");
                 }
@@ -150,9 +156,8 @@ function initializeReservaTurno(horariosUrl) {
     });
 }
 
-// Inicializa las funciones específicas de la reserva al cargar el DOM
+// Inicializa las funciones
 document.addEventListener('DOMContentLoaded', function () {
-    // Obtener la URL de la API del atributo de datos
     const formElement = document.querySelector('form.main-form');
     if (formElement) {
         const horariosUrl = formElement.getAttribute('data-horarios-url');

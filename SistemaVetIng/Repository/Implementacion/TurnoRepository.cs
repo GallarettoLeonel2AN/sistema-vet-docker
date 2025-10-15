@@ -30,9 +30,22 @@ namespace SistemaVetIng.Repository.Implementacion
         {
             await _context.SaveChangesAsync();
         }
-        
 
         public async Task<IEnumerable<Turno>> ListarTodo()
-         => await _context.Turnos.ToListAsync();
+        {
+            return await _context.Turnos
+                                 .Include(t => t.Cliente)
+                                 .Include(t => t.Mascota)
+                                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Turno>> ObtenerTurnosPorClienteIdAsync(int clienteId)
+        {
+            return await _context.Turnos
+                                 .Include(t => t.Cliente)
+                                 .Include(t => t.Mascota)
+                                 .Where(t => t.ClienteId == clienteId)
+                                 .ToListAsync();
+        }
     }
 }

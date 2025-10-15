@@ -1,11 +1,10 @@
-﻿using SistemaVetIng.Models;
-
-namespace SistemaVetIng.ViewsModels
+﻿namespace SistemaVetIng.ViewsModels
 {
     public class ClientePaginaPrincipalViewModel
     {
         public List<MascotaListViewModel> Mascotas { get; set; }
         public ClienteViewModel Cliente { get; set; }
+        public List<TurnoViewModel> Turnos { get; set; }
 
         // Reportes simulados / indicadores
         public int CantidadTurnosReservados { get; set; }
@@ -18,6 +17,7 @@ namespace SistemaVetIng.ViewsModels
         {
             Mascotas = new List<MascotaListViewModel>();
             Cliente = new ClienteViewModel();
+            Turnos = new List<TurnoViewModel>();
         }
     }
 }
