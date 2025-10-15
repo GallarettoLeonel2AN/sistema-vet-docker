@@ -130,6 +130,18 @@ namespace SistemaVetIng.Servicios.Implementacion
         {
             return await _clienteRepository.ObtenerPorIdUsuario(id);
         }
+        public async Task<Cliente> ObtenerClientePorUserNameAsync(string userName)
+        {
+
+            var usuario = await _userManager.FindByNameAsync(userName);
+
+            if (usuario == null)
+            {
+                return null;
+            }
+
+            return await ObtenerPorIdUsuario(usuario.Id);
+        }
         #endregion
     }
 }

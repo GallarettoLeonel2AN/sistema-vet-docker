@@ -43,8 +43,98 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             return especieLower == "perro" && _razasPeligrosas.Contains(razaLower);
         }
+        public async Task<IEnumerable<MascotaListViewModel>> ObtenerMascotasPorClienteUserNameAsync(string userName)
+        {
 
 
+            var mascotas = await _context.Mascotas
+                .Include(m => m.Propietario)
+                .ThenInclude(p => p.Usuario)
+                .Where(m => m.Propietario != null && m.Propietario.Usuario.UserName == userName)
+                .Select(m => new MascotaListViewModel
+                {
+                    Id = m.Id,
+                    NombreMascota = m.Nombre,
+                    Especie = m.Especie,
+                    Raza = m.Raza,
+                    Sexo = m.Sexo,
+                    // Calcular Edad Mascota Ver Si funciona
+                    EdadAnios = (DateTime.Today.Year - m.FechaNacimiento.Year),
+                    RazaPeligrosa = m.RazaPeligrosa,
+                    NombreDueno = m.Propietario.Nombre + " " + m.Propietario.Apellido,
+                    ClienteId = m.ClienteId
+                })
+                .AsNoTracking()
+                .ToListAsync();
+
+            return mascotas;
+        }
+        public async Task<MascotaDetalleViewModel> ObtenerDetalleConHistorial(int mascotaId)
+        {
+
+            var mascotaEntity = await _context.Mascotas
+                .Include(m => m.Propietario)
+                .Include(m => m.Chip)
+                .Include(m => m.HistoriaClinica)
+                    .ThenInclude(hc => hc.Atenciones)
+                        .ThenInclude(a => a.Veterinario)
+                .Include(m => m.HistoriaClinica)
+                    .ThenInclude(hc => hc.Atenciones)
+                        .ThenInclude(a => a.Tratamiento)
+                .Include(m => m.HistoriaClinica)
+                    .ThenInclude(hc => hc.Atenciones)
+                        .ThenInclude(a => a.Vacunas)
+                .Include(m => m.HistoriaClinica)
+                    .ThenInclude(hc => hc.Atenciones)
+                        .ThenInclude(a => a.EstudiosComplementarios)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == mascotaId);
+
+            if (mascotaEntity == null)
+            {
+                return null;
+            }
+
+
+            var viewModel = new MascotaDetalleViewModel
+            {
+                Id = mascotaEntity.Id,
+                Nombre = mascotaEntity.Nombre,
+                Especie = mascotaEntity.Especie,
+                Raza = mascotaEntity.Raza,
+                FechaNacimiento = mascotaEntity.FechaNacimiento,
+                Sexo = mascotaEntity.Sexo,
+                EsRazaPeligrosa = mascotaEntity.RazaPeligrosa,
+                ChipCodigo = mascotaEntity.Chip?.Codigo,
+                PropietarioNombreCompleto = $"{mascotaEntity.Propietario?.Nombre} {mascotaEntity.Propietario?.Apellido}",
+
+
+                HistorialClinico = mascotaEntity.HistoriaClinica?.Atenciones
+                    ?.OrderByDescending(a => a.Fecha)
+                    .Select(a => new AtencionDetalleViewModel
+                    {
+                        AtencionId = a.Id,
+                        Fecha = a.Fecha,
+                        Diagnostico = a.Diagnostico,
+                        PesoKg = a.PesoMascota,
+                        VeterinarioNombreCompleto = a.Veterinario != null ? $"{a.Veterinario.Nombre} {a.Veterinario.Apellido}" : "N/A",
+                        Medicamento = a.Tratamiento?.Medicamento,
+                        Dosis = a.Tratamiento?.Dosis,
+                        Frecuencia = a.Tratamiento?.Frecuencia,
+                        DuracionDias = a.Tratamiento?.Duracion,
+                        ObservacionesTratamiento = a.Tratamiento?.Observaciones,
+                        NombresVacunasConLote = a.Vacunas?
+                                        .Select(v => $"{v.Nombre} (Lote: {v.Lote})")
+                                        .ToList() ?? new List<string>(),
+                        NombresEstudios = a.EstudiosComplementarios?
+                                        .Select(e => e.Nombre)
+                                        .ToList() ?? new List<string>(),
+                        CostoTotal = a.CostoTotal
+                    }).ToList() ?? new List<AtencionDetalleViewModel>()
+            };
+
+            return viewModel;
+        }
         public async Task<(bool success, string message)> Registrar(MascotaRegistroViewModel model)
         {
             

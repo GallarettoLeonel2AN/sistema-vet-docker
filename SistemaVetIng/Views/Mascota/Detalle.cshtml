@@ -1,0 +1,94 @@
+﻿@model SistemaVetIng.ViewsModels.MascotaDetalleViewModel
+
+@{
+    ViewData["Title"] = $"Detalle de Mascota: @Model.Nombre";
+    Layout = "_Layout";
+}
+
+<div class="v1-main-dashboard">
+    <h1 class="v1-section-title">Detalle de @Model.Nombre</h1>
+    <p class="lead">Propietario: @Model.PropietarioNombreCompleto</p>
+
+    <section id="info-mascota" class="v1-section">
+        <div class="v1-card">
+            <div class="v1-card-header">
+                <h3 class="v1-card-title">Datos Básicos</h3>
+            </div>
+            <div class="v1-card-content">
+                <p><strong>Raza:</strong> @Model.Raza</p>
+                <p><strong>Especie:</strong> @Model.Especie</p>
+                <p><strong>Fecha Nacimiento:</strong> @Model.FechaNacimiento.ToShortDateString()</p>
+                <p><strong>Chip:</strong> @(string.IsNullOrEmpty(Model.ChipCodigo) ? "No" : Model.ChipCodigo)</p>
+                <p><strong>Raza Peligrosa:</strong> @(Model.EsRazaPeligrosa ? "Sí" : "No")</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="historial-clinico" class="v1-section">
+        <h2 class="v1-section-title">Historial Clínico (@Model.HistorialClinico.Count Atenciones)</h2>
+
+        @if (Model.HistorialClinico.Any())
+        {
+            @foreach (var atencion in Model.HistorialClinico)
+            {
+                <div class="v1-card mb-4 border-left-@atencion.Fecha.ToShortDateString()">
+                    <div class="v1-card-header">
+                        <h4 class="v1-card-title">Atención del @atencion.Fecha.ToShortDateString()</h4>
+                        <small>Veterinario: @atencion.VeterinarioNombreCompleto</small>
+                    </div>
+
+                    <div class="v1-card-content">
+                        <p><strong>Diagnóstico:</strong> @atencion.Diagnostico</p>
+                        <p><strong>Peso:</strong> @atencion.PesoKg kg</p>
+                        <hr>
+
+                        @if (!string.IsNullOrEmpty(atencion.Medicamento))
+                        {
+                            <h5>💊 Tratamiento Registrado:</h5>
+                            <ul>
+                                <li><strong>Medicamento:</strong> @atencion.Medicamento</li>
+                                <li><strong>Dosis:</strong> @atencion.Dosis</li>
+                                <li><strong>Frecuencia:</strong> @atencion.Frecuencia</li>
+                                <li><strong>Duración:</strong> @atencion.DuracionDias días</li>
+                                <li><strong>Observaciones:</strong> @atencion.ObservacionesTratamiento</li>
+                            </ul>
+                        }
+
+                        @if (atencion.NombresVacunasConLote.Any())
+                        {
+                            <h5>💉 Vacunas Aplicadas:</h5>
+                            <ul>
+                                @foreach (var vacunaDetalle in atencion.NombresVacunasConLote)
+                                {
+                                    <li>@vacunaDetalle</li>
+                                }
+                            </ul>
+                        }
+
+                        @if (atencion.NombresEstudios.Any())
+                        {
+                            <h5>🔬 Estudios Complementarios:</h5>
+                            <ul>
+                                @foreach (var estudioNombre in atencion.NombresEstudios)
+                                {
+                                    <li>@estudioNombre</li>
+                                }
+                            </ul>
+                        }
+
+                        <p class="text-right mt-3"><strong>Costo Total: $@atencion.CostoTotal</strong></p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-info">Esta mascota no tiene atenciones registradas.</div>
+        }
+    </section>
+
+    <div class="mt-4">
+        <a asp-controller="Cliente" asp-action="PaginaPrincipal" class="v1-btn v1-btn-secondary">← Volver al Dashboard</a>
+    </div>
+
+</div>

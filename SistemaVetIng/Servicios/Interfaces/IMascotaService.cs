@@ -12,5 +12,7 @@ namespace SistemaVetIng.Servicios.Interfaces
         Task<IEnumerable<Mascota>> ListarTodo();
         Task<IEnumerable<Mascota>> FiltrarPorBusqueda(string busqueda);
         Task<IEnumerable<Mascota>> ListarMascotasPorClienteId(int clienteId);
+        Task<IEnumerable<MascotaListViewModel>> ObtenerMascotasPorClienteUserNameAsync(string userName);
+        Task<MascotaDetalleViewModel> ObtenerDetalleConHistorial(int mascotaId);
     }
 }

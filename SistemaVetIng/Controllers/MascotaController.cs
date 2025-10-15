@@ -30,9 +30,46 @@ namespace SistemaVetIng.Controllers
         }
 
 
+        [HttpGet]
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Detalle(int id)
+        {
+            if (id <= 0)
+            {
+                _toastNotification.AddErrorToastMessage("ID de mascota inválido.");
+                return RedirectToAction("PaginaPrincipal", "Cliente");
+            }
+
+
+            var viewModel = await _mascotaService.ObtenerDetalleConHistorial(id);
+
+            if (viewModel == null)
+            {
+                _toastNotification.AddErrorToastMessage("Mascota no encontrada.");
+                return RedirectToAction("PaginaPrincipal", "Cliente");
+            }
+
+
+            if (User.IsInRole("Cliente"))
+            {
+                var userName = User.Identity.Name;
+
+                var clienteActual = await _clienteService.ObtenerClientePorUserNameAsync(userName);
+
+                if (clienteActual == null || !viewModel.PropietarioNombreCompleto.Contains(clienteActual.Nombre))
+                {
+                    _toastNotification.AddWarningToastMessage("Acceso denegado. No es el propietario de esta mascota.");
+                    return RedirectToAction("PaginaPrincipal", "Cliente");
+                }
+            }
+
+            return View(viewModel);
+        }
+
 
         #region LISTARCLIENTES
-       
+
         public async Task<IActionResult> ListarClientes()
         {
             var clientes = await _clienteService.ListarTodo();

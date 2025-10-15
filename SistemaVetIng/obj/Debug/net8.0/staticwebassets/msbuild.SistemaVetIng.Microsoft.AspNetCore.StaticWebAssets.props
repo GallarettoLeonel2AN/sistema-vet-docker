@@ -624,8 +624,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>d3v47ibu8m</Fingerprint>
-      <Integrity>l2oohqCvTNm6wlbP9ajyB5DYhYElxSx4F/YgT0TCMrA=</Integrity>
+      <Fingerprint>9djts5l9zs</Fingerprint>
+      <Integrity>s5jYX6fiJS7R956IW6D9cj4gu+CJTyvdFKyfnjQ+zYE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\veterinary-dashboard.css'))</OriginalItemSpec>
@@ -714,8 +714,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>11s7yfu2l3</Fingerprint>
-      <Integrity>WxhCw1oCe7fwYhHYjU+GlFQXzTr042HX4WVwUA3ZMSI=</Integrity>
+      <Fingerprint>xfct4az914</Fingerprint>
+      <Integrity>w7+pLPH+OcrQ7Mr5WiXKR8f7QMQAzZlUXxX/lHJudxk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\reservaTurno.js'))</OriginalItemSpec>

@@ -2,6 +2,7 @@
 {
     public class ClientePaginaPrincipalViewModel
     {
+        public string NombreCompleto { get; set; }
         public List<MascotaListViewModel> Mascotas { get; set; }
         public ClienteViewModel Cliente { get; set; }
         public List<TurnoViewModel> Turnos { get; set; }

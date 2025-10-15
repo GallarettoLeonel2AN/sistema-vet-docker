@@ -16,15 +16,18 @@ namespace SistemaVetIng.Controllers
         private readonly IToastNotification _toastNotification;
         private readonly IClienteService _clienteService;
         private readonly ITurnoService _turnoService;
-        
+        private readonly IMascotaService _mascotaService;
+
 
         public ClienteController(IToastNotification toastNotification, 
             IClienteService clienteService,
-            ITurnoService turnoService)
+            ITurnoService turnoService,
+            IMascotaService mascotaService)
         {
             _toastNotification = toastNotification;
             _clienteService = clienteService;
             _turnoService = turnoService;
+            _mascotaService = mascotaService;
         }
 
 
@@ -32,7 +35,6 @@ namespace SistemaVetIng.Controllers
         [HttpGet]
         public async Task<IActionResult> PaginaPrincipal()
         {
-
             var usuarioIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             // Convertir el ID (string) a un entero (int).
@@ -41,10 +43,31 @@ namespace SistemaVetIng.Controllers
                 return BadRequest("El formato ID de usuario no es valido");
             }
 
-            var cliente = await _clienteService.ObtenerPorIdUsuario(usuarioIdNumerico);
+            // 1. Obtener el cliente y el nombre de usuario
+            var userName = User.Identity.Name;
 
-            var viewModel = new ClientePaginaPrincipalViewModel();
+            if (string.IsNullOrEmpty(userName))
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
+            // Usaremos esta instancia de cliente para obtener turnos y mascotas
+            var cliente = await _clienteService.ObtenerClientePorUserNameAsync(userName);
+
+            if (cliente == null)
+            {
+                // Redirigir si no se encuentra el cliente con el userName
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Inicializar el ViewModel
+            var viewModel = new ClientePaginaPrincipalViewModel
+            {
+                // Asignar inmediatamente el nombre completo
+                NombreCompleto = $"{cliente.Nombre} {cliente.Apellido}"
+            };
+
+            // 2. Obtener y asignar los turnos
             var turnos = await _turnoService.ObtenerTurnosPorClienteIdAsync(cliente.Id);
 
             if (turnos != null && turnos.Any())
@@ -66,6 +89,13 @@ namespace SistemaVetIng.Controllers
                 viewModel.Turnos = new List<TurnoViewModel>();
             }
 
+            // 3. Obtener y asignar las mascotas
+            // Nota: Si ObtenerMascotasPorClienteUserNameAsync necesita un cliente asociado al userName,
+            // es mejor usar el cliente.Id que ya obtuviste, pero mantendremos la llamada original si es necesario.
+            var mascotas = await _mascotaService.ObtenerMascotasPorClienteUserNameAsync(userName);
+            viewModel.Mascotas = mascotas.ToList();
+
+            // Devolver la vista con el viewModel completo
             return View(viewModel);
         }
         #endregion
