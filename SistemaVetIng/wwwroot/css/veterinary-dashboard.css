@@ -178,6 +178,16 @@
 }
 
 /* -- Gráficos y Listas de Citas -- */
+.v1-chart-and-list-container-flex {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 50px;
+    max-width: none;
+    width: 90vw;
+}
+
 .v1-chart-and-list-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -373,7 +383,12 @@
         background-color: #3182ce;
         border-color: #3182ce;
     }
-
+.btn-centrar {
+    display: flex;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    align-self: flex-start;
+}
 .v1-btn-ghost {
     background-color: transparent;
     border: none;
@@ -479,4 +494,9 @@
 
 .v1-badge-danger {
     background-color: #dc3545;
+}
+
+.primeraCita{
+    color: limegreen;
+    font-weight: 700;
 }

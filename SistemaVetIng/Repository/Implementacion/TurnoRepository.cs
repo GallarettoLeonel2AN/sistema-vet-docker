@@ -47,5 +47,15 @@ namespace SistemaVetIng.Repository.Implementacion
                                  .Where(t => t.ClienteId == clienteId)
                                  .ToListAsync();
         }
+
+        public async Task<IEnumerable<Turno>> ObtenerTurnosPorFechaAsync(DateTime fecha)
+        {
+            return await _context.Turnos
+                                 .Include(t => t.Cliente)
+                                 .Include(t => t.Mascota)
+                                 .Where(t => t.Fecha.Date == fecha.Date) 
+                                 .OrderBy(t => t.Horario) 
+                                 .ToListAsync();
+        }
     }
 }

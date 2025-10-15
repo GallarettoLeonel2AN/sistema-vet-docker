@@ -117,16 +117,28 @@
 
                                         @if (turno.PrimeraCita)
                                         {
-                                            <p class="v1-appointment-pet"><strong>Primera Cita</strong></p>
+                                            <p class="v1-appointment-pet">Primera Cita</p>
                                         }
                                         else
                                         {
-                                            <p class="v1-appointment-pet">@(turno.Mascota?.Nombre ?? "Mascota Eliminada")</p>
+                                            <p class="v1-appointment-pet">Mascota: @(turno.Mascota?.Nombre ?? "Mascota Eliminada")</p>
                                         }
                                     </div>
                                 </div>
                                 <div class="v1-appointment-badges">
-                                    <span class="v1-badge v1-badge-secondary">@turno.Motivo</span>
+
+                                    @if (!string.IsNullOrWhiteSpace(turno.Motivo))
+                                    {
+                                        <span class="v1-badge v1-badge-secondary">
+                                            Motivo: @turno.Motivo
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="v1-badge v1-badge-secondary">
+                                            No especificó Motivo
+                                        </span>
+                                    }
                                     <span class="v1-badge @(turno.Estado == "Finalizado" ? "v1-badge-green" : turno.Estado == "Pendiente" ? "v1-badge-yellow" : "v1-badge-gray")">@turno.Estado</span>
                                 </div>
                             </div>

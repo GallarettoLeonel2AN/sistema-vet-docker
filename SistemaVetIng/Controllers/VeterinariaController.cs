@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using SistemaVetIng.Models;
+using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
@@ -16,6 +17,7 @@ namespace SistemaVetIng.Controllers
         private readonly IVeterinarioService _veterinarioService;
         private readonly IClienteService _clienteService;
         private readonly IMascotaService _mascotaService;
+        private readonly ITurnoService _turnoService;
         
 
         public VeterinariaController(
@@ -23,8 +25,8 @@ namespace SistemaVetIng.Controllers
             IToastNotification toastNotification,
             IMascotaService mascotaService,
             IClienteService clienteService,
-            IVeterinarioService veterinarioService
-            
+            IVeterinarioService veterinarioService,
+            ITurnoService turnoService
             )
         {
             _mascotaService = mascotaService;
@@ -32,6 +34,7 @@ namespace SistemaVetIng.Controllers
             _clienteService = clienteService;
             _veterinariaConfigService = service;
             _toastNotification = toastNotification;
+            _turnoService = turnoService;
            
         }
 
@@ -113,6 +116,22 @@ namespace SistemaVetIng.Controllers
                 NombreDueno = $"{m.Propietario?.Nombre} {m.Propietario?.Apellido}",
                 ClienteId = m.Propietario?.Id ?? 0
             }).ToList();
+
+
+            // Cargar Listado de Turnos para la fecha actual
+            var turnosDeHoy = await _turnoService.ObtenerTurnosPorFechaAsync(DateTime.Today);
+
+            viewModel.CitasDeHoy = turnosDeHoy.Select(t => new TurnoViewModel
+            {
+                Id = t.Id,
+                Horario = t.Horario,
+                Motivo = t.Motivo,
+                Estado = t.Estado,
+                PrimeraCita = t.PrimeraCita,
+                NombreMascota = t.Mascota?.Nombre,
+                NombreCliente = $"{t.Cliente?.Nombre} {t.Cliente?.Apellido}"
+            }).ToList();
+
 
 
             // Hardcoded de datos para Reportes Analíticos 

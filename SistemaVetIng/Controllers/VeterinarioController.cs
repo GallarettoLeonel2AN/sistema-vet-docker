@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
+using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
@@ -14,17 +15,20 @@ namespace SistemaVetIng.Controllers
         private readonly IVeterinarioService _veterinarioService;
         private readonly IClienteService _clienteService;
         private readonly IMascotaService _mascotaService;
+        private readonly ITurnoService _turnoService;
 
         public VeterinarioController(
             IVeterinarioService veterinarioService,
             IToastNotification toastNotification,
             IClienteService clienteService,
-            IMascotaService mascotaService)
+            IMascotaService mascotaService,
+            ITurnoService turnoService)
         {
             _veterinarioService = veterinarioService;
             _toastNotification = toastNotification;
             _clienteService = clienteService;
             _mascotaService = mascotaService;
+            _turnoService = turnoService;
         }
 
         #region PAGINA PRINCIPAL
@@ -60,6 +64,20 @@ namespace SistemaVetIng.Controllers
                 EdadAnios = DateTime.Today.Year - m.FechaNacimiento.Year - (DateTime.Today.Month < m.FechaNacimiento.Month || (DateTime.Today.Month == m.FechaNacimiento.Month && DateTime.Today.Day < m.FechaNacimiento.Day) ? 1 : 0),
                 NombreDueno = $"{m.Propietario?.Nombre} {m.Propietario?.Apellido}",
                 ClienteId = m.Propietario?.Id ?? 0
+            }).ToList();
+
+            // Cargar Listado de Turnos para la fecha actual
+            var turnosDeHoy = await _turnoService.ObtenerTurnosPorFechaAsync(DateTime.Today);
+
+            viewModel.CitasDeHoy = turnosDeHoy.Select(t => new TurnoViewModel
+            {
+                Id = t.Id,
+                Horario = t.Horario,
+                Motivo = t.Motivo,
+                Estado = t.Estado,
+                PrimeraCita = t.PrimeraCita,
+                NombreMascota = t.Mascota?.Nombre,
+                NombreCliente = $"{t.Cliente?.Nombre} {t.Cliente?.Apellido}"
             }).ToList();
 
             return View(viewModel);

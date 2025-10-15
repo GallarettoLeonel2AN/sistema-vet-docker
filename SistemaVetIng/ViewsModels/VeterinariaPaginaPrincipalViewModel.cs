@@ -7,7 +7,8 @@ namespace SistemaVetIng.ViewsModels
         public List<VeterinarioViewModel> Veterinarios { get; set; }
         public ConfiguracionVeterinariaViewModel ConfiguracionTurnos { get; set; }
         public List<ClienteViewModel> Clientes { get; set; } 
-        public List<MascotaListViewModel> Mascotas { get; set; } 
+        public List<MascotaListViewModel> Mascotas { get; set; }
+        public List<TurnoViewModel> CitasDeHoy { get; set; } = new List<TurnoViewModel>();
 
         // Propiedades para los reportes analíticos simulados
         public int CantidadPerrosPeligrosos { get; set; }
@@ -20,7 +21,8 @@ namespace SistemaVetIng.ViewsModels
             Veterinarios = new List<VeterinarioViewModel>();
             Clientes = new List<ClienteViewModel>();
             Mascotas = new List<MascotaListViewModel>();
-            ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel(); 
+            ConfiguracionTurnos = new ConfiguracionVeterinariaViewModel();
+            CitasDeHoy = new List<TurnoViewModel>();
         }
     }
 }

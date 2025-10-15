@@ -85,58 +85,67 @@
                     </div>
                 </div>
             </div>
+
             <div class="v1-chart-and-list-container">
                 <div class="v1-card v1-appointment-list-card">
                     <div class="v1-card-header">
-                        <h3 class="v1-card-title">Citas de Hoy</h3>
-                        <p class="v1-card-description">Próximas citas programadas</p>
+                        <h3 class="v1-card-title">Citas de Hoy (@Model.CitasDeHoy.Count)</h3>
+                        <p class="v1-card-description">Citas programadas para el @DateTime.Today.ToString("dd/MM/yyyy")</p>
                     </div>
                     <div class="v1-card-content v1-appointment-list-content">
-                        <div class="v1-appointment-item">
-                            <div class="v1-appointment-info">
-                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
-                                <div>
-                                    <p class="v1-appointment-time">10:30</p>
-                                    <p class="v1-appointment-pet">Max</p>
-                                    <p class="v1-appointment-owner">Juan Pérez</p>
+
+                        @if (Model.CitasDeHoy.Any())
+                        {
+                            @foreach (var turno in Model.CitasDeHoy)
+                            {
+                                <div class="v1-appointment-item">
+                                    <div class="v1-appointment-info">
+                                        <i class="fa-regular fa-clock v1-appointment-icon"></i>
+                                        <div>
+                                            <p class="v1-appointment-time">@turno.Horario.ToString(@"hh\:mm") hs</p>
+
+                                            @if (turno.PrimeraCita)
+                                            {
+                                                <p class="v1-appointment-pet primeraCita">Primera Cita</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="v1-appointment-pet">Mascota: @(turno.NombreMascota ?? "Sin mascota")</p>
+                                            }
+
+                                            <p class="v1-appointment-owner">Cliente: @turno.NombreCliente</p>
+                                        </div>
+                                    </div>
+                                    <div class="v1-appointment-badges">
+                                        @if (!string.IsNullOrWhiteSpace(turno.Motivo))
+                                        {
+                                            <span class="v1-badge v1-badge-secondary">@turno.Motivo</span>
+                                        }
+
+                                        <span class="v1-badge @(turno.Estado == "Finalizado" ? "v1-badge-green" : turno.Estado == "Pendiente" ? "v1-badge-yellow" : "v1-badge-gray")">
+                                            @turno.Estado
+                                        </span>
+                                    </div>
+
+                                    @if (turno.Estado == "Pendiente")
+                                    {
+                                        <div class="v1-appointment-actions">
+                                            <a asp-controller="#" asp-action="#" asp-route-turnoId="@turno.Id" class="v1-btn v1-btn-primary">
+                                                <i class="fa-solid fa-file-waveform"></i> Registrar Atención
+                                            </a>
+                                        </div>
+                                    }
                                 </div>
-                            </div>
-                            <div class="v1-appointment-badges">
-                                <span class="v1-badge v1-badge-secondary">Vacuna</span>
-                                <span class="v1-badge v1-badge-green">Confirmada</span>
-                            </div>
-                        </div>
-                        <div class="v1-appointment-item">
-                            <div class="v1-appointment-info">
-                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
-                                <div>
-                                    <p class="v1-appointment-time">11:00</p>
-                                    <p class="v1-appointment-pet">Luna</p>
-                                    <p class="v1-appointment-owner">María Gómez</p>
-                                </div>
-                            </div>
-                            <div class="v1-appointment-badges">
-                                <span class="v1-badge v1-badge-secondary">Consulta</span>
-                                <span class="v1-badge v1-badge-yellow">Pendiente</span>
-                            </div>
-                        </div>
-                        <div class="v1-appointment-item">
-                            <div class="v1-appointment-info">
-                                <i class="fa-regular fa-clock v1-appointment-icon"></i>
-                                <div>
-                                    <p class="v1-appointment-time">11:30</p>
-                                    <p class="v1-appointment-pet">Rocky</p>
-                                    <p class="v1-appointment-owner">Carlos Fernández</p>
-                                </div>
-                            </div>
-                            <div class="v1-appointment-badges">
-                                <span class="v1-badge v1-badge-secondary">Revisión</span>
-                                <span class="v1-badge v1-badge-gray">Cancelada</span>
-                            </div>
-                        </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="v1-empty-state">No hay citas programadas para hoy.</div>
+                        }
                     </div>
                 </div>
             </div>
+
         </section>
 
         <section id="clientes" class="v1-section">

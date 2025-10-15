@@ -92,5 +92,10 @@ namespace SistemaVetIng.Servicios.Implementacion
         {
             return await _turnoRepository.ObtenerTurnosPorClienteIdAsync(clienteId);
         }
+
+        public async Task<IEnumerable<Turno>> ObtenerTurnosPorFechaAsync(DateTime fecha)
+        {
+            return await _turnoRepository.ObtenerTurnosPorFechaAsync(fecha);
+        }
     }
 }

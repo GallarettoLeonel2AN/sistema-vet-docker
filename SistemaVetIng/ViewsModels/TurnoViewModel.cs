@@ -9,6 +9,8 @@ namespace SistemaVetIng.ViewsModels
         public TimeSpan Horario { get; set; }
         public string Estado { get; set; } // Pendiente, Cancelado, Rechazado, Finalizado
         public string? Motivo { get; set; }
+        public string NombreMascota { get; set; }
+        public string NombreCliente { get; set; }
         public bool PrimeraCita { get; set; }
         public Cliente Cliente { get; set; }
         public int ClienteId { get; set; }

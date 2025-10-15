@@ -9,5 +9,6 @@ namespace SistemaVetIng.Repository.Interfaces
         Task Guardar();
         Task<IEnumerable<Turno>> ListarTodo();
         Task<IEnumerable<Turno>> ObtenerTurnosPorClienteIdAsync(int clienteId);
+        Task<IEnumerable<Turno>> ObtenerTurnosPorFechaAsync(DateTime fecha);
     }
 }
