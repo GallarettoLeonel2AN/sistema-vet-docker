@@ -57,5 +57,18 @@ namespace SistemaVetIng.Repository.Implementacion
                                  .OrderBy(t => t.Horario) 
                                  .ToListAsync();
         }
+
+        public async Task<Turno> ObtenerPorIdConDatosAsync(int id)
+        {
+            return await _context.Turnos
+                                 .Include(t => t.Cliente) 
+                                 .Include(t => t.Mascota)   
+                                 .FirstOrDefaultAsync(t => t.Id == id); 
+        }
+
+        public void Actualizar(Turno turno)
+        {
+            _context.Turnos.Update(turno);
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace SistemaVetIng.Servicios.Implementacion
         {
             return await _vacunaRepository.ListarTodoAsync();
         }
+
+        public async Task<IEnumerable<Vacuna>> ObtenerPorIdsAsync(List<int> ids)
+        {
+            return await _vacunaRepository.ObtenerPorIdsAsync(ids);
+        }
     }
 }

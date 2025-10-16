@@ -1,4 +1,5 @@
 ﻿using SistemaVetIng.Models;
+using SistemaVetIng.Repository.Implementacion;
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 
@@ -26,6 +27,11 @@ namespace SistemaVetIng.Servicios.Implementacion
         public async Task<Mascota> GetDetalleHistoriaClinica(int mascotaId)
         {
             return await _repository.GetHistoriaClinicaCompletaMascota(mascotaId);
+        }
+
+        public async Task<HistoriaClinica> ObtenerPorMascotaIdAsync(int mascotaId)
+        {
+            return await _repository.ObtenerPorMascotaIdAsync(mascotaId);
         }
     }
 }

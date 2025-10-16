@@ -7,5 +7,7 @@ namespace SistemaVetIng.Servicios.Interfaces
         Task<List<Cliente>> GetClientesParaSeguimiento(string searchString);
         Task<Cliente> GetMascotasCliente(int clienteId);
         Task<Mascota> GetDetalleHistoriaClinica(int mascotaId);
+
+        Task<HistoriaClinica> ObtenerPorMascotaIdAsync(int mascotaId);
     }
 }

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using SistemaVetIng.Data;
 using SistemaVetIng.Models;
+using SistemaVetIng.Repository.Implementacion;
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
@@ -10,10 +13,26 @@ namespace SistemaVetIng.Servicios.Implementacion
     public class AtencionVeterinariaService : IAtencionVeterinariaService
     {
         private readonly IAtencionVeterinariaRepository _repository;
+        private readonly ApplicationDbContext _context;
+        private readonly IVeterinarioService _veterinarioService;
+        private readonly IVacunaService _vacunaService;
+        private readonly IEstudioService _estudioService;
+        private readonly ITurnoService _turnoService;
 
-        public AtencionVeterinariaService(IAtencionVeterinariaRepository repository)
+        public AtencionVeterinariaService(
+            IAtencionVeterinariaRepository repository,
+            ApplicationDbContext context,
+            IVeterinarioService veterinarioService,
+            IVacunaService vacunaService,
+            IEstudioService estudioService,
+            ITurnoService turnoService)
         {
             _repository = repository;
+            _context = context;
+            _veterinarioService = veterinarioService;
+            _vacunaService = vacunaService;
+            _estudioService = estudioService;
+            _turnoService = turnoService;
         }
 
         public async Task<AtencionVeterinariaViewModel> GetAtencionVeterinariaViewModel(int historiaClinicaId)
@@ -107,5 +126,94 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             return null; 
         }
+
+
+        public async Task RegistrarAtencionDesdeTurnoAsync(AtencionPorTurnoViewModel model, ClaimsPrincipal user)
+        {
+            // Usamos una transacción para garantizar la integridad de los datos.
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                // Obtener veterinario
+                var userIdString = user.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userIdInt))
+                {
+                    throw new Exception("Error al obtener el ID del usuario.");
+                }
+
+                var veterinario = await _repository.GetVeterinarioPorId(userIdInt);
+                if (veterinario == null)
+                {
+                    throw new Exception("El usuario logueado no está asociado a un perfil de veterinario.");
+                }
+
+                model.VeterinarioId = veterinario.Id;
+
+                // Costos
+                var vacunasSeleccionadas = await _vacunaService.ObtenerPorIdsAsync(model.VacunasSeleccionadasIds);
+                var estudiosSeleccionados = await _estudioService.ObtenerPorIdsAsync(model.EstudiosSeleccionadosIds);
+
+                decimal costoVacunas = vacunasSeleccionadas.Sum(v => v.Precio);
+                decimal costoEstudios = estudiosSeleccionados.Sum(e => e.Precio);
+                decimal costoConsultaBase = 1000; 
+                decimal costoTotal = costoVacunas + costoConsultaBase + costoEstudios;
+
+                // Tratamiento
+                Tratamiento tratamiento = null;
+                if (!string.IsNullOrWhiteSpace(model.Medicamento))
+                {
+                    tratamiento = new Tratamiento
+                    {
+                        Medicamento = model.Medicamento,
+                        Dosis = model.Dosis,
+                        Frecuencia = model.Frecuencia,
+                        Duracion = model.DuracionDias.ToString(), 
+                        Observaciones = model.ObservacionesTratamiento
+                    };
+                    await _repository.AgregarTratamiento(tratamiento);
+                }
+
+                // Atencion
+                var atencion = new AtencionVeterinaria
+                {
+                    Fecha = DateTime.Now,
+                    Diagnostico = model.Diagnostico,
+                    PesoMascota = (float)model.PesoKg,
+                    HistoriaClinicaId = model.HistoriaClinicaId,
+                    VeterinarioId = veterinario.Id,
+                    Tratamiento = tratamiento,
+                    CostoTotal = costoTotal,
+                    Vacunas = vacunasSeleccionadas.ToList(),
+                    EstudiosComplementarios = estudiosSeleccionados.ToList()
+                };
+
+                await _repository.AgregarAtencionVeterinaria(atencion);
+                await _context.SaveChangesAsync(); 
+
+                // Actualizar Turno
+                var turno = await _turnoService.ObtenerPorIdConDatosAsync(model.TurnoId);
+                if (turno == null)
+                {
+                    throw new Exception("El turno asociado no fue encontrado.");
+                }
+
+                turno.Estado = "Finalizado";
+
+                _turnoService.Actualizar(turno);
+                await _context.SaveChangesAsync();
+
+                // Transaccion
+                await transaction.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                throw; 
+            }
+        }
+
     }
+
+
 }

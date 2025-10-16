@@ -17,5 +17,10 @@ namespace SistemaVetIng.Servicios.Implementacion
         {
             return await _estudioRepository.ListarTodoAsync();
         }
+
+        public async Task<IEnumerable<Estudio>> ObtenerPorIdsAsync(List<int> ids)
+        {
+            return await _estudioRepository.ObtenerPorIdsAsync(ids);
+        }
     }
 }

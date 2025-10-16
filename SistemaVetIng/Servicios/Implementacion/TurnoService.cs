@@ -1,4 +1,5 @@
-﻿using SistemaVetIng.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaVetIng.Models;
 using SistemaVetIng.Repository.Interfaces;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
@@ -96,6 +97,15 @@ namespace SistemaVetIng.Servicios.Implementacion
         public async Task<IEnumerable<Turno>> ObtenerTurnosPorFechaAsync(DateTime fecha)
         {
             return await _turnoRepository.ObtenerTurnosPorFechaAsync(fecha);
+        }
+        public async Task<Turno> ObtenerPorIdConDatosAsync(int id)
+        {
+            return await _turnoRepository.ObtenerPorIdConDatosAsync(id);
+        }
+
+        public void Actualizar(Turno turno)
+        {
+           _turnoRepository.Actualizar(turno);
         }
     }
 }

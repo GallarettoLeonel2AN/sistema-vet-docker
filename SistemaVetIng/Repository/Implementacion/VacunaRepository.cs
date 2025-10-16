@@ -23,5 +23,15 @@ namespace SistemaVetIng.Repository.Implementacion
         {
             return await _context.Vacunas.FindAsync(id);
         }
+
+        public async Task<IEnumerable<Vacuna>> ObtenerPorIdsAsync(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+            {
+                return new List<Vacuna>();
+            }
+
+            return await _context.Vacunas.Where(v => ids.Contains(v.Id)).ToListAsync();
+        }
     }
 }

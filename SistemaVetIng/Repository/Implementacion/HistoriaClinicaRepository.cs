@@ -55,6 +55,11 @@ namespace SistemaVetIng.Repository.Implementacion
                                          .ThenInclude(a => a.EstudiosComplementarios)
                                  .FirstOrDefaultAsync(m => m.Id == mascotaId);
         }
+
+        public async Task<HistoriaClinica> ObtenerPorMascotaIdAsync(int mascotaId)
+        {
+            return await _context.HistoriasClinicas.FirstOrDefaultAsync(h => h.MascotaId == mascotaId);
+        }
     }
 }
 

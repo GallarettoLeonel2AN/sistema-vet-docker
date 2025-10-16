@@ -37,5 +37,9 @@ namespace SistemaVetIng.ViewsModels
 
         // lista desplegable de clientes.
         public IEnumerable<SelectListItem>? Clientes { get; set; }
+
+
+        // Para turnos primera cita
+        public int? TurnoIdParaRedireccion { get; set; }
     }
 }

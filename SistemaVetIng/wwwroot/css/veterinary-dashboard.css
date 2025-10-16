@@ -1,6 +1,5 @@
-﻿/* -- Variables y configuración base -- */
+﻿
 :root {
-    /* Mapeo a tu paleta de colores */
     --v1-primary: var(--primary-color);
     --v1-secondary: var(--border-color);
     --v1-background: var(--bg-dark);
@@ -8,13 +7,12 @@
     --v1-text-primary: var(--text-color-light);
     --v1-text-secondary: rgba(255, 255, 255, 0.7);
     --v1-text-danger: var(--error-color);
-    /* Colores de los badges ajustados para el tema oscuro */
     --v1-badge-secondary-bg: var(--input-bg);
     --v1-badge-secondary-text: var(--text-color-light);
     --v1-badge-green-bg: var(--accent-color);
     --v1-badge-green-text: var(--text-color-dark);
-    --v1-badge-yellow-bg: #facc15; /* Nuevo amarillo */
-    --v1-badge-yellow-text: #333; /* Texto oscuro */
+    --v1-badge-yellow-bg: #facc15; 
+    --v1-badge-yellow-text: #333; 
     --v1-badge-gray-bg: #383838;
     --v1-badge-gray-text: #a0a0a0;
 }
@@ -265,12 +263,12 @@
 }
 
 .v1-badge-green {
-    background-color: var(--v1-badge-green-bg);
+    background-color: green;
     color: var(--v1-badge-green-text);
 }
 
 .v1-badge-yellow {
-    background-color: var(--v1-badge-yellow-bg);
+    background-color: #e8b800;
     color: var(--v1-badge-yellow-text);
 }
 

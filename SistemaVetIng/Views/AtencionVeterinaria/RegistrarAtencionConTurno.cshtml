@@ -1,4 +1,4 @@
-﻿@model SistemaVetIng.ViewsModels.TurnoViewModel
+﻿@model SistemaVetIng.ViewsModels.AtencionPorTurnoViewModel
 
 
 @{
@@ -32,8 +32,11 @@
             <h2 class="section-title">Nueva Atención para <span class="v1-text-primary">@Model.NombreMascota</span></h2>
             <p class="form-subtitle">Propietario: <strong>@Model.NombreCliente</strong></p>
 
-            <form asp-action="RegistrarAtencion" asp-controller="AtencionVeterinaria" method="post" class="main-form">
+            <form asp-action="RegistrarAtencionConTurno" asp-controller="AtencionVeterinaria" method="post" class="main-form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="TurnoId" />
+                <input type="hidden" asp-for="MascotaId" />
+
                 <input type="hidden" asp-for="HistoriaClinicaId" />
 
                 <div class="form-group">
@@ -99,7 +102,7 @@
                     <button type="submit" class="button register-button">
                         <i class="fas fa-save"></i> Guardar Atención
                     </button>
-                    <a asp-controller="HistoriaClinica" asp-action="DetalleHistoriaClinica" asp-route-mascotaId="@Model.MascotaId" class="btnBack">
+                    <a asp-controller="Veterinario" asp-action="PaginaPrincipal" class="btnBack">
                         <i class="fas fa-arrow-left"></i> Cancelar y Volver
                     </a>
                 </div>

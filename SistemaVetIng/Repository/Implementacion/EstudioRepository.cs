@@ -23,5 +23,15 @@ namespace SistemaVetIng.Repository.Implementacion
         {
             return await _context.Estudios.FindAsync(id);
         }
+
+        public async Task<IEnumerable<Estudio>> ObtenerPorIdsAsync(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+            {
+                return new List<Estudio>();
+            }
+
+            return await _context.Estudios.Where(e => ids.Contains(e.Id)).ToListAsync();
+        }
     }
 }

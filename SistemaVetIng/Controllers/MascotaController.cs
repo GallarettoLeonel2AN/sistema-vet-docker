@@ -31,7 +31,6 @@ namespace SistemaVetIng.Controllers
 
 
         [HttpGet]
-
         [AllowAnonymous]
         public async Task<IActionResult> Detalle(int id)
         {
@@ -80,21 +79,22 @@ namespace SistemaVetIng.Controllers
         #region REGISTRAR MASCOTA
 
         [HttpGet]
-        public async Task<IActionResult> RegistrarMascota(int clienteId)
-        {
 
+        public async Task<IActionResult> RegistrarMascota(int clienteId, int? turnoIdParaRedireccion = null)
+        {
             var cliente = await _clienteService.ObtenerPorId(clienteId);
             if (cliente == null)
             {
-                _toastNotification.AddInfoToastMessage("Seleccione un Cliente.");
-                return RedirectToAction(nameof(ListarClientes));
+                _toastNotification.AddInfoToastMessage("El Cliente no fue encontrado.");
+                return RedirectToAction(nameof(ListarClientes)); 
             }
 
             ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
 
             var model = new MascotaRegistroViewModel
             {
-                ClienteId = clienteId
+                ClienteId = clienteId,
+                TurnoIdParaRedireccion = turnoIdParaRedireccion
             };
 
             return View(model);

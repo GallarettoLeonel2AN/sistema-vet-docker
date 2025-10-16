@@ -7,5 +7,6 @@ namespace SistemaVetIng.Servicios.Interfaces
     {
         Task<AtencionVeterinariaViewModel> GetAtencionVeterinariaViewModel(int historiaClinicaId);
         Task<string> CreateAtencionVeterinaria(AtencionVeterinariaViewModel model, ClaimsPrincipal user);
+        Task RegistrarAtencionDesdeTurnoAsync(AtencionPorTurnoViewModel model, ClaimsPrincipal user);
     }
 }

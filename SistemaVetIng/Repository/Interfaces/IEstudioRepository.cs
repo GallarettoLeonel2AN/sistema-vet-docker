@@ -6,5 +6,6 @@ namespace SistemaVetIng.Repository.Interfaces
     {
         Task<IEnumerable<Estudio>> ListarTodoAsync();
         Task<Estudio> ObtenerPorIdAsync(int id);
+        Task<IEnumerable<Estudio>> ObtenerPorIdsAsync(List<int> ids);
     }
 }
