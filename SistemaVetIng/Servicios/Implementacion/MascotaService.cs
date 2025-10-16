@@ -135,87 +135,83 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             return viewModel;
         }
-        public async Task<(bool success, string message)> Registrar(MascotaRegistroViewModel model)
+        public async Task<(Mascota? mascota, bool success, string message)> Registrar(MascotaRegistroViewModel model)
         {
-            
-            var clienteExiste = await _clienteRepository.ObtenerPorId(model.ClienteId);
-            if (clienteExiste == null)
-            {
-                return (false, "El cliente asociado no es válido. Intente de nuevo.");
-            }
-
-            // Crear  Mascota a partir del ViewModel.
-            var mascota = new Mascota
-            {
-                Nombre = model.Nombre,
-                Especie = model.Especie,
-                Raza = model.Raza,
-                FechaNacimiento = model.FechaNacimiento,
-                Sexo = model.Sexo,
-                RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza), 
-                ClienteId = model.ClienteId,
-                HistoriaClinica = new HistoriaClinica() 
-            };
-
-            // Lógica para el CHIP y la API de Perros Peligrosos.
-
-            string apiMessage = string.Empty;
-            bool apiCommunicationSuccess = true;
-            if (mascota.RazaPeligrosa)
-            {
-                Chip chipAsociado = null;
-
-                if (model.Chip)
-                {
-                    chipAsociado = new Chip
-                    {
-                        Codigo = Guid.NewGuid().ToString("N").Substring(0, 16),
-                        Mascota = mascota
-                    };
-                    mascota.Chip = chipAsociado;
-                }
-
-                var clienteAsociado = await _clienteRepository.ObtenerPorId(model.ClienteId);
-
-                // Llamada a la API externa.
-                apiCommunicationSuccess = await EnviarApiPerrosPeligrosos(
-                    mascota.Id,
-                    mascota.Nombre,
-                    mascota.Raza,
-                    mascota.RazaPeligrosa,
-                    model.Chip,
-                    chipAsociado?.Codigo,
-                    clienteAsociado.Dni,
-                    clienteAsociado.Nombre,
-                    clienteAsociado.Apellido
-                );
-
-                if (apiCommunicationSuccess)
-                {
-                    apiMessage = model.Chip
-                        ? $"Chip Asociado (Código: {chipAsociado?.Codigo})."
-                        : "Mascota peligrosa sin chip registrada en la API.";
-                }
-                else
-                {
-                    return (false, "Hubo un problema al comunicar con la API de perros peligrosos.");
-                }
-            }
+            // Usamos una transacción para asegurar que la mascota solo se cree si la API responde correctamente.
+            using var transaction = await _context.Database.BeginTransactionAsync();
 
             try
             {
-                // Registrar la mascota y el chip (si aplica)
+                var clienteAsociado = await _clienteRepository.ObtenerPorId(model.ClienteId);
+                if (clienteAsociado == null)
+                {
+                    return (null, false, "El cliente asociado no es válido. Intente de nuevo.");
+                }
+
+                var mascota = new Mascota
+                {
+                    Nombre = model.Nombre,
+                    Especie = model.Especie,
+                    Raza = model.Raza,
+                    FechaNacimiento = model.FechaNacimiento,
+                    Sexo = model.Sexo,
+                    RazaPeligrosa = IsRazaPeligrosa(model.Especie, model.Raza),
+                    ClienteId = model.ClienteId,
+                    HistoriaClinica = new HistoriaClinica()
+                };
+
+
                 await _mascotaRepository.Agregar(mascota);
+                await _context.SaveChangesAsync(); 
 
-            
-                await _mascotaRepository.Guardar();
+                // Logica para el CHIP y la API de Perros Peligrosos.
+                string apiMessage = string.Empty;
+                if (mascota.RazaPeligrosa)
+                {
+                    Chip chipAsociado = null;
+                    if (model.Chip)
+                    {
+                        chipAsociado = new Chip
+                        {
+                            Codigo = Guid.NewGuid().ToString("N").Substring(0, 16),
+                            MascotaId = mascota.Id 
+                        };
 
-                return (true, $"Mascota '{mascota.Nombre}' registrada correctamente. " + apiMessage);
+                        await _context.Chips.AddAsync(chipAsociado);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    bool apiCommunicationSuccess = await EnviarApiPerrosPeligrosos(
+                        mascota.Id,
+                        mascota.Nombre,
+                        mascota.Raza,
+                        mascota.RazaPeligrosa,
+                        model.Chip,
+                        chipAsociado?.Codigo,
+                        clienteAsociado.Dni,
+                        clienteAsociado.Nombre,
+                        clienteAsociado.Apellido
+                    );
+
+                    if (!apiCommunicationSuccess)
+                    {
+                        // Si la API falla, deshacemos todo.
+                        await transaction.RollbackAsync();
+                        return (null, false, "Hubo un problema al comunicar con la API de perros peligrosos. La mascota no fue registrada.");
+                    }
+
+                    apiMessage = model.Chip ? $"Chip Asociado (Código: {chipAsociado?.Codigo})." : "Registrada en la API de perros peligrosos.";
+                }
+
+                // Confirmamos la transacción.
+                await transaction.CommitAsync();
+                return (mascota, true, $"Mascota '{mascota.Nombre}' registrada correctamente. " + apiMessage);
             }
             catch (Exception ex)
             {
-               
-                return (false, $"Error al registrar la mascota: {ex.Message}");
+                // Si hay cualquier otro error, deshacemos todo.
+                await transaction.RollbackAsync();
+                return (null, false, $"Error al registrar la mascota: {ex.Message}");
             }
         }
 

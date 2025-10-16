@@ -5,7 +5,7 @@ namespace SistemaVetIng.Servicios.Interfaces
 {
     public interface IMascotaService
     {
-        Task<(bool success, string message)> Registrar(MascotaRegistroViewModel viewModel);
+        Task<(Mascota? mascota, bool success, string message)> Registrar(MascotaRegistroViewModel model);
         Task<(bool success, string message)> Modificar(MascotaEditarViewModel viewModel);
         Task<(bool success, string message)> Eliminar(int id);
         Task<Mascota> ObtenerPorId(int id);

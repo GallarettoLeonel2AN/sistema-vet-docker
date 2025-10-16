@@ -12,5 +12,6 @@ namespace SistemaVetIng.Servicios.Interfaces
         Task<IEnumerable<Turno>> ObtenerTurnosPorFechaAsync(DateTime fecha);
         Task<Turno> ObtenerPorIdConDatosAsync(int id);
         void Actualizar(Turno turno);
+        Task Guardar();
     }
 }

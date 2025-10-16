@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
+using SistemaVetIng.Servicios.Implementacion;
 using SistemaVetIng.Servicios.Interfaces;
 using SistemaVetIng.ViewsModels;
 
@@ -12,6 +13,7 @@ namespace SistemaVetIng.Controllers
         private readonly IMascotaService _mascotaService;
         private readonly IClienteService _clienteService;
         private readonly IToastNotification _toastNotification;
+        private readonly ITurnoService _turnoService;
 
 
         private readonly List<string> _razasPeligrosas = new List<string>
@@ -21,12 +23,17 @@ namespace SistemaVetIng.Controllers
             "american staffordshire terrier", "pastor alemán"
         };
 
-        public MascotaController(IMascotaService mascotaService, IClienteService clienteService, IToastNotification toastNotification)
+        public MascotaController(
+            IMascotaService mascotaService,
+            IClienteService clienteService, 
+            IToastNotification toastNotification,
+            ITurnoService turnoService)
         {
 
             _mascotaService = mascotaService;
             _clienteService = clienteService;
             _toastNotification = toastNotification;
+            _turnoService = turnoService;
         }
 
 
@@ -116,30 +123,34 @@ namespace SistemaVetIng.Controllers
                 return View(model);
             }
 
-            
-            var (success, message) = await _mascotaService.Registrar(model);
+
+            var (nuevaMascota, success, message) = await _mascotaService.Registrar(model);
 
             if (success)
             {
                 _toastNotification.AddSuccessToastMessage(message);
+
+                // Redireccion: Si el registro viene de un turno:
+                if (model.TurnoIdParaRedireccion.HasValue)
+                {
+                    // Buscamos el turno original para vincularle la mascota.
+                    var turnoOriginal = await _turnoService.ObtenerPorIdConDatosAsync(model.TurnoIdParaRedireccion.Value);
+                    if (turnoOriginal != null)
+                    {
+                        turnoOriginal.MascotaId = nuevaMascota.Id;
+                        _turnoService.Actualizar(turnoOriginal);
+                        await _turnoService.Guardar();
+                    }
+
+                    return RedirectToAction("RegistrarAtencionConTurno", "AtencionVeterinaria", new { turnoId = model.TurnoIdParaRedireccion.Value });
+                }
+
+                // Si no, es una creación normal
                 return RedirectToAction(nameof(ListarClientes));
             }
             else
             {
-                
                 _toastNotification.AddErrorToastMessage(message);
-                // Si el error es por un cliente no válido, redirige a la lista de clientes.
-                if (message.Contains("El cliente asociado no es válido"))
-                {
-                    return RedirectToAction(nameof(ListarClientes));
-                }
-
-                
-                var cliente = await _clienteService.ObtenerPorId(model.ClienteId);
-                if (cliente != null)
-                {
-                    ViewBag.ClienteNombre = $"{cliente.Nombre} {cliente.Apellido}";
-                }
                 return View(model);
             }
         }

@@ -107,5 +107,10 @@ namespace SistemaVetIng.Servicios.Implementacion
         {
            _turnoRepository.Actualizar(turno);
         }
+
+        public async Task Guardar()
+        {
+            await _turnoRepository.Guardar();
+        }
     }
 }

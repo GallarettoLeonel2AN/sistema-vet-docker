@@ -148,7 +148,6 @@ namespace SistemaVetIng.Controllers
             if (!ModelState.IsValid)
             {
                 _toastNotification.AddErrorToastMessage("Por favor, corrige los errores del formulario.");
-                // Si hay un error, debemos volver a cargar los dropdowns antes de mostrar la vista.
                 model.VacunasDisponibles = new SelectList(todasLasVacunas, "Id", "Nombre");
                 model.EstudiosDisponibles = new SelectList(todosLosEstudios, "Id", "Nombre");
                 return View("RegistrarAtencionConTurno", model);
@@ -163,7 +162,6 @@ namespace SistemaVetIng.Controllers
             }
             catch (Exception ex)
             {
-                // Loguear el error 'ex' es una buena práctica.
                 _toastNotification.AddErrorToastMessage("Ocurrió un error inesperado al guardar la atención.");
                 model.VacunasDisponibles = new SelectList(todasLasVacunas, "Id", "Nombre");
                 model.EstudiosDisponibles = new SelectList(todosLosEstudios, "Id", "Nombre");
