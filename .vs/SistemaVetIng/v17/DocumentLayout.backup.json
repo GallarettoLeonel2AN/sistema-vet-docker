@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\controllers\\mascotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\controllers\\mascotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\wwwroot\\js\\reservaturno.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\wwwroot\\js\\reservaturno.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\controllers\\atencionveterinariacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\controllers\\atencionveterinariacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\repository\\interfaces\\iturnorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\repository\\interfaces\\iturnorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\servicios\\interfaces\\iturnoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\servicios\\interfaces\\iturnoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\servicios\\implementacion\\turnoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\servicios\\implementacion\\turnoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\repository\\implementacion\\turnorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\repository\\implementacion\\turnorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\turno\\reservarturno.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\turno\\reservarturno.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,76 +34,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AtencionVeterinariaController.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\AtencionVeterinariaController.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\AtencionVeterinariaController.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\AtencionVeterinariaController.cs",
-              "RelativeToolTip": "SistemaVetIng\\Controllers\\AtencionVeterinariaController.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T17:56:09.723Z",
+              "DocumentIndex": 0,
+              "Title": "reservaTurno.js",
+              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
+              "RelativeDocumentMoniker": "SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
+              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
+              "RelativeToolTip": "SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAAAGsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-10-16T18:38:36.725Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MascotaController.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\MascotaController.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\MascotaController.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\MascotaController.cs",
-              "RelativeToolTip": "SistemaVetIng\\Controllers\\MascotaController.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAIwJEAAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T17:53:21.355Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ITurnoRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Repository\\Interfaces\\ITurnoRepository.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Repository\\Interfaces\\ITurnoRepository.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Repository\\Interfaces\\ITurnoRepository.cs",
-              "RelativeToolTip": "SistemaVetIng\\Repository\\Interfaces\\ITurnoRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T17:51:21.447Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ITurnoService.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Servicios\\Interfaces\\ITurnoService.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Servicios\\Interfaces\\ITurnoService.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Servicios\\Interfaces\\ITurnoService.cs",
-              "RelativeToolTip": "SistemaVetIng\\Servicios\\Interfaces\\ITurnoService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T17:51:12.623Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TurnoService.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Servicios\\Implementacion\\TurnoService.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Servicios\\Implementacion\\TurnoService.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Servicios\\Implementacion\\TurnoService.cs",
-              "RelativeToolTip": "SistemaVetIng\\Servicios\\Implementacion\\TurnoService.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAIwG8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T17:50:20.691Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TurnoRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Repository\\Implementacion\\TurnoRepository.cs",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Repository\\Implementacion\\TurnoRepository.cs",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Repository\\Implementacion\\TurnoRepository.cs",
-              "RelativeToolTip": "SistemaVetIng\\Repository\\Implementacion\\TurnoRepository.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwEMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T17:47:32.846Z"
+              "DocumentIndex": 1,
+              "Title": "ReservarTurno.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
+              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
+              "RelativeToolTip": "SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAFAAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-16T18:36:35.886Z",
+              "EditorCaption": ""
             }
           ]
         }

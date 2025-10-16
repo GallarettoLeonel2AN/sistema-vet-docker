@@ -39,7 +39,6 @@ wwwroot\favicon.ico
 wwwroot\js\atencionVeterinaria.js
 wwwroot\js\dashboard.js
 wwwroot\js\menuhamburguesa.js
-wwwroot\js\reservaTurno.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -97,3 +96,4 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\js\reservaTurno.js

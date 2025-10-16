@@ -106,6 +106,7 @@ function initializeReservaTurno(horariosUrl) {
 
     // Logica para el envio del formulario con Ajax
     reservaForm.on('submit', function (e) {
+
         e.preventDefault();
 
         const esPrimeraCita = primeraCitaCheckbox.length ? primeraCitaCheckbox.is(':checked') : false;
@@ -125,6 +126,7 @@ function initializeReservaTurno(horariosUrl) {
 
 
         const formData = new FormData(this);
+
         const submitButton = $(this).find('button[type="submit"]');
         submitButton.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Reservando...');
 
@@ -142,23 +144,22 @@ function initializeReservaTurno(horariosUrl) {
 
                 } else {
                     toastr.error(response.message || "Ocurrió un error al reservar el turno.");
+                    submitButton.prop('disabled', false).html('<i class="fa-solid fa-calendar-plus"></i> Confirmar Turno');
                 }
             },
             error: function (xhr, status, error) {
                 toastr.error("Ocurrió un error al conectar con el servidor. Por favor, intente de nuevo.");
-            },
-            complete: function () {
                 submitButton.prop('disabled', false).html('<i class="fa-solid fa-calendar-plus"></i> Confirmar Turno');
-            }
+            },
         });
     });
 }
 
 // Inicializa las funciones
-document.addEventListener('DOMContentLoaded', function () {
-    const formElement = document.querySelector('form.main-form');
-    if (formElement) {
-        const horariosUrl = formElement.getAttribute('data-horarios-url');
+$(document).ready(function () {
+    const formElement = $('form.main-form');
+    if (formElement.length) {
+        const horariosUrl = formElement.data('horarios-url');
         if (horariosUrl) {
             initializeReservaTurno(horariosUrl);
         }
