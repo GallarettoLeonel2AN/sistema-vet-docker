@@ -5,6 +5,8 @@ using NToastNotify;
 using SistemaVetIng.Data;
 using SistemaVetIng.Models.Extension;
 using SistemaVetIng.Models.Indentity;
+using MercadoPago.Config;
+using SistemaVetIng.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,17 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
+// MErcado Pago
+var mpSettings = builder.Configuration.GetSection("MercadoPagoSettings").Get<MercadoPagoSettings>();
+if (mpSettings != null && !string.IsNullOrEmpty(mpSettings.AccessToken))
+{
+    MercadoPagoConfig.AccessToken = mpSettings.AccessToken;
+}
+else
+{
+    // Manejo de error si falta la configuración
+    throw new InvalidOperationException("Falta o no está configurado el AccessToken de Mercado Pago.");
+}
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));

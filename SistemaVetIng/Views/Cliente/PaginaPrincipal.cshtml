@@ -188,39 +188,41 @@
 
         
         <section id="pagos" class="v1-section">
-            <h2 class="v1-section-title">Pagos</h2>
+            <h2 class="v1-section-title">Pagos Pendientes</h2>
             <div class="v1-card">
                 <div class="v1-card-content v1-list-content">
-                  @*   @if (Model.PagosPendientes != null && Model.PagosPendientes.Any())
-                   {
-                        @foreach (var pago in Model.PagosPendientes)
+
+                    @if (Model.PagosPendientes != null && Model.PagosPendientes.Any())
+                    {
+                        @* Filtramos solo las atenciones con estado "Pendiente" *@
+                        @foreach (var atencionPendiente in Model.PagosPendientes.Where(p => p.EstadoDePago == "Pendiente"))
                         {
                             <div class="v1-list-item">
                                 <div class="v1-list-info">
-                                    <p class="v1-list-name">Servicio: @pago.Descripcion</p>
-                                    <p class="v1-list-subtext">Monto: $@pago.Monto.ToString("N2")</p>
+
+                                    @* Las propiedades MascotaNombre y Fecha se heredan de AtencionVeterinariaViewModel *@
+                                    <p class="v1-list-name">Atención Mascota: @atencionPendiente.MascotaNombre</p>
+                                    <p class="v1-list-subtext">Monto: $@atencionPendiente.CostoTotal.ToString("N2")</p>
+                                    <p class="v1-list-subtext-small">Fecha: @atencionPendiente.Fecha.ToShortDateString()</p>
                                 </div>
                                 <div class="v1-list-actions">
-                                    <a asp-controller="Pago" asp-action="RealizarPago" asp-route-id="@pago.Id" class="v1-btn v1-btn-primary"><i class="fa-solid fa-credit-card"></i> Pagar</a>
+
+                                    @* Usamos AtencionId como la referencia única *@
+                                    <a asp-controller="Pagos"
+                                       asp-action="GenerarLinkDePago"
+                                       asp-route-idAtencion="@atencionPendiente.AtencionId"
+                                       class="v1-btn v1-btn-primary">
+                                        <i class="fa-solid fa-credit-card"></i> Pagar con MP
+                                    </a>
                                 </div>
                             </div>
                         }
                     }
                     else
                     {
-                        <div class="v1-empty-state">No tienes pagos pendientes.</div>
-                     } *@
+                        <div class="v1-empty-state">¡Felicidades! No tienes pagos pendientes.</div>
+                    }
 
-                    <div class="v1-list-item">
-                        <div class="v1-list-info">
-                            <p class="v1-list-name">Servicio: Vacunacion </p>
-                            <p class="v1-list-subtext">Monto: $1000</p>
-                        </div>
-                        <div class="v1-list-actions">
-                            <a asp-controller="Pago" asp-action="RealizarPago" asp-route-id="pagoid" class="v1-btn v1-btn-primary"><i class="fa-solid fa-credit-card"></i> Pagar</a>
-                        </div>
-                    </div>
-                     
                 </div>
             </div>
         </section>

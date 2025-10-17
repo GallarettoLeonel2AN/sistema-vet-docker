@@ -1,14 +1,82 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\",
+  "WorkspaceRootPath": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\wwwroot\\js\\reservaturno.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\wwwroot\\js\\reservaturno.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\ulipv\\source\\repos\\sistemaveting\\sistemaveting\\views\\turno\\reservarturno.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\turno\\reservarturno.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\models\\extension\\injeciondepencencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\models\\extension\\injeciondepencencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\views\\cliente\\paginaprincipal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\cliente\\paginaprincipal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\controllers\\mercadopagowebhookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\controllers\\mercadopagowebhookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\viewsmodels\\resultadopagoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\viewsmodels\\resultadopagoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\viewsmodels\\clientepaginaprincipalviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\viewsmodels\\clientepaginaprincipalviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\viewsmodels\\atenciondetalleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\viewsmodels\\atenciondetalleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\views\\pagos\\resultadopago.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\views\\pagos\\resultadopago.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\servicios\\implementacion\\atencionveterinariaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\servicios\\implementacion\\atencionveterinariaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\servicios\\interfaces\\iatencionveterinariaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\servicios\\interfaces\\iatencionveterinariaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\servicios\\implementacion\\mercadopagoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\servicios\\implementacion\\mercadopagoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\servicios\\interfaces\\imercadopagoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\servicios\\interfaces\\imercadopagoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\repository\\implementacion\\atencionveterinariarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\repository\\implementacion\\atencionveterinariarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\repository\\interfaces\\iatencionveterinariarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\repository\\interfaces\\iatencionveterinariarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\models\\mercadopagosettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\models\\mercadopagosettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\vetingmercadopago\\sistemaveting\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,12 +86,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 8,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -34,28 +98,249 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "reservaTurno.js",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
-              "RelativeDocumentMoniker": "SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
-              "RelativeToolTip": "SistemaVetIng\\wwwroot\\js\\reservaTurno.js",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAAAGsAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-10-16T18:38:36.725Z",
+              "DocumentIndex": 3,
+              "Title": "PaginaPrincipal.cshtml",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Views\\Cliente\\PaginaPrincipal.cshtml",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Cliente\\PaginaPrincipal.cshtml",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Views\\Cliente\\PaginaPrincipal.cshtml",
+              "RelativeToolTip": "SistemaVetIng\\Views\\Cliente\\PaginaPrincipal.cshtml",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAAAOMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T17:34:30.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Program.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Program.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Program.cs",
+              "RelativeToolTip": "SistemaVetIng\\Program.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:32:32.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PagosController.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Controllers\\PagosController.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\PagosController.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Controllers\\PagosController.cs",
+              "RelativeToolTip": "SistemaVetIng\\Controllers\\PagosController.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAQwGoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:30:59Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MercadoPagoWebhookController.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Controllers\\MercadoPagoWebhookController.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\MercadoPagoWebhookController.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Controllers\\MercadoPagoWebhookController.cs",
+              "RelativeToolTip": "SistemaVetIng\\Controllers\\MercadoPagoWebhookController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:29:08.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Controllers\\ClienteController.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\ClienteController.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Controllers\\ClienteController.cs",
+              "RelativeToolTip": "SistemaVetIng\\Controllers\\ClienteController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAGUAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:21:58.309Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ReservarTurno.cshtml",
-              "DocumentMoniker": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
-              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
-              "ToolTip": "C:\\Users\\ulipv\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
-              "RelativeToolTip": "SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAFAAAAADAAAAAAAAAA==",
+              "Title": "InjecionDepencencia.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Models\\Extension\\InjecionDepencencia.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Models\\Extension\\InjecionDepencencia.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Models\\Extension\\InjecionDepencencia.cs",
+              "RelativeToolTip": "SistemaVetIng\\Models\\Extension\\InjecionDepencencia.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAADwvzoAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:20:49.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\appsettings.json",
+              "RelativeDocumentMoniker": "SistemaVetIng\\appsettings.json",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\appsettings.json",
+              "RelativeToolTip": "SistemaVetIng\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-17T17:02:51.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ResultadoPagoViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\ViewsModels\\ResultadoPagoViewModel.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\ViewsModels\\ResultadoPagoViewModel.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\ViewsModels\\ResultadoPagoViewModel.cs",
+              "RelativeToolTip": "SistemaVetIng\\ViewsModels\\ResultadoPagoViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:19:57.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ClientePaginaPrincipalViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\ViewsModels\\ClientePaginaPrincipalViewModel.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\ViewsModels\\ClientePaginaPrincipalViewModel.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\ViewsModels\\ClientePaginaPrincipalViewModel.cs",
+              "RelativeToolTip": "SistemaVetIng\\ViewsModels\\ClientePaginaPrincipalViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:18:26.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AtencionDetalleViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\ViewsModels\\AtencionDetalleViewModel.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\ViewsModels\\AtencionDetalleViewModel.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\ViewsModels\\AtencionDetalleViewModel.cs",
+              "RelativeToolTip": "SistemaVetIng\\ViewsModels\\AtencionDetalleViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:18:00.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ResultadoPago.cshtml",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Views\\Pagos\\ResultadoPago.cshtml",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Pagos\\ResultadoPago.cshtml",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Views\\Pagos\\ResultadoPago.cshtml",
+              "RelativeToolTip": "SistemaVetIng\\Views\\Pagos\\ResultadoPago.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-16T18:36:35.886Z",
+              "WhenOpened": "2025-10-17T17:16:54.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AtencionVeterinariaService.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Servicios\\Implementacion\\AtencionVeterinariaService.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Servicios\\Implementacion\\AtencionVeterinariaService.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Servicios\\Implementacion\\AtencionVeterinariaService.cs",
+              "RelativeToolTip": "SistemaVetIng\\Servicios\\Implementacion\\AtencionVeterinariaService.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAwwIMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:14:48.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IAtencionVeterinariaService.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Servicios\\Interfaces\\IAtencionVeterinariaService.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Servicios\\Interfaces\\IAtencionVeterinariaService.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Servicios\\Interfaces\\IAtencionVeterinariaService.cs",
+              "RelativeToolTip": "SistemaVetIng\\Servicios\\Interfaces\\IAtencionVeterinariaService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:13:49.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MercadoPagoService.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Servicios\\Implementacion\\MercadoPagoService.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Servicios\\Implementacion\\MercadoPagoService.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Servicios\\Implementacion\\MercadoPagoService.cs",
+              "RelativeToolTip": "SistemaVetIng\\Servicios\\Implementacion\\MercadoPagoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:11:47.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IMercadoPagoService.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Servicios\\Interfaces\\IMercadoPagoService.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Servicios\\Interfaces\\IMercadoPagoService.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Servicios\\Interfaces\\IMercadoPagoService.cs",
+              "RelativeToolTip": "SistemaVetIng\\Servicios\\Interfaces\\IMercadoPagoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAACsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:11:03.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AtencionVeterinariaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Repository\\Implementacion\\AtencionVeterinariaRepository.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Repository\\Implementacion\\AtencionVeterinariaRepository.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Repository\\Implementacion\\AtencionVeterinariaRepository.cs",
+              "RelativeToolTip": "SistemaVetIng\\Repository\\Implementacion\\AtencionVeterinariaRepository.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowDcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:07:37.701Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IAtencionVeterinariaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Repository\\Interfaces\\IAtencionVeterinariaRepository.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Repository\\Interfaces\\IAtencionVeterinariaRepository.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Repository\\Interfaces\\IAtencionVeterinariaRepository.cs",
+              "RelativeToolTip": "SistemaVetIng\\Repository\\Interfaces\\IAtencionVeterinariaRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:07:08.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "MercadoPagoSettings.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Models\\MercadoPagoSettings.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Models\\MercadoPagoSettings.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\Models\\MercadoPagoSettings.cs",
+              "RelativeToolTip": "SistemaVetIng\\Models\\MercadoPagoSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T17:06:11.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "SistemaVetIng\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\SistemaVetIng\\appsettings.Development.json",
+              "RelativeToolTip": "SistemaVetIng\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-17T17:02:22.011Z",
               "EditorCaption": ""
             }
           ]

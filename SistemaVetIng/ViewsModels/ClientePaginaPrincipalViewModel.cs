@@ -6,19 +6,24 @@
         public List<MascotaListViewModel> Mascotas { get; set; }
         public ClienteViewModel Cliente { get; set; }
         public List<TurnoViewModel> Turnos { get; set; }
+        public List<AtencionDetalleViewModel> PagosPendientes { get; set; } 
+        
+        // Reportes simulados / indicadores
 
         // Reportes simulados / indicadores
         public int CantidadTurnosReservados { get; set; }
         public int CantidadTurnosCancelados { get; set; }
         public string VeterinarioMasFrecuente { get; set; }
 
-        public HistoriaClinicaViewModel HistoriaClinicas { get; set; } = new HistoriaClinicaViewModel();
+        public HistoriaClinicaViewModel HistoriaClinicas { get; set; } 
 
         public ClientePaginaPrincipalViewModel()
         {
             Mascotas = new List<MascotaListViewModel>();
             Cliente = new ClienteViewModel();
             Turnos = new List<TurnoViewModel>();
+            HistoriaClinicas = new HistoriaClinicaViewModel();
+            PagosPendientes = new List<AtencionDetalleViewModel>();
         }
     }
 }

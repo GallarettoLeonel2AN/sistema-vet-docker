@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj": {}
+    "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj": {
+    "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
+        "projectUniqueName": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
         "projectName": "PerrosPeligrososApi",
-        "projectPath": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
-        "packagesPath": "C:\\Users\\ulipv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulipv\\Source\\Repos\\SistemaVetIng\\PerrosPeligrososApi\\obj\\",
+        "projectPath": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
+        "packagesPath": "C:\\Users\\leo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\PerrosPeligrososApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ulipv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\leo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -89,6 +89,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[9.0.1, )"
+            },
+            "mercadopago-sdk": {
+              "target": "Package",
+              "version": "[2.10.0, )"
             }
           },
           "imports": [
@@ -110,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
