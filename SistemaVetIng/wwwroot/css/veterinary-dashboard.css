@@ -11,10 +11,17 @@
     --v1-badge-secondary-text: var(--text-color-light);
     --v1-badge-green-bg: var(--accent-color);
     --v1-badge-green-text: var(--text-color-dark);
-    --v1-badge-yellow-bg: #facc15; 
-    --v1-badge-yellow-text: #333; 
+    --v1-badge-yellow-bg: #facc15;
+    --v1-badge-yellow-text: #333;
     --v1-badge-gray-bg: #383838;
     --v1-badge-gray-text: #a0a0a0;
+    --history-bg: #121212; /* Fondo principal casi negro */
+    --history-card-bg: #1e1e1e; /* Fondo de las tarjetas, gris muy oscuro */
+    --history-header-bg: #2a2a2a; /* Fondo para cabeceras/pies, un poco más claro */
+    --history-border: #444444; /* Color de bordes y separadores */
+    --history-text-primary: #e0e0e0; /* Texto principal, blanco suave */
+    --history-text-secondary: #9e9e9e; /* Texto secundario (etiquetas, descripciones) */
+    --history-tag-border: #555555; /* Borde para las etiquetas */
 }
 
 /* -- Estilos del Contenedor Principal -- */
@@ -498,3 +505,167 @@
     color: limegreen;
     font-weight: 700;
 }
+
+/* Contenedor principal del historial */
+.attention-history {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Estilo para cada tarjeta de atención */
+.history-card {
+    background-color: var(--history-card-bg);
+    border: 1px solid var(--history-border);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+    .history-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+/* Cabecera de la tarjeta (Fecha y Veterinario) */
+.history-header {
+    background-color: var(--history-header-bg);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--history-border);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--history-text-primary);
+}
+
+    .history-header .fa-calendar-alt {
+        color: var(--history-text-secondary); /* Icono con color secundario */
+    }
+
+    .history-header div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .history-header .date {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .history-header .vet {
+        font-size: 0.9rem;
+        color: var(--history-text-secondary);
+    }
+
+/* Cuerpo de la tarjeta (Toda la información clínica) */
+.history-body {
+    padding: 1.5rem;
+}
+
+/* Secciones dentro del cuerpo (Tratamiento, Vacunas, etc.) */
+.history-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--history-border);
+}
+
+    .history-section h4 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0 0 1rem 0;
+        font-size: 1.1rem;
+        color: var(--history-text-primary); /* Título de sección con color principal */
+    }
+
+        .history-section h4 .fas {
+            color: var(--history-text-secondary);
+        }
+
+
+/* Grilla para mostrar datos en formato "Etiqueta: Valor" */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+}
+
+.details-item {
+    display: flex;
+    flex-direction: column;
+}
+
+    .details-item label {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--history-text-secondary);
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+    }
+
+    .details-item span {
+        font-size: 1rem;
+        color: var(--history-text-primary);
+        word-wrap: break-word;
+    }
+
+    .details-item.full-width {
+        grid-column: 1 / -1;
+    }
+
+/* Estilo para listas de Vacunas y Estudios tipo "tags" */
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-item {
+    background-color: transparent; /* Fondo transparente */
+    color: var(--history-text-secondary); /* Texto con color secundario */
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--history-tag-border); /* Borde sutil */
+}
+
+/* Pie de la tarjeta (Costo Total) */
+.history-footer {
+    background-color: var(--history-header-bg);
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--history-border);
+    text-align: right;
+}
+
+.cost-item {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--history-text-primary);
+}
+
+    .cost-item label {
+        font-weight: normal;
+        font-size: 0.9rem;
+        color: var(--history-text-secondary);
+        display: block;
+    }
+
+/* Estilo para cuando no hay atenciones */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--history-card-bg);
+    border: 2px dashed var(--history-border);
+    border-radius: 8px;
+    color: var(--history-text-secondary);
+}
+
+    .empty-state .fas {
+        margin-bottom: 1rem;
+        color: var(--history-header-bg);
+    }

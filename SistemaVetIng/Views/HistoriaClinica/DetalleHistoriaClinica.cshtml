@@ -77,88 +77,108 @@
 
             @if (Model.HistoriaClinica.Atenciones == null || !Model.HistoriaClinica.Atenciones.Any())
             {
-                <div class="v1-empty-state">
-                    No hay atenciones registradas para esta mascota.
+                <div class="empty-state">
+                    <i class="fas fa-file-medical-alt fa-3x"></i>
+                    <h3>Sin Historial</h3>
+                    <p>Aún no hay atenciones registradas para esta mascota.</p>
                 </div>
             }
             else
             {
-                @foreach (var atencion in Model.HistoriaClinica.Atenciones.OrderByDescending(a => a.Fecha))
-                {
-                    <div class="v1-card mb-3">
-                        <div class="v1-card-header">
-                            <strong>Fecha:</strong> @atencion.Fecha.ToShortDateString() -
-                            <strong>Veterinario:</strong> @atencion.Veterinario?.Nombre @atencion.Veterinario?.Apellido
-                        </div>
-                        <div class="v1-card-content">
-                            <dl class="v1-info-grid">
-                                <div class="v1-info-item">
-                                    <strong>Diagnóstico:</strong>
-                                    <span>@atencion.Diagnostico</span>
+                <div class="attention-history">
+                    @foreach (var atencion in Model.HistoriaClinica.Atenciones.OrderByDescending(a => a.Fecha))
+                    {
+                        <div class="history-card">
+                            <div class="history-header">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <span class="date">@atencion.Fecha.ToString("dd 'de' MMMM 'de' yyyy")</span>
+                                    <span class="vet">Atendido por: @(atencion.Veterinario?.Nombre) @(atencion.Veterinario?.Apellido)</span>
                                 </div>
-                                <div class="v1-info-item">
-                                    <strong>Peso (kg):</strong>
-                                    <span>@atencion.PesoMascota</span>
+                            </div>
+
+                            <div class="history-body">
+                                <div class="details-grid">
+                                    <div class="details-item">
+                                        <label>Diagnóstico</label>
+                                        <span>@atencion.Diagnostico</span>
+                                    </div>
+                                    <div class="details-item">
+                                        <label>Peso</label>
+                                        <span>@atencion.PesoMascota kg</span>
+                                    </div>
                                 </div>
-                            </dl>
 
-                            @if (atencion.Tratamiento != null)
-                            {
-                                <h5>Tratamiento</h5>
-                                <dl class="v1-info-grid">
-                                    <div class="v1-info-item">
-                                        <strong>Medicamento:</strong>
-                                        <span>@atencion.Tratamiento.Medicamento</span>
+                                @if (atencion.Tratamiento != null)
+                                {
+                                    <div class="history-section">
+                                        <h4>Tratamiento Indicado</h4>
+                                        <div class="details-grid">
+                                            <div class="details-item">
+                                                <label>Medicamento</label>
+                                                <span>@atencion.Tratamiento.Medicamento</span>
+                                            </div>
+                                            <div class="details-item">
+                                                <label>Dosis</label>
+                                                <span>@atencion.Tratamiento.Dosis</span>
+                                            </div>
+                                            <div class="details-item">
+                                                <label>Frecuencia</label>
+                                                <span>@atencion.Tratamiento.Frecuencia</span>
+                                            </div>
+                                            <div class="details-item">
+                                                <label>Duración</label>
+                                                <span>@atencion.Tratamiento.Duracion días</span>
+                                            </div>
+                                            @if (!string.IsNullOrWhiteSpace(atencion.Tratamiento.Observaciones))
+                                            {
+                                                <div class="details-item full-width">
+                                                    <label>Observaciones</label>
+                                                    <span>@atencion.Tratamiento.Observaciones</span>
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
-                                    <div class="v1-info-item">
-                                        <strong>Dosis:</strong>
-                                        <span>@atencion.Tratamiento.Dosis</span>
-                                    </div>
-                                    <div class="v1-info-item">
-                                        <strong>Frecuencia:</strong>
-                                        <span>@atencion.Tratamiento.Frecuencia</span>
-                                    </div>
-                                    <div class="v1-info-item">
-                                        <strong>Duración (días):</strong>
-                                        <span>@atencion.Tratamiento.Duracion</span>
-                                    </div>
-                                    <div class="v1-info-item">
-                                        <strong>Observaciones:</strong>
-                                        <span>@atencion.Tratamiento.Observaciones</span>
-                                    </div>
-                                </dl>
-                            }
+                                }
 
-                            @if (atencion.Vacunas != null && atencion.Vacunas.Any())
-                            {
-                                <h5>Vacunas Aplicadas</h5>
-                                <ul>
-                                    @foreach (var vacuna in atencion.Vacunas)
-                                    {
-                                        <li>@vacuna.Nombre (@vacuna.FechaAplicacion.ToShortDateString()) - Lote: @vacuna.Lote</li>
-                                    }
-                                </ul>
-                            }
+                                @if (atencion.Vacunas != null && atencion.Vacunas.Any())
+                                {
+                                    <div class="history-section">
+                                        <h4>Vacunas Aplicadas</h4>
+                                        <div class="tags-list">
+                                            @foreach (var vacuna in atencion.Vacunas)
+                                            {
+                                                <span class="tag-item">@vacuna.Nombre (Lote: @vacuna.Lote)</span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
 
-                            @if (atencion.EstudiosComplementarios != null && atencion.EstudiosComplementarios.Any())
-                            {
-                                <h5>Estudios Complementarios</h5>
-                                <ul>
-                                    @foreach (var estudio in atencion.EstudiosComplementarios)
-                                    {
-                                        <li>@estudio.Nombre - Resultados: @estudio.Informe</li>
-                                    }
-                                </ul>
-                            }
+                                @if (atencion.EstudiosComplementarios != null && atencion.EstudiosComplementarios.Any())
+                                {
+                                    <div class="history-section">
+                                        <h4>Estudios Complementarios</h4>
+                                        <div class="tags-list">
+                                            @foreach (var estudio in atencion.EstudiosComplementarios)
+                                            {
+                                                <span class="tag-item">
+                                                    @estudio.Nombre @(string.IsNullOrWhiteSpace(estudio.Informe) ? "" : $"- Informe: {estudio.Informe}")
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
 
-                            <hr />
-                            <div class="v1-info-item">
-                                <strong>Costo Total:</strong>
-                                <span>$ @atencion.CostoTotal.ToString("N2")</span>
+                            <div class="history-footer">
+                                <div class="cost-item">
+                                    <label>Costo Total de la Atención</label>
+                                    <span class="primeraCita">$ @atencion.CostoTotal.ToString("N2")</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             }
 
             <div class="v1-section-actions mt-3">

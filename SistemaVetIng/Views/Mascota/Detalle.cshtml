@@ -1,94 +1,233 @@
 ﻿@model SistemaVetIng.ViewsModels.MascotaDetalleViewModel
 
 @{
-    ViewData["Title"] = $"Detalle de Mascota: @Model.Nombre";
-    Layout = "_Layout";
+    ViewData["Title"] = "Detalles de Mascota";
+    Layout = null;
 }
 
-<div class="v1-main-dashboard">
-    <h1 class="v1-section-title">Detalle de @Model.Nombre</h1>
-    <p class="lead">Propietario: @Model.PropietarioNombreCompleto</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/veterinario-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/veterinary-dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion-home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
 
-    <section id="info-mascota" class="v1-section">
-        <div class="v1-card">
-            <div class="v1-card-header">
-                <h3 class="v1-card-title">Datos Básicos</h3>
+    <header class="main-header">
+        <a href="#" class="logo">
+            <i class="fas fa-paw"></i>
+            <span>VetIng</span>
+        </a>
+        <a asp-controller="Cliente" asp-action="PaginaPrincipal" class="btn sesion">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+    </header>
+
+
+    <main class="v1-main-dashboard">
+        <section class="v1-section">
+            <h1 class="v1-section-title">Historia Clínica de: @Model.Nombre</h1>
+            <h3 class="v1-section-subtitle">Propietario: @Model.PropietarioNombreCompleto</h3>
+
+
+            <div class="table-container">
+                <table class="table responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Especie</th>
+                            <th>Raza</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Sexo</th>
+                            <th>Raza Peligrosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td data-label="Nombre:">@Model.Nombre</td>
+                            <td data-label="Especie:">@Model.Especie</td>
+                            <td data-label="Raza:">@Model.Raza</td>
+                            <td data-label="FechaNacimiento:">@Model.FechaNacimiento.ToShortDateString()</td>
+                            <td data-label="Sexo:">@Model.Sexo</td>
+                            <td data-label="RazaPeligrosa:">@(Model.EsRazaPeligrosa ? "Sí" : "No")</td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
-            <div class="v1-card-content">
-                <p><strong>Raza:</strong> @Model.Raza</p>
-                <p><strong>Especie:</strong> @Model.Especie</p>
-                <p><strong>Fecha Nacimiento:</strong> @Model.FechaNacimiento.ToShortDateString()</p>
-                <p><strong>Chip:</strong> @(string.IsNullOrEmpty(Model.ChipCodigo) ? "No" : Model.ChipCodigo)</p>
-                <p><strong>Raza Peligrosa:</strong> @(Model.EsRazaPeligrosa ? "Sí" : "No")</p>
+
+            <div class="v1-section">
+                <h4 class="v1-section-title">Atenciones Registradas: (@Model.HistorialClinico.Count)</h4>
+                
             </div>
-        </div>
-    </section>
 
-    <section id="historial-clinico" class="v1-section">
-        <h2 class="v1-section-title">Historial Clínico (@Model.HistorialClinico.Count Atenciones)</h2>
-
-        @if (Model.HistorialClinico.Any())
-        {
-            @foreach (var atencion in Model.HistorialClinico)
+            @if (!Model.HistorialClinico.Any())
             {
-                <div class="v1-card mb-4 border-left-@atencion.Fecha.ToShortDateString()">
-                    <div class="v1-card-header">
-                        <h4 class="v1-card-title">Atención del @atencion.Fecha.ToShortDateString()</h4>
-                        <small>Veterinario: @atencion.VeterinarioNombreCompleto</small>
-                    </div>
-
-                    <div class="v1-card-content">
-                        <p><strong>Diagnóstico:</strong> @atencion.Diagnostico</p>
-                        <p><strong>Peso:</strong> @atencion.PesoKg kg</p>
-                        <hr>
-
-                        @if (!string.IsNullOrEmpty(atencion.Medicamento))
-                        {
-                            <h5>💊 Tratamiento Registrado:</h5>
-                            <ul>
-                                <li><strong>Medicamento:</strong> @atencion.Medicamento</li>
-                                <li><strong>Dosis:</strong> @atencion.Dosis</li>
-                                <li><strong>Frecuencia:</strong> @atencion.Frecuencia</li>
-                                <li><strong>Duración:</strong> @atencion.DuracionDias días</li>
-                                <li><strong>Observaciones:</strong> @atencion.ObservacionesTratamiento</li>
-                            </ul>
-                        }
-
-                        @if (atencion.NombresVacunasConLote.Any())
-                        {
-                            <h5>💉 Vacunas Aplicadas:</h5>
-                            <ul>
-                                @foreach (var vacunaDetalle in atencion.NombresVacunasConLote)
-                                {
-                                    <li>@vacunaDetalle</li>
-                                }
-                            </ul>
-                        }
-
-                        @if (atencion.NombresEstudios.Any())
-                        {
-                            <h5>🔬 Estudios Complementarios:</h5>
-                            <ul>
-                                @foreach (var estudioNombre in atencion.NombresEstudios)
-                                {
-                                    <li>@estudioNombre</li>
-                                }
-                            </ul>
-                        }
-
-                        <p class="text-right mt-3"><strong>Costo Total: $@atencion.CostoTotal</strong></p>
-                    </div>
+                <div class="empty-state">
+                    <i class="fas fa-file-medical-alt fa-3x"></i>
+                    <h3>Sin Historial</h3>
+                    <p>No hay atenciones registradas para esta mascota.</p>
                 </div>
             }
-        }
-        else
-        {
-            <div class="alert alert-info">Esta mascota no tiene atenciones registradas.</div>
-        }
-    </section>
+            else
+            {
+                <div class="attention-history">
+                    @foreach (var atencion in Model.HistorialClinico.OrderByDescending(a => a.Fecha))
+                    {
+                        <div class="history-card">
+                            <div class="history-header">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <span class="date">@atencion.Fecha.ToString("dd 'de' MMMM 'de' yyyy")</span>
+                                    <span class="vet">Atendido por: @atencion.VeterinarioNombreCompleto</span>
+                                </div>
+                            </div>
 
-    <div class="mt-4">
-        <a asp-controller="Cliente" asp-action="PaginaPrincipal" class="v1-btn v1-btn-secondary">← Volver al Dashboard</a>
-    </div>
+                            <div class="history-body">
+                                <div class="details-grid">
+                                    <div class="details-item">
+                                        <label>Diagnóstico</label>
+                                        <span>@atencion.Diagnostico</span>
+                                    </div>
+                                    <div class="details-item">
+                                        <label>Peso</label>
+                                        <span>@atencion.PesoKg kg</span>
+                                    </div>
+                                </div>
 
-</div>
+                                @if (!string.IsNullOrEmpty(atencion.Medicamento))
+                                {
+                                    <div class="history-section">
+                                        <h4>Tratamiento Indicado</h4>
+                                        <div class="details-grid">
+                                            <div class="details-item">
+                                                <label>Medicamento</label>
+                                                <span>@atencion.Medicamento</span>
+                                            </div>
+                                            <div class="details-item">
+                                                <label>Dosis</label>
+                                                <span>@atencion.Dosis</span>
+                                            </div>
+                                            <div class="details-item">
+                                                <label>Frecuencia</label>
+                                                <span>@atencion.Frecuencia</span>
+                                            </div>
+                                            <div class="details-item">
+                                                <label>Duración</label>
+                                                <span>@atencion.DuracionDias días</span>
+                                            </div>
+                                            @if (!string.IsNullOrWhiteSpace(atencion.ObservacionesTratamiento))
+                                            {
+                                                <div class="details-item full-width">
+                                                    <label>Observaciones</label>
+                                                    <span>@atencion.ObservacionesTratamiento</span>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (atencion.NombresVacunasConLote.Any())
+                                {
+                                    <div class="history-section">
+                                        <h4> Vacunas Aplicadas</h4>
+                                        <div class="tags-list">
+                                            @foreach (var vacuna in atencion.NombresVacunasConLote)
+                                            {
+                                                <span class="tag-item">@vacuna</span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (atencion.NombresEstudios.Any())
+                                {
+                                    <div class="history-section">
+                                        <h4>Estudios Complementarios</h4>
+                                        <div class="tags-list">
+                                            @foreach (var estudioNombre in atencion.NombresEstudios)
+                                            {
+                                                <span class="tag-item">@estudioNombre</span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="history-footer">
+                                <div class="cost-item">
+                                    <label>Costo Total de la Atención</label>
+                                    <span class="primeraCita">$ @atencion.CostoTotal.ToString("N2")</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+            <div class="form-actions">
+                <a asp-controller="Cliente" asp-action="PaginaPrincipal" class="btnBack">Volver</a>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="main-footer">
+        <div class="footer-col footer-info">
+            <div class="footer-logo-container">
+                <i class="fa-solid fa-paw footer-logo-icon"></i>
+                <h3 class="footer-brand">VetIng Software</h3>
+            </div>
+            <p class="footer-description">Soluciones tecnológicas para un cuidado animal excepcional.</p>
+            <div class="footer-social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Acerca de VetIng</h4>
+            <ul class="footer-links">
+                <li><a href="#">Nuestra Historia</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Noticias y Blog</a></li>
+                <li><a href="#">Fundación VetIng</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Soporte</h4>
+            <ul class="footer-links">
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Guías de Usuario</a></li>
+                <li><a href="#">Descargar App Móvil</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; @DateTime.Now.Year VetIng Software. Todos los derechos reservados. | Proyecto de Ulises Sosa y Leonel Gallaretto</p>
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>
