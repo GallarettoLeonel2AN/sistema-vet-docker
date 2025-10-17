@@ -12,6 +12,9 @@ namespace SistemaVetIng.Repository.Interfaces
         Task<List<Estudio>> GetEstudioSeleccionado(IEnumerable<int> ids);
         Task AgregarAtencionVeterinaria(AtencionVeterinaria atencion);
         Task AgregarTratamiento(Tratamiento tratamiento);
+        Task<List<AtencionVeterinaria>> ObtenerAtencionesPendientesPorCliente(int clienteId);
+        Task<AtencionVeterinaria> ObtenerAtencionConCliente(int idAtencion);
+        Task<AtencionVeterinaria> ObtenerPorId(int id);
         Task SaveChangesAsync();
         Task<HistoriaClinica> GetHistoriaClinicaPorId(int id);
     }

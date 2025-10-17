@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "ContainingType": "SistemaVetIng.Controllers.MercadoPagoWebhookController",
+    "Method": "ReceiveNotification",
+    "RelativePath": "api/webhooks/mercadopago",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "topic",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

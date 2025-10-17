@@ -126,8 +126,40 @@ namespace SistemaVetIng.Servicios.Implementacion
 
             return null; 
         }
+        public async Task<AtencionVeterinaria> ObtenerPorId(int id)
+        {
+            return await _repository.ObtenerAtencionConCliente(id);
+        }
+        public async Task<List<AtencionDetalleViewModel>> ObtenerPagosPendientesPorClienteId(int clienteId)
+        {
+            // NOTA: Esta es la lógica central. Tienes que ir a la BD y:
+            // 1. Encontrar las Historias Clínicas asociadas a las mascotas del Cliente.
+            // 2. Encontrar las Atenciones asociadas a esas Historias Clínicas.
+            // 3. Filtrar las Atenciones donde el estado de pago sea "Pendiente" (o similar).
 
+            // *** SIMULACIÓN ACADÉMICA (Debes reemplazar esto con tu lógica real de BD) ***
 
+            // Simulamos una lista de atenciones pendientes que obtendrías de tu Repositorio
+            var atencionesDB = await _repository.ObtenerAtencionesPendientesPorCliente(clienteId);
+
+            // Si tu repositorio no tiene ese método, debes crearlo para que filtre por Cliente.Id y Atencion.EstadoDePago.
+
+            var viewModelList = atencionesDB
+                .Select(a => new AtencionDetalleViewModel
+                {
+                    AtencionId = a.Id,
+                    CostoTotal = a.CostoTotal,
+                    EstadoDePago = "Pendiente", // Esto debe venir de la DB
+
+                    // Mapeo de propiedades heredadas para mostrar en la vista
+                    Fecha = a.Fecha,
+                    MascotaNombre = a.HistoriaClinica.Mascota.Nombre, // Asegúrate del Include() en el repositorio
+                                                                      // ... otras propiedades necesarias
+                })
+                .ToList();
+
+            return viewModelList;
+        }
         public async Task RegistrarAtencionDesdeTurnoAsync(AtencionPorTurnoViewModel model, ClaimsPrincipal user)
         {
             // Usamos una transacción para garantizar la integridad de los datos.

@@ -17,17 +17,20 @@ namespace SistemaVetIng.Controllers
         private readonly IClienteService _clienteService;
         private readonly ITurnoService _turnoService;
         private readonly IMascotaService _mascotaService;
+        private readonly IAtencionVeterinariaService _atencionVeterinariaService;
 
 
         public ClienteController(IToastNotification toastNotification, 
             IClienteService clienteService,
             ITurnoService turnoService,
-            IMascotaService mascotaService)
+            IMascotaService mascotaService,
+            IAtencionVeterinariaService atencionVeterinariaService)
         {
             _toastNotification = toastNotification;
             _clienteService = clienteService;
             _turnoService = turnoService;
             _mascotaService = mascotaService;
+            _atencionVeterinariaService = atencionVeterinariaService;
         }
 
 
@@ -59,7 +62,12 @@ namespace SistemaVetIng.Controllers
                 // Redirigir si no se encuentra el cliente con el userName
                 return RedirectToAction("Login", "Account");
             }
-
+            // 2. Obtener datos del cliente (Turnos y Mascotas)
+            var turnos = await _turnoService.ObtenerTurnosPorClienteIdAsync(cliente.Id);
+            var mascotas = await _mascotaService.ObtenerMascotasPorClienteUserNameAsync(userName);
+            // 3. Obtener Pagos Pendientes (¡INTEGRACIÓN MERCADO PAGO!)
+            // Llamamos al nuevo servicio para obtener la lista de AtencionDetalleViewModel
+            var pagosPendientes = await _atencionVeterinariaService.ObtenerPagosPendientesPorClienteId(cliente.Id);
             // Inicializar el ViewModel
             var viewModel = new ClientePaginaPrincipalViewModel
             {
@@ -68,7 +76,7 @@ namespace SistemaVetIng.Controllers
             };
 
             // 2. Obtener y asignar los turnos
-            var turnos = await _turnoService.ObtenerTurnosPorClienteIdAsync(cliente.Id);
+            
 
             if (turnos != null && turnos.Any())
             {
@@ -89,11 +97,9 @@ namespace SistemaVetIng.Controllers
                 viewModel.Turnos = new List<TurnoViewModel>();
             }
 
-            // 3. Obtener y asignar las mascotas
-            // Nota: Si ObtenerMascotasPorClienteUserNameAsync necesita un cliente asociado al userName,
-            // es mejor usar el cliente.Id que ya obtuviste, pero mantendremos la llamada original si es necesario.
-            var mascotas = await _mascotaService.ObtenerMascotasPorClienteUserNameAsync(userName);
+            
             viewModel.Mascotas = mascotas.ToList();
+            viewModel.PagosPendientes = pagosPendientes;
 
             // Devolver la vista con el viewModel completo
             return View(viewModel);
