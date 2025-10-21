@@ -1,0 +1,48 @@
+services:
+  # Servicio para la Base de Datos PostgreSQL
+  postgres-db:
+    image: postgres:15
+    container_name: postgres_db_veting
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=Losfresnos3250
+      - POSTGRES_DB=VetIng
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d VetIng"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Servicio para la API
+  perrospeligrososapi:
+    build:
+      context: .
+      dockerfile: api.dockerfile
+    container_name: perros_peligrosos_api
+    ports:
+      - "8001:8080"
+    depends_on:
+      - postgres-db
+
+  # Servicio para la aplicación Blazor
+  sistemaveting:
+    build:
+      context: .
+      dockerfile: blazor.dockerfile
+    container_name: sistema_veting_blazor
+    ports:
+      - "8002:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - Urls__Api=http://perrospeligrososapi:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres-db;Database=VetIng;Username=myuser;Password=Losfresnos3250
+    depends_on:
+      - postgres-db
+      - perrospeligrososapi
+
+volumes:
+  postgres-data:

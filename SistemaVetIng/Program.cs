@@ -8,6 +8,7 @@ using SistemaVetIng.Models.Indentity;
 using MercadoPago.Config;
 using SistemaVetIng.Models;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,8 +28,14 @@ else
     throw new InvalidOperationException("Falta o no está configurado el AccessToken de Mercado Pago.");
 }
 
+builder.Services.AddHttpClient("Api", client =>
+{
+    var apiUrl = builder.Configuration["Urls:Api"];
+    client.BaseAddress = new Uri(apiUrl!);
+});
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString)
+);
 
 builder.Services.AddIdentity<Usuario, Rol>(options =>
 {
@@ -63,7 +70,28 @@ builder.Services.AddControllersWithViews()
     });
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        // Busca el contexto de tu base de datos
+        var context = services.GetRequiredService<ApplicationDbContext>();
 
+        // Aplica cualquier migración pendiente.
+        // Esto creará la base de datos y todas sus tablas si no existen.
+        context.Database.Migrate();
+
+        // El log muestra que tenés un "IdentitySeeder" para crear roles y usuarios.
+        // Lo llamamos aquí para que se ejecute después de crear las tablas.
+        await IdentitySeeder.SeedRolesAndAdminAsync(services);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Ocurrió un error al migrar o inicializar la base de datos.");
+    }
+}
 // Pipeline HTTP
 if (app.Environment.IsDevelopment())
 {

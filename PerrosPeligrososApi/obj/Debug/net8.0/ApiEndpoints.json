@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "PerrosPeligrososApi.Controllers.PerrosPeligrososController",
+    "Method": "Registrar",
+    "RelativePath": "api/perros-peligrosos/registrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registroDto",
+        "Type": "PerrosPeligrososApi.Models.PerroPeligrosoRegistroDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,28 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/PerrosPeligrososApi/noty.8s9pevhhfs.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\noty.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8s9pevhhfs"},{"Name":"integrity","Value":"sha256-yPezQylZ3B1Ga9hurSPOnBjVR6fbbTyJrXEfhDB44Xc="},{"Name":"label","Value":"_content/PerrosPeligrososApi/noty.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"6492"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022yPezQylZ3B1Ga9hurSPOnBjVR6fbbTyJrXEfhDB44Xc=\u0022"},{"Name":"Last-Modified","Value":"Wed, 30 Mar 2022 02:42:26 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/PerrosPeligrososApi/noty.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\noty.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-yPezQylZ3B1Ga9hurSPOnBjVR6fbbTyJrXEfhDB44Xc="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"6492"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022yPezQylZ3B1Ga9hurSPOnBjVR6fbbTyJrXEfhDB44Xc=\u0022"},{"Name":"Last-Modified","Value":"Wed, 30 Mar 2022 02:42:26 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/PerrosPeligrososApi/toastr.hyoec0zd2t.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\toastr.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"hyoec0zd2t"},{"Name":"integrity","Value":"sha256-J44jB2EoMUus4PRNCTzpHdCBKiyyAVh8IZ6XPPgBekI="},{"Name":"label","Value":"_content/PerrosPeligrososApi/toastr.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"6956"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022J44jB2EoMUus4PRNCTzpHdCBKiyyAVh8IZ6XPPgBekI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 30 Mar 2022 02:42:26 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/PerrosPeligrososApi/toastr.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\toastr.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-J44jB2EoMUus4PRNCTzpHdCBKiyyAVh8IZ6XPPgBekI="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"6956"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022J44jB2EoMUus4PRNCTzpHdCBKiyyAVh8IZ6XPPgBekI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 30 Mar 2022 02:42:26 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>
