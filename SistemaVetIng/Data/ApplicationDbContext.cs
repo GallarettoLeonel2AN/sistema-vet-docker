@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SistemaVetIng.Models;
 using SistemaVetIng.Models.Indentity;
@@ -6,7 +7,7 @@ using System.Diagnostics;
 
 namespace SistemaVetIng.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Usuario, Rol, int>
+    public class ApplicationDbContext : IdentityDbContext<Usuario, Rol, int>, IDataProtectionKeyContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) {}
@@ -14,6 +15,7 @@ namespace SistemaVetIng.Data
 
         // DbSets de cada entidad
         public DbSet<Persona> Personas { get; set; }
+        public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Veterinario> Veterinarios { get; set; }
         public DbSet<Mascota> Mascotas { get; set; }

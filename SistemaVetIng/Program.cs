@@ -7,6 +7,7 @@ using SistemaVetIng.Models.Extension;
 using SistemaVetIng.Models.Indentity;
 using MercadoPago.Config;
 using SistemaVetIng.Models;
+using Microsoft.AspNetCore.DataProtection;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -36,6 +37,10 @@ builder.Services.AddHttpClient("Api", client =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString)
 );
+
+
+builder.Services.AddDataProtection()
+    .PersistKeysToDbContext<ApplicationDbContext>();
 
 builder.Services.AddIdentity<Usuario, Rol>(options =>
 {

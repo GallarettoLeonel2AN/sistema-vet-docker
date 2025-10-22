@@ -2871,3 +2871,4 @@ C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\obj\Debug\net8.0\refint\Si
 C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\obj\Debug\net8.0\SistemaVetIng.pdb
 C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\obj\Debug\net8.0\SistemaVetIng.genruntimeconfig.cache
 C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\obj\Debug\net8.0\ref\SistemaVetIng.dll
+C:\Users\leo\source\repos\SistemaVetIng\SistemaVetIng\bin\Debug\net8.0\Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.dll

@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Migrations\\20251022193047_AddDataProtectionKeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SistemaVetIng\\Migrations\\20251022193047_AddDataProtectionKeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\sistemaveting\\sistemaveting\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|c:\\users\\leo\\source\\repos\\sistemaveting\\sistemaveting\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6272BE07-6D0C-44EB-9692-80A19F8F92DB}|SistemaVetIng\\SistemaVetIng.csproj|solutionrelative:sistemaveting\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3FFD3E0E-99EC-413D-BB3A-86B766BD761D}|PerrosPeligrososApi\\PerrosPeligrososApi.csproj|c:\\users\\leo\\source\\repos\\sistemaveting\\perrospeligrososapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -102,19 +110,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "20251022193047_AddDataProtectionKeys.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Migrations\\20251022193047_AddDataProtectionKeys.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Migrations\\20251022193047_AddDataProtectionKeys.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Migrations\\20251022193047_AddDataProtectionKeys.cs",
+              "RelativeToolTip": "SistemaVetIng\\Migrations\\20251022193047_AddDataProtectionKeys.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T19:30:47.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "SistemaVetIng\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "SistemaVetIng\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T19:19:48.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Program.cs",
               "RelativeDocumentMoniker": "SistemaVetIng\\Program.cs",
               "ToolTip": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Program.cs",
               "RelativeToolTip": "SistemaVetIng\\Program.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAAFcAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAiwCgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-20T17:10:22.929Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "20251020172705_PostGre.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Migrations\\20251020172705_PostGre.cs",
               "RelativeDocumentMoniker": "PerrosPeligrososApi\\Migrations\\20251020172705_PostGre.cs",
@@ -122,11 +156,12 @@
               "RelativeToolTip": "PerrosPeligrososApi\\Migrations\\20251020172705_PostGre.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T17:27:06.088Z"
+              "WhenOpened": "2025-10-20T17:27:06.088Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\appsettings.json",
               "RelativeDocumentMoniker": "SistemaVetIng\\appsettings.json",
@@ -139,7 +174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "20251020172724_PostGre.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Migrations\\20251020172724_PostGre.cs",
               "RelativeDocumentMoniker": "SistemaVetIng\\Migrations\\20251020172724_PostGre.cs",
@@ -147,11 +182,12 @@
               "RelativeToolTip": "SistemaVetIng\\Migrations\\20251020172724_PostGre.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T17:27:24.354Z"
+              "WhenOpened": "2025-10-20T17:27:24.354Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\appsettings.Development.json",
               "RelativeDocumentMoniker": "SistemaVetIng\\appsettings.Development.json",
@@ -164,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\appsettings.json",
               "RelativeDocumentMoniker": "PerrosPeligrososApi\\appsettings.json",
@@ -177,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "PerrosPeligrososApi\\appsettings.Development.json",
@@ -185,11 +221,12 @@
               "RelativeToolTip": "PerrosPeligrososApi\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-20T17:12:38.061Z"
+              "WhenOpened": "2025-10-20T17:12:38.061Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\Program.cs",
               "RelativeDocumentMoniker": "PerrosPeligrososApi\\Program.cs",
@@ -197,11 +234,12 @@
               "RelativeToolTip": "PerrosPeligrososApi\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T17:12:50.365Z"
+              "WhenOpened": "2025-10-20T17:12:50.365Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "20251020172359_PostGre.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\VetingMercadoPago\\PerrosPeligrososApi\\Migrations\\20251020172359_PostGre.cs",
               "RelativeDocumentMoniker": "..\\VetingMercadoPago\\PerrosPeligrososApi\\Migrations\\20251020172359_PostGre.cs",
@@ -212,30 +250,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "PerrosPeligrososApi.csproj",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
               "RelativeDocumentMoniker": "PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
               "ToolTip": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
               "RelativeToolTip": "PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-20T16:43:47.928Z"
+              "WhenOpened": "2025-10-20T16:43:47.928Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "PerrosPeligrososApi",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
               "RelativeDocumentMoniker": "PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
               "ToolTip": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
               "RelativeToolTip": "PerrosPeligrososApi\\PerrosPeligrososApi.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-20T16:43:52.326Z"
+              "WhenOpened": "2025-10-20T16:43:52.326Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "PagosController.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\PagosController.cs",
               "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\PagosController.cs",
@@ -243,11 +283,12 @@
               "RelativeToolTip": "SistemaVetIng\\Controllers\\PagosController.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAAAwwFoAAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-17T18:07:30.839Z"
+              "WhenOpened": "2025-10-17T18:07:30.839Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "MercadoPagoWebhookController.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\MercadoPagoWebhookController.cs",
               "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\MercadoPagoWebhookController.cs",
@@ -255,11 +296,12 @@
               "RelativeToolTip": "SistemaVetIng\\Controllers\\MercadoPagoWebhookController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAIBZwA0AAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-17T18:07:08.138Z"
+              "WhenOpened": "2025-10-17T18:07:08.138Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "ClienteController.cs",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Controllers\\ClienteController.cs",
               "RelativeDocumentMoniker": "SistemaVetIng\\Controllers\\ClienteController.cs",
@@ -267,11 +309,12 @@
               "RelativeToolTip": "SistemaVetIng\\Controllers\\ClienteController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-17T18:06:59.023Z"
+              "WhenOpened": "2025-10-17T18:06:59.023Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "ReservarTurno.cshtml",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
               "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
@@ -279,23 +322,25 @@
               "RelativeToolTip": "SistemaVetIng\\Views\\Turno\\ReservarTurno.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-17T17:44:16.512Z"
+              "WhenOpened": "2025-10-17T17:44:16.512Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "Detalle.cshtml",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\Detalle.cshtml",
               "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Mascota\\Detalle.cshtml",
               "ToolTip": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Mascota\\Detalle.cshtml",
               "RelativeToolTip": "SistemaVetIng\\Views\\Mascota\\Detalle.cshtml",
-              "ViewState": "AgIAAEgAAAAAAAAAAIBZwIgAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAEUAAAAAAAAAACBjwIgAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-17T17:21:12.789Z"
+              "WhenOpened": "2025-10-17T17:21:12.789Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "veterinary-dashboard.css",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\wwwroot\\css\\veterinary-dashboard.css",
               "RelativeDocumentMoniker": "SistemaVetIng\\wwwroot\\css\\veterinary-dashboard.css",
@@ -303,11 +348,12 @@
               "RelativeToolTip": "SistemaVetIng\\wwwroot\\css\\veterinary-dashboard.css",
               "ViewState": "AgIAAOcBAAAAAAAAAAAkwPcBAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-17T17:49:09.667Z"
+              "WhenOpened": "2025-10-17T17:49:09.667Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "DetalleHistoriaClinica.cshtml",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\HistoriaClinica\\DetalleHistoriaClinica.cshtml",
               "RelativeDocumentMoniker": "SistemaVetIng\\Views\\HistoriaClinica\\DetalleHistoriaClinica.cshtml",
@@ -315,23 +361,25 @@
               "RelativeToolTip": "SistemaVetIng\\Views\\HistoriaClinica\\DetalleHistoriaClinica.cshtml",
               "ViewState": "AgIAAFkAAAAAAAAAAAAmwGMAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-17T17:21:06.171Z"
+              "WhenOpened": "2025-10-17T17:21:06.171Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "PaginaPrincipal.cshtml",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinaria\\PaginaPrincipal.cshtml",
               "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Veterinaria\\PaginaPrincipal.cshtml",
               "ToolTip": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinaria\\PaginaPrincipal.cshtml",
               "RelativeToolTip": "SistemaVetIng\\Views\\Veterinaria\\PaginaPrincipal.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAIBZwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAACBjwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-17T17:44:08.843Z"
+              "WhenOpened": "2025-10-17T17:44:08.843Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "GuardarConfiguracion.cshtml",
               "DocumentMoniker": "C:\\Users\\leo\\source\\repos\\SistemaVetIng\\SistemaVetIng\\Views\\Veterinaria\\GuardarConfiguracion.cshtml",
               "RelativeDocumentMoniker": "SistemaVetIng\\Views\\Veterinaria\\GuardarConfiguracion.cshtml",
@@ -339,7 +387,8 @@
               "RelativeToolTip": "SistemaVetIng\\Views\\Veterinaria\\GuardarConfiguracion.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAIBZwFUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-17T17:35:45.485Z"
+              "WhenOpened": "2025-10-17T17:35:45.485Z",
+              "EditorCaption": ""
             }
           ]
         }

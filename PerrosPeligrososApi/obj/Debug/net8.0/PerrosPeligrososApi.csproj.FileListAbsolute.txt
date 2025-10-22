@@ -935,3 +935,4 @@ C:\Users\leo\source\repos\SistemaVetIng\PerrosPeligrososApi\obj\Debug\net8.0\ref
 C:\Users\leo\source\repos\SistemaVetIng\PerrosPeligrososApi\obj\Debug\net8.0\PerrosPeligrososApi.pdb
 C:\Users\leo\source\repos\SistemaVetIng\PerrosPeligrososApi\obj\Debug\net8.0\PerrosPeligrososApi.genruntimeconfig.cache
 C:\Users\leo\source\repos\SistemaVetIng\PerrosPeligrososApi\obj\Debug\net8.0\ref\PerrosPeligrososApi.dll
+C:\Users\leo\source\repos\SistemaVetIng\PerrosPeligrososApi\bin\Debug\net8.0\Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.dll
